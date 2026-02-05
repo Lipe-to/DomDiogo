@@ -1,44 +1,44 @@
 package com.domdiogo.model;
 
 public class AlunoEntity {
-    private int id;
+    private int matricula;
     private String nome;
-    private String matricula;
-    private String email;
+    private String usuario;
     private String senha;
+    private String palavra;
 
-    public AlunoEntity(int id, String nome, String matricula, String email, String senha) {
-        this.id = id;
-        this.nome = nome;
+    public AlunoEntity(int matricula, String nome, String usuario, String senha, String palavra) {
         this.matricula = matricula;
-        this.email = email;
+        this.nome = nome;
+        this.usuario = usuario;
         this.senha = senha;
+        this.palavra = palavra;
     }
 
-    public AlunoEntity(String nome, String matricula, String email, String senha) {
+    public AlunoEntity(String nome, String usuario, String senha, String palavra) {
         this.nome = nome;
-        this.matricula = matricula;
-        this.email = email;
+        this.usuario = usuario;
         this.senha = senha;
+        this.palavra = palavra;
     }
 
-    public int getId() {
-        return id;
+    public int getMatricula() {
+        return matricula;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public String getMatricula() {
-        return matricula;
-    }
-
-    public String getEmail() {
-        return email;
+    public String getUsuario() {
+        return usuario;
     }
 
     public String getSenha() {
         return senha;
+    }
+
+    public String getPalavra() {
+        return palavra;
     }
 }
