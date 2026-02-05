@@ -7,7 +7,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionFactory {
-    public Connection conectar() {
+    public Connection connect() {
         Connection conn = null;
         try {
             Dotenv dotenv = Dotenv.load();
@@ -21,7 +21,7 @@ public class ConnectionFactory {
         }
         return conn;
     }
-    public void desconectar(Connection conn){
+    public void disconnect(Connection conn){
         try{
             if(conn!=null && !conn.isClosed()){
                 conn.close();
