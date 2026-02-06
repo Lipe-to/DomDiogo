@@ -20,11 +20,12 @@ public class AlunoServlet extends HttpServlet {
 
         switch (request.getParameter("action")){
             case "create":
-                if (repository.isApto(request.getParameter("usuario"))){
+                String usuario = request.getParameter("usuario");
+                if (repository.isApto(usuario)){
                 AlunoEntity alunoEntity = new AlunoEntity(
                         Integer.parseInt("matricula"),
                         request.getParameter("nome"),
-                        request.getParameter("usuario"),
+                        usuario,
                         request.getParameter("senha"),
                         request.getParameter("palavra")
                 );
@@ -35,6 +36,7 @@ public class AlunoServlet extends HttpServlet {
                     case 0:
                         statusMessage = "Já existe um aluno com essas informações, faça login!";
                     default:
+                        repository.toggleMatriculado(usuario);
                         configureStatus("Aluno(a) " + request.getParameter("nome") + "criado com sucesso!", "green");
                         break;
                 }

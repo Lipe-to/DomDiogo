@@ -129,21 +129,38 @@ public class AlunoRepository {
     public boolean isApto(String email){
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
-        String query = "select email from aptos";
+        String query = "select email from aptos where email = ?";
         try{
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(query);
-            while (resultSet.next()){
-                if (resultSet.getString(1).equals(email)){
-                    return true;
-                }
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return true;
             }
+            return false;
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }finally {
             connectionFactory.disconnect(connection);
-            return false;
         }
-
+    }
+    public boolean toggleMatriculado(String email) {
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        Connection connection = connectionFactory.connect();
+        String query = "update aptos set is_matriculado = is_matriculado! from aptos where email = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, email);
+            if (preparedStatement.executeQuery() != null) {
+                return true;
+            }
+            return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }finally {
+            connectionFactory.disconnect(connection);
+        }
     }
 }
