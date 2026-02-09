@@ -4,15 +4,15 @@ public class NotaEntity {
     private double N2;
     private double media;
     private int id_disciplina;
-    private int id_aluno;
+    private int matricula_aluno;
 
-    public NotaEntity(int id, double N1, double N2, double media, int id_disciplina, int id_aluno){
+    public NotaEntity(int id, double N1, double N2, double media, int id_disciplina, int matricula_aluno){
         this.id = id;
         this.N1 = N1;
         this.N2 = N2;
         this.media = media;
         this.id_disciplina = id_disciplina;
-        this.id_aluno = id_aluno;
+        this.matricula_aluno = matricula_aluno;
     }
     public int getId() {
         return this.id;
@@ -35,7 +35,7 @@ public class NotaEntity {
     }
 
     public int getId_aluno() {
-        return this.id_aluno;
+        return this.matricula_aluno;
     }
 
     public void setN1(double n1) {
@@ -56,6 +56,6 @@ public class NotaEntity {
                 "\tN2=" + N2 +
                 "\tMedia=" + media +
                 "\tId_disciplina=" + id_disciplina +
-                "\tId_aluno=" + id_aluno;
+                "\tId_aluno=" + matricula_aluno;
     }
 }

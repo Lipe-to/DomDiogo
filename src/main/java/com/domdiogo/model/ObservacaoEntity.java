@@ -1,7 +1,7 @@
 public class ObservacaoEntity {
     private int id;
     private String observacoes;
-    private int id_aluno;
+    private int matricula_aluno;
     private int id_professor;
 
     public ObservacaoEntity( int id, String observacoes, int id_aluno, int id_professor){
