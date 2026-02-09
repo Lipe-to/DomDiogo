@@ -1,53 +1,114 @@
 package com.domdiogo.servlet;
 
-import java.io.*;
-
+import java.io.IOException;
 import com.domdiogo.model.AlunoEntity;
+import com.domdiogo.model.StatusColor;
 import com.domdiogo.repository.AlunoRepository;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
-@WebServlet("aluno")
+@WebServlet("/aluno")
 public class AlunoServlet extends HttpServlet {
-    private String statusMessage = null;
-    private String statusColor = "red";
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private String redirect = "";
 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        AlunoRepository repository = new AlunoRepository();
+        String action = request.getParameter("action");
+
+        switch (action) {
+            case "read":
+                request.setAttribute("listaAlunos", repository.read());
+                redirect = "";
+                break;
+
+            case "findByMatricula":
+                AlunoEntity aluno = repository.findByMatricula(Integer.parseInt(request.getParameter("matricula")));
+                if (aluno != null) {
+                    request.setAttribute("aluno", aluno);
+                }
+                redirect = "";
+                break;
+
+            default:
+                configureStatus(request, "Ação inexistente, erro interno", StatusColor.RED);
+                redirect = "/WEB-INF/home.jsp";
+        }
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher(redirect);
+        dispatcher.forward(request, response);
     }
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         AlunoRepository repository = new AlunoRepository();
+        String action = request.getParameter("action");
 
-        switch (request.getParameter("action")){
+        switch (action) {
             case "create":
                 String usuario = request.getParameter("usuario");
-                if (repository.isApto(usuario)){
-                AlunoEntity alunoEntity = new AlunoEntity(
-                        Integer.parseInt("matricula"),
+                if (repository.isApto(usuario)) {
+                    AlunoEntity alunoEntity = new AlunoEntity(
+                            Integer.parseInt(request.getParameter("matricula")),
+                            request.getParameter("nome"),
+                            usuario,
+                            request.getParameter("senha"),
+                            request.getParameter("palavra")
+                    );
+                    int status = repository.create(alunoEntity);
+                    if (status > 0) {
+                        repository.toggleMatriculado(usuario);
+                        configureStatus(request, "Aluno(a) " + alunoEntity.getNome() + " criado com sucesso!", StatusColor.GREEN);
+                    } else if (status == 0) {
+                        configureStatus(request, "Já existe um aluno com essas informações, faça login!", StatusColor.RED);
+                    } else {
+                        configureStatus(request, "Erro interno, tente novamente.", StatusColor.RED);
+                    }
+                } else {
+                    configureStatus(request, "Você não está apto a se cadastrar.", StatusColor.RED);
+                }
+                redirect = "/WEB-INF/home.jsp";
+                break;
+
+            case "update":
+                AlunoEntity alunoUpdate = new AlunoEntity(
+                        Integer.parseInt(request.getParameter("matricula")),
                         request.getParameter("nome"),
-                        usuario,
+                        request.getParameter("usuario"),
                         request.getParameter("senha"),
                         request.getParameter("palavra")
                 );
-                switch (repository.create(alunoEntity)) {
-                    case -1:
-                        statusMessage = "Erro interno, tente denovo ou entre em contato com a instituição.";
-                        break;
-                    case 0:
-                        statusMessage = "Já existe um aluno com essas informações, faça login!";
-                    default:
-                        repository.toggleMatriculado(usuario);
-                        configureStatus("Aluno(a) " + request.getParameter("nome") + "criado com sucesso!", "green");
-                        break;
+                int updateStatus = repository.update(alunoUpdate);
+                if (updateStatus > 0) {
+                    configureStatus(request, "Atualizado com sucesso!", StatusColor.GREEN);
+                } else {
+                    configureStatus(request, "Erro ao atualizar.", StatusColor.RED);
                 }
-                }else{
-                    configureStatus("Você não está apto a se cadastrar.", "red");
-                }
+                redirect = "/WEB-INF/home.jsp";
                 break;
-        };
+            case "delete":
+                int id = Integer.parseInt(request.getParameter("matricula"));
+                int deleteStatus = repository.delete(id);
+                if (deleteStatus > 0) {
+                    configureStatus(request, "Deletado com sucesso!", StatusColor.GREEN);
+                } else {
+                    configureStatus(request, "Erro ao deletar.", StatusColor.RED);
+                }
+                redirect = "/WEB-INF/home.jsp";
+                break;
+
+            default:
+                redirect = "/WEB-INF/home.jsp";
+                break;
+        }
+        RequestDispatcher dispatcher = request.getRequestDispatcher(redirect);
+        dispatcher.forward(request, response);
     }
-    public void configureStatus(String statusMessage, String statusColor){
-        this.statusMessage = statusMessage;
-        this.statusColor = statusColor;
+
+    private void configureStatus(HttpServletRequest request, String statusMessage, StatusColor statusColor) {
+        request.setAttribute("statusMessage", statusMessage);
+        request.setAttribute("statusColor", statusColor.getValue());
     }
 }
