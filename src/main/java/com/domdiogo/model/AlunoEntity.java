@@ -6,21 +6,24 @@ public class AlunoEntity {
     private String usuario;
     private String senha;
     private String palavra;
+    private String turma;
 
-    public AlunoEntity(int matricula, String nome, String usuario, String senha, String palavra) {
+    public AlunoEntity(int matricula, String nome, String usuario, String senha, String palavra, String turma) {
         this.matricula = matricula;
         this.nome = nome;
         this.usuario = usuario;
         this.senha = senha;
         this.palavra = palavra;
+        this.turma = turma;
     }
-
-    public AlunoEntity(String nome, String usuario, String senha, String palavra) {
+    public AlunoEntity(String nome, String usuario, String senha, String palavra, String turma) {
         this.nome = nome;
         this.usuario = usuario;
         this.senha = senha;
         this.palavra = palavra;
+        this.turma = turma;
     }
+
 
     public int getMatricula() {
         return matricula;
@@ -41,4 +44,6 @@ public class AlunoEntity {
     public String getPalavra() {
         return palavra;
     }
+
+    public String getTurma() {return turma;}
 }

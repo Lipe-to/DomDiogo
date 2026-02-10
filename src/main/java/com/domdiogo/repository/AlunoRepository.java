@@ -24,7 +24,8 @@ public class AlunoRepository {
                         resultSet.getString("nome"),
                         resultSet.getString("usuario"),
                         resultSet.getString("senha"),
-                        resultSet.getString("palavra")
+                        resultSet.getString("palavra"),
+                        resultSet.getString("turma")
                 );
                 listaAlunos.add(alunoEntity);
             }
@@ -98,7 +99,8 @@ public class AlunoRepository {
                         resultSet.getString("nome"),
                         resultSet.getString("usuario"),
                         resultSet.getString("senha"),
-                        resultSet.getString("palavra")
+                        resultSet.getString("palavra"),
+                        resultSet.getString("turma")
                 );
             }
         } catch (SQLException e) {
