@@ -1,39 +1,45 @@
+package com.domdiogo.model;
+
 public class ObservacaoEntity {
     private int id;
+    private int matriculaAluno;
+    private int idProfessor;
     private String observacoes;
-    private int matricula_aluno;
-    private int id_professor;
 
-    public ObservacaoEntity( int id, String observacoes, int id_aluno, int id_professor){
+    public ObservacaoEntity( int id, int matriculaAluno, int idProfessor, String observacoes){
         this.id = id;
+        this.matriculaAluno = matriculaAluno;
+        this.idProfessor =idProfessor;
         this.observacoes = observacoes;
-        this.id_aluno = id_aluno;
-        this.id_professor =id_professor;
     }
+
+    public ObservacaoEntity(int matriculaAluno, int idProfessor, String observacoes){
+        this.matriculaAluno = matriculaAluno;
+        this.idProfessor =idProfessor;
+        this.observacoes = observacoes;
+    }
+
     public int getId() {
         return this.id;
     }
-    public String getObservacoes(){
-        return this.observacoes;
-    }
 
     public int getId_aluno() {
-        return this.id_aluno;
+        return this.matriculaAluno;
     }
 
     public int getId_professor() {
-        return this.id_professor;
+        return this.idProfessor;
     }
 
-    public void setObservacoes(String observacoes) {
-        this.observacoes = observacoes;
+    public String getObservacoes(){
+        return this.observacoes;
     }
 
     public String toString() {
         return "Observacao:" +
                 "\tId=" + id +
                 "\tObservacoes='" + observacoes+
-                "\tId_aluno=" + id_aluno +
-                "\tId_professor=" + id_professor;
+                "\tId_aluno=" + matriculaAluno +
+                "\tId_professor=" + idProfessor;
     }
 }

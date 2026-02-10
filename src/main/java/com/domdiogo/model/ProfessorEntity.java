@@ -1,3 +1,5 @@
+package com.domdiogo.model;
+
 public class ProfessorEntity {
     private int id;
     private String nome;
@@ -26,13 +28,6 @@ public class ProfessorEntity {
     }
     public String getPalavra() {
         return this.palavra;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public String toString() {
