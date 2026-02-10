@@ -55,7 +55,6 @@ public class AlunoServlet extends HttpServlet {
                 String usuario = request.getParameter("usuario");
                 if (repository.isApto(usuario)) {
                     AlunoEntity alunoEntity = new AlunoEntity(
-                            Integer.parseInt(request.getParameter("matricula")),
                             request.getParameter("nome"),
                             usuario,
                             request.getParameter("senha"),
@@ -82,7 +81,8 @@ public class AlunoServlet extends HttpServlet {
                         request.getParameter("nome"),
                         request.getParameter("usuario"),
                         request.getParameter("senha"),
-                        request.getParameter("palavra")
+                        request.getParameter("palavra"),
+                        request.getParameter("turma")
                 );
                 Status updateStatus = repository.update(alunoUpdate);
                 if (updateStatus == Status.SUCCESS) {
