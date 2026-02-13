@@ -1,0 +1,41 @@
+@import url(variables.css);
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+}
+
+.text-box, .button {
+    border-width: thin;
+    box-sizing: border-box;
+    padding: 2.5% 0;
+
+    box-shadow: var(--shadow-simple);
+}
+
+.button {
+    background: var(--lake-green);
+    background: var(--gradient-lake-green);
+    
+    border-color: var(--white);
+    border-radius: 10px;
+}
+
+.text-box {
+    width: 100%;
+    padding-left: 3% !important;
+
+    background-color: rgba(246, 246, 246, 0.15);
+
+    border-color: #4646462c;
+    border-radius: 3px;
+}
+
+.text-box:focus-visible {
+    background-color: red;
+}

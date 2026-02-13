@@ -1,30 +1,40 @@
 <!-- <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %> -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fazer Login</title>
-</head>
-<body>
-    <h1>Login</h1>
-    <form action="" method="">
-        <div class="input">
-            <p>E-mail</p>
-            <input name="" type="text"
-            placeholder="Ex: bahia@gmail.com">
-        </div>
 
-        <div class="input">
-            <p>Senha</p>
-            <input name="" type="password"
-            placeholder="Insira sua senha aqui">
-        </div>
-        
-        <div class="forgot">
-            <a href="">Esqueceu a senha?</a>
-        </div>
-        <button type="submit">Fazer Login</button>
-    </form>
+    <title>Fazer Login</title>
+
+    <link rel="stylesheet" href="../../css/login.css">
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/variables.css">
+    <link rel="stylesheet" href="../../css/font.css">
+</head>
+
+<body>
+    <div class="login-form">
+        <h1>Login</h1>
+        <form action="" method="">
+            <div class="input-container">
+                <p>E-mail</p>
+                <input class="text-box" name="" type="text" placeholder="Ex: bahia@gmail.com">
+            </div>
+    
+            <div class="input-container">
+                <p>Senha</p>
+                <input class="text-box" name="" type="password" placeholder="Insira sua senha aqui">
+            </div>
+    
+            <div class="forgot-password">
+                <a href="">Esqueceu a senha?</a>
+            </div>
+            <button class="button" type="submit">Fazer Login</button>
+        </form>
+    </div>
 </body>
+
 </html>
