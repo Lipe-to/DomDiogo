@@ -81,26 +81,31 @@ public class ProfessorRepository {
         }
     }
 
-    public Status login(String usuario, String senha) {
+    public ProfessorEntity login(String usuario, String senha) {
         String query = "select * from professor where usuario = ? and senha = ?";
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
+        ProfessorEntity professorEntity = null;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, usuario);
             preparedStatement.setString(2, senha);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return Status.SUCCESS;
-            } else {
-                return Status.NOT_FOUND;
+                professorEntity = new ProfessorEntity(
+                        resultSet.getInt("id"),
+                        resultSet.getString("nome"),
+                        resultSet.getString("usuario"),
+                        resultSet.getString("senha"),
+                        resultSet.getString("palavra")
+                );
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            return Status.INTERNAL_ERROR;
         } finally {
             connectionFactory.disconnect(connection);
         }
+        return professorEntity;
     }
 
     public Status validarPalavra(String usuario, String palavra) {

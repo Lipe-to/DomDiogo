@@ -32,21 +32,13 @@ public class NotaEntity {
         return this.media;
     }
 
-    public int getId_disciplina() {
+    public int getIdDisciplina() {
         return this.idDisciplina;
     }
 
-    public int getId_aluno() {
+    public int getMatriculaAluno() {
         return this.matriculaAluno;
     }
 
-    public String toString() {
-        return "Nota:" +
-                "\tId=" + id +
-                "\tN1=" + n1 +
-                "\tN2=" + n2 +
-                "\tMedia=" + media +
-                "\tId_disciplina=" + idDisciplina +
-                "\tId_aluno=" + matriculaAluno;
-    }
+
 }
