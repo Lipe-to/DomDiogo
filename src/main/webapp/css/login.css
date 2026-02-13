@@ -20,6 +20,10 @@ body {
     padding: 10% 0; /* Para obrigar o overflow-y */
 }
 
+.login-form input, .login-form .button {
+    min-height: 32px;
+}
+
 .login-form form {
     height: 100%;
     width: 100%;
@@ -29,6 +33,22 @@ body {
     justify-content: space-between;
 }
 
+@media (max-width: 400px) {
+    .login-form {
+        min-width: 280px;
+    }
+
+    .text-box {
+        padding-left: 5% !important;
+    }
+}
+
+@media (max-width: 340px) {
+    .login-form {
+        min-width: 220px;
+    }
+}
+
 .login-form>:first-child {
     text-align: center;
     margin-bottom: 10%;
@@ -36,6 +56,27 @@ body {
 
 .input-container>:first-child {
     margin-bottom: 1%;
+}
+
+.input-holder {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+
+.show-password {
+    background: none;
+    cursor: pointer;
+    opacity: 80%;
+    border: 0;
+
+    transform: translateX(-80%) translateY(3%);
+    position: absolute;
+}
+
+.show-password img {
+    width: 85%;
+    height: min-content;
 }
 
 .login-form form>:first-child>:last-child {
