@@ -11,7 +11,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
-@WebServlet("/aluno")
+@WebServlet({"/aluno", "/aluno/*"})
 public class AlunoServlet extends HttpServlet {
     private String redirect = "";
     private final AlunoRepository repository = new AlunoRepository();

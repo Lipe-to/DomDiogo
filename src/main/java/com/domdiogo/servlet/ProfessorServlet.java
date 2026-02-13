@@ -11,7 +11,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
-@WebServlet("/professor")
+@WebServlet({"/professor", "/professor/*"})
 public class ProfessorServlet extends HttpServlet {
     private String redirect = "";
     private final ProfessorRepository repository = new ProfessorRepository();
