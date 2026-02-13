@@ -1,3 +1,5 @@
+@import url('../variables.css');
+
 body {
     /* overflow: hidden; */
     overflow-x: hidden;
@@ -118,7 +120,7 @@ body {
 .email::after {
     content: "Por favor, insira um e-mail válido";
     font-size: 0.9rem;
-    color: red;
+    color: var(--red);
     opacity: 70%;
 
     display: block;
