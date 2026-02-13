@@ -59,7 +59,7 @@ public class AlunoRepository {
     }
 
     public Status create(AlunoEntity alunoEntity) {
-        String query = "insert into aluno (nome, usuario, senha, palavra) values (?, ?, ?, ?, ?)";
+        String query = "insert into aluno (nome, usuario, senha, palavra, turma) values (?, ?, ?, ?, ?)";
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
         try {
@@ -68,6 +68,7 @@ public class AlunoRepository {
             preparedStatement.setString(2, alunoEntity.getUsuario());
             preparedStatement.setString(3, alunoEntity.getSenha());
             preparedStatement.setString(4, alunoEntity.getPalavra());
+            preparedStatement.setString(5, alunoEntity.getTurma());
 
             int rows = preparedStatement.executeUpdate();
             if (rows > 0) {
@@ -136,19 +137,15 @@ public class AlunoRepository {
         }
     }
 
-    public boolean isApto(String email) {
+    public boolean isApto(String usuario) {
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
-        String query = "select email from aptos where email = ?";
+        String query = "select usuario from aptos where usuario = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, email);
+            preparedStatement.setString(1, usuario);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                return true;
-            } else {
-                return false;
-            }
+            return resultSet.next();
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -157,19 +154,15 @@ public class AlunoRepository {
         }
     }
 
-    public boolean toggleMatriculado(String email) {
+    public boolean toggleMatriculado(String usuario) {
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
-        String query = "update aptos set is_matriculado = not is_matriculado where email = ?";
+        String query = "update aptos set is_matriculado = not is_matriculado where usuario = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, email);
+            preparedStatement.setString(1, usuario);
             int rows = preparedStatement.executeUpdate();
-            if (rows > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return rows > 0;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -200,13 +193,13 @@ public class AlunoRepository {
         }
     }
 
-    public Status validarPalavra(String email, String palavra) {
-        String query = "select palavra from professor where email = ?";
+    public Status validarPalavra(String usuario, String palavra) {
+        String query = "select palavra from professor where usuario = ?";
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, email);
+            preparedStatement.setString(1, usuario);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 if (resultSet.getString("palavra").equals(palavra)) {

@@ -17,15 +17,12 @@ public class AlunoEntity {
         this.turma = turma;
     }
 
-
-
     public AlunoEntity(String nome, String usuario, String senha, String palavra) {
         this.nome = nome;
         this.usuario = usuario;
         this.senha = senha;
         this.palavra = palavra;
     }
-
 
     public int getMatricula() {
         return matricula;
@@ -47,5 +44,7 @@ public class AlunoEntity {
         return palavra;
     }
 
-    public String getTurma() {return turma;}
+    public String getTurma() {
+        return turma;
+    }
 }
