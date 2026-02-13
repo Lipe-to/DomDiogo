@@ -3,39 +3,34 @@ package com.domdiogo.servlet;
 import java.io.IOException;
 
 import com.domdiogo.ServletHelper;
-import com.domdiogo.model.AlunoEntity;
+import com.domdiogo.model.ProfessorEntity;
 import com.domdiogo.model.Status;
 import com.domdiogo.model.StatusColor;
-import com.domdiogo.repository.AlunoRepository;
+import com.domdiogo.repository.ProfessorRepository;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
-@WebServlet("/aluno")
-public class AlunoServlet extends HttpServlet {
+@WebServlet("/professor")
+public class ProfessorServlet extends HttpServlet {
     private String redirect = "";
-    private final AlunoRepository repository = new AlunoRepository();
+    private final ProfessorRepository repository = new ProfessorRepository();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String action = request.getParameter("action");
 
         switch (action) {
-            case "read":
-                request.setAttribute("listaAlunos", repository.read());
-                redirect = "";
-                break;
-
-            case "findByMatricula":
-                int matricula = Integer.parseInt(request.getParameter("matricula"));
-                AlunoEntity aluno = repository.findByMatricula(matricula);
-                if (aluno != null) {
-                    request.setAttribute("aluno", aluno);
-                    ServletHelper.configureStatus(request, "Aluno encontrado com sucesso", StatusColor.GREEN);
+            case "findById":
+                int id = Integer.parseInt(request.getParameter("id"));
+                ProfessorEntity professor = repository.findById(id);
+                if (professor != null) {
+                    request.setAttribute("professor", professor);
+                    ServletHelper.configureStatus(request, "Professor encontrado com sucesso", StatusColor.GREEN);
                 } else {
-                    ServletHelper.configureStatus(request, "Aluno não encontrado", StatusColor.RED);
+                    ServletHelper.configureStatus(request, "Professor não encontrado", StatusColor.RED);
                 }
-                redirect = "";
+                redirect = "/WEB-INF/home.jsp";
                 break;
 
             default:
@@ -51,44 +46,19 @@ public class AlunoServlet extends HttpServlet {
         String action = request.getParameter("action");
 
         switch (action) {
-            case "create":
-                String usuario = request.getParameter("usuario");
-                if (repository.isApto(usuario)) {
-                    AlunoEntity alunoEntity = new AlunoEntity(
-                            request.getParameter("nome"),
-                            usuario,
-                            request.getParameter("senha"),
-                            request.getParameter("palavra")
-                    );
-                    Status status = repository.create(alunoEntity);
-                    if (status == Status.SUCCESS) {
-                        repository.toggleMatriculado(usuario);
-                        ServletHelper.configureStatus(request, "Aluno(a) " + alunoEntity.getNome() + " criado com sucesso!", StatusColor.GREEN);
-                    } else if (status == Status.NOT_FOUND) {
-                        ServletHelper.configureStatus(request, "Já existe um aluno com essas informações, faça login.", StatusColor.RED);
-                    } else {
-                        ServletHelper.configureStatus(request, "Erro interno, tente novamente.", StatusColor.RED);
-                    }
-                } else {
-                    ServletHelper.configureStatus(request, "Você não está apto a se cadastrar.", StatusColor.RED);
-                }
-                redirect = "/WEB-INF/home.jsp";
-                break;
-
             case "update":
-                AlunoEntity alunoUpdate = new AlunoEntity(
-                        Integer.parseInt(request.getParameter("matricula")),
+                ProfessorEntity professorUpdate = new ProfessorEntity(
+                        Integer.parseInt(request.getParameter("id")),
                         request.getParameter("nome"),
                         request.getParameter("usuario"),
                         request.getParameter("senha"),
-                        request.getParameter("palavra"),
-                        request.getParameter("turma")
+                        request.getParameter("palavra")
                 );
-                Status updateStatus = repository.update(alunoUpdate);
+                Status updateStatus = repository.update(professorUpdate);
                 if (updateStatus == Status.SUCCESS) {
                     ServletHelper.configureStatus(request, "Atualizado com sucesso!", StatusColor.GREEN);
                 } else if (updateStatus == Status.NOT_FOUND) {
-                    ServletHelper.configureStatus(request, "Erro ao atualizar: aluno não encontrado.", StatusColor.RED);
+                    ServletHelper.configureStatus(request, "Erro ao atualizar: professor não encontrado.", StatusColor.RED);
                 } else {
                     ServletHelper.configureStatus(request, "Erro interno ao atualizar.", StatusColor.RED);
                 }
@@ -96,12 +66,12 @@ public class AlunoServlet extends HttpServlet {
                 break;
 
             case "delete":
-                int id = Integer.parseInt(request.getParameter("matricula"));
+                int id = Integer.parseInt(request.getParameter("id"));
                 Status deleteStatus = repository.delete(id);
                 if (deleteStatus == Status.SUCCESS) {
                     ServletHelper.configureStatus(request, "Deletado com sucesso!", StatusColor.GREEN);
                 } else if (deleteStatus == Status.NOT_FOUND) {
-                    ServletHelper.configureStatus(request, "Erro ao deletar: aluno não encontrado.", StatusColor.RED);
+                    ServletHelper.configureStatus(request, "Erro ao deletar: professor não encontrado.", StatusColor.RED);
                 } else {
                     ServletHelper.configureStatus(request, "Erro interno ao deletar.", StatusColor.RED);
                 }
@@ -119,6 +89,21 @@ public class AlunoServlet extends HttpServlet {
                     ServletHelper.configureStatus(request, "Usuário ou senha inválidos.", StatusColor.RED);
                 } else {
                     ServletHelper.configureStatus(request, "Erro interno ao realizar login.", StatusColor.RED);
+                }
+                redirect = "/WEB-INF/home.jsp";
+                break;
+
+            case "validarPalavra":
+                Status validarStatus = repository.validarPalavra(
+                        request.getParameter("usuario"),
+                        request.getParameter("palavra")
+                );
+                if (validarStatus == Status.SUCCESS) {
+                    ServletHelper.configureStatus(request, "Palavra validada com sucesso!", StatusColor.GREEN);
+                } else if (validarStatus == Status.NOT_FOUND) {
+                    ServletHelper.configureStatus(request, "Palavra inválida.", StatusColor.RED);
+                } else {
+                    ServletHelper.configureStatus(request, "Erro interno ao validar palavra.", StatusColor.RED);
                 }
                 redirect = "/WEB-INF/home.jsp";
                 break;

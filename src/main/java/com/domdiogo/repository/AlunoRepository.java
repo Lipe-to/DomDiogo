@@ -24,7 +24,8 @@ public class AlunoRepository {
                         resultSet.getString("nome"),
                         resultSet.getString("usuario"),
                         resultSet.getString("senha"),
-                        resultSet.getString("palavra")
+                        resultSet.getString("palavra"),
+                        resultSet.getString("turma")
                 );
                 listaAlunos.add(alunoEntity);
             }
@@ -58,23 +59,22 @@ public class AlunoRepository {
     }
 
     public Status create(AlunoEntity alunoEntity) {
-        String query = "insert into aluno (matricula, nome, usuario, senha, palavra) values (?, ?, ?, ?, ?)";
+        String query = "insert into aluno (nome, usuario, senha, palavra, turma) values (?, ?, ?, ?, ?)";
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, alunoEntity.getMatricula());
-            preparedStatement.setString(2, alunoEntity.getNome());
-            preparedStatement.setString(3, alunoEntity.getUsuario());
-            preparedStatement.setString(4, alunoEntity.getSenha());
-            preparedStatement.setString(5, alunoEntity.getPalavra());
+            preparedStatement.setString(1, alunoEntity.getNome());
+            preparedStatement.setString(2, alunoEntity.getUsuario());
+            preparedStatement.setString(3, alunoEntity.getSenha());
+            preparedStatement.setString(4, alunoEntity.getPalavra());
+            preparedStatement.setString(5, alunoEntity.getTurma());
 
             int rows = preparedStatement.executeUpdate();
             if (rows > 0) {
                 return Status.SUCCESS;
-            } else {
-                return Status.NOT_FOUND;
             }
+            return Status.NOT_FOUND;
         } catch (SQLException e) {
             e.printStackTrace();
             return Status.INTERNAL_ERROR;
@@ -98,7 +98,8 @@ public class AlunoRepository {
                         resultSet.getString("nome"),
                         resultSet.getString("usuario"),
                         resultSet.getString("senha"),
-                        resultSet.getString("palavra")
+                        resultSet.getString("palavra"),
+                        resultSet.getString("turma")
                 );
             }
         } catch (SQLException e) {
@@ -110,7 +111,7 @@ public class AlunoRepository {
     }
 
     public Status update(AlunoEntity alunoEntity) {
-        String query = "update aluno set nome = ?, usuario = ?, senha = ?, palavra = ? where matricula = ?";
+        String query = "update aluno set nome = ?, usuario = ?, senha = ?, palavra = ?, turma = ? where matricula = ?";
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
         try {
@@ -119,7 +120,8 @@ public class AlunoRepository {
             preparedStatement.setString(2, alunoEntity.getUsuario());
             preparedStatement.setString(3, alunoEntity.getSenha());
             preparedStatement.setString(4, alunoEntity.getPalavra());
-            preparedStatement.setInt(5, alunoEntity.getMatricula());
+            preparedStatement.setString(5, alunoEntity.getTurma());
+            preparedStatement.setInt(6, alunoEntity.getMatricula());
 
             int rows = preparedStatement.executeUpdate();
             if (rows > 0) {
@@ -135,19 +137,15 @@ public class AlunoRepository {
         }
     }
 
-    public boolean isApto(String email) {
+    public boolean isApto(String usuario) {
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
-        String query = "select email from aptos where email = ?";
+        String query = "select usuario from aptos where usuario = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, email);
+            preparedStatement.setString(1, usuario);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                return true;
-            } else {
-                return false;
-            }
+            return resultSet.next();
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -156,19 +154,15 @@ public class AlunoRepository {
         }
     }
 
-    public boolean toggleMatriculado(String email) {
+    public boolean toggleMatriculado(String usuario) {
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
-        String query = "update aptos set is_matriculado = not is_matriculado where email = ?";
+        String query = "update aptos set is_matriculado = not is_matriculado where usuario = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, email);
+            preparedStatement.setString(1, usuario);
             int rows = preparedStatement.executeUpdate();
-            if (rows > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return rows > 0;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -190,6 +184,31 @@ public class AlunoRepository {
                 return Status.SUCCESS;
             } else {
                 return Status.NOT_FOUND;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return Status.INTERNAL_ERROR;
+        } finally {
+            connectionFactory.disconnect(connection);
+        }
+    }
+
+    public Status validarPalavra(String usuario, String palavra) {
+        String query = "select palavra from professor where usuario = ?";
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        Connection connection = connectionFactory.connect();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, usuario);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                if (resultSet.getString("palavra").equals(palavra)) {
+                    return Status.SUCCESS;
+                } else {
+                    return Status.NOT_FOUND;
+                }
+            } else {
+                return Status.INTERNAL_ERROR;
             }
         } catch (SQLException e) {
             e.printStackTrace();
