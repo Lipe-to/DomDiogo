@@ -15,14 +15,16 @@ body {
     height: fit-content;
     max-width: 350px;
     min-width: 300px;
-    
+
     display: flex;
     flex-direction: column;
 
-    padding: 10% 0; /* Para obrigar o overflow-y */
+    padding: 10% 0;
+    /* Para obrigar o overflow-y */
 }
 
-.login-form input, .login-form .button {
+.login-form input,
+.login-form .button {
     min-height: 32px;
 }
 
@@ -49,6 +51,10 @@ body {
     .login-form {
         min-width: 220px;
     }
+}
+
+.forgot-password a {
+    font-size: 0.95rem;
 }
 
 .login-form>:first-child {
@@ -101,7 +107,8 @@ body {
     margin-top: 7%;
 }
 
-.login-form form>*, .login-form form>:first-child>* {
+.login-form form>*,
+.login-form form>:first-child>* {
     margin-bottom: 5%;
 }
 
@@ -136,14 +143,27 @@ body {
 }
 
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-4px); }
-  50% { transform: translateX(4px); }
-  75% { transform: translateX(-4px); }
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-4px);
+    }
+
+    50% {
+        transform: translateX(4px);
+    }
+
+    75% {
+        transform: translateX(-4px);
+    }
 }
 
 .validation:not(:placeholder-shown):invalid {
-  border-color: var(--red);
+    border-color: var(--red);
 }
 
 /* 
@@ -156,9 +176,8 @@ body {
     bottom: 0;
     left: 0;
     
-    transform: translateX(15%) translateY(-70%);
-
     opacity: 60%;
+    transform: translateX(15%) translateY(-70%);
 }
 
 .admin a {
@@ -170,4 +189,10 @@ body {
 .admin img {
     width: 0.8rem;
     transform: translateX(-30%) translateY(15%);
+}
+
+@media (max-width: 600px) {
+    .admin {
+        transform: translateX(10%) translateY(-70%);
+    }
 }
