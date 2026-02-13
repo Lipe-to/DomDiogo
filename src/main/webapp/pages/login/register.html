@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Fazer Login</title>
+    <title>Registrar aluno</title>
 
     <link rel="stylesheet" href="../../css/login.css">
 
@@ -17,9 +17,15 @@
 
 <body>
     <div class="login-form">
-        <h1>Bem vindo de volta!</h1>
+        <h1>Registrar aluno</h1>
         <form action="" method="">
             <div class="input-major">
+                <div class="input-container">
+                    <p class="required">Nome completo</p>
+                    <input class="text-box" name="" type="password" placeholder="Insira seu nome"
+                    required>
+                </div>
+
                 <div class="email input-container">
                     <p class="required">E-mail</p>
                     <input class="validation text-box" id="email" name="" type="email" placeholder="Insira seu endereço de e-mail"
@@ -31,13 +37,21 @@
                     <input class="text-box" name="" type="password" placeholder="Insira sua senha"
                     required>
                 </div>
+                
+                <div class="input-container">
+                    <p class="required">Confirmar senha</p>
+                    <input class="text-box" name="" type="password" placeholder="Insira sua senha novamente"
+                    required>
+                </div>
+                
+                <div class="input-container">
+                    <p class="required">Comprovação de identidade</p>
+                    <input class="text-box" name="" type="password" placeholder="Insira a palavra-chave"
+                    required>
+                </div>
             </div>    
-
-            <div class="forgot-password">
-                <a href="">Esqueceu a senha?</a>
-            </div>
             
-            <button class="button" type="submit">Continue</button>
+            <button class="button" type="submit">Registrar</button>
         </form>
     </div>
 </body>

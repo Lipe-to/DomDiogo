@@ -48,7 +48,11 @@ body {
 }
 
 .login-form .forgot-password {
-    margin: 7% 0;
+    margin-top: 7%;
+}
+
+.login-form form .button {
+    margin-top: 7%;
 }
 
 .login-form form>*, .login-form form>:first-child>* {
@@ -59,6 +63,12 @@ body {
     content: "*";
     color: var(--red);
     margin-left: 0.75%;
+
+    transition: opacity 0.4s ease-in-out;
+}
+
+.input-container:has(input:valid) .required::after {
+    opacity: 0;
 }
 
 .email::after {
