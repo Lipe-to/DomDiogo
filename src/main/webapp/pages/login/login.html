@@ -17,22 +17,25 @@
 
 <body>
     <div class="login-form">
-        <h1>Login</h1>
+        <h1>Bem vindo de volta!</h1>
         <form action="" method="">
-            <div class="input-container">
-                <p>E-mail</p>
-                <input class="text-box" name="" type="text" placeholder="Ex: bahia@gmail.com">
-            </div>
-    
-            <div class="input-container">
-                <p>Senha</p>
-                <input class="text-box" name="" type="password" placeholder="Insira sua senha aqui">
-            </div>
-    
+            <div class="input-major">
+                <div class="email input-container">
+                    <p class="required">E-mail</p>
+                    <input class="validation text-box" id="email" name="" type="email" placeholder="Insira seu endereço de e-mail"
+                    pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" required>
+                </div>
+        
+                <div class="input-container">
+                    <p class="required">Senha</p>
+                    <input class="text-box" name="" type="password" placeholder="Insira sua senha"
+                    required>
+                </div>
+            </div>    
             <div class="forgot-password">
                 <a href="">Esqueceu a senha?</a>
             </div>
-            <button class="button" type="submit">Fazer Login</button>
+            <button class="button" type="submit">Continue</button>
         </form>
     </div>
 </body>

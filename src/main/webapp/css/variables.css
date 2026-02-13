@@ -7,11 +7,13 @@
     
     --hyperlink-blue: #4D81E7;
     --lake-green: #61CB9F;
+    --red: #d13e3e;
 
     --gradient-lake-green: linear-gradient(90deg, rgba(97, 203, 159, 1) 0%, rgb(91, 192, 150) 100%);
 
     --text-box-border: #2727272c;
     
     /* shadows ↓ */
-    --shadow-simple: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    --shadow-simple: rgba(149, 157, 165, 0.1) 0px 8px 24px;
+    --shadow-focus: rgba(149, 157, 165, 0.2) 0px 12px 24px;
 }

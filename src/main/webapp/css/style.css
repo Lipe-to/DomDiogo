@@ -12,6 +12,7 @@ body {
 
 .text-box, .button {
     border-width: thin;
+    border-style: solid;
     box-sizing: border-box;
     padding: 2.5% 0;
 
@@ -24,18 +25,28 @@ body {
     
     border-color: var(--white);
     border-radius: 10px;
+
+    cursor: pointer;
 }
 
 .text-box {
     width: 100%;
     padding-left: 3% !important;
-
+    
     background-color: rgba(246, 246, 246, 0.15);
-
+    
     border-color: #4646462c;
     border-radius: 3px;
+
+    transition: box-shadow 0.3s ease-in-out;
 }
 
-.text-box:focus-visible {
-    background-color: red;
+.text-box::placeholder {
+    font-weight: 500;
 }
+
+.text-box:focus {
+    box-shadow: var(--shadow-focus);
+    outline: none;
+}
+
