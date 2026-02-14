@@ -10,8 +10,9 @@
     --lake-green: #61CB9F;
     --red: #d13e3e;
 
-    --background-grey: #A4A4A4;
     --table-grey: #CDD7D6;
+    --table-background: rgba(164, 164, 164, 0.15); /* #A4A4A4 */
+    --table-row: rgba(0, 0, 0, 0.05); /* #000000 */
 
     --gradient-lake-green: linear-gradient(90deg, rgba(97, 203, 159, 1) 0%, rgb(91, 192, 150) 100%);
 

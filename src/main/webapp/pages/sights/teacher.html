@@ -17,48 +17,192 @@
 </head>
 
 <body>
-    <section class="dashboard"> <!-- Position fixed !!! -->
-        <a href=""></a>
-    </section>
-    <main>
-        <header></header>
-        <div id="front-desk"></div>
-        <div id="grades">
-            <h1>Matéria</h1>
-            <div>
-                <select name="" id="">Filtrar por turmas</select>
-            </div>
-
-            <div>
-                <div>
+    <div id="major-container">
+        <aside id="sidebar"> <!-- Position fixed !!! -->
+            <a href="">home</a>
+        </aside>
+        <div id="wrap">
+            <header></header>
+            <main>
+                <div id="front-desk"></div>
+                <div id="grades">
+                    <h1>Matéria</h1>
                     <div>
-                        <h3>2° Série G Tech</h3>
-                        <sub>Alunos</sub>
+                        <label for="classes">Filtrar por turmas</label>
+                        <select name="classes" id="classes">
+                            <option value=""></option>
+                        </select>
                     </div>
 
-                    <input type="text">
+                    <div class="wrap-for-scroll">
+                        <div class="table-container">
+                            <div class="table-info"> <!-- Contenção da turma -->
+                                <div>
+                                    <h3>2° Série G Tech</h3>
+                                    <sub>Alunos</sub>
+                                </div>
+                                <input type="text">
+                                <div>
+                                    <button>Filtrar</button>
+                                    <button>Gerenciar notas</button>
+                                </div>
+                            </div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Estudante</th>
+                                        <th>Matrícula</th>
+                                        <th>N1'</th>
+                                        <th>N2'</th>
+                                        <th>Média Final</th>
+                                        <th>Situação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Jotaro</td>
+                                        <td>12409124</td>
+                                        <td>10</td>
+                                        <td>8</td>
+                                        <td>9,5</td>
+                                        <td>Aprovado</td>
+                                    </tr>
+                                </tbody>
+                                <tbody>
+                                    <tr>
+                                        <td>Jotaro</td>
+                                        <td>12409124</td>
+                                        <td>10</td>
+                                        <td>8</td>
+                                        <td>9,5</td>
+                                        <td>Aprovado</td>
+                                    </tr>
+                                </tbody>
+                                <tbody>
+                                    <tr>
+                                        <td>Jotaro</td>
+                                        <td>12409124</td>
+                                        <td>10</td>
+                                        <td>8</td>
+                                        <td>9,5</td>
+                                        <td>Aprovado</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Tables de teste -->
 
-                    <div>
-                        <button>Filtrar</button>
-                        <button>Gerenciar notas</button>
+                        <div class="table-container">
+                            <div class="table-info"> <!-- Contenção da turma -->
+                                <div>
+                                    <h3>2° Série G Tech</h3>
+                                    <sub>Alunos</sub>
+                                </div>
+                                <input type="text">
+                                <div>
+                                    <button>Filtrar</button>
+                                    <button>Gerenciar notas</button>
+                                </div>
+                            </div>
+                            <table class="grades">
+                                <thead>
+                                    <tr>
+                                        <th>Estudante</th>
+                                        <th>Matrícula</th>
+                                        <th>N1'</th>
+                                        <th>N2'</th>
+                                        <th>Média Final</th>
+                                        <th>Situação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Jotaro</td>
+                                        <td>12409124</td>
+                                        <td>10</td>
+                                        <td>8</td>
+                                        <td>9,5</td>
+                                        <td>Aprovado</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-container">
+                            <div class="table-info"> <!-- Contenção da turma -->
+                                <div>
+                                    <h3>2° Série G Tech</h3>
+                                    <sub>Alunos</sub>
+                                </div>
+                                <input type="text">
+                                <div>
+                                    <button>Filtrar</button>
+                                    <button>Gerenciar notas</button>
+                                </div>
+                            </div>
+                            <table class="grades">
+                                <thead>
+                                    <tr>
+                                        <th>Estudante</th>
+                                        <th>Matrícula</th>
+                                        <th>N1'</th>
+                                        <th>N2'</th>
+                                        <th>Média Final</th>
+                                        <th>Situação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Jotaro</td>
+                                        <td>12409124</td>
+                                        <td>10</td>
+                                        <td>8</td>
+                                        <td>9,5</td>
+                                        <td>Aprovado</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-container">
+                            <div class="table-info"> <!-- Contenção da turma -->
+                                <div>
+                                    <h3>2° Série G Tech</h3>
+                                    <sub>Alunos</sub>
+                                </div>
+                                <input type="text">
+                                <div>
+                                    <button>Filtrar</button>
+                                    <button>Gerenciar notas</button>
+                                </div>
+                            </div>
+                            <table class="grades">
+                                <thead>
+                                    <tr>
+                                        <th>Estudante</th>
+                                        <th>Matrícula</th>
+                                        <th>N1'</th>
+                                        <th>N2'</th>
+                                        <th>Média Final</th>
+                                        <th>Situação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Jotaro</td>
+                                        <td>12409124</td>
+                                        <td>10</td>
+                                        <td>8</td>
+                                        <td>9,5</td>
+                                        <td>Aprovado</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Estudante</th>
-                            <th>Matrícula</th>
-                            <th>N1'</th>
-                            <th>N2'</th>
-                            <th>Média Final</th>
-                            <th>Situação</th>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
+            </main>
         </div>
-    </main>
+    </div>
 </body>
 
 </html>
