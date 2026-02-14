@@ -13,26 +13,29 @@ body {
     flex-direction: row;
 }
 
-#major-container>* {
-    background-color: var(--white);
-    border-radius: 10px;
-}
-
 #wrap {
     flex: 1;
     min-width: 0;
+}
+
+main>* {
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 1.5% 0 1.5% 2%;
 }
 
 main {
     display: flex;
     flex-direction: column;
     flex: 1;
-    margin-left: 1.25%;
 }
 
 aside {
-    display: none;
     width: 5%;
+    border-radius: 10px;
+    background-color: var(--white);
+
+    display: none;
 }
 
 .wrap-for-scroll {
@@ -41,30 +44,39 @@ aside {
     flex: 0 1 auto;
     overflow-x: auto;
     gap: 2%;
+    margin-top: 1%;
 }
 
 .wrap-for-scroll>* {
-    min-width: 620px;
+    min-width: 700px;
     flex-shrink: 0;
+}
+
+.wrap-for-scroll::-webkit-scrollbar {
+    display: none;
 }
 
 table {
     border-collapse: collapse;
-    text-align: center;
+    border-radius: 4px;
     width: 100%;
+    
+    overflow: hidden;
+    text-align: center;
+    background-color: var(--table-grey);
 }
 
 table th {
-    padding: 1.5% 0;
+    padding: 2% 0;
     color: var(--white);
     font-weight: 600;
 }
 
 table td {
-    padding: 2.15% 0;
+    padding: 2.45% 0;
 }
 
-tbody:nth-child(2n) {
+table tbody:nth-child(even) {
     background-color: var(--table-row);
 }
 
@@ -72,20 +84,50 @@ table thead {
     background-color: var(--blue);
 }
 
+table tbody {
+    font-weight: 500;
+}
+
 .table-container {
     background-color: var(--table-background);
-    padding: 0.5%;
+    padding: 1% 1.25% 1.5%;
     border-radius: 6px;
 }
 
 .table-info {
     display: flex;
     justify-content: space-between;
-    margin: 0 3%;
+    align-items: center;
+    margin: 0 2% 1.5%;
 }
 
 .table-info>:first-child {
     display: flex;
     flex-direction: column;
+}
+
+.situation span {
+    padding: 1.5% 8%;
+    border-radius: 25px;
+    border-style: solid;
+    border-width: 1px;
+    font-weight: 500;    
+    white-space: nowrap;
+
+    color: #454545d3;
+    background-color: #45454518;
+    border-color: #4545452a;
+}
+
+.situation .approved {
+    color: #13734B9f;
+    background-color: #61CA9E4D;
+    border-color: #2591634D;
+}
+
+.situation .failed {
+    color: #7c0a0a9f;
+    background-color: #FF6C6C4D;
+    border-color: #C84A4A4D;
 }
 

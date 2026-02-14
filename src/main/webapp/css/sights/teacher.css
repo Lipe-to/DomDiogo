@@ -1,2 +1,6 @@
 @import url('../variables.css');
 
+#grades {
+    background-color: var(--white);
+    margin-top: 1%;
+}
