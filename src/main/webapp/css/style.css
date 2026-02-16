@@ -15,7 +15,7 @@ body {
     overflow-x: hidden;
 }
 
-.text-box, .button, .search-box {
+.text-box, .button {
     border-width: thin;
     border-style: solid;
     box-sizing: border-box;
@@ -27,17 +27,15 @@ body {
 .button {
     background: var(--lake-green);
     background: var(--gradient-lake-green);
-    
     border-color: var(--white);
     border-radius: 10px;
 
     cursor: pointer;
 }
 
-.text-box, .search-box {
+.text-box {
     width: 100%;
     background-color: rgba(246, 246, 246, 0.15);
-    
     border-color: #4646462c;
     border-radius: 3px;
 
@@ -46,10 +44,6 @@ body {
 
 .text-box {
     padding-left: 3%;
-}
-
-.search-box {
-    padding-left: 7.5%;
 }
 
 .text-box::placeholder, .search-box::placeholder {
