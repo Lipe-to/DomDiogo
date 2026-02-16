@@ -18,7 +18,7 @@
 
 <body>
     <div id="major-container">
-        <aside id="sidebar"> <!-- Position fixed !!! -->
+        <aside id="sidebar"> <!-- Position fixed ! -->
             <input name="menu-checkbox" id="menu-checkbox" type="checkbox">
             <label id="menu-icon" for="menu-checkbox">
                 <img class="sidebar-icon" src="../../img/svg/sidebar/menu-burger.svg">
@@ -28,10 +28,11 @@
 
         <div id="wrap">
             <header>
+                <a href="#"><img class="logo" src="../../img/branding/teste.png" alt="Logo"></a>
                 <div class="personal-info">
-                    <a href="#"><img class="logo" src="../../img/branding/teste.png" alt="Logo"> </a>
+                    <img src="../../img/neymar.png" alt=""> <!-- Condicional em JSP se não houver bd de perfil -->
                     <div>
-                        <h4>Kesler Santos</h4>
+                        <h3>Neymar Santos</h3>
                         <p>Aluno</p>
                     </div>
                 </div>
@@ -75,11 +76,13 @@
                                     <sub>Alunos</sub>
                                 </div>
                                 <div class="table-actions">
-                                    <input style="display: none;" type="checkbox" id="search-submit">
-                                    <label for="search-submit"><img src="../../img/svg/search.svg"alt=""></label>
+                                    <input checked style="display: none;" type="checkbox" id="search-submit">
+                                    <label for="search-submit"><img src="../../img/svg/search.svg" alt=""></label>
                                     <input class="search-box" type="text" placeholder="Pesquisar por matrícula">
-                                    <button><img src="../../img/svg/filter.svg" alt="Filtrar"></button>
-                                    <button><div><img src="../../img/svg/document.svg"><span>Gerenciar notas</span></div></button>
+                                    <button title="Filtrar"><img src="../../img/svg/filter.svg" alt="Filtrar"></button>
+                                    <button title="Gerenciar notas">
+                                        <div><img src="../../img/svg/document.svg"><span>Gerenciar notas</span></div>
+                                    </button>
                                 </div>
                             </div>
                             <table>

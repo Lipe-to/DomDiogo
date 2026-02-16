@@ -170,11 +170,41 @@ aside {
     height: auto;
 }
 
-.personal-info {
+header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+
+.personal-info {
+    display: flex;
+    gap: 2%;
+    width: 40%;
+    justify-content: end;
+    align-items: center;
+    overflow: hidden;
+
+    color: var(--white);
+}
+
+.personal-info>img {
+    width: 8%;
+    aspect-ratio: 1 / 1;
+    
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 100%;
+    border-color: var(--white);
+}
+
+.personal-info h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.personal-info p {
+    font-size: 0.75rem;
 }
 
 .table-actions {
@@ -226,6 +256,16 @@ aside {
     width: 30%;
 }
 
+@media (max-width: 800px) {
+    .table-actions span {
+        display: none !important;
+    }
+
+    .table-actions>:last-child {
+        width: auto;
+    }
+}
+
 .table-actions>:last-child * {
     display: flex;
     align-items: center;
@@ -239,4 +279,3 @@ aside {
 .table-actions:has(input:checked) input[type="text"] {
     display: none;
 }
-

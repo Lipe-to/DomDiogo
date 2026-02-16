@@ -51,7 +51,7 @@ body {
     font-weight: 500;
 }
 
-.text-box:focus, .search-box::focus {
+.text-box:focus, .search-box:focus {
     box-shadow: var(--shadow-focus);
     outline: none;
 }
