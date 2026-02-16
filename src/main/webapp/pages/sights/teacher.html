@@ -19,12 +19,22 @@
 <body>
     <div id="major-container">
         <aside id="sidebar"> <!-- Position fixed !!! -->
-            <a href="">home</a>
+            <input name="menu-checkbox" id="menu-checkbox" type="checkbox">
+            <label id="menu-icon" for="menu-checkbox">
+                <img class="sidebar-icon" src="../../img/svg/sidebar/menu-burger.svg">
+            </label>
+            <a href=""><img src="" alt=""></a>
         </aside>
 
         <div id="wrap">
             <header>
-
+                <div class="personal-info">
+                    <a href="#"><img class="logo" src="../../img/branding/teste.png" alt="Logo">                    </a>
+                    <div>
+                        <h4>Kesler Santos</h4>
+                        <p>Aluno</p>
+                    </div>
+                </div>
             </header>
         
             <main>
@@ -64,7 +74,9 @@
                                     <h3>2° Série G Tech</h3>
                                     <sub>Alunos</sub>
                                 </div>
-                                <input type="text">
+                                <div class="search-container">
+                                    <input class="search-box" type="text" placeholder="Pesquisar por matrícula">
+                                </div>
                                 <div>
                                     <button>Filtrar</button>
                                     <button>Gerenciar notas</button>

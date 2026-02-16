@@ -15,7 +15,7 @@ body {
     overflow-x: hidden;
 }
 
-.text-box, .button {
+.text-box, .button, .search-box {
     border-width: thin;
     border-style: solid;
     box-sizing: border-box;
@@ -34,10 +34,8 @@ body {
     cursor: pointer;
 }
 
-.text-box {
+.text-box, .search-box {
     width: 100%;
-    padding-left: 3%;
-    
     background-color: rgba(246, 246, 246, 0.15);
     
     border-color: #4646462c;
@@ -46,11 +44,24 @@ body {
     transition: box-shadow 0.3s ease-in-out;
 }
 
-.text-box::placeholder {
+.text-box {
+    padding-left: 3%;
+}
+
+.search-box {
+    padding-left: 7.5%;
+}
+
+.text-box::placeholder, .search-box::placeholder {
+    background-color: transparent;
     font-weight: 500;
 }
 
-.text-box:focus {
+.text-box:focus, .search-box::focus {
     box-shadow: var(--shadow-focus);
     outline: none;
+}
+
+.logo {
+    max-width: 200px;
 }
