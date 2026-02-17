@@ -29,8 +29,11 @@
                 <div class="input-container">
                     <p class="required">Senha</p>
                     <div class="input-holder">
-                        <button class="show-password"><img src="../../img/svg/eye.svg" alt="Visualizar senha"></button>
-                        <input class="text-box" name="" type="password" placeholder="Insira sua senha" required>
+                        <button class="show-password" name="toggle">
+                            <img id="open" src="../../img/svg/eye.svg">
+                            <img id="closed" src="../../img/svg/eye-crossed.svg">
+                        </button>
+                        <input class="text-box" name="password" type="password" placeholder="Insira sua senha" required>
                     </div>
                 </div>
             </div>
@@ -47,5 +50,7 @@
         <a href=""><img src="../../img/svg/lock.svg" alt="">Entrar como administrador</a>
     </div>
 </body>
+
+<script src="../../js/password.js"></script>
 
 </html>
