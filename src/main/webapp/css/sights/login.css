@@ -5,6 +5,32 @@ body {
     flex-direction: column;
 }
 
+#login {
+    background-image: url('../../img/flat/Dragon.png');
+    background-repeat: no-repeat;
+    background-size: 78%;
+    background-position: 134% 60%;
+}
+
+#sign-up {
+    background-image: url('../../img/flat/Sailor.png');
+    background-repeat: no-repeat;
+    background-size: 71%;
+    background-position: 145% 57%;
+}
+
+#forgot-password {
+    background-image: url('../../img/flat/Diver.png');
+    background-repeat: no-repeat;
+    background-size: 60%;
+    background-position: 107% 60%;
+}
+
+body>:first-child {
+    align-self: flex-start;
+    padding-left: 10%;
+}
+
 .login-form {
     width: 60%;
     height: fit-content;
