@@ -18,15 +18,21 @@
 </head>
 
 <body>
-    <div id="major-container">
-        <aside id="sidebar"> <!-- Position fixed ! -->
-            <input name="menu-checkbox" id="menu-checkbox" type="checkbox">
+    <aside id="sidebar"> <!-- Position fixed ! -->
+        <div>
             <label id="menu-icon" for="menu-checkbox">
                 <img class="sidebar-icon" src="../../img/svg/sidebar/menu-burger.svg">
             </label>
-            <a href=""><img src="" alt=""></a>
-        </aside>
-
+            <input name="menu-checkbox" id="menu-checkbox" type="checkbox">
+            <a href=""><img class="sidebar-icon" src="../../img/svg/sidebar/home.svg" alt=""></a>
+            <a href=""><img class="sidebar-icon" src="../../img/svg/sidebar/dashboard.svg" alt=""></a>
+            <a href=""><img class="sidebar-icon" src="../../img/svg/sidebar/address-book.svg" alt=""></a>
+        </div>
+        
+        <button><img id="sign-out" class="sidebar-icon" src="../../img/svg/sidebar/sign-out.svg" alt=""></button>
+    </aside>
+    
+    <div id="major-container">
         <div id="wrap">
             <header>
                 <a href="#"><img class="logo" src="../../img/branding/teste.png" alt="Logo"></a>
@@ -40,34 +46,20 @@
             </header>
 
             <main>
-                <div class="wrap-for-scroll" id="front-desk">
-                    <div id="welcome">
-                        <h2>Olá Kesler!</h2>
-                        <p>Bem vindo de volta!</p>
-                    </div>
-
-                    <div id="welcome">
-                        <h2>Olá Kesler!</h2>
-                        <p>Bem vindo de volta!</p>
-                    </div>
-                    <div id="welcome">
-                        <h2>Olá Kesler!</h2>
-                        <p>Bem vindo de volta!</p>
-                    </div>
-                    <div id="welcome">
-                        <h2>Olá Kesler!</h2>
-                        <p>Bem vindo de volta!</p>
-                    </div>
+                <div id="welcome">
+                    <h2>Olá Kesler!</h2>
+                    <p>Bem vindo de volta!</p>
                 </div>
 
                 <div id="grades">
-                    <h1>Matéria</h1>
-                    <div>
-                        <label for="classes">Filtrar por turmas</label>
-                        <select name="classes" id="classes">
-                            <option value=""></option>
-                        </select>
-                    </div>
+                    <h1>Matemática</h1>
+                    <select class="select-box">
+                        <option value="">Todas as turmas</option>
+                        <option value="">6º Ano</option>
+                        <option value="">7º Ano</option>
+                        <option value="">8º Ano</option>
+                        <option value="">9º Ano</option>
+                    </select>
 
                     <div class="wrap-for-scroll">
                         <div class="table-container">
@@ -93,7 +85,8 @@
                                         <th>Matrícula</th>
                                         <th>N1'</th>
                                         <th>N2'</th>
-                                        <th>Média Final</th>
+                                        <th>Média Final<img class="info" title="(N1' + N2') / 2"
+                                                src="../../img/svg/info-white.svg"></img></th>
                                         <th>Situação</th>
                                     </tr>
                                 </thead>
@@ -131,6 +124,58 @@
                         </div>
                     </div>
                 </div>
+
+                <div id="observations">
+                    <h1>Observações</h1>
+                    <select class="select-box">
+                        <option value="">Todas as turmas</option>
+                        <option value="">6º Ano</option>
+                        <option value="">7º Ano</option>
+                        <option value="">8º Ano</option>
+                        <option value="">9º Ano</option>
+                    </select>
+
+                    <div class="card-container">
+                        <div class="card">
+                            <div>
+                                <h2>Análise individual</h2>
+                                <p>realizada por Daniel Alves</p>
+                            </div>
+                            <button class="button">Ver detalhes</button>
+                        </div>
+
+                        <div class="card">
+                            <div>
+                                <h2>Análise individual</h2>
+                                <p>realizada por Daniel Alves</p>
+                            </div>
+                            <button class="button">Ver detalhes</button>
+                        </div>
+                        <div class="card">
+                            <div>
+                                <h2>Análise individual</h2>
+                                <p>realizada por Daniel Alves</p>
+                            </div>
+                            <button class="button">Ver detalhes</button>
+                        </div>
+                        <div class="card">
+                            <div>
+                                <h2>Análise individual</h2>
+                                <p>realizada por Daniel Alves</p>
+                            </div>
+                            <button class="button">Ver detalhes</button>
+                        </div>
+                        <div class="card">
+                            <div>
+                                <h2>Análise individual</h2>
+                                <p>realizada por Daniel Alves</p>
+                            </div>
+                            <button class="button">Ver detalhes</button>
+                        </div>
+
+
+                    </div>
+                </div>
             </main>
         </div>
     </div>
@@ -158,26 +203,22 @@
 
                 <div class="input-container">
                     <p class="required">Matrícula</p>
-                    <input class="text-box" name="" type="text"
-                    value="" readonly>
+                    <input class="text-box" name="" type="text" value="" readonly>
                 </div>
 
                 <div class="input-container">
                     <p class="required">N1'</p>
-                    <input class="text-box" name="" type="number" 
-                    min="0" max="10" step="0.1">
+                    <input class="text-box" name="" type="number" min="0" max="10" step="0.1">
                 </div>
-                
+
                 <div class="input-container">
                     <p class="required">N2'</p>
-                    <input class="text-box" name="" type="number" 
-                    min="0" max="10" step="0.1">
+                    <input class="text-box" name="" type="number" min="0" max="10" step="0.1">
                 </div>
 
                 <div class="input-container">
                     <p class="required">Média final</p>
-                    <input class="text-box" name="" type="text"
-                    value="" readonly>
+                    <input class="text-box" name="" type="text" value="" readonly>
                 </div>
             </div>
 
@@ -185,10 +226,5 @@
         </form>
     </div>
 </body>
-
-<script>
-    const pop = document.getElementById("popup-grades");
-    pop.showPopover();
-</script>
 
 </html>

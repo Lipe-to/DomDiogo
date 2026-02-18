@@ -15,6 +15,11 @@ body {
     overflow-x: hidden;
 }
 
+img, button>*, select, a {
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
 .text-box, .button {
     border-width: thin;
     border-style: solid;
@@ -62,4 +67,27 @@ body {
 
 #closed {
     display: none;
+}
+
+.select-box {
+    outline: none;
+    appearance: none;
+
+    border-style: solid;
+    background-color: rgba(246, 246, 246, 0.15);
+    border-color: #4646462c;
+    border-radius: 3px;
+
+    transition: box-shadow 0.3s ease-in-out;
+
+    min-width: 145px;
+    padding: 0.1% 2.5% 0.1% 1%;
+    background-image: url('../img/svg/caret-down.svg');
+    background-size: 12%;
+    background-repeat: no-repeat;
+    background-position: 95% 50%;
+}
+
+.select-box object {
+    font-weight: 400;
 }
