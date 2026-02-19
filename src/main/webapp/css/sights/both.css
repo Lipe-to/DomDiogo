@@ -187,54 +187,94 @@ aside {
     align-items: center;
     justify-content: space-between;
     
-    width: 5vw;
     height: 100vh;
     background-color: var(--white);
 
-    transition: width 0.25s ease;
+    transition: width 0.8s ease-in-out;
+}
+
+aside ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    list-style-type: none;
+    
+    margin-top: 20px;
+    padding-left: 24px;
+
+    width: 100%;
+    height: 90%;
+}
+
+aside ul>div {
+    display: flex;
+    flex-direction: column;
+    
+    width: 100%;
+    height: 330px;
+}
+
+aside ul>div>:nth-child(n) {
+    margin-bottom: 25px;
+}
+
+aside ul>div>:first-child {
+    background-color: green;
+    margin-bottom: 50px !important;
+}
+
+aside li {
+    padding: 8px;
+    border-radius: 4px;
+    background-color: red;
+    cursor: pointer;
+
+    white-space: nowrap;
+    max-height: 20px;
+    overflow: hidden;
+
+    width: 20px;
+}
+
+#sign-out * {
+    border: none;
+    background-color: transparent;
 }
 
 aside:has(#menu-checkbox:checked) {
     width: 20vw;
+    padding-right: 20px;
 }
 
-aside>:first-child {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 20%;
+aside:has(#menu-checkbox:checked) li {
+    width: 85%;
 }
 
-aside a, aside label {
+aside a, aside label, aside button {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+}
+
+aside a, aside button {
+    font-size: 1.05rem;
+    font-weight: 450;
+    color: var(--black);
+    gap: 10px;
 }
 
 aside img {
     overflow: visible;
 }
 
-aside>:last-child {
-    border: none;
-    background-color: transparent;
-}
-
 #menu-checkbox {
     display: none;
 }
 
-#menu-icon {
-    margin-top: 60%;
-}
-
 .sidebar-icon {
-    width: 24px;
+    width: 20px;
     height: auto;
  
-    /* padding: 20%; */
-    border-radius: 4px;
-    
-    cursor: pointer;
     transition: background-color 0.2s ease-in-out;
 }
 

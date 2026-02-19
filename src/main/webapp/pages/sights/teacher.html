@@ -22,29 +22,40 @@
 
 <body>
     <aside id="sidebar"> <!-- Position fixed ! -->
-        <div>
-            <label id="menu-icon" for="menu-checkbox">
-                <img class="sidebar-icon" src="../../img/svg/sidebar/menu-burger.svg">
-            </label>
-            <input name="menu-checkbox" id="menu-checkbox" type="checkbox">
-            
-            <a href="">
-                <img class="sidebar-icon" src="../../img/svg/sidebar/home.svg" alt="">
-                <span>Tela Inicial</span>
-            </a>
-
-            <a href="">
-                <img class="sidebar-icon" src="../../img/svg/sidebar/dashboard.svg" alt="">
-            
-            </a>
-
-            <a href="">
-                <img class="sidebar-icon" src="../../img/svg/sidebar/address-book.svg" alt="">
-                
-            </a>
-        </div>
-
-        <button><img id="sign-out" class="sidebar-icon" src="../../img/svg/sidebar/sign-out.svg" alt=""></button>
+        <ul>
+            <div>
+                <li>
+                    <label id="menu-icon" for="menu-checkbox">
+                        <img class="sidebar-icon" src="../../img/svg/sidebar/menu-burger.svg">
+                    </label>
+                    <input name="menu-checkbox" id="menu-checkbox" type="checkbox">
+                </li>
+                <li>
+                    <a href="">
+                        <img class="sidebar-icon" src="../../img/svg/sidebar/home.svg" alt="">
+                        <span>Tela Inicial</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <img class="sidebar-icon" src="../../img/svg/sidebar/dashboard.svg" alt="">
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <img class="sidebar-icon" src="../../img/svg/sidebar/address-book.svg" alt="">
+                        <span>Tela de testes</span>
+                    </a>
+                </li>
+            </div>
+            <li id="sign-out">
+                <button>
+                    <img class="sidebar-icon" src="../../img/svg/sidebar/sign-out.svg" alt="">
+                    <span>Sair</span>
+                </button>
+            </li>
+        </ul>
     </aside>
 
     <div id="major-container">
