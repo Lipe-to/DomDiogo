@@ -99,13 +99,29 @@ body>:first-child {
     opacity: 80%;
     border: 0;
 
-    transform: translateX(-80%) translateY(3%);
+    color: var(--black);
+    transform: translateX(-90%);
     position: absolute;
+    
+    font-size: 1.1rem;
 }
 
-.show-password img {
-    width: 85%;
-    height: min-content;
+.show-password i {
+    display: inline;
+}
+
+#sign-up-redirect {
+    margin-top: 4%;
+    text-align: center;
+    color: var(--black);
+}
+
+#sign-up-redirect, #sign-up-redirect>a {
+    font-size: 0.9rem;
+}
+
+#sign-up-redirect>a {
+    margin-left: 1%;
 }
 
 .login-form form>:first-child>:last-child {

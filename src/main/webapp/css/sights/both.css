@@ -59,6 +59,10 @@ main>*,
     margin: 1% 0;
 }
 
+main .select-box {
+    margin-bottom: 1%;
+}
+
 #front-desk>* {
     padding-top: 0.8%;
 }
@@ -77,7 +81,6 @@ main .select-box {
     flex: 0 1 auto;
     overflow-x: auto;
     gap: 2%;
-    margin: 1% 0;
 }
 
 .wrap-for-scroll>* {
@@ -114,7 +117,7 @@ table td {
     padding: 2.45% 0;
 }
 
-table tbody:nth-child(even) {
+table tbody tr:nth-child(even) {
     background-color: var(--table-row);
 }
 
@@ -126,14 +129,15 @@ table tbody {
     font-weight: 500;
 }
 
+.table-wrap {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
 .table-container, .card-container {
     background-color: var(--table-background);
     padding: 1% 1.25% 1.5%;
     border-radius: 6px;
-}
-
-.card-container {
-    margin-top: 1%;
 }
 
 .table-info {
@@ -175,24 +179,29 @@ table tbody {
 
 aside {
     position: fixed;
-    height: 100vh;
     left: 0;
     top: 0;
-
+    
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-
-    width: 5%;
+    
+    width: 5vw;
+    height: 100vh;
     background-color: var(--white);
+
+    transition: width 0.25s ease;
+}
+
+aside:has(#menu-checkbox:checked) {
+    width: 20vw;
 }
 
 aside>:first-child {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
-    gap: 1rem;
-    margin-top: 20%;
+    gap: 20%;
 }
 
 aside a, aside label {
@@ -205,16 +214,7 @@ aside img {
     overflow: visible;
 }
 
-aside>:first-child>:first-child {
-    margin-bottom: 80%;
-}
-
-aside>:first-child>* {
-    margin-top: 50%;
-}
-
 aside>:last-child {
-    margin-bottom: 50%;
     border: none;
     background-color: transparent;
 }
@@ -231,7 +231,7 @@ aside>:last-child {
     width: 24px;
     height: auto;
  
-    padding: 20%;
+    /* padding: 20%; */
     border-radius: 4px;
     
     cursor: pointer;
@@ -295,6 +295,7 @@ header {
     align-items: center;
     gap: 2%;
     width: 70%;
+    max-width: 500px;
 }
 
 .table-actions label,
@@ -343,7 +344,7 @@ header {
 
 @media (max-width: 800px) {
     .table-actions span {
-        display: none !important;
+        display: none;
     }
 
     .table-actions>:last-child {
@@ -375,6 +376,9 @@ header {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
+
+    overflow: auto;
+    max-height: 400px;
 }
 
 .card {
