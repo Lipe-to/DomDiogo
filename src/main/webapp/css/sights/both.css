@@ -187,10 +187,12 @@ aside {
     align-items: center;
     justify-content: space-between;
     
-    height: 100vh;
-    background-color: var(--white);
+    transition: width 0.3s ease-in-out, padding-right 0.3s ease-in-out;
 
-    transition: width 0.8s ease-in-out;
+    width: 60px;
+    height: 100vh;
+    padding-right: 1px;
+    background-color: var(--white);
 }
 
 aside ul {
@@ -219,26 +221,61 @@ aside ul>div>:nth-child(n) {
 }
 
 aside ul>div>:first-child {
-    background-color: green;
     margin-bottom: 50px !important;
 }
 
 aside li {
     padding: 8px;
     border-radius: 4px;
-    background-color: red;
-    cursor: pointer;
+    background-color: var(--sidebar-icon);
 
     white-space: nowrap;
+    width: 20px;
     max-height: 20px;
     overflow: hidden;
 
-    width: 20px;
+    transition: width 0.3s ease, background-color 0.2s ease, transform 0.3s ease-in-out;
+}
+
+aside li:hover {
+    background-color: var(--sidebar-icon-hover);
+    transform: translateY(-2px);
+}
+
+aside li:active {
+    background-color: var(--sidebar-icon-active);
+}
+
+aside li.emphasis {
+    background-color: var(--sidebar-icon-emphasis);
+}
+
+aside li.emphasis:hover {
+    background-color: var(--sidebar-icon-emphasis-hover);
+}
+
+aside li.emphasis:active {
+    background-color: var(--sidebar-icon-emphasis-active);
+}
+
+
+aside li * {
+    cursor: pointer;
 }
 
 #sign-out * {
     border: none;
     background-color: transparent;
+    color: var(--red);
+}
+
+#sign-out {
+    background-color: var(--sidebar-icon-sign-out);
+}
+
+#menu-icon-container, #menu-icon {
+    width: fit-content !important; /* É necessário o !important por conta do :has() */
+    transform: none;
 }
 
 aside:has(#menu-checkbox:checked) {
@@ -257,7 +294,7 @@ aside a, aside label, aside button {
 }
 
 aside a, aside button {
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     font-weight: 450;
     color: var(--black);
     gap: 10px;
@@ -277,20 +314,6 @@ aside img {
  
     transition: background-color 0.2s ease-in-out;
 }
-
-.sidebar-icon:hover {
-    background-color: rgba(22, 22, 22, 0.226);
-}
-
-.sidebar-icon.selected {
-    background-color: #3C71BA66;
-}
-
-/* 
-.sidebar-icon:hover#sign-out {
-    background-color: #BA3C3C66;
-    color: red;
-} */
 
 header {
     display: flex;
