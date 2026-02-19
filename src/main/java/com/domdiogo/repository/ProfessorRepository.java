@@ -5,29 +5,10 @@ import com.domdiogo.model.ProfessorEntity;
 import com.domdiogo.model.Status;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProfessorRepository {
-
-    public Status delete(int id) {
-        String query = "delete from professor where id = ?";
-        ConnectionFactory connectionFactory = new ConnectionFactory();
-        Connection connection = connectionFactory.connect();
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, id);
-            int rows = preparedStatement.executeUpdate();
-            if (rows > 0) {
-                return Status.SUCCESS;
-            } else {
-                return Status.NOT_FOUND;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return Status.INTERNAL_ERROR;
-        } finally {
-            connectionFactory.disconnect(connection);
-        }
-    }
 
     public ProfessorEntity findById(int id) {
         String query = "select * from professor where id = ?";
@@ -44,7 +25,8 @@ public class ProfessorRepository {
                         resultSet.getString("nome"),
                         resultSet.getString("usuario"),
                         resultSet.getString("senha"),
-                        resultSet.getString("palavra")
+                        resultSet.getString("palavra"),
+                        resultSet.getBoolean("ativo")
                 );
             }
         } catch (SQLException e) {
@@ -55,8 +37,35 @@ public class ProfessorRepository {
         return professorEntity;
     }
 
+    public List<ProfessorEntity> read(boolean apenasAtivos) {
+        String query = apenasAtivos ? "select * from professor where ativo = true" : "select * from professor";
+        List<ProfessorEntity> professores = new ArrayList<>();
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        Connection connection = connectionFactory.connect();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                ProfessorEntity professor = new ProfessorEntity(
+                        resultSet.getInt("id"),
+                        resultSet.getString("nome"),
+                        resultSet.getString("usuario"),
+                        resultSet.getString("senha"),
+                        resultSet.getString("palavra"),
+                        resultSet.getBoolean("ativo")
+                );
+                professores.add(professor);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            connectionFactory.disconnect(connection);
+        }
+        return professores;
+    }
+
     public Status update(ProfessorEntity professorEntity) {
-        String query = "update professor set nome = ?, usuario = ?, senha = ?, palavra = ? where id = ?";
+        String query = "update professor set nome = ?, usuario = ?, senha = ?, palavra = ?, ativo = ? where id = ?";
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
         try {
@@ -65,7 +74,8 @@ public class ProfessorRepository {
             preparedStatement.setString(2, professorEntity.getUsuario());
             preparedStatement.setString(3, professorEntity.getSenha());
             preparedStatement.setString(4, professorEntity.getPalavra());
-            preparedStatement.setInt(5, professorEntity.getId());
+            preparedStatement.setBoolean(5, professorEntity.getAtivo());
+            preparedStatement.setInt(6, professorEntity.getId());
 
             int rows = preparedStatement.executeUpdate();
             if (rows > 0) {
@@ -97,7 +107,8 @@ public class ProfessorRepository {
                         resultSet.getString("nome"),
                         resultSet.getString("usuario"),
                         resultSet.getString("senha"),
-                        resultSet.getString("palavra")
+                        resultSet.getString("palavra"),
+                        resultSet.getBoolean("ativo")
                 );
             }
         } catch (SQLException e) {
@@ -124,6 +135,27 @@ public class ProfessorRepository {
                 }
             } else {
                 return Status.INTERNAL_ERROR;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return Status.INTERNAL_ERROR;
+        } finally {
+            connectionFactory.disconnect(connection);
+        }
+    }
+
+    public Status toggleAtivo(int id) {
+        String query = "update professor set ativo = not ativo where id = ?";
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        Connection connection = connectionFactory.connect();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            int rows = preparedStatement.executeUpdate();
+            if (rows > 0) {
+                return Status.SUCCESS;
+            } else {
+                return Status.NOT_FOUND;
             }
         } catch (SQLException e) {
             e.printStackTrace();

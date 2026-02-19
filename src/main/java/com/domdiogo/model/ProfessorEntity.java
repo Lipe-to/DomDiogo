@@ -6,13 +6,15 @@ public class ProfessorEntity {
     private String usuario;
     private String senha;
     private String palavra;
+    private boolean ativo;
 
-    public ProfessorEntity(int id, String nome, String usuario, String senha, String palavra){
+    public ProfessorEntity(int id, String nome, String usuario, String senha, String palavra, boolean ativo){
         this.id = id;
         this.nome = nome;
         this.usuario = usuario;
         this.senha = senha;
         this.palavra = palavra;
+        this.ativo = ativo;
     }
 
     public int getId() {
@@ -33,5 +35,9 @@ public class ProfessorEntity {
 
     public String getPalavra() {
         return this.palavra;
+    }
+
+    public boolean getAtivo() {
+        return this.ativo;
     }
 }
