@@ -91,3 +91,44 @@ img, button>*, select, a {
 .select-box object {
     font-weight: 400;
 }
+
+/* Por padrão, será cinza
+    --blue: #3C71BA;
+    --purple: #D68DD4;
+    --lake-green: #61CB9F;
+    --lime-green: #B7D692;
+    --red: #D13E3E;
+    --orange: #D6B48D;
+*/
+
+.blue {
+    background-color: var(--blue);
+}
+
+.tea-blue {
+    background-color: var(--tea-blue);
+}
+
+.purple {
+    background-color: var(--purple);
+}
+
+.green {
+    background-color: var(--green);
+}
+
+.lime-green {
+    background-color: var(--lime-green);
+}
+
+.red {
+    background-color: var(--red);
+}
+
+.smooth-red {
+    background-color: var(--smooth-red);
+}
+
+.orange {
+    background-color: var(--orange);
+}

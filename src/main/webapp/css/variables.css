@@ -7,12 +7,19 @@
     
     --hyperlink-blue: #4D81E7;
     --blue: #3C71BA;
-    --lake-green: #61CB9F;
     --red: #D13E3E;
+    --lake-green: #61CB9F;
+
+    --tea-blue: #8D99D6;
+    --purple: #ca93c7;
+    --green: #86d1a8;
+    --lime-green: #b0cf89;
+    --smooth-red: #e08383;
+    --orange: #dfb381;
 
     --table-grey: #CDD7D6;
-    --table-background: rgba(164, 164, 164, 0.15); /* #A4A4A4 */
-    --table-row: rgba(0, 0, 0, 0.05); /* #000000 */
+    --table-background: rgba(216, 216, 216, 0.397); /* #A4A4A4 */
+    --table-row: rgba(29, 29, 29, 0.05); /* #000000 */
 
     --sidebar-icon: rgba(158, 158, 158, 0.200);
     --sidebar-icon-hover: rgba(158, 158, 158, 0.514);
