@@ -187,7 +187,7 @@ aside {
     align-items: center;
     justify-content: space-between;
     
-    transition: width 0.3s ease-in-out, padding-right 0.3s ease-in-out;
+    transition: width 0.3s ease-in-out, padding-right 0.3s ease-in-out, box-shadow 1s ease-in-out;
 
     width: 60px;
     height: 100vh;
@@ -224,6 +224,20 @@ aside ul>div>:first-child {
     margin-bottom: 50px !important;
 }
 
+#menu-text {
+    font-size: 0.9rem;
+
+    margin: 0;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease-in-out;
+}
+
+aside:has(#menu-checkbox:checked) #menu-text {
+    opacity: 75%;
+    transform: translateY(-10px);
+}
+
 aside li {
     padding: 8px;
     border-radius: 4px;
@@ -250,6 +264,10 @@ aside li.emphasis {
     background-color: var(--sidebar-icon-emphasis);
 }
 
+aside li.emphasis span {
+    color: var(--hyperlink-blue);
+}
+
 aside li.emphasis:hover {
     background-color: var(--sidebar-icon-emphasis-hover);
 }
@@ -258,8 +276,7 @@ aside li.emphasis:active {
     background-color: var(--sidebar-icon-emphasis-active);
 }
 
-
-aside li * {
+aside li *, aside li {
     cursor: pointer;
 }
 
@@ -281,6 +298,7 @@ aside li * {
 aside:has(#menu-checkbox:checked) {
     width: 20vw;
     padding-right: 20px;
+    box-shadow: var(--shadow-aside);
 }
 
 aside:has(#menu-checkbox:checked) li {
@@ -461,25 +479,7 @@ header {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    
-    position: relative;
 }
-
-/* 
-.card::before {
-    content: "";
-    inset: 0;
-    position: absolute;
-    border-radius: 8px;
-    background-color: rgb(0, 0, 0);
-    opacity: 5%;
-    z-index: 0;
-}
-
-.card>* {
-    position: relative;
-    z-index: 1;
-} */
 
 .card h2 {
     font-size: 1.2rem;
