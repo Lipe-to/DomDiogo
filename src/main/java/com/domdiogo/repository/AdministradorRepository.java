@@ -1,26 +1,24 @@
 package com.domdiogo.repository;
 
 import com.domdiogo.ConnectionFactory;
-import com.domdiogo.model.AdminEntity;
+import com.domdiogo.model.AdministradorEntity;
 import com.domdiogo.model.Status;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
-public class AdminRepository {
+public class AdministradorRepository {
 
-    public Status update(AdminEntity adminEntity) {
-        String query = "update admin set nome = ?, usuario = ?, senha = ?, palavra = ? where id = ?";
+    public Status update(AdministradorEntity administradorEntity) {
+        String query = "update administrador set nome = ?, usuario = ?, senha = ?, palavra = ? where id = ?";
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, adminEntity.getNome());
-            preparedStatement.setString(2, adminEntity.getEmail());
-            preparedStatement.setString(3, adminEntity.getSenha());
-            preparedStatement.setString(4, adminEntity.getPalavra());
-            preparedStatement.setInt(5, adminEntity.getId());
+            preparedStatement.setString(1, administradorEntity.getNome());
+            preparedStatement.setString(2, administradorEntity.getEmail());
+            preparedStatement.setString(3, administradorEntity.getSenha());
+            preparedStatement.setString(4, administradorEntity.getPalavra());
+            preparedStatement.setInt(5, administradorEntity.getId());
 
             int rows = preparedStatement.executeUpdate();
             if (rows > 0) {
@@ -37,7 +35,7 @@ public class AdminRepository {
     }
 
     public Status delete(int id) {
-        String query = "delete from admin where id = ?";
+        String query = "delete from administrador where id = ?";
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
         try {
@@ -58,7 +56,7 @@ public class AdminRepository {
     }
 
     public Status login(String email, String senha) {
-        String query = "select * from admin where email = ? and senha = ?";
+        String query = "select * from administrador where email = ? and senha = ?";
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
         try {
@@ -80,7 +78,7 @@ public class AdminRepository {
     }
 
     public Status validarPalavra(String email, String palavra) {
-        String query = "select palavra from admin where email = ?";
+        String query = "select palavra from administrador where email = ?";
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
         try {
