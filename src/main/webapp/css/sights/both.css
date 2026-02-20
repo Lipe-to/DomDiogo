@@ -23,6 +23,8 @@ body {
 
 #front-desk {
     display: flex;
+    box-sizing: border-box;
+    justify-content: space-between;
     flex-direction: row;
     gap: 2%;
 
@@ -35,15 +37,28 @@ body {
 #welcome {
     width: 40%;
     min-height: 90px;
-    
+}
+
+#welcome.castle {
     color: #2C4D50;
-    background-color: #A3C1D6;
-    
-    background-image: url('../../img/flat/background-1.png');
+    background-color: #2C4D50;
+
+    background-image: url('../../img/flat/castle.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 100%;
     background-size: 100%;
+}
+
+.general-statistic {
+    width: 60%;
+    background-color: var(--white);
+}
+
+.general-statistic>div {
+    display: flex;
+    gap: 5%;
+    margin-top: 2%;
 }
 
 main {
@@ -61,10 +76,6 @@ main>*,
 
 main .select-box {
     margin-bottom: 1%;
-}
-
-#front-desk>* {
-    padding-top: 0.8%;
 }
 
 #grades {
@@ -115,6 +126,14 @@ table th .info {
 
 table td {
     padding: 2.45% 0;
+}
+
+#report-card th {
+    padding: 1.45%;
+}
+
+#report-card td {
+    padding: 1.55%;
 }
 
 table tbody tr:nth-child(even) {
@@ -177,6 +196,14 @@ table tbody {
     border-color: #C84A4A4D;
 }
 
+.appr {
+    color: var(--blue);
+}
+
+.repr {
+    color: var(--red);
+}
+
 aside {
     position: fixed;
     left: 0;
@@ -217,7 +244,7 @@ aside ul>div {
 }
 
 aside ul>div>:nth-child(n) {
-    margin-bottom: 25px;
+    margin-bottom: 18px;
 }
 
 aside ul>div>:first-child {
@@ -280,29 +307,27 @@ aside li *, aside li {
     cursor: pointer;
 }
 
-#sign-out * {
+aside #sign-out * {
     border: none;
     background-color: transparent;
     color: var(--red);
 }
 
-#sign-out {
+aside #sign-out {
     background-color: var(--sidebar-icon-sign-out);
+}
+
+aside #sign-out:hover {
+    background-color: var(--sidebar-icon-sign-out-hover);
+}
+
+aside #sign-out:active {
+    background-color: var(--sidebar-icon-sign-out-active);
 }
 
 #menu-icon-container, #menu-icon {
     width: fit-content !important; /* É necessário o !important por conta do :has() */
     transform: none;
-}
-
-aside:has(#menu-checkbox:checked) {
-    width: 20vw;
-    padding-right: 20px;
-    box-shadow: var(--shadow-aside);
-}
-
-aside:has(#menu-checkbox:checked) li {
-    width: 85%;
 }
 
 aside a, aside label, aside button {
@@ -333,6 +358,22 @@ aside img {
     transition: background-color 0.2s ease-in-out;
 }
 
+aside:has(#menu-checkbox:checked) {
+    width: 20vw;
+    padding-right: 20px;
+    box-shadow: var(--shadow-aside);
+}
+
+aside:has(#menu-checkbox:checked) li {
+    width: 85%;
+}
+
+@media (max-width: 900px) {
+    aside:has(#menu-checkbox:checked) {
+        width: 40vw;
+    }
+}
+
 header {
     display: flex;
     flex-direction: row;
@@ -351,9 +392,14 @@ header {
     color: var(--white);
 }
 
-.personal-info>img {
-    width: 8%;
+.profile-image {
+    width: 34px;
     aspect-ratio: 1 / 1;
+
+    background-image: url('../../img/flat/diver.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 
     border-width: 1px;
     border-style: solid;
@@ -362,7 +408,7 @@ header {
 }
 
 .personal-info h3 {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     font-weight: 600;
 }
 
@@ -494,4 +540,8 @@ header {
     border: 0;
     width: 40%;
     border-radius: 4px;
+}
+
+.redirect {
+    width: 2%;
 }

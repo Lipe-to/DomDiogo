@@ -6,24 +6,33 @@ body {
 }
 
 #login {
-    background-image: url('../../img/flat/Dragon.png');
+    background-image: url('../../img/flat/dragon.png');
     background-repeat: no-repeat;
-    background-size: 78%;
-    background-position: 134% 60%;
+    background-attachment: fixed;
+    background-size: 90% auto;
+    background-position: right 65%;
 }
 
 #sign-up {
-    background-image: url('../../img/flat/Sailor.png');
+    background-image: url('../../img/flat/sailor.png');
     background-repeat: no-repeat;
-    background-size: 71%;
-    background-position: 145% 57%;
+    background-size: 70%;
+    background-position: 110% 50%;
 }
 
 #forgot-password {
-    background-image: url('../../img/flat/Diver.png');
+    background-image: url('../../img/flat/diver.png');
     background-repeat: no-repeat;
+    background-attachment: fixed;
     background-size: 60%;
-    background-position: 107% 60%;
+    background-position: right 50%;
+}
+
+@media (max-width: 1050px) {
+    #login {
+        background-size: 90% auto;
+        background-position: 140% 65%;
+    }
 }
 
 body>:first-child {

@@ -7,7 +7,7 @@ import com.domdiogo.repository.AlunoRepository;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
-@WebServlet("aluno")
+@WebServlet("/aluno")
 public class AlunoServlet extends HttpServlet {
     private String statusMessage = null;
     private String statusColor = "red";

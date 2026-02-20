@@ -23,13 +23,15 @@
 
     --sidebar-icon: rgba(158, 158, 158, 0.200);
     --sidebar-icon-hover: rgba(158, 158, 158, 0.514);
-    --sidebar-icon-active: rgba(158, 158, 158, 0.205);
+    --sidebar-icon-active: rgba(158, 158, 158, 0.377);
     
     --sidebar-icon-emphasis: #cae0ff;
-    --sidebar-icon-emphasis-hover: #77acf5;
+    --sidebar-icon-emphasis-hover: #87b5f5;
     --sidebar-icon-emphasis-active: #97c3ff;
 
     --sidebar-icon-sign-out: #F9CECE;
+    --sidebar-icon-sign-out-hover: #e79e9e;
+    --sidebar-icon-sign-out-active: #ebafaf;
     
     --gradient-lake-green: linear-gradient(90deg, rgba(97, 203, 159, 1) 0%, rgb(91, 192, 150) 100%);
 

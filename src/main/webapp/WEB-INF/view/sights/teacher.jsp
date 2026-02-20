@@ -1,0 +1,557 @@
+<!-- <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %> -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dom Diogo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="../../css/sights/both.css">
+    <link rel="stylesheet" href="../../css/sights/teacher.css">
+    <link rel="stylesheet" href="../../css/popup.css">
+
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/variables.css">
+    <link rel="stylesheet" href="../../css/font.css">
+</head>
+
+<body>
+    <aside id="sidebar"> <!-- Position fixed ! -->
+        <ul>
+            <div>
+                <li id="menu-icon-container">
+                    <label id="menu-icon" for="menu-checkbox">
+                        <img class="sidebar-icon" src="../../img/svg/sidebar/menu-burger.svg">
+                    </label>
+                    <input name="menu-checkbox" id="menu-checkbox" type="checkbox">
+                </li>
+                <p id="menu-text">Menu</p>
+                <li class="emphasis">
+                    <a href="">
+                        <img class="sidebar-icon" src="../../img/svg/sidebar/home-emphasis.svg" alt="">
+                        <span>Tela Inicial</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <img class="sidebar-icon" src="../../img/svg/sidebar/dashboard.svg" alt="">
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <img class="sidebar-icon" src="../../img/svg/sidebar/address-book.svg" alt="">
+                        <span>Professores</span>
+                    </a>
+                </li>
+            </div>
+            <li id="sign-out">
+                <button>
+                    <img class="sidebar-icon" src="../../img/svg/sidebar/sign-out.svg" alt="">
+                    <span>Sair</span>
+                </button>
+            </li>
+        </ul>
+    </aside>
+
+    <div id="major-container">
+        <div id="wrap">
+            <header>
+                <a href="#"><img class="logo" src="../../img/branding/teste.png" alt="Logo"></a>
+                <div class="personal-info">
+                    <div class="profile-image"></div> <!-- Condicional em JSP se não houver bd de perfil -->
+                    <div>
+                        <h3>Neymar Santos</h3>
+                        <p>Professor</p>
+                    </div>
+                </div>
+            </header>
+
+            <main>
+                <div id="front-desk">
+                    <div class="castle" id="welcome">
+                        <h2>Olá Kesler!</h2>
+                        <p>Bem vindo de volta!</p>
+                    </div>
+                    <div class="general-statistic">
+                        <a href="" class="h2">Visão geral <img class="redirect" src="../../img/svg/redirect-blue.svg" alt=""></a>
+                        <div>
+                            <div>
+                                <h3><span>32</span></h3>
+                                <span>Total de alunos</span>
+                            </div>
+                            <div>
+                                <h3><span>12</span></h3>
+                                <span>Total de turmas</span>
+                            </div>
+                            <div>
+                                <h3><span class="appr">62</span> %</h3>
+                                <span>Alunos aprovados</span>
+                            </div>
+                            <div>
+                                <h3><span class="repr">12</span> %</h3>
+                                <span>Alunos reprovados</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="grades">
+                    <h1>Matemática</h1>
+                    <select class="select-box">
+                        <option value="">Todas as turmas</option>
+                        <option value="">6º Ano</option>
+                        <option value="">7º Ano</option>
+                        <option value="">8º Ano</option>
+                        <option value="">9º Ano</option>
+                    </select>
+
+                    <div class="wrap-for-scroll">
+                        <div class="table-container">
+                            <div class="table-info"> <!-- Contenção da turma -->
+                                <div>
+                                    <h3>2° Série E Tech</h3>
+                                    <sub>Alunos</sub>
+                                </div>
+                                <div class="table-actions">
+                                    <input checked style="display: none;" type="checkbox" id="search-submit">
+                                    <label for="search-submit"><img src="../../img/svg/search.svg" alt=""></label>
+                                    <input class="search-box" type="text" placeholder="Pesquisar por matrícula">
+                                    <button title="Filtrar"><img src="../../img/svg/filter.svg" alt="Filtrar"></button>
+                                    <button title="Gerenciar notas" popovertarget="popup-grades">
+                                        <div><img src="../../img/svg/document.svg"><span>Gerenciar notas</span></div>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="table-wrap">
+                                <table>
+                                    <thead class="blue">
+                                        <tr>
+                                            <th>Estudante</th>
+                                            <th>Matrícula</th>
+                                            <th>N1'</th>
+                                            <th>N2'</th>
+                                            <th>Média Final<img class="info" title="(N1' + N2') / 2"
+                                                    src="../../img/svg/info-white.svg"></img></th>
+                                            <th>Situação</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Ana Souza</td>
+                                            <td>124124</td>
+                                            <td>8</td>
+                                            <td>7</td>
+                                            <td class="appr">7,5</td>
+                                            <td class="situation"><span class="approved">Aprovado</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bruno Almeida</td>
+                                            <td>124125</td>
+                                            <td>6</td>
+                                            <td>5</td>
+                                            <td class="repr">5,5</td>
+                                            <td class="situation"><span class="failed">Reprovado</span></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Carla Mendes</td>
+                                            <td>124126</td>
+                                            <td>9</td>
+                                            <td>8</td>
+                                            <td class="appr">8,5</td>
+                                            <td class="situation"><span class="approved">Aprovado</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Daniel Oliveira</td>
+                                            <td>124127</td>
+                                            <td>7</td>
+                                            <td>7</td>
+                                            <td class="appr">7</td>
+                                            <td class="situation"><span class="approved">Aprovado</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Eduarda Lima</td>
+                                            <td>124128</td>
+                                            <td>5</td>
+                                            <td>6</td>
+                                            <td class="repr">5,5</td>
+                                            <td class="situation"><span class="failed">Reprovado</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Felipe Santos</td>
+                                            <td>124129</td>
+                                            <td>10</td>
+                                            <td>9</td>
+                                            <td class="appr">9,5</td>
+                                            <td class="situation"><span class="approved">Aprovado</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gabriela Rocha</td>
+                                            <td>124130</td>
+                                            <td>6</td>
+                                            <td>8</td>
+                                            <td class="appr">7</td>
+                                            <td class="situation"><span class="approved">Aprovado</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Henrique Costa</td>
+                                            <td>124131</td>
+                                            <td>4</td>
+                                            <td>6</td>
+                                            <td class="repr">5</td>
+                                            <td class="situation"><span class="failed">Reprovado</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Isabela Ferreira</td>
+                                            <td>124132</td>
+                                            <td>7</td>
+                                            <td>8</td>
+                                            <td class="appr">7,5</td>
+                                            <td class="situation"><span class="approved">Aprovado</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>João Martins</td>
+                                            <td>124133</td>
+                                            <td>6</td>
+                                            <td>7</td>
+                                            <td class="repr">6,5</td>
+                                            <td class="situation"><span class="failed">Reprovado</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="table-container">
+                            <div class="table-info"> <!-- Contenção da turma -->
+                                <div>
+                                    <h3>2° Série F Tech</h3>
+                                    <sub>Alunos</sub>
+                                </div>
+                                <div class="table-actions">
+                                    <input checked style="display: none;" type="checkbox" id="search-submit">
+                                    <label for="search-submit"><img src="../../img/svg/search.svg" alt=""></label>
+                                    <input class="search-box" type="text" placeholder="Pesquisar por matrícula">
+                                    <button title="Filtrar"><img src="../../img/svg/filter.svg" alt="Filtrar"></button>
+                                    <button title="Gerenciar notas" popovertarget="popup-grades">
+                                        <div><img src="../../img/svg/document.svg"><span>Gerenciar notas</span></div>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="table-wrap">
+                                <table>
+                                    <thead class="green">
+                                        <tr>
+                                            <th>Estudante</th>
+                                            <th>Matrícula</th>
+                                            <th>N1'</th>
+                                            <th>N2'</th>
+                                            <th>Média Final<img class="info" title="(N1' + N2') / 2"
+                                                    src="../../img/svg/info-white.svg"></img></th>
+                                            <th>Situação</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Ana Souza</td>
+                                            <td>124124</td>
+                                            <td>8</td>
+                                            <td>7</td>
+                                            <td>7,5</td>
+                                            <td class="situation"><span class="approved">Aprovado</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bruno Almeida</td>
+                                            <td>124125</td>
+                                            <td>6</td>
+                                            <td>5</td>
+                                            <td>5,5</td>
+                                            <td class="situation"><span class="failed">Reprovado</span></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Carla Mendes</td>
+                                            <td>124126</td>
+                                            <td>9</td>
+                                            <td>8</td>
+                                            <td>8,5</td>
+                                            <td class="situation"><span class="approved">Aprovado</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Daniel Oliveira</td>
+                                            <td>124127</td>
+                                            <td>7</td>
+                                            <td>7</td>
+                                            <td>7</td>
+                                            <td class="situation"><span class="approved">Aprovado</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Eduarda Lima</td>
+                                            <td>124128</td>
+                                            <td>5</td>
+                                            <td>6</td>
+                                            <td>5,5</td>
+                                            <td class="situation"><span class="failed">Reprovado</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Felipe Santos</td>
+                                            <td>124129</td>
+                                            <td>10</td>
+                                            <td>9</td>
+                                            <td>9,5</td>
+                                            <td class="situation"><span class="approved">Aprovado</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gabriela Rocha</td>
+                                            <td>124130</td>
+                                            <td>6</td>
+                                            <td>8</td>
+                                            <td>7</td>
+                                            <td class="situation"><span class="approved">Aprovado</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Henrique Costa</td>
+                                            <td>124131</td>
+                                            <td>4</td>
+                                            <td>6</td>
+                                            <td>5</td>
+                                            <td class="situation"><span class="failed">Reprovado</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Isabela Ferreira</td>
+                                            <td>124132</td>
+                                            <td>7</td>
+                                            <td>8</td>
+                                            <td>7,5</td>
+                                            <td class="situation"><span class="approved">Aprovado</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>João Martins</td>
+                                            <td>124133</td>
+                                            <td>6</td>
+                                            <td>7</td>
+                                            <td>6,5</td>
+                                            <td class="situation"><span class="failed">Reprovado</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="table-container">
+                            <div class="table-info"> <!-- Contenção da turma -->
+                                <div>
+                                    <h3>2° Série G Tech</h3>
+                                    <sub>Alunos</sub>
+                                </div>
+                                <div class="table-actions">
+                                    <input checked style="display: none;" type="checkbox" id="search-submit">
+                                    <label for="search-submit"><img src="../../img/svg/search.svg" alt=""></label>
+                                    <input class="search-box" type="text" placeholder="Pesquisar por matrícula">
+                                    <button title="Filtrar"><img src="../../img/svg/filter.svg" alt="Filtrar"></button>
+                                    <button title="Gerenciar notas" popovertarget="popup-grades">
+                                        <div><img src="../../img/svg/document.svg"><span>Gerenciar notas</span></div>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="table-wrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Estudante</th>
+                                            <th>Matrícula</th>
+                                            <th>N1'</th>
+                                            <th>N2'</th>
+                                            <th>Média Final<img class="info" title="(N1' + N2') / 2"
+                                                    src="../../img/svg/info-white.svg"></img></th>
+                                            <th>Situação</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Ana Souza</td>
+                                            <td>124124</td>
+                                            <td>8</td>
+                                            <td>7</td>
+                                            <td>7,5</td>
+                                            <td class="situation"><span class="approved">Aprovado</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="observations">
+                    <h1>Observações</h1>
+                    <select class="select-box">
+                        <option value="">Todas as turmas</option>
+                        <option value="">1°E TECH</option>
+                        <option value="">1°F TECH</option>
+                        <option value="">1°G TECH</option>
+                        <option value="">1°H TECH</option>
+                        <option value="">1°I TECH</option>
+                    </select>
+
+                    <div class="card-container">
+                        <div class="card">
+                            <div>
+                                <h2>Análise individual</h2>
+                                <p>realizada por Daniel Alves</p>
+                            </div>
+                            <button class="button">Ver detalhes</button>
+                        </div>
+
+                        <div class="card blue">
+                            <div>
+                                <h2>Análise individual</h2>
+                                <p>realizada por Daniel Alves</p>
+                            </div>
+                            <button class="button">Ver detalhes</button>
+                        </div>
+                        <div class="card green">
+                            <div>
+                                <h2>Análise individual</h2>
+                                <p>realizada por Daniel Alves</p>
+                            </div>
+                            <button class="button">Ver detalhes</button>
+                        </div>
+                        <div class="card orange">
+                            <div>
+                                <h2>Análise individual</h2>
+                                <p>realizada por Daniel Alves</p>
+                            </div>
+                            <button class="button">Ver detalhes</button>
+                        </div>
+                        <div class="card lime-green">
+                            <div>
+                                <h2>Análise individual</h2>
+                                <p>realizada por Daniel Alves</p>
+                            </div>
+                            <button class="button">Ver detalhes</button>
+                        </div>
+                        <div class="card red">
+                            <div>
+                                <h2>Análise individual</h2>
+                                <p>realizada por Daniel Alves</p>
+                            </div>
+                            <button class="button">Ver detalhes</button>
+                        </div>
+                        <div class="card purple">
+                            <div>
+                                <h2>Análise individual</h2>
+                                <p>realizada por Daniel Alves</p>
+                            </div>
+                            <button class="button">Ver detalhes</button>
+                        </div>
+                        <div class="card smooth-red">
+                            <div>
+                                <h2>Análise individual</h2>
+                                <p>realizada por Daniel Alves</p>
+                            </div>
+                            <button class="button">Ver detalhes</button>
+                        </div>
+                        <div class="card tea-blue">
+                            <div>
+                                <h2>Análise individual</h2>
+                                <p>realizada por Daniel Alves</p>
+                            </div>
+                            <button class="button">Ver detalhes</button>
+                        </div>
+                        <div class="card">
+                            <div>
+                                <h2>Análise individual</h2>
+                                <p>realizada por Daniel Alves</p>
+                            </div>
+                            <button class="button">Ver detalhes</button>
+                        </div>
+                        <div class="card">
+                            <div>
+                                <h2>Análise individual</h2>
+                                <p>realizada por Daniel Alves</p>
+                            </div>
+                            <button class="button">Ver detalhes</button>
+                        </div>
+                        <div class="card">
+                            <div>
+                                <h2>Análise individual</h2>
+                                <p>realizada por Daniel Alves</p>
+                            </div>
+                            <button class="button">Ver detalhes</button>
+                        </div>
+                        <div class="card">
+                            <div>
+                                <h2>Análise individual</h2>
+                                <p>realizada por Daniel Alves</p>
+                            </div>
+                            <button class="button">Ver detalhes</button>
+                        </div>
+                        <div class="card">
+                            <div>
+                                <h2>Análise individual</h2>
+                                <p>realizada por Daniel Alves</p>
+                            </div>
+                            <button class="button">Ver detalhes</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div id="popup-grades" class="popup" popover="auto">
+        <!-- Apesar de cada table ter um símbolo de nota específico, o POPUP de notas será único -->
+        <h1>Gerenciar notas</h1>
+        <form action="" method="">
+            <div class="input-major">
+                <div class="email input-container">
+                    <p class="required">Aluno</p>
+                    <select class="text-box" name="" id="">
+                        <option value="" disabled selected>
+                            Selecione um aluno
+                        </option>
+
+                        <optgroup label="1° Ano TECH">
+                            <option value="">Nisflei Santos</option>
+                            <option value="">Jotaro Kujo</option>
+                            <option value="">Viviane Moreira</option>
+                            <option value="">Marcelo Grilo</option>
+                            <option value="">Davi Silva</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="input-container">
+                    <p class="required">Matrícula</p>
+                    <input class="text-box" name="" type="text" value="" readonly>
+                </div>
+
+                <div class="input-container">
+                    <p class="required">N1'</p>
+                    <input class="text-box" name="" type="number" min="0" max="10" step="0.1">
+                </div>
+
+                <div class="input-container">
+                    <p class="required">N2'</p>
+                    <input class="text-box" name="" type="number" min="0" max="10" step="0.1">
+                </div>
+
+                <div class="input-container">
+                    <p class="required">Média final</p>
+                    <input class="text-box" name="" type="text" value="" readonly>
+                </div>
+            </div>
+
+            <button class="button" type="submit">Registrar</button>
+        </form>
+    </div>
+</body>
+
+</html>

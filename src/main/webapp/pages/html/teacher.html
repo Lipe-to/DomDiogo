@@ -46,7 +46,7 @@
                 <li>
                     <a href="">
                         <img class="sidebar-icon" src="../../img/svg/sidebar/address-book.svg" alt="">
-                        <span>Tela de testes</span>
+                        <span>Professores</span>
                     </a>
                 </li>
             </div>
@@ -64,7 +64,7 @@
             <header>
                 <a href="#"><img class="logo" src="../../img/branding/teste.png" alt="Logo"></a>
                 <div class="personal-info">
-                    <img src="../../img/neymar.png" alt=""> <!-- Condicional em JSP se não houver bd de perfil -->
+                    <div class="profile-image"></div> <!-- Condicional em JSP se não houver bd de perfil -->
                     <div>
                         <h3>Neymar Santos</h3>
                         <p>Professor</p>
@@ -73,9 +73,32 @@
             </header>
 
             <main>
-                <div id="welcome">
-                    <h2>Olá Kesler!</h2>
-                    <p>Bem vindo de volta!</p>
+                <div id="front-desk">
+                    <div class="castle" id="welcome">
+                        <h2>Olá Kesler!</h2>
+                        <p>Bem vindo de volta!</p>
+                    </div>
+                    <div class="general-statistic">
+                        <a href="" class="h2">Visão geral <img class="redirect" src="../../img/svg/redirect-blue.svg" alt=""></a>
+                        <div>
+                            <div>
+                                <h3><span>32</span></h3>
+                                <span>Total de alunos</span>
+                            </div>
+                            <div>
+                                <h3><span>12</span></h3>
+                                <span>Total de turmas</span>
+                            </div>
+                            <div>
+                                <h3><span class="appr">62</span> %</h3>
+                                <span>Alunos aprovados</span>
+                            </div>
+                            <div>
+                                <h3><span class="repr">12</span> %</h3>
+                                <span>Alunos reprovados</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="grades">
@@ -124,7 +147,7 @@
                                             <td>124124</td>
                                             <td>8</td>
                                             <td>7</td>
-                                            <td>7,5</td>
+                                            <td class="appr">7,5</td>
                                             <td class="situation"><span class="approved">Aprovado</span></td>
                                         </tr>
                                         <tr>
@@ -132,7 +155,7 @@
                                             <td>124125</td>
                                             <td>6</td>
                                             <td>5</td>
-                                            <td>5,5</td>
+                                            <td class="repr">5,5</td>
                                             <td class="situation"><span class="failed">Reprovado</span></td>
                                         </tr>
 
@@ -141,7 +164,7 @@
                                             <td>124126</td>
                                             <td>9</td>
                                             <td>8</td>
-                                            <td>8,5</td>
+                                            <td class="appr">8,5</td>
                                             <td class="situation"><span class="approved">Aprovado</span></td>
                                         </tr>
                                         <tr>
@@ -149,7 +172,7 @@
                                             <td>124127</td>
                                             <td>7</td>
                                             <td>7</td>
-                                            <td>7</td>
+                                            <td class="appr">7</td>
                                             <td class="situation"><span class="approved">Aprovado</span></td>
                                         </tr>
                                         <tr>
@@ -157,7 +180,7 @@
                                             <td>124128</td>
                                             <td>5</td>
                                             <td>6</td>
-                                            <td>5,5</td>
+                                            <td class="repr">5,5</td>
                                             <td class="situation"><span class="failed">Reprovado</span></td>
                                         </tr>
                                         <tr>
@@ -165,7 +188,7 @@
                                             <td>124129</td>
                                             <td>10</td>
                                             <td>9</td>
-                                            <td>9,5</td>
+                                            <td class="appr">9,5</td>
                                             <td class="situation"><span class="approved">Aprovado</span></td>
                                         </tr>
                                         <tr>
@@ -173,7 +196,7 @@
                                             <td>124130</td>
                                             <td>6</td>
                                             <td>8</td>
-                                            <td>7</td>
+                                            <td class="appr">7</td>
                                             <td class="situation"><span class="approved">Aprovado</span></td>
                                         </tr>
                                         <tr>
@@ -181,7 +204,7 @@
                                             <td>124131</td>
                                             <td>4</td>
                                             <td>6</td>
-                                            <td>5</td>
+                                            <td class="repr">5</td>
                                             <td class="situation"><span class="failed">Reprovado</span></td>
                                         </tr>
                                         <tr>
@@ -189,7 +212,7 @@
                                             <td>124132</td>
                                             <td>7</td>
                                             <td>8</td>
-                                            <td>7,5</td>
+                                            <td class="appr">7,5</td>
                                             <td class="situation"><span class="approved">Aprovado</span></td>
                                         </tr>
                                         <tr>
@@ -197,7 +220,7 @@
                                             <td>124133</td>
                                             <td>6</td>
                                             <td>7</td>
-                                            <td>6,5</td>
+                                            <td class="repr">6,5</td>
                                             <td class="situation"><span class="failed">Reprovado</span></td>
                                         </tr>
                                     </tbody>

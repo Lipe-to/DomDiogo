@@ -19,17 +19,41 @@
 
 <body>
     <aside id="sidebar"> <!-- Position fixed ! -->
-        <div>
-            <label id="menu-icon" for="menu-checkbox">
-                <img class="sidebar-icon" src="../../img/svg/sidebar/menu-burger.svg">
-            </label>
-            <input name="menu-checkbox" id="menu-checkbox" type="checkbox">
-            <a href=""><img class="sidebar-icon" src="../../img/svg/sidebar/home.svg" alt=""></a>
-            <a href=""><img class="sidebar-icon" src="../../img/svg/sidebar/dashboard.svg" alt=""></a>
-            <a href=""><img class="sidebar-icon" src="../../img/svg/sidebar/address-book.svg" alt=""></a>
-        </div>
-
-        <button><img id="sign-out" class="sidebar-icon" src="../../img/svg/sidebar/sign-out.svg" alt=""></button>
+        <ul>
+            <div>
+                <li id="menu-icon-container">
+                    <label id="menu-icon" for="menu-checkbox">
+                        <img class="sidebar-icon" src="../../img/svg/sidebar/menu-burger.svg">
+                    </label>
+                    <input name="menu-checkbox" id="menu-checkbox" type="checkbox">
+                </li>
+                <p id="menu-text">Menu</p>
+                <li class="emphasis">
+                    <a href="">
+                        <img class="sidebar-icon" src="../../img/svg/sidebar/home-emphasis.svg" alt="">
+                        <span>Tela Inicial</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <img class="sidebar-icon" src="../../img/svg/sidebar/dashboard.svg" alt="">
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <img class="sidebar-icon" src="../../img/svg/sidebar/address-book.svg" alt="">
+                        <span>Tela de testes</span>
+                    </a>
+                </li>
+            </div>
+            <li id="sign-out">
+                <button>
+                    <img class="sidebar-icon" src="../../img/svg/sidebar/sign-out.svg" alt="">
+                    <span>Sair</span>
+                </button>
+            </li>
+        </ul>
     </aside>
 
     <div id="major-container">
@@ -46,9 +70,32 @@
             </header>
 
             <main>
-                <div id="welcome">
-                    <h2>Olá Kesler!</h2>
-                    <p>Bem vindo de volta!</p>
+                <div id="front-desk">
+                    <div class="castle" id="welcome">
+                        <h2>Olá Kesler!</h2>
+                        <p>Bem vindo de volta!</p>
+                    </div>
+                    <div class="general-statistic">
+                        <h2>Visão geral</h2>
+                        <div>
+                            <div>
+                                <h3><span>32</span></h3>
+                                <span>Total de alunos</span>
+                            </div>
+                            <div>
+                                <h3><span>8,1</span></h3>
+                                <span>Total de turmas</span>
+                            </div>
+                            <div>
+                                <h3><span>12</span> %</h3>
+                                <span>Alunos reprovados</span>
+                            </div>
+                            <div>
+                                <h3><span>12</span> %</h3>
+                                <span>Alunos reprovados</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="grades">
@@ -78,7 +125,7 @@
                             </div>
                         </div>
                         <div class="table-wrap">
-                            <table>
+                            <table id="report-card">
                                 <thead>
                                     <tr>
                                         <th>Matéria</th>
@@ -92,51 +139,51 @@
                                 <tbody>
                                     <tr>
                                         <td>Matemática</td>
-                                        <td>8.5</td>
-                                        <td>7.5</td>
-                                        <td>8.0</td>
+                                        <td>8,5</td>
+                                        <td>7,5</td>
+                                        <td class="appr">8</td>
                                         <td class="situation"><span class="approved">Aprovado</span></td>
                                     </tr>
                                     <tr>
                                         <td>Português</td>
-                                        <td>6.0</td>
-                                        <td>6.5</td>
-                                        <td>6.25</td>
+                                        <td>6</td>
+                                        <td>6,5</td>
+                                        <td class="repr">6</td>
                                         <td class="situation"><span class="failed">Reprovado</span></td>
                                     </tr>
                                     <tr>
                                         <td>Física</td>
-                                        <td>7.0</td>
-                                        <td>9.0</td>
-                                        <td>8.0</td>
+                                        <td>7</td>
+                                        <td>9</td>
+                                        <td class="appr">8</td>
                                         <td class="situation"><span class="approved">Aprovado</span></td>
                                     </tr>
                                     <tr>
                                         <td>Química</td>
-                                        <td>5.5</td>
-                                        <td>7.0</td>
-                                        <td>6.25</td>
+                                        <td>5,5</td>
+                                        <td>7</td>
+                                        <td class="repr">6</td>
                                         <td class="situation"><span class="failed">Reprovado</span></td>
                                     </tr>
                                     <tr>
                                         <td>História</td>
-                                        <td>9.0</td>
-                                        <td>8.0</td>
-                                        <td>8.5</td>
+                                        <td>9</td>
+                                        <td>8</td>
+                                        <td class="appr">8,5</td>
                                         <td class="situation"><span class="approved">Aprovado</span></td>
                                     </tr>
                                     <tr>
                                         <td>Geografia</td>
-                                        <td>6.8</td>
-                                        <td>7.2</td>
-                                        <td>7.0</td>
+                                        <td>6</td>
+                                        <td>7</td>
+                                        <td class="appr">7</td>
                                         <td class="situation"><span class="approved">Aprovado</span></td>
                                     </tr>
                                     <tr>
                                         <td>Biologia</td>
-                                        <td>4.0</td>
-                                        <td>6.0</td>
-                                        <td>5.0</td>
+                                        <td>4</td>
+                                        <td>6</td>
+                                        <td class="repr">5</td>
                                         <td class="situation"><span class="failed">Reprovado</span></td>
                                     </tr>
                                 </tbody>
