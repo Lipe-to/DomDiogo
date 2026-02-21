@@ -11,7 +11,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
-@WebServlet("/aluno")
+@WebServlet({"/aluno", "/aluno/*"})
 public class AlunoServlet extends HttpServlet {
     private String redirect = "";
     private final AlunoRepository repository = new AlunoRepository();
@@ -55,7 +55,6 @@ public class AlunoServlet extends HttpServlet {
                 String usuario = request.getParameter("usuario");
                 if (repository.isApto(usuario)) {
                     AlunoEntity alunoEntity = new AlunoEntity(
-                            Integer.parseInt(request.getParameter("matricula")),
                             request.getParameter("nome"),
                             usuario,
                             request.getParameter("senha"),
@@ -82,7 +81,8 @@ public class AlunoServlet extends HttpServlet {
                         request.getParameter("nome"),
                         request.getParameter("usuario"),
                         request.getParameter("senha"),
-                        request.getParameter("palavra")
+                        request.getParameter("palavra"),
+                        request.getParameter("turma")
                 );
                 Status updateStatus = repository.update(alunoUpdate);
                 if (updateStatus == Status.SUCCESS) {
@@ -109,18 +109,22 @@ public class AlunoServlet extends HttpServlet {
                 break;
 
             case "login":
-                Status loginStatus = repository.login(
+                AlunoEntity aluno = repository.login(
                         request.getParameter("usuario"),
                         request.getParameter("senha")
                 );
-                if (loginStatus == Status.SUCCESS) {
+
+                if (aluno != null) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("nome", aluno.getNome());
+                    session.setAttribute("matricula", aluno.getMatricula());
+
                     ServletHelper.configureStatus(request, "Login realizado com sucesso!", StatusColor.GREEN);
-                } else if (loginStatus == Status.NOT_FOUND) {
-                    ServletHelper.configureStatus(request, "Usuário ou senha inválidos.", StatusColor.RED);
+                    redirect = "/WEB-INF/home.jsp";
                 } else {
-                    ServletHelper.configureStatus(request, "Erro interno ao realizar login.", StatusColor.RED);
+                    ServletHelper.configureStatus(request, "Usuário ou senha inválidos.", StatusColor.RED);
+                    redirect = "/WEB-INF/login.jsp";
                 }
-                redirect = "/WEB-INF/home.jsp";
                 break;
 
             default:
