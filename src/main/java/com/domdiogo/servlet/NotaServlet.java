@@ -40,32 +40,11 @@ public class NotaServlet extends HttpServlet {
         String action = request.getParameter("action");
 
         switch (action) {
-            case "create":
-                NotaEntity novaNota = new NotaEntity(
-                        0,
-                        Double.parseDouble(request.getParameter("n1")),
-                        Double.parseDouble(request.getParameter("n2")),
-                        0.0,
-                        Integer.parseInt(request.getParameter("idDisciplina")),
-                        Integer.parseInt(request.getParameter("matriculaAluno"))
-                );
-                Status createStatus = repository.create(novaNota);
-                if (createStatus == Status.SUCCESS) {
-                    ServletHelper.configureStatus(request, "Nota cadastrada com sucesso!", StatusColor.GREEN);
-                } else {
-                    ServletHelper.configureStatus(request, "Erro ao cadastrar nota.", StatusColor.RED);
-                }
-                redirect = "/nota?action=readAll";
-                break;
-
             case "update":
                 NotaEntity notaUpdate = new NotaEntity(
                         Integer.parseInt(request.getParameter("id")),
                         Double.parseDouble(request.getParameter("n1")),
-                        Double.parseDouble(request.getParameter("n2")),
-                        0.0,
-                        0,
-                        0
+                        Double.parseDouble(request.getParameter("n2"))
                 );
                 Status updateStatus = repository.update(notaUpdate);
                 if (updateStatus == Status.SUCCESS) {

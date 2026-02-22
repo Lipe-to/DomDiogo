@@ -16,6 +16,13 @@ public class NotaEntity {
         this.idDisciplina = idDisciplina;
         this.matriculaAluno = matriculaAluno;
     }
+
+    public NotaEntity(int id, double n1, double n2) {
+        this.id = id;
+        this.n1 = n1;
+        this.n2 = n2;
+    }
+
     public int getId() {
         return this.id;
     }

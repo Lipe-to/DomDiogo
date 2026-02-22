@@ -2,6 +2,7 @@ package com.domdiogo.repository;
 
 import com.domdiogo.ConnectionFactory;
 import com.domdiogo.model.AlunoEntity;
+import com.domdiogo.model.NotaEntity;
 import com.domdiogo.model.Status;
 
 import java.sql.*;
@@ -83,6 +84,26 @@ public class AlunoRepository {
         }
     }
 
+    public Status createNotas(int matricula) {
+        String query = "insert into notas (matricula_aluno) values (?)";
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        Connection connection = connectionFactory.connect();
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setDouble(1, matricula);
+            int rows = ps.executeUpdate();
+            if (rows > 0) {
+                return Status.SUCCESS;
+            }
+            return Status.INTERNAL_ERROR;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return Status.INTERNAL_ERROR;
+        } finally {
+            connectionFactory.disconnect(connection);
+        }
+    }
+
     public AlunoEntity findByMatricula(int matricula) {
         String query = "select * from aluno where matricula = ?";
         AlunoEntity alunoEntity = null;
@@ -91,6 +112,33 @@ public class AlunoRepository {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, matricula);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                alunoEntity = new AlunoEntity(
+                        resultSet.getInt("matricula"),
+                        resultSet.getString("nome"),
+                        resultSet.getString("usuario"),
+                        resultSet.getString("senha"),
+                        resultSet.getString("palavra"),
+                        resultSet.getString("turma")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            connectionFactory.disconnect(connection);
+        }
+        return alunoEntity;
+    }
+
+    public AlunoEntity findByUsuario(String usuario) {
+        String query = "select * from aluno where usuario = ?";
+        AlunoEntity alunoEntity = null;
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        Connection connection = connectionFactory.connect();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, usuario);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 alunoEntity = new AlunoEntity(

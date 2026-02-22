@@ -43,31 +43,6 @@ public class NotaRepository {
         return listaNotas;
     }
 
-    public Status create(NotaEntity nota) {
-        String query = "INSERT INTO notas (n1, n2, id_disciplina, matricula_aluno) VALUES (?, ?, ?, ?)";
-        ConnectionFactory connectionFactory = new ConnectionFactory();
-        Connection connection = connectionFactory.connect();
-
-        try {
-            PreparedStatement ps = connection.prepareStatement(query);
-            ps.setDouble(1, nota.getN1());
-            ps.setDouble(2, nota.getN2());
-            ps.setInt(3, nota.getIdDisciplina());
-            ps.setInt(4, nota.getMatriculaAluno());
-
-            int rows = ps.executeUpdate();
-            if (rows > 0) {
-                return Status.SUCCESS;
-            }
-            return Status.INTERNAL_ERROR;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return Status.INTERNAL_ERROR;
-        } finally {
-            connectionFactory.disconnect(connection);
-        }
-    }
-
     public Status update(NotaEntity nota) {
         String query = "UPDATE notas SET n1 = ?, n2 = ? WHERE id = ?";
         ConnectionFactory connectionFactory = new ConnectionFactory();
