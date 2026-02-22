@@ -43,17 +43,17 @@
             </div>
 
             <div class="forgot-password">
-                <a href="${pageContext.request.contextPath}/pages/login/forgot-password.jsp">Esqueceu a senha?</a>
+                <a href="pages/login/forgot-password.jsp">Esqueceu a senha?</a>
             </div>
 
             <button class="button" type="submit">Continuar</button>
         </form>
         
-        <p id="sign-up-redirect">Ainda não possui uma conta?<a href="${pageContext.request.contextPath}/pages/login/register.jsp">Registrar-se</a></p>
+        <p id="sign-up-redirect">Ainda não possui uma conta?<a href="pages/login/register.jsp">Registrar-se</a></p>
     </div>
 
     <div class="admin">
-        <a href=""><img src="img/svg/lock.svg" alt="">Entrar como administrador</a>
+        <a href="WEB-INF/view/sights/teacher.jsp"><img src="img/svg/lock.svg" alt="">Entrar como administrador</a>
     </div>
 </body>
 

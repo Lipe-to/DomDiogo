@@ -1,4 +1,5 @@
-<!-- <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %> -->
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,13 +12,13 @@
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <link rel="stylesheet" href="../../css/sights/both.css">
-    <link rel="stylesheet" href="../../css/sights/teacher.css">
-    <link rel="stylesheet" href="../../css/popup.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sights/both.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sights/teacher.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/popup.css">
 
-    <link rel="stylesheet" href="../../css/style.css">
-    <link rel="stylesheet" href="../../css/variables.css">
-    <link rel="stylesheet" href="../../css/font.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/variables.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font.css">
 </head>
 
 <body>
@@ -26,33 +27,33 @@
             <div>
                 <li id="menu-icon-container">
                     <label id="menu-icon" for="menu-checkbox">
-                        <img class="sidebar-icon" src="../../img/svg/sidebar/menu-burger.svg">
+                        <img class="sidebar-icon" src="${pageContext.request.contextPath}/img/svg/sidebar/menu-burger.svg">
                     </label>
                     <input name="menu-checkbox" id="menu-checkbox" type="checkbox">
                 </li>
                 <p id="menu-text">Menu</p>
                 <li class="emphasis">
                     <a href="">
-                        <img class="sidebar-icon" src="../../img/svg/sidebar/home-emphasis.svg" alt="">
+                        <img class="sidebar-icon" src="${pageContext.request.contextPath}/img/svg/sidebar/home-emphasis.svg" alt="">
                         <span>Tela Inicial</span>
                     </a>
                 </li>
                 <li>
                     <a href="">
-                        <img class="sidebar-icon" src="../../img/svg/sidebar/dashboard.svg" alt="">
+                        <img class="sidebar-icon" src="${pageContext.request.contextPath}/img/svg/sidebar/dashboard.svg" alt="">
                         <span>Dashboard</span>
                     </a>
                 </li>
                 <li>
                     <a href="">
-                        <img class="sidebar-icon" src="../../img/svg/sidebar/address-book.svg" alt="">
+                        <img class="sidebar-icon" src="${pageContext.request.contextPath}/img/svg/sidebar/address-book.svg" alt="">
                         <span>Professores</span>
                     </a>
                 </li>
             </div>
             <li id="sign-out">
                 <button>
-                    <img class="sidebar-icon" src="../../img/svg/sidebar/sign-out.svg" alt="">
+                    <img class="sidebar-icon" src="${pageContext.request.contextPath}/img/svg/sidebar/sign-out.svg" alt="">
                     <span>Sair</span>
                 </button>
             </li>
@@ -62,7 +63,7 @@
     <div id="major-container">
         <div id="wrap">
             <header>
-                <a href="#"><img class="logo" src="../../img/branding/teste.png" alt="Logo"></a>
+                <a href="#"><img class="logo" src="${pageContext.request.contextPath}/img/branding/teste.png" alt="Logo"></a>
                 <div class="personal-info">
                     <div class="profile-image"></div> <!-- Condicional em JSP se não houver bd de perfil -->
                     <div>
@@ -79,7 +80,7 @@
                         <p>Bem vindo de volta!</p>
                     </div>
                     <div class="general-statistic">
-                        <a href="" class="h2">Visão geral <img class="redirect" src="../../img/svg/redirect-blue.svg" alt=""></a>
+                        <a href="" class="h2">Visão geral <img class="redirect" src="${pageContext.request.contextPath}/img/svg/redirect-blue.svg" alt=""></a>
                         <div>
                             <div>
                                 <h3><span>32</span></h3>
@@ -120,11 +121,11 @@
                                 </div>
                                 <div class="table-actions">
                                     <input checked style="display: none;" type="checkbox" id="search-submit">
-                                    <label for="search-submit"><img src="../../img/svg/search.svg" alt=""></label>
+                                    <label for="search-submit"><img src="${pageContext.request.contextPath}/img/svg/search.svg" alt=""></label>
                                     <input class="search-box" type="text" placeholder="Pesquisar por matrícula">
-                                    <button title="Filtrar"><img src="../../img/svg/filter.svg" alt="Filtrar"></button>
+                                    <button title="Filtrar"><img src="${pageContext.request.contextPath}/img/svg/filter.svg" alt="Filtrar"></button>
                                     <button title="Gerenciar notas" popovertarget="popup-grades">
-                                        <div><img src="../../img/svg/document.svg"><span>Gerenciar notas</span></div>
+                                        <div><img src="${pageContext.request.contextPath}/img/svg/document.svg"><span>Gerenciar notas</span></div>
                                     </button>
                                 </div>
                             </div>
@@ -137,7 +138,7 @@
                                             <th>N1'</th>
                                             <th>N2'</th>
                                             <th>Média Final<img class="info" title="(N1' + N2') / 2"
-                                                    src="../../img/svg/info-white.svg"></img></th>
+                                                    src="${pageContext.request.contextPath}/img/svg/info-white.svg"></img></th>
                                             <th>Situação</th>
                                         </tr>
                                     </thead>
@@ -236,11 +237,11 @@
                                 </div>
                                 <div class="table-actions">
                                     <input checked style="display: none;" type="checkbox" id="search-submit">
-                                    <label for="search-submit"><img src="../../img/svg/search.svg" alt=""></label>
+                                    <label for="search-submit"><img src="${pageContext.request.contextPath}/img/svg/search.svg" alt=""></label>
                                     <input class="search-box" type="text" placeholder="Pesquisar por matrícula">
-                                    <button title="Filtrar"><img src="../../img/svg/filter.svg" alt="Filtrar"></button>
+                                    <button title="Filtrar"><img src="${pageContext.request.contextPath}/img/svg/filter.svg" alt="Filtrar"></button>
                                     <button title="Gerenciar notas" popovertarget="popup-grades">
-                                        <div><img src="../../img/svg/document.svg"><span>Gerenciar notas</span></div>
+                                        <div><img src="${pageContext.request.contextPath}/img/svg/document.svg"><span>Gerenciar notas</span></div>
                                     </button>
                                 </div>
                             </div>
@@ -253,7 +254,7 @@
                                             <th>N1'</th>
                                             <th>N2'</th>
                                             <th>Média Final<img class="info" title="(N1' + N2') / 2"
-                                                    src="../../img/svg/info-white.svg"></img></th>
+                                                    src="${pageContext.request.contextPath}/img/svg/info-white.svg"></img></th>
                                             <th>Situação</th>
                                         </tr>
                                     </thead>
@@ -352,11 +353,11 @@
                                 </div>
                                 <div class="table-actions">
                                     <input checked style="display: none;" type="checkbox" id="search-submit">
-                                    <label for="search-submit"><img src="../../img/svg/search.svg" alt=""></label>
+                                    <label for="search-submit"><img src="${pageContext.request.contextPath}/img/svg/search.svg" alt=""></label>
                                     <input class="search-box" type="text" placeholder="Pesquisar por matrícula">
-                                    <button title="Filtrar"><img src="../../img/svg/filter.svg" alt="Filtrar"></button>
+                                    <button title="Filtrar"><img src="${pageContext.request.contextPath}/img/svg/filter.svg" alt="Filtrar"></button>
                                     <button title="Gerenciar notas" popovertarget="popup-grades">
-                                        <div><img src="../../img/svg/document.svg"><span>Gerenciar notas</span></div>
+                                        <div><img src="${pageContext.request.contextPath}/img/svg/document.svg"><span>Gerenciar notas</span></div>
                                     </button>
                                 </div>
                             </div>
@@ -369,7 +370,7 @@
                                             <th>N1'</th>
                                             <th>N2'</th>
                                             <th>Média Final<img class="info" title="(N1' + N2') / 2"
-                                                    src="../../img/svg/info-white.svg"></img></th>
+                                                    src="${pageContext.request.contextPath}/img/svg/info-white.svg"></img></th>
                                             <th>Situação</th>
                                         </tr>
                                     </thead>

@@ -171,6 +171,10 @@ table tbody {
     flex-direction: column;
 }
 
+.table-info h3 {
+    white-space: nowrap;
+}
+
 .situation span {
     padding: 1.5% 8%;
     border-radius: 25px;
@@ -467,6 +471,7 @@ header {
 
 .table-actions>:last-child {
     width: 30%;
+    min-width: 140px;
 }
 
 @media (max-width: 800px) {
@@ -544,4 +549,32 @@ header {
 
 .redirect {
     width: 2%;
+}
+
+.td-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5%;
+}
+
+.td-actions button {
+    display: flex;
+    border: 0;
+    border-radius: 4px;
+    padding: 2%;
+    cursor: pointer;
+}
+
+.td-actions .show {
+    background-color: var(--tea-blue);
+}
+
+.td-actions .edit {
+    background-color: var(--orange);
+}
+
+.td-actions .delete {
+    background-color: var(--smooth-red);
 }
