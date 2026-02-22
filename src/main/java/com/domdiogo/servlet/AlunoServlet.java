@@ -62,6 +62,10 @@ public class AlunoServlet extends HttpServlet {
                     );
                     Status status = repository.create(alunoEntity);
                     if (status == Status.SUCCESS) {
+                        //cria uma entidade de notas para o aluno criado apenas com sua matricula
+                        if (repository.createNotas(repository.findByUsuario(usuario).getMatricula()) == Status.INTERNAL_ERROR) {
+                            ServletHelper.configureStatus(request, "Erro interno, tente novamente.", StatusColor.RED);
+                        };
                         repository.toggleMatriculado(usuario);
                         ServletHelper.configureStatus(request, "Aluno(a) " + alunoEntity.getNome() + " criado com sucesso!", StatusColor.GREEN);
                     } else if (status == Status.NOT_FOUND) {
