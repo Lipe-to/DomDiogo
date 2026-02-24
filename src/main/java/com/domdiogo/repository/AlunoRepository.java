@@ -78,14 +78,14 @@ public class AlunoRepository {
             return Status.NOT_FOUND;
         } catch (SQLException e) {
             e.printStackTrace();
-            return Status.INTERNAL_ERROR;
+            return Status.NOT_FOUND;
         } finally {
             connectionFactory.disconnect(connection);
         }
     }
 
     public Status createNotas(int matricula) {
-        String query = "insert into notas (matricula_aluno) values (?)";
+        String query = "insert into nota (matricula_aluno) values (?)";
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
         try {
@@ -206,6 +206,7 @@ public class AlunoRepository {
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
         String query = "update aptos set is_matriculado = not is_matriculado where usuario = ?";
+        System.out.println("passou");
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, usuario);

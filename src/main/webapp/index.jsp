@@ -22,7 +22,7 @@
 <body id="login" style="overflow: hidden;">
     <div class="login-form">
         <h1>Bem vindo de volta!</h1>
-        <form action="" method="">
+        <form action="${pageContext.request.contextPath}/login" method="post">
             <div class="input-major">
                 <div class="email input-container">
                     <p class="required">E-mail</p>
@@ -33,7 +33,7 @@
                 <div class="input-container">
                     <p class="required">Senha</p>
                     <div class="input-holder">
-                        <button class="show-password" name="toggle">
+                        <button class="show-password" type="button" name="toggle">
                             <i id="open" class="fa-jelly-duo fa-regular fa-eye"></i>
                             <i id="closed" class="fa-jelly-duo fa-regular fa-eye-slash"></i>
                         </button>
@@ -53,7 +53,7 @@
     </div>
 
     <div class="admin">
-        <a href="WEB-INF/view/sights/teacher.jsp"><img src="img/svg/lock.svg" alt="">Entrar como administrador</a>
+        <a href=""><img src="img/svg/lock.svg" alt="">Entrar como administrador</a>
     </div>
 </body>
 

@@ -20,16 +20,16 @@
 <body id="sign-up">
     <div class="login-form">
         <h1>Registrar aluno</h1>
-        <form action="" method="">
+        <form action="${pageContext.request.contextPath}/aluno?action=create" method="post">
             <div class="input-major">
                 <div class="input-container">
                     <p class="required">Nome completo</p>
-                    <input class="text-box" name="" type="text" placeholder="Insira seu nome" required>
+                    <input class="text-box" name="nome" type="text" placeholder="Insira seu nome" required>
                 </div>
 
                 <div class="email input-container">
                     <p class="required">E-mail</p>
-                    <input class="validation text-box" id="email" name="" type="email"
+                    <input class="validation text-box" id="email" name="usuario" type="email"
                         placeholder="Insira seu endereço de e-mail" pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" required>
                 </div>
 
@@ -40,18 +40,18 @@
                             <i id="open" class="fa-jelly-duo fa-regular fa-eye"></i>
                             <i id="closed" class="fa-jelly-duo fa-regular fa-eye-slash"></i>
                         </button>
-                        <input class="text-box" name="password" type="password" placeholder="Insira sua senha" required>
+                        <input class="text-box" name="senha" type="password" placeholder="Insira sua senha" required>
                     </div>
                 </div>
 
                 <div class="input-container">
                     <p class="required">Confirmar senha</p>
-                    <input class="text-box" name="" type="password" placeholder="Insira sua senha novamente" required>
+                    <input class="text-box" type="password" placeholder="Insira sua senha novamente" required>
                 </div>
 
                 <div class="input-container">
                     <p class="required">Comprovação de identidade <span class="tooltip msg-identity"><img class="info" src="../../img/svg/info.svg"></span></p>
-                    <input class="text-box" name="" type="text" placeholder="Insira uma palavra-chave" required>
+                    <input class="text-box" name="palavra" type="text" placeholder="Insira uma palavra-chave" required>
                 </div>
             </div>
 

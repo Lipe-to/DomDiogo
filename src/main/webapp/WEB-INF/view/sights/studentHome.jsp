@@ -234,8 +234,6 @@
                             </div>
                             <button class="button">Ver detalhes</button>
                         </div>
-
-
                     </div>
                 </div>
             </main>
