@@ -1,0 +1,214 @@
+@import url(variables.css);
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+img,
+button>*,
+select,
+a {
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.text-box,
+.button {
+    border-width: thin;
+    border-style: solid;
+    box-sizing: border-box;
+    padding: 2.5% 0;
+
+    box-shadow: var(--shadow-simple);
+}
+
+.button {
+    background: var(--lake-green);
+    background: var(--gradient-lake-green);
+    border-color: var(--white);
+    border-radius: 10px;
+
+    cursor: pointer;
+}
+
+.text-box {
+    width: 100%;
+    background-color: rgba(246, 246, 246, 0.15);
+    border-color: #4646462c;
+    border-radius: 3px;
+
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.text-box {
+    padding-left: 3%;
+}
+
+.text-box::placeholder,
+.search-box::placeholder {
+    background-color: transparent;
+    font-weight: 500;
+}
+
+.text-box:focus,
+.search-box:focus {
+    box-shadow: var(--shadow-focus);
+    outline: none;
+}
+
+.logo {
+    max-width: 200px;
+}
+
+#closed {
+    display: none;
+}
+
+.select-box {
+    outline: none;
+    appearance: none;
+
+    border-style: solid;
+    background-color: rgba(246, 246, 246, 0.15);
+    border-color: #4646462c;
+    border-radius: 3px;
+
+    transition: box-shadow 0.3s ease-in-out;
+
+    min-width: 145px;
+    padding: 0.1% 2.5% 0.1% 1%;
+    background-image: url('../img/svg/caret-down.svg');
+    background-size: 12%;
+    background-repeat: no-repeat;
+    background-position: 95% 50%;
+}
+
+.select-box object {
+    font-weight: 400;
+}
+
+.info {
+    width: 4%;
+    transform: translateY(1px);
+}
+
+.required:has(.info)::after {
+    margin-left: 1.5%;
+}
+
+.tooltip {
+    position: relative;
+    cursor: pointer;
+}
+
+.tooltip::after {
+    content: "";
+    position: absolute;
+
+    bottom: 150%;
+    left: 50%;
+    transform: translateX(-20%) translateY(80%);
+
+    font-size: 0.8rem;
+
+    width: 220px;
+    padding: 30%;
+    padding-left: 60%;
+    border-radius: 8px;
+
+    transition: transform 0.5s ease-in-out, opacity 0.4s ease-in-out;
+}
+
+.tooltip::before {
+    content: ".";
+    position: absolute;
+
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-85%) rotate(45deg);
+
+    border-radius: 2px;
+    width: 20px;
+    height: auto;
+
+    /* transition: transform 0.25s ease-in 0.6s, opacity 0.2s ease-in 0.6s; */
+    transition: transform 0.15s ease-in-out 0.1s, opacity 0s;
+}
+
+.tooltip::after,
+.tooltip::before {
+    color: var(--white) !important;
+    background-color: #7a92c2;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.tooltip:hover::after {
+    transform: translateX(-20%);
+}
+
+.tooltip:hover::before {
+    transform: translateX(-50%) translateY(-25%) rotate(45deg);
+    transition: transform 0.25s ease-in 0.425s, opacity 0.2s ease-in 0.425s;
+}
+
+.tooltip:hover::after,
+.tooltip:hover::before {
+    opacity: 1;
+}
+
+.msg-identity::after {
+    content: "A palavra-chave é um meio para recuperar sua senha.";
+}
+
+/* Por padrão, será cinza
+    --blue: #3C71BA;
+    --purple: #D68DD4;
+    --lake-green: #61CB9F;
+    --lime-green: #B7D692;
+    --red: #D13E3E;
+    --orange: #D6B48D;
+*/
+
+.blue {
+    background-color: var(--blue);
+}
+
+.tea-blue {
+    background-color: var(--tea-blue);
+}
+
+.purple {
+    background-color: var(--purple);
+}
+
+.green {
+    background-color: var(--green);
+}
+
+.lime-green {
+    background-color: var(--lime-green);
+}
+
+.red {
+    background-color: var(--red);
+}
+
+.smooth-red {
+    background-color: var(--smooth-red);
+}
+
+.orange {
+    background-color: var(--orange);
+}

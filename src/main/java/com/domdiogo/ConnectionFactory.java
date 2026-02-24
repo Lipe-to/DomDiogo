@@ -10,6 +10,7 @@ public class ConnectionFactory {
     public Connection connect() {
         Connection conn = null;
         try {
+            Class.forName("org.postgresql.Driver");
             Dotenv dotenv = Dotenv.load();
             String url = dotenv.get("DB_URL");
             String user = dotenv.get("DB_USER");
@@ -18,6 +19,8 @@ public class ConnectionFactory {
         } catch (SQLException e) {
             System.out.println("Erro ao conectar ao banco:");
             e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            System.out.println("Não achou o driver");
         }
         return conn;
     }

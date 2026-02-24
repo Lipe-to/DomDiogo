@@ -1,0 +1,35 @@
+@import url('../variables.css');
+
+body {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: left !important;
+    
+    background-image: url('../../img/flat/surfer.png');
+    background-position: 150% 50%;
+    background-size: 80% auto;
+    background-repeat: no-repeat;
+}
+
+div {
+    display: flex;
+    flex-direction: column;
+    white-space: nowrap;
+    margin-left: 2.5%;
+}
+
+div>:first-child {
+    margin-bottom: 5%;
+}
+
+h1 {
+    text-align: left;
+}
+
+a {
+    text-align: center;
+    width: 40%;
+    padding: 1% !important;
+    color: var(--white) !important;
+    border: 0;
+}

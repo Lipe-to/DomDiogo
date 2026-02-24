@@ -15,7 +15,7 @@ public class NotaRepository {
 
     public List<NotaEntity> readAll() {
         List<NotaEntity> listaNotas = new ArrayList<>();
-        String query = "SELECT * FROM notas";
+        String query = "SELECT * FROM nota";
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
 
@@ -44,7 +44,7 @@ public class NotaRepository {
     }
 
     public Status update(NotaEntity nota) {
-        String query = "UPDATE notas SET n1 = ?, n2 = ? WHERE id = ?";
+        String query = "UPDATE nota SET n1 = ?, n2 = ? WHERE id = ?";
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
 
@@ -68,7 +68,7 @@ public class NotaRepository {
     }
 
     public Status zerarNota(int id) {
-        String query = "UPDATE notas SET n1 = 0, n2 = 0 WHERE id = ?";
+        String query = "UPDATE nota SET n1 = 0, n2 = 0 WHERE id = ?";
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
 

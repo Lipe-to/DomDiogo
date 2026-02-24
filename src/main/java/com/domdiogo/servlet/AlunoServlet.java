@@ -63,20 +63,20 @@ public class AlunoServlet extends HttpServlet {
                     Status status = repository.create(alunoEntity);
                     if (status == Status.SUCCESS) {
                         //cria uma entidade de notas para o aluno criado apenas com sua matricula
-                        if (repository.createNotas(repository.findByUsuario(usuario).getMatricula()) == Status.INTERNAL_ERROR) {
-                            ServletHelper.configureStatus(request, "Erro interno, tente novamente.", StatusColor.RED);
-                        };
+                        repository.createNotas(repository.findByUsuario(usuario).getMatricula());
                         repository.toggleMatriculado(usuario);
                         ServletHelper.configureStatus(request, "Aluno(a) " + alunoEntity.getNome() + " criado com sucesso!", StatusColor.GREEN);
+                        redirect = "/index.jsp";
                     } else if (status == Status.NOT_FOUND) {
                         ServletHelper.configureStatus(request, "Já existe um aluno com essas informações, faça login.", StatusColor.RED);
+                        redirect = "/pages/login/register.jsp";
                     } else {
                         ServletHelper.configureStatus(request, "Erro interno, tente novamente.", StatusColor.RED);
+                        redirect = "/pages/login/register.jsp";
                     }
                 } else {
                     ServletHelper.configureStatus(request, "Você não está apto a se cadastrar.", StatusColor.RED);
                 }
-                redirect = "/WEB-INF/home.jsp";
                 break;
 
             case "update":
@@ -110,25 +110,6 @@ public class AlunoServlet extends HttpServlet {
                     ServletHelper.configureStatus(request, "Erro interno ao deletar.", StatusColor.RED);
                 }
                 redirect = "/WEB-INF/home.jsp";
-                break;
-
-            case "login":
-                AlunoEntity aluno = repository.login(
-                        request.getParameter("usuario"),
-                        request.getParameter("senha")
-                );
-
-                if (aluno != null) {
-                    HttpSession session = request.getSession();
-                    session.setAttribute("nome", aluno.getNome());
-                    session.setAttribute("matricula", aluno.getMatricula());
-
-                    ServletHelper.configureStatus(request, "Login realizado com sucesso!", StatusColor.GREEN);
-                    redirect = "/WEB-INF/home.jsp";
-                } else {
-                    ServletHelper.configureStatus(request, "Usuário ou senha inválidos.", StatusColor.RED);
-                    redirect = "/WEB-INF/login.jsp";
-                }
                 break;
 
             default:

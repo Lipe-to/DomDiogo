@@ -92,25 +92,6 @@ public class ProfessorServlet extends HttpServlet {
                 }
                 break;
 
-            case "login":
-                ProfessorEntity professor = repository.login(
-                        request.getParameter("usuario"),
-                        request.getParameter("senha")
-                );
-
-                if (professor != null) {
-                    HttpSession session = request.getSession();
-                    session.setAttribute("usuario", professor.getUsuario());
-                    session.setAttribute("idProfessor", professor.getId());
-
-                    ServletHelper.configureStatus(request, "Login realizado com sucesso!", StatusColor.GREEN);
-                    redirect = "/WEB-INF/homeProfessor.jsp";
-                } else {
-                    ServletHelper.configureStatus(request, "Usuário ou senha inválidos.", StatusColor.RED);
-                    redirect = "/WEB-INF/homeProfessor.login";
-                }
-                break;
-
             case "validarPalavra":
                 Status validarStatus = repository.validarPalavra(
                         request.getParameter("usuario"),

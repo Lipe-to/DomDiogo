@@ -1,0 +1,45 @@
+:root {
+    /* colors */
+
+    --black: #333333;
+    --dark-grey: #464646;
+    --white: #FFFFFF;
+    
+    --hyperlink-blue: #4D81E7;
+    --lake-green: #61CB9F;
+    
+    --blue: #3C71BA;
+    --red: #D13E3E;
+
+    --tea-blue: #8D99D6;
+    --purple: #ca93c7;
+    --green: #86d1a8;
+    --lime-green: #b0cf89;
+    --smooth-red: #e08383;
+    --orange: #dfb381;
+
+    --table-grey: #CDD7D6;
+    --table-background: rgba(216, 216, 216, 0.397); /* #A4A4A4 */
+    --table-row: rgba(29, 29, 29, 0.05); /* #000000 */
+
+    --sidebar-icon: rgba(158, 158, 158, 0.200);
+    --sidebar-icon-hover: rgba(158, 158, 158, 0.514);
+    --sidebar-icon-active: rgba(158, 158, 158, 0.377);
+    
+    --sidebar-icon-emphasis: #cae0ff;
+    --sidebar-icon-emphasis-hover: #87b5f5;
+    --sidebar-icon-emphasis-active: #97c3ff;
+
+    --sidebar-icon-sign-out: #F9CECE;
+    --sidebar-icon-sign-out-hover: #e79e9e;
+    --sidebar-icon-sign-out-active: #ebafaf;
+    
+    --gradient-lake-green: linear-gradient(90deg, rgba(97, 203, 159, 1) 0%, rgb(91, 192, 150) 100%);
+
+    --text-box-border: #2727272c;
+    
+    /* shadows ↓ */
+    --shadow-simple: rgba(149, 157, 165, 0.1) 0px 8px 24px;
+    --shadow-focus: rgba(149, 157, 165, 0.2) 0px 12px 24px;
+    --shadow-aside: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}

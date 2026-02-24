@@ -1,0 +1,589 @@
+@import url('../variables.css');
+
+body {
+    background-color: var(--blue);
+    justify-content: end !important;
+}
+
+#major-container {
+    width: 90%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: row;
+
+    margin-top: 3%;
+    margin-right: 3%;
+}
+
+#wrap {
+    flex: 1;
+    min-width: 0;
+}
+
+#front-desk {
+    display: flex;
+    box-sizing: border-box;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 2%;
+
+    background-color: transparent;
+    border-radius: 0;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+#welcome {
+    width: 40%;
+    min-height: 90px;
+}
+
+#welcome.castle {
+    color: #2C4D50;
+    background-color: #2C4D50;
+
+    background-image: url('../../img/flat/castle.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 100%;
+    background-size: 100%;
+}
+
+.general-statistic {
+    width: 60%;
+    background-color: var(--white);
+}
+
+.general-statistic>div {
+    display: flex;
+    gap: 5%;
+    margin-top: 2%;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+main>*,
+#front-desk>* {
+    border-radius: 10px;
+    padding: 1.5% 1.5% 1.5% 2%;
+    margin: 1% 0;
+}
+
+main .select-box {
+    margin-bottom: 1%;
+}
+
+#grades {
+    background-color: var(--white);
+}
+
+main .select-box {
+    margin-top: 0.35%;
+}
+
+.wrap-for-scroll {
+    display: flex;
+    align-items: baseline;
+    flex: 0 1 auto;
+    overflow-x: auto;
+    gap: 2%;
+}
+
+.wrap-for-scroll>* {
+    min-width: 700px;
+    flex-shrink: 0;
+}
+
+.wrap-for-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-radius: 4px;
+    width: 100%;
+
+    overflow: hidden;
+    text-align: center;
+    background-color: var(--table-grey);
+}
+
+table th {
+    padding: 2% 0;
+    color: var(--white);
+    font-weight: 600;
+}
+
+table th .info {
+    width: 12px;
+    margin-left: 3%;
+}
+
+table td {
+    padding: 2.45% 0;
+}
+
+#report-card th {
+    padding: 1.45%;
+}
+
+#report-card td {
+    padding: 1.55%;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: var(--table-row);
+}
+
+table thead {
+    background-color: var(--blue);
+}
+
+table tbody {
+    font-weight: 500;
+}
+
+table td input {
+    background-color: transparent;
+    border: 0;
+    text-align: center;
+    font-weight: 500 !important;
+    font-size: 1rem;
+    width: fit-content;
+}
+
+.table-wrap {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.table-container, .card-container {
+    background-color: var(--table-background);
+    padding: 1% 1.25% 1.5%;
+    border-radius: 6px;
+}
+
+.table-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 2% 1.5%;
+}
+
+.table-info>:first-child {
+    display: flex;
+    flex-direction: column;
+}
+
+.table-info h3 {
+    white-space: nowrap;
+}
+
+.situation span {
+    padding: 1.5% 8%;
+    border-radius: 25px;
+    border-style: solid;
+    border-width: 1px;
+    font-weight: 500;
+    white-space: nowrap;
+
+    color: #454545d3;
+    background-color: #45454518;
+    border-color: #4545452a;
+}
+
+.situation .approved {
+    color: #13734B9f;
+    background-color: #61CA9E4D;
+    border-color: #2591634D;
+}
+
+.situation .failed {
+    color: #7c0a0a9f;
+    background-color: #FF6C6C4D;
+    border-color: #C84A4A4D;
+}
+
+.appr {
+    color: var(--blue);
+}
+
+.repr {
+    color: var(--red);
+}
+
+aside {
+    position: fixed;
+    left: 0;
+    top: 0;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    
+    transition: width 0.3s ease-in-out, padding-right 0.3s ease-in-out, box-shadow 1s ease-in-out;
+
+    width: 60px;
+    height: 100vh;
+    padding-right: 1px;
+    background-color: var(--white);
+}
+
+aside ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    list-style-type: none;
+    
+    margin-top: 20px;
+    padding-left: 24px;
+
+    width: 100%;
+    height: 90%;
+}
+
+aside ul>div {
+    display: flex;
+    flex-direction: column;
+    
+    width: 100%;
+    height: 330px;
+}
+
+aside ul>div>:nth-child(n) {
+    margin-bottom: 18px;
+}
+
+aside ul>div>:first-child {
+    margin-bottom: 50px !important;
+}
+
+#menu-text {
+    font-size: 0.9rem;
+
+    margin: 0;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease-in-out;
+}
+
+aside:has(#menu-checkbox:checked) #menu-text {
+    opacity: 75%;
+    transform: translateY(-10px);
+}
+
+aside li {
+    padding: 8px;
+    border-radius: 4px;
+    background-color: var(--sidebar-icon);
+
+    white-space: nowrap;
+    width: 20px;
+    max-height: 20px;
+    overflow: hidden;
+
+    transition: width 0.3s ease, background-color 0.2s ease, transform 0.3s ease-in-out;
+}
+
+aside li:hover {
+    background-color: var(--sidebar-icon-hover);
+    transform: translateY(-2px);
+}
+
+aside li:active {
+    background-color: var(--sidebar-icon-active);
+}
+
+aside li.emphasis {
+    background-color: var(--sidebar-icon-emphasis);
+}
+
+aside li.emphasis span {
+    color: var(--hyperlink-blue);
+}
+
+aside li.emphasis:hover {
+    background-color: var(--sidebar-icon-emphasis-hover);
+}
+
+aside li.emphasis:active {
+    background-color: var(--sidebar-icon-emphasis-active);
+}
+
+aside li *, aside li {
+    cursor: pointer;
+}
+
+aside #sign-out * {
+    border: none;
+    background-color: transparent;
+    color: var(--red);
+}
+
+aside #sign-out {
+    background-color: var(--sidebar-icon-sign-out);
+}
+
+aside #sign-out:hover {
+    background-color: var(--sidebar-icon-sign-out-hover);
+}
+
+aside #sign-out:active {
+    background-color: var(--sidebar-icon-sign-out-active);
+}
+
+#menu-icon-container, #menu-icon {
+    width: fit-content !important; /* É necessário o !important por conta do :has() */
+    transform: none;
+}
+
+aside a, aside label, aside button {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+aside a, aside button {
+    font-size: 0.95rem;
+    font-weight: 450;
+    color: var(--black);
+    gap: 10px;
+}
+
+aside img {
+    overflow: visible;
+}
+
+#menu-checkbox {
+    display: none;
+}
+
+.sidebar-icon {
+    width: 20px;
+    height: auto;
+ 
+    transition: background-color 0.2s ease-in-out;
+}
+
+aside:has(#menu-checkbox:checked) {
+    width: 20vw;
+    padding-right: 20px;
+    box-shadow: var(--shadow-aside);
+}
+
+aside:has(#menu-checkbox:checked) li {
+    width: 85%;
+}
+
+@media (max-width: 900px) {
+    aside:has(#menu-checkbox:checked) {
+        width: 40vw;
+    }
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.personal-info {
+    display: flex;
+    gap: 2%;
+    width: 40%;
+    justify-content: end;
+    align-items: center;
+    overflow: hidden;
+
+    color: var(--white);
+}
+
+.profile-image {
+    width: 34px;
+    aspect-ratio: 1 / 1;
+
+    background-image: url('../../img/flat/diver.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 100%;
+    border-color: var(--white);
+}
+
+.personal-info h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.personal-info p {
+    font-size: 0.75rem;
+}
+
+.table-actions {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    gap: 2%;
+    width: 70%;
+    max-width: 500px;
+}
+
+.table-actions label,
+.table-actions button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+.table-actions label,
+.table-actions button,
+.table-actions input[type="text"] {
+    border-radius: 5px;
+    border-width: thin;
+    border-style: solid;
+    border-color: #4646462c;
+    background-color: rgba(246, 246, 246, 0.15);
+
+    padding: 1%;
+    color: var(--black);
+    font-weight: 500;
+    box-shadow: var(--shadow-simple);
+}
+
+.table-actions input[type="text"] {
+    padding: 1%;
+    padding-left: 2%;
+    width: 45%;
+}
+
+.table-actions img {
+    width: 16px;
+}
+
+.table-actions .search-container {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+
+.table-actions>:last-child {
+    width: 30%;
+    min-width: 140px;
+}
+
+@media (max-width: 800px) {
+    .table-actions span {
+        display: none;
+    }
+
+    .table-actions>:last-child {
+        width: auto;
+    }
+}
+
+.table-actions>:last-child * {
+    display: flex;
+    align-items: center;
+    gap: 2%;
+
+    overflow: visible;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.table-actions:has(input:checked) input[type="text"] {
+    display: none;
+}
+
+#observations {
+    background-color: var(--white);
+}
+
+.card-container {
+    background-color: var(--table-background);
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+
+    overflow: auto;
+    max-height: 400px;
+}
+
+.card {
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    height: 7rem;
+    padding: 4% 0 7% 6%;
+    border-radius: 8px;
+    
+    background-color: rgb(90, 90, 90);
+    
+    color: var(--white);
+    background-image: url('../../img/shape/Card.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.card h2 {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.card p {
+    font-size: 0.75rem;
+}
+
+.card button {
+    border: 0;
+    width: 40%;
+    border-radius: 4px;
+}
+
+.redirect {
+    width: 2%;
+}
+
+.td-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5%;
+}
+
+.td-actions button {
+    display: flex;
+    border: 0;
+    border-radius: 4px;
+    padding: 2%;
+    cursor: pointer;
+}
+
+.td-actions .show {
+    background-color: var(--tea-blue);
+}
+
+.td-actions .edit {
+    background-color: var(--orange);
+}
+
+.td-actions .delete {
+    background-color: var(--smooth-red);
+}
