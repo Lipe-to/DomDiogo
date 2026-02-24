@@ -27,7 +27,7 @@ public class LoginServlet extends HttpServlet {
         String usuario = request.getParameter("usuario");
         String senha = request.getParameter("senha");
 
-        if (usuario != null && usuario.contains("@")) {
+        if (usuario.contains("@")) {
 
             // LOGIN ALUNO
             AlunoEntity aluno = alunoRepository.login(usuario, senha);

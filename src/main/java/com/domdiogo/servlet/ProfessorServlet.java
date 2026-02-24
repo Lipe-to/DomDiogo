@@ -36,23 +36,12 @@ public class ProfessorServlet extends HttpServlet {
                 break;
 
             case "readAll":
-                List<ProfessorEntity> todosProfessores = repository.read(false);
+                List<ProfessorEntity> todosProfessores = repository.read();
                 if (todosProfessores.isEmpty()) {
                     ServletHelper.configureStatus(request, "Nenhum professor encontrado", StatusColor.RED);
-                }else {
+                } else {
                     request.setAttribute("professores", todosProfessores);
                     ServletHelper.configureStatus(request, "Todos os professores carregados com sucesso", StatusColor.GREEN);
-                }
-                redirect = "";
-                break;
-
-            case "readActives":
-                List<ProfessorEntity> professoresAtivos = repository.read(true);
-                if (professoresAtivos.isEmpty()) {
-                    ServletHelper.configureStatus(request, "Nenhum professor encontrado", StatusColor.RED);
-                }else {
-                    request.setAttribute("professores", professoresAtivos);
-                    ServletHelper.configureStatus(request, "Professores ativos carregados com sucesso", StatusColor.GREEN);
                 }
                 redirect = "";
                 break;
@@ -76,8 +65,7 @@ public class ProfessorServlet extends HttpServlet {
                         request.getParameter("nome"),
                         request.getParameter("usuario"),
                         request.getParameter("senha"),
-                        request.getParameter("palavra"),
-                        Boolean.parseBoolean(request.getParameter("ativo"))
+                        request.getParameter("palavra")
                 );
                 Status updateStatus = repository.update(professorUpdate);
                 if (updateStatus == Status.SUCCESS) {
@@ -105,19 +93,6 @@ public class ProfessorServlet extends HttpServlet {
                     ServletHelper.configureStatus(request, "Erro interno ao validar palavra.", StatusColor.RED);
                 }
                 redirect = "/WEB-INF/homeProfessor.jsp";
-                break;
-
-            case "toggleAtivo":
-                int idToggle = Integer.parseInt(request.getParameter("id"));
-                Status toggleStatus = repository.toggleAtivo(idToggle);
-                if (toggleStatus == Status.SUCCESS) {
-                    ServletHelper.configureStatus(request, "Status alterado com sucesso!", StatusColor.GREEN);
-                } else if (toggleStatus == Status.NOT_FOUND) {
-                    ServletHelper.configureStatus(request, "Erro ao alterar: professor não encontrado.", StatusColor.RED);
-                } else {
-                    ServletHelper.configureStatus(request, "Erro interno ao alterar status.", StatusColor.RED);
-                }
-                redirect = "";
                 break;
 
             default:
