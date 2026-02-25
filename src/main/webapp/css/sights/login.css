@@ -115,7 +115,7 @@ body>:first-child {
     font-size: 1.1rem;
 }
 
-.show-password i {
+.show-password i, .show-password img {
     display: inline;
 }
 
@@ -189,7 +189,6 @@ body>:first-child {
 }
 
 @keyframes shake {
-
     0%,
     100% {
         transform: translateX(0);

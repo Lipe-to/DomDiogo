@@ -36,7 +36,7 @@
                 <div class="input-container">
                     <p class="required">Senha</p>
                     <div class="input-holder">
-                        <button class="show-password" name="toggle">
+                        <button class="show-password" name="toggle" type="button">
                             <i id="open" class="fa-jelly-duo fa-regular fa-eye"></i>
                             <i id="closed" class="fa-jelly-duo fa-regular fa-eye-slash"></i>
                         </button>

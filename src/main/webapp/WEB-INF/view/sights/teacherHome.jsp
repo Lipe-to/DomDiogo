@@ -26,6 +26,8 @@
 <%
     AlunoRepository alunoRepository = new AlunoRepository();
     List<AlunoEntity> listAlunos = alunoRepository.read();
+
+    String nome = (String) session.getAttribute("nome");
 %>
 
 <body>
@@ -83,7 +85,7 @@
             <main>
                 <div id="front-desk">
                     <div class="castle" id="welcome">
-                        <h2>Olá Kesler!</h2>
+                        <h2>Olá <%=nome%>!</h2>
                         <p>Bem vindo de volta!</p>
                     </div>
                     <div class="general-statistic">
@@ -142,6 +144,7 @@
                                     <tr>
                                         <th>Matrícula</th>
                                         <th>Estudante</th>
+                                        <th>Turma</th>
                                         <th>N1'</th>
                                         <th>N2'</th>
                                         <th>Média Final<img class="info" title="(N1' + N2') / 2"
@@ -157,6 +160,7 @@
                                     <tr>
                                         <td><%=aluno.getMatricula()%></td>
                                         <td><%=aluno.getNome()%></td>
+                                        <td><%=aluno.getTurma() == null ? "Não alocado" : aluno.getTurma()%></td>
                                         <td><%=nota.getN1()%></td>
                                         <td><%=nota.getN2()%></td>
                                         <td class=<%=nota.getMedia() <= 7 ? "appr" : "repr"%>><%=nota.getMedia()%></td>
