@@ -25,9 +25,9 @@
         <form action="${pageContext.request.contextPath}/login" method="post">
             <div class="input-major">
                 <div class="email input-container">
-                    <p class="required">E-mail</p>
-                    <input class="validation text-box" id="email" name="" type="email"
-                        placeholder="Insira seu endereço de e-mail" pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" required>
+                    <p class="required">Usuário</p>
+                    <input class="validation text-box" id="email" name="usuario" type="text" placeholder="Insira seu usuário"
+                           pattern="^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|[a-zA-Z]\.[a-zA-Z])$" required>
                 </div>
 
                 <div class="input-container">
@@ -37,7 +37,7 @@
                             <i id="open" class="fa-jelly-duo fa-regular fa-eye"></i>
                             <i id="closed" class="fa-jelly-duo fa-regular fa-eye-slash"></i>
                         </button>
-                        <input class="text-box" name="password" type="password" placeholder="Insira sua senha" required>
+                        <input class="text-box" name="senha" type="password" placeholder="Insira sua senha" required>
                     </div>
                 </div>
             </div>
@@ -45,10 +45,10 @@
             <div class="forgot-password">
                 <a href="pages/login/forgot-password.jsp">Esqueceu a senha?</a>
             </div>
-
+            
             <button class="button" type="submit">Continuar</button>
         </form>
-        
+
         <p id="sign-up-redirect">Ainda não possui uma conta?<a href="pages/login/register.jsp">Registrar-se</a></p>
     </div>
 

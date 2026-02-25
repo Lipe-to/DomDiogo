@@ -92,12 +92,12 @@ public class ProfessorServlet extends HttpServlet {
                 } else {
                     ServletHelper.configureStatus(request, "Erro interno ao validar palavra.", StatusColor.RED);
                 }
-                redirect = "/WEB-INF/homeProfessor.jsp";
+                redirect = "/WEB-INF/teacherHome.jsp";
                 break;
 
             default:
                 ServletHelper.configureStatus(request, "Ação inválida.", StatusColor.RED);
-                redirect = "/WEB-INF/homeProfessor.jsp";
+                redirect = "/WEB-INF/teacherHome.jsp";
                 break;
         }
 

@@ -20,17 +20,17 @@
 <body id="forgot-password">
     <div class="login-form">
         <h1>Recuperar senha</h1>
-        <form action="" method="">
+        <form action="" method="post">
             <div class="input-major">
                 <div class="email input-container">
-                    <p class="required">E-mail</p>
-                    <input class="validation text-box" id="email" name="" type="email"
-                        placeholder="Insira seu endereço de e-mail" pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" required>
+                    <p class="required">Usuário</p>
+                    <input class="validation text-box" id="email" name="usuario" type="text" placeholder="Insira seu endereço de e-mail"
+                           pattern="^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|[a-zA-Z]\.[a-zA-Z])$" required>
                 </div>
 
                 <div class="input-container">
                     <p class="required">Validar identidade</p>
-                    <input class="text-box" name="" type="text" placeholder="Insira sua palavra-chave" required>
+                    <input class="text-box" name="palavra" type="text" placeholder="Insira sua palavra-chave" required>
                 </div>
             </div>
 
