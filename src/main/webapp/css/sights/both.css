@@ -409,7 +409,6 @@ header {
     width: 34px;
     aspect-ratio: 1 / 1;
 
-    background-image: url('../../img/flat/diver.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -418,6 +417,14 @@ header {
     border-style: solid;
     border-radius: 100%;
     border-color: var(--white);
+}
+
+.foto-1 {
+    background-image: url('../../img/flat/dragon.png');
+}
+
+.foto-2 {
+    background-image: url('../../img/flat/diver.png');
 }
 
 .personal-info h3 {

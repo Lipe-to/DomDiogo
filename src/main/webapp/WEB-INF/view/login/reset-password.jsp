@@ -8,8 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Recuperar senha</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sights/login.css">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
@@ -22,15 +20,21 @@
         <h1>Recuperar senha</h1>
         <form action="${pageContext.request.contextPath}/login?action=validarPalavra" method="post">
             <div class="input-major">
-                <div class="email input-container">
-                    <p class="required">Usuário</p>
-                    <input class="validation text-box" id="email" name="usuario" type="text" placeholder="Insira seu endereço de e-mail"
-                           pattern="^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|[a-zA-Z]\.[a-zA-Z])$" required>
+                <div class="input-container">
+                    <p class="required">Nova senha</p>
+                    <div class="input-holder">
+                        <button class="show-password" name="toggle">
+                            <i id="open" class="fa-jelly-duo fa-regular fa-eye"></i>
+                            <i id="closed" class="fa-jelly-duo fa-regular fa-eye-slash"></i>
+                        </button>
+                        <input class="text-box" name="senha" type="password" placeholder="Insira sua senha" required
+                               pattern=".{8,}">
+                    </div>
                 </div>
 
                 <div class="input-container">
-                    <p class="required">Validar identidade</p>
-                    <input class="text-box" name="palavra" type="text" placeholder="Insira sua palavra-chave" required>
+                    <p class="required">Confirmar senha</p>
+                    <input class="text-box" type="password" placeholder="Insira sua senha novamente" required>
                 </div>
             </div>
 

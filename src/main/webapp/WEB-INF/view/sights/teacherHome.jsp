@@ -1,3 +1,8 @@
+<%@ page import="com.domdiogo.model.AlunoEntity" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.domdiogo.repository.NotaRepository" %>
+<%@ page import="com.domdiogo.model.NotaEntity" %>
+<%@ page import="com.domdiogo.repository.AlunoRepository" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -19,11 +24,14 @@
 </head>
 
 <%
-    List<AlunoEntity> listAlunos = (List<AlunoEntity>) request.getAttribute("listaAlunos");
+    AlunoRepository alunoRepository = new AlunoRepository();
+    List<AlunoEntity> listAlunos = alunoRepository.read();
+
+    String nome = (String) session.getAttribute("nome");
 %>
 
 <body>
-    <aside id="sidebar"> <!-- Position fixed ! -->
+    <aside id="sidebar">
         <ul>
             <div>
                 <li id="menu-icon-container">
@@ -77,7 +85,7 @@
             <main>
                 <div id="front-desk">
                     <div class="castle" id="welcome">
-                        <h2>Olá Kesler!</h2>
+                        <h2>Olá <%=nome%>!</h2>
                         <p>Bem vindo de volta!</p>
                     </div>
                     <div class="general-statistic">
@@ -136,6 +144,7 @@
                                     <tr>
                                         <th>Matrícula</th>
                                         <th>Estudante</th>
+                                        <th>Turma</th>
                                         <th>N1'</th>
                                         <th>N2'</th>
                                         <th>Média Final<img class="info" title="(N1' + N2') / 2"
@@ -145,15 +154,17 @@
                                 </thead>
                                 <tbody>
                                     <%
-                                        for (AlunoEntity i : listAlunos) {
+                                        for (AlunoEntity aluno : listAlunos) {
+                                            NotaEntity nota = new NotaRepository().findByMatricula(aluno.getMatricula());
                                     %>
                                     <tr>
-                                        <td><%=i.getMatricula()></td>
-                                        <td><%=i.getNome()></td>
-                                        <td></td>
-                                        <td><input name="n2" type="text"></td>
-                                        <td class="appr"></td>
-                                        <td class="situation"><span class="approved">Aprovado</span></td>
+                                        <td><%=aluno.getMatricula()%></td>
+                                        <td><%=aluno.getNome()%></td>
+                                        <td><%=aluno.getTurma() == null ? "Não alocado" : aluno.getTurma()%></td>
+                                        <td><%=nota.getN1()%></td>
+                                        <td><%=nota.getN2()%></td>
+                                        <td class=<%=nota.getMedia() <= 7 ? "appr" : "repr"%>><%=nota.getMedia()%></td>
+                                        <td class="situation"><span <%=nota.getMedia() <= 7 ? "approved" : "reproved"%>><%=nota.getMedia() <= 7 ? "Aprovado" : "Reprovado"%></span></td>
                                     </tr>
                                     <%
                                         }
@@ -207,7 +218,7 @@
     <div id="popup-grades" class="popup" popover="auto">
         <!-- Apesar de cada table ter um símbolo de nota específico, o POPUP de notas será único -->
         <h1>Gerenciar notas</h1>
-        <form action="" method="">
+        <form>
             <div class="input-major">
                 <div class="email input-container">
                     <p class="required">Aluno</p>

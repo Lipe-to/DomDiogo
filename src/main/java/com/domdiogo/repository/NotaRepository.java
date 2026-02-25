@@ -13,6 +13,33 @@ import java.util.List;
 
 public class NotaRepository {
 
+    public NotaEntity findByMatricula(int matricula) {
+        String query = "select * from nota where matricula_aluno = ?";
+        NotaEntity notaEntity = null;
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        Connection connection = connectionFactory.connect();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, matricula);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                notaEntity = new NotaEntity(
+                        resultSet.getInt("id"),
+                        resultSet.getDouble("n1"),
+                        resultSet.getDouble("n2"),
+                        resultSet.getDouble("media"),
+                        resultSet.getInt("id_disciplina"),
+                        resultSet.getInt("matricula_aluno")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            connectionFactory.disconnect(connection);
+        }
+        return notaEntity;
+    }
+
     public List<NotaEntity> readAll() {
         List<NotaEntity> listaNotas = new ArrayList<>();
         String query = "SELECT * FROM nota";
