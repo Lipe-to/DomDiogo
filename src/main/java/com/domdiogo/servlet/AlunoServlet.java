@@ -112,20 +112,6 @@ public class AlunoServlet extends HttpServlet {
                 redirect = "/WEB-INF/home.jsp";
                 break;
 
-            case "validarPalavra":
-                Status validarStatus = repository.validarPalavra(request.getParameter("usuario"), request.getParameter("palavra"));
-                if (validarStatus == Status.SUCCESS) {
-                    ServletHelper.configureStatus(request, "Palavra validada com sucesso!", StatusColor.GREEN);
-                    redirect = "/WEB-INF/home.jsp";
-                } else if (validarStatus == Status.NOT_FOUND) {
-                    ServletHelper.configureStatus(request, "Palavra incorreta.", StatusColor.RED);
-                    redirect = "/pages/login/forgot-password.jsp";
-                } else {
-                    ServletHelper.configureStatus(request, "Erro interno ao validar palavra.", StatusColor.RED);
-                    redirect = "/pages/login/forgot-password.jsp";
-                }
-                break;
-
             default:
                 ServletHelper.configureStatus(request, "Ação inválida.", StatusColor.RED);
                 redirect = "/WEB-INF/home.jsp";
