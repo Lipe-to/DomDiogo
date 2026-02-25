@@ -1,3 +1,6 @@
+<%@ page import="com.domdiogo.repository.AlunoRepository" %>
+<%@ page import="com.domdiogo.model.AlunoEntity" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -17,6 +20,14 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/variables.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font.css">
 </head>
+
+<%
+    AlunoRepository alunoRepository = new AlunoRepository();
+    List<AlunoEntity> listAlunos = alunoRepository.read();
+
+    String nome = (String) session.getAttribute("nome");
+    String matricula = (String) session.getAttribute("matricula");
+%>
 
 <body>
     <aside id="sidebar"> <!-- Position fixed ! -->
@@ -67,7 +78,7 @@
             <main>
                 <div id="front-desk">
                     <div class="castle" id="welcome">
-                        <h2>Olá Kesler!</h2>
+                        <h2>Olá <%=nome%>!</h2>
                         <p>Bem vindo de volta!</p>
                     </div>
                     <div class="general-statistic">
@@ -132,6 +143,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <%
+                                        for (AlunoEntity aluno : listAlunos) {
+                                            NotaEntity nota = new NotaRepository().findByMatricula(aluno.getMatricula());
+                                    %>
                                     <tr>
                                         <td>Matemática</td>
                                         <td>8,5</td>
@@ -139,48 +154,9 @@
                                         <td class="appr">8</td>
                                         <td class="situation"><span class="approved">Aprovado</span></td>
                                     </tr>
-                                    <tr>
-                                        <td>Português</td>
-                                        <td>6</td>
-                                        <td>6,5</td>
-                                        <td class="repr">6</td>
-                                        <td class="situation"><span class="failed">Reprovado</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Física</td>
-                                        <td>7</td>
-                                        <td>9</td>
-                                        <td class="appr">8</td>
-                                        <td class="situation"><span class="approved">Aprovado</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Química</td>
-                                        <td>5,5</td>
-                                        <td>7</td>
-                                        <td class="repr">6</td>
-                                        <td class="situation"><span class="failed">Reprovado</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>História</td>
-                                        <td>9</td>
-                                        <td>8</td>
-                                        <td class="appr">8,5</td>
-                                        <td class="situation"><span class="approved">Aprovado</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Geografia</td>
-                                        <td>6</td>
-                                        <td>7</td>
-                                        <td class="appr">7</td>
-                                        <td class="situation"><span class="approved">Aprovado</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Biologia</td>
-                                        <td>4</td>
-                                        <td>6</td>
-                                        <td class="repr">5</td>
-                                        <td class="situation"><span class="failed">Reprovado</span></td>
-                                    </tr>
+                                    <%
+                                        }
+                                    %>
                                 </tbody>
                             </table>
                         </div>
