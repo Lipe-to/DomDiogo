@@ -58,5 +58,7 @@ public class NotaEntity {
         return this.matriculaAluno;
     }
 
-
+    public String getNomeDisciplina() {
+        return this.nomeDisciplina;
+    }
 }

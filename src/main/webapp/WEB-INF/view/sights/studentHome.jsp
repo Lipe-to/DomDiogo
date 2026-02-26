@@ -149,11 +149,11 @@
                                         for (NotaEntity nota : notaRepository.findByMatricula(matricula)) {
                                     %>
                                     <tr>
-                                        <td><%=nota.%></td>
-                                        <td>8,5</td>
-                                        <td>7,5</td>
-                                        <td class="appr">8</td>
-                                        <td class="situation"><span class="approved">Aprovado</span></td>
+                                        <td><%=nota.getNomeDisciplina()%></td>
+                                        <td><%=nota.getN1()%></td>
+                                        <td><%=nota.getN2()%></td>
+                                        <td><%=nota.getMedia()%></td>
+                                        <td class="situation"><span class="approved">ds</span></td>
                                     </tr>
                                     <%
                                         }
@@ -188,7 +188,7 @@
     <div id="popup-grades" class="popup" popover="auto">
         <!-- Apesar de cada table ter um símbolo de nota específico, o POPUP de notas será único -->
         <h1>Gerenciar notas</h1>
-        <form action="" method="">
+        <form>
             <div class="input-major">
                 <div class="email input-container">
                     <p class="required">Aluno</p>

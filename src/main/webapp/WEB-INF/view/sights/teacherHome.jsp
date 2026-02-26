@@ -28,6 +28,7 @@
     List<AlunoEntity> listAlunos = alunoRepository.read();
 
     String nome = (String) session.getAttribute("nome");
+    int idProfessor = (int) session.getAttribute("idProfessor");
 %>
 
 <body>
@@ -156,7 +157,7 @@
                                     <%
                                         NotaRepository notaRepository = new NotaRepository();
                                         for (AlunoEntity aluno : listAlunos) {
-                                            for (NotaEntity nota : notaRepository.findByMatricula(aluno.getMatricula())) {
+                                            for (NotaEntity nota : notaRepository.findByProfessor(idProfessor)) {
                                     %>
                                     <tr>
                                         <td><%=aluno.getMatricula()%></td>
