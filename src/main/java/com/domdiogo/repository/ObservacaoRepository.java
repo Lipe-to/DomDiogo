@@ -3,6 +3,7 @@ package com.domdiogo.repository;
 import com.domdiogo.ConnectionFactory;
 import com.domdiogo.model.ObservacaoEntity;
 import com.domdiogo.model.Status;
+import com.domdiogo.model.ColorPalette;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,9 +22,11 @@ public class ObservacaoRepository {
             while (resultSet.next()) {
                 ObservacaoEntity observacaoEntity = new ObservacaoEntity(
                         resultSet.getInt("id"),
+                        resultSet.getString("titulo"),
                         resultSet.getInt("matricula_aluno"),
                         resultSet.getInt("id_professor"),
-                        resultSet.getString("observacao")
+                        resultSet.getString("observacao"),
+                        ColorPalette.valueOf(resultSet.getString("cor"))
                 );
                 listaObservacoes.add(observacaoEntity);
             }
@@ -36,14 +39,16 @@ public class ObservacaoRepository {
     }
 
     public Status create(ObservacaoEntity observacaoEntity) {
-        String query = "insert into observacao (matricula_aluno, id_professor, observacao) values (?, ?, ?)";
+        String query = "insert into observacao (titulo, matricula_aluno, id_professor, observacao, cor) values (?, ?, ?, ?, ?)";
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, observacaoEntity.getMatriculaAluno());
-            preparedStatement.setInt(2, observacaoEntity.getIdProfessor());
-            preparedStatement.setString(3, observacaoEntity.getObservacao());
+            preparedStatement.setString(1, observacaoEntity.getTitulo());
+            preparedStatement.setInt(2, observacaoEntity.getMatriculaAluno());
+            preparedStatement.setInt(3, observacaoEntity.getIdProfessor());
+            preparedStatement.setString(4, observacaoEntity.getObservacao());
+            preparedStatement.setString(5, observacaoEntity.getCor().name());
 
             int rows = preparedStatement.executeUpdate();
             if (rows > 0) {
@@ -59,13 +64,15 @@ public class ObservacaoRepository {
     }
 
     public Status update(ObservacaoEntity observacaoEntity) {
-        String query = "update observacao set observacao = ? where id = ?";
+        String query = "update observacao set titulo = ?, observacao = ?, cor = ? where id = ?";
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, observacaoEntity.getObservacao());
-            preparedStatement.setInt(2, observacaoEntity.getId());
+            preparedStatement.setString(1, observacaoEntity.getTitulo());
+            preparedStatement.setString(2, observacaoEntity.getObservacao());
+            preparedStatement.setString(3, observacaoEntity.getCor().name());
+            preparedStatement.setInt(4, observacaoEntity.getId());
 
             int rows = preparedStatement.executeUpdate();
             if (rows > 0) {
@@ -114,9 +121,11 @@ public class ObservacaoRepository {
             if (resultSet.next()) {
                 observacaoEntity = new ObservacaoEntity(
                         resultSet.getInt("id"),
+                        resultSet.getString("titulo"),
                         resultSet.getInt("matricula_aluno"),
                         resultSet.getInt("id_professor"),
-                        resultSet.getString("observacao")
+                        resultSet.getString("observacao"),
+                        ColorPalette.valueOf(resultSet.getString("cor"))
                 );
             }
         } catch (SQLException e) {
@@ -139,9 +148,39 @@ public class ObservacaoRepository {
             while (resultSet.next()) {
                 ObservacaoEntity observacaoEntity = new ObservacaoEntity(
                         resultSet.getInt("id"),
+                        resultSet.getString("titulo"),
                         resultSet.getInt("matricula_aluno"),
                         resultSet.getInt("id_professor"),
-                        resultSet.getString("observacao")
+                        resultSet.getString("observacao"),
+                        ColorPalette.valueOf(resultSet.getString("cor"))
+                );
+                listaObservacoes.add(observacaoEntity);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            connectionFactory.disconnect(connection);
+        }
+        return listaObservacoes;
+    }
+
+    public List<ObservacaoEntity> findByProfessor(int idProfessor) {
+        String query = "select * from observacao where id_professor = ?";
+        List<ObservacaoEntity> listaObservacoes = new ArrayList<>();
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        Connection connection = connectionFactory.connect();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, idProfessor);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                ObservacaoEntity observacaoEntity = new ObservacaoEntity(
+                        resultSet.getInt("id"),
+                        resultSet.getString("titulo"),
+                        resultSet.getInt("matricula_aluno"),
+                        resultSet.getInt("id_professor"),
+                        resultSet.getString("observacao"),
+                        ColorPalette.valueOf(resultSet.getString("cor"))
                 );
                 listaObservacoes.add(observacaoEntity);
             }
