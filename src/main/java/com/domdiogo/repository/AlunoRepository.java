@@ -90,7 +90,9 @@ public class AlunoRepository {
         Connection connection = connectionFactory.connect();
         try {
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setDouble(1, matricula);
+            for (int i = 1; i <= 6; i++) {
+                ps.setInt(1, matricula);
+            }
             int rows = ps.executeUpdate();
             if (rows > 0) {
                 return Status.SUCCESS;
