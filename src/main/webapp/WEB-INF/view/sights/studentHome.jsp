@@ -1,6 +1,8 @@
 <%@ page import="com.domdiogo.repository.AlunoRepository" %>
 <%@ page import="com.domdiogo.model.AlunoEntity" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.domdiogo.repository.NotaRepository" %>
+<%@ page import="com.domdiogo.model.NotaEntity" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -22,11 +24,11 @@
 </head>
 
 <%
-    AlunoRepository alunoRepository = new AlunoRepository();
-    List<AlunoEntity> listAlunos = alunoRepository.read();
-
     String nome = (String) session.getAttribute("nome");
-    String matricula = (String) session.getAttribute("matricula");
+    int matricula = (int) session.getAttribute("matricula");
+
+    NotaRepository notaRepository = new NotaRepository();
+    List<NotaEntity> notas = notaRepository.findByMatricula(matricula);
 %>
 
 <body>
@@ -144,11 +146,10 @@
                                 </thead>
                                 <tbody>
                                     <%
-                                        for (AlunoEntity aluno : listAlunos) {
-                                            NotaEntity nota = new NotaRepository().findByMatricula(aluno.getMatricula());
+                                        for (NotaEntity nota : notaRepository.findByMatricula(matricula)) {
                                     %>
                                     <tr>
-                                        <td>Matemática</td>
+                                        <td><%=nota.%></td>
                                         <td>8,5</td>
                                         <td>7,5</td>
                                         <td class="appr">8</td>
@@ -168,41 +169,9 @@
                     <select class="select-box">
                         <option value="">Todos os professores</option>
                         <option value="">Daniel Lima</option>
-                        <option value="">Kesler Santos</option>
-                        <option value="">Mariana Lavinia</option>
-                        <option value="">David Santos</option>
                     </select>
 
                     <div class="card-container">
-                        <div class="card">
-                            <div>
-                                <h2>Análise individual</h2>
-                                <p>realizada por Daniel Alves</p>
-                            </div>
-                            <button class="button">Ver detalhes</button>
-                        </div>
-
-                        <div class="card">
-                            <div>
-                                <h2>Análise individual</h2>
-                                <p>realizada por Daniel Alves</p>
-                            </div>
-                            <button class="button">Ver detalhes</button>
-                        </div>
-                        <div class="card">
-                            <div>
-                                <h2>Análise individual</h2>
-                                <p>realizada por Daniel Alves</p>
-                            </div>
-                            <button class="button">Ver detalhes</button>
-                        </div>
-                        <div class="card">
-                            <div>
-                                <h2>Análise individual</h2>
-                                <p>realizada por Daniel Alves</p>
-                            </div>
-                            <button class="button">Ver detalhes</button>
-                        </div>
                         <div class="card">
                             <div>
                                 <h2>Análise individual</h2>

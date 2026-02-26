@@ -91,7 +91,7 @@ public class AlunoRepository {
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             for (int i = 1; i <= 6; i++) {
-                ps.setInt(1, matricula);
+                ps.setInt(i, matricula);
             }
             int rows = ps.executeUpdate();
             if (rows > 0) {

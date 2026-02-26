@@ -154,8 +154,9 @@
                                 </thead>
                                 <tbody>
                                     <%
+                                        NotaRepository notaRepository = new NotaRepository();
                                         for (AlunoEntity aluno : listAlunos) {
-                                            NotaEntity nota = new NotaRepository().findByMatricula(aluno.getMatricula());
+                                            for (NotaEntity nota : notaRepository.findByMatricula(aluno.getMatricula())) {
                                     %>
                                     <tr>
                                         <td><%=aluno.getMatricula()%></td>
@@ -167,6 +168,7 @@
                                         <td class="situation"><span <%=nota.getMedia() <= 7 ? "approved" : "reproved"%>><%=nota.getMedia() <= 7 ? "Aprovado" : "Reprovado"%></span></td>
                                     </tr>
                                     <%
+                                            }
                                         }
                                     %>
                                 </tbody>
@@ -218,7 +220,7 @@
     <div id="popup-grades" class="popup" popover="auto">
         <!-- Apesar de cada table ter um símbolo de nota específico, o POPUP de notas será único -->
         <h1>Gerenciar notas</h1>
-        <form>
+        <form action="${pageContext.request.contextPath}/nota?action=readAll" method="post">
             <div class="input-major">
                 <div class="email input-container">
                     <p class="required">Aluno</p>
@@ -229,10 +231,6 @@
 
                         <optgroup label="1° Ano TECH">
                             <option value="">Nisflei Santos</option>
-                            <option value="">Jotaro Kujo</option>
-                            <option value="">Viviane Moreira</option>
-                            <option value="">Marcelo Grilo</option>
-                            <option value="">Davi Silva</option>
                         </optgroup>
                     </select>
                 </div>
