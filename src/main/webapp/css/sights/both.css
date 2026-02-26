@@ -80,6 +80,7 @@ main .select-box {
 
 #grades {
     background-color: var(--white);
+    /*max-height: 500px;*/
 }
 
 main .select-box {
@@ -160,6 +161,10 @@ table td input {
 .table-wrap {
     max-height: 300px;
     overflow-y: auto;
+}
+
+.table-wrap:has(#report-card) {
+    max-height: none !important;
 }
 
 .table-container, .card-container {
