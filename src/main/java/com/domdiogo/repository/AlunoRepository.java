@@ -85,12 +85,14 @@ public class AlunoRepository {
     }
 
     public Status createNotas(int matricula) {
-        String query = "insert into nota (matricula_aluno) values (?)";
+        String query = "insert into nota (matricula_aluno, id_disciplina) values (?, 1), (?, 2), (?, 3), (?, 4), (?, 5), (?, 6)";
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
         try {
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setDouble(1, matricula);
+            for (int i = 1; i <= 6; i++) {
+                ps.setInt(i, matricula);
+            }
             int rows = ps.executeUpdate();
             if (rows > 0) {
                 return Status.SUCCESS;

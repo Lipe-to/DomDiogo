@@ -1,3 +1,8 @@
+<%@ page import="com.domdiogo.repository.AlunoRepository" %>
+<%@ page import="com.domdiogo.model.AlunoEntity" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.domdiogo.repository.NotaRepository" %>
+<%@ page import="com.domdiogo.model.NotaEntity" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -17,6 +22,14 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/variables.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font.css">
 </head>
+
+<%
+    String nome = (String) session.getAttribute("nome");
+    int matricula = (int) session.getAttribute("matricula");
+
+    NotaRepository notaRepository = new NotaRepository();
+    List<NotaEntity> notas = notaRepository.findByMatricula(matricula);
+%>
 
 <body>
     <aside id="sidebar"> <!-- Position fixed ! -->
@@ -67,7 +80,7 @@
             <main>
                 <div id="front-desk">
                     <div class="castle" id="welcome">
-                        <h2>Olá Kesler!</h2>
+                        <h2>Olá <%=nome%>!</h2>
                         <p>Bem vindo de volta!</p>
                     </div>
                     <div class="general-statistic">
@@ -132,55 +145,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <%
+                                        for (NotaEntity nota : notaRepository.findByMatricula(matricula)) {
+                                    %>
                                     <tr>
-                                        <td>Matemática</td>
-                                        <td>8,5</td>
-                                        <td>7,5</td>
-                                        <td class="appr">8</td>
-                                        <td class="situation"><span class="approved">Aprovado</span></td>
+                                        <td><%=nota.getNomeDisciplina()%></td>
+                                        <td><%=nota.getN1()%></td>
+                                        <td><%=nota.getN2()%></td>
+                                        <td><%=nota.getMedia()%></td>
+                                        <td class="situation"><span class="approved">ds</span></td>
                                     </tr>
-                                    <tr>
-                                        <td>Português</td>
-                                        <td>6</td>
-                                        <td>6,5</td>
-                                        <td class="repr">6</td>
-                                        <td class="situation"><span class="failed">Reprovado</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Física</td>
-                                        <td>7</td>
-                                        <td>9</td>
-                                        <td class="appr">8</td>
-                                        <td class="situation"><span class="approved">Aprovado</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Química</td>
-                                        <td>5,5</td>
-                                        <td>7</td>
-                                        <td class="repr">6</td>
-                                        <td class="situation"><span class="failed">Reprovado</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>História</td>
-                                        <td>9</td>
-                                        <td>8</td>
-                                        <td class="appr">8,5</td>
-                                        <td class="situation"><span class="approved">Aprovado</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Geografia</td>
-                                        <td>6</td>
-                                        <td>7</td>
-                                        <td class="appr">7</td>
-                                        <td class="situation"><span class="approved">Aprovado</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Biologia</td>
-                                        <td>4</td>
-                                        <td>6</td>
-                                        <td class="repr">5</td>
-                                        <td class="situation"><span class="failed">Reprovado</span></td>
-                                    </tr>
+                                    <%
+                                        }
+                                    %>
                                 </tbody>
                             </table>
                         </div>
@@ -192,41 +169,9 @@
                     <select class="select-box">
                         <option value="">Todos os professores</option>
                         <option value="">Daniel Lima</option>
-                        <option value="">Kesler Santos</option>
-                        <option value="">Mariana Lavinia</option>
-                        <option value="">David Santos</option>
                     </select>
 
                     <div class="card-container">
-                        <div class="card">
-                            <div>
-                                <h2>Análise individual</h2>
-                                <p>realizada por Daniel Alves</p>
-                            </div>
-                            <button class="button">Ver detalhes</button>
-                        </div>
-
-                        <div class="card">
-                            <div>
-                                <h2>Análise individual</h2>
-                                <p>realizada por Daniel Alves</p>
-                            </div>
-                            <button class="button">Ver detalhes</button>
-                        </div>
-                        <div class="card">
-                            <div>
-                                <h2>Análise individual</h2>
-                                <p>realizada por Daniel Alves</p>
-                            </div>
-                            <button class="button">Ver detalhes</button>
-                        </div>
-                        <div class="card">
-                            <div>
-                                <h2>Análise individual</h2>
-                                <p>realizada por Daniel Alves</p>
-                            </div>
-                            <button class="button">Ver detalhes</button>
-                        </div>
                         <div class="card">
                             <div>
                                 <h2>Análise individual</h2>
@@ -243,7 +188,7 @@
     <div id="popup-grades" class="popup" popover="auto">
         <!-- Apesar de cada table ter um símbolo de nota específico, o POPUP de notas será único -->
         <h1>Gerenciar notas</h1>
-        <form action="" method="">
+        <form>
             <div class="input-major">
                 <div class="email input-container">
                     <p class="required">Aluno</p>

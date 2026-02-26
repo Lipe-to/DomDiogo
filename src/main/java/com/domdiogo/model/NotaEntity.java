@@ -7,14 +7,25 @@ public class NotaEntity {
     private double media;
     private int idDisciplina;
     private int matriculaAluno;
+    private String nomeDisciplina;
 
-    public NotaEntity(int id, double n1, double n2, double media, int idDisciplina, int matriculaAluno){
+    public NotaEntity(int id, double n1, double n2, double media, int idDisciplina, int matriculaAluno) {
         this.id = id;
         this.n1 = n1;
         this.n2 = n2;
         this.media = media;
         this.idDisciplina = idDisciplina;
         this.matriculaAluno = matriculaAluno;
+    }
+
+    public NotaEntity(int id, double n1, double n2, double media, int idDisciplina, int matriculaAluno, String nomeDisciplina) {
+        this.id = id;
+        this.n1 = n1;
+        this.n2 = n2;
+        this.media = media;
+        this.idDisciplina = idDisciplina;
+        this.matriculaAluno = matriculaAluno;
+        this.nomeDisciplina = nomeDisciplina;
     }
 
     public NotaEntity(int id, double n1, double n2) {
@@ -47,5 +58,7 @@ public class NotaEntity {
         return this.matriculaAluno;
     }
 
-
+    public String getNomeDisciplina() {
+        return this.nomeDisciplina;
+    }
 }
