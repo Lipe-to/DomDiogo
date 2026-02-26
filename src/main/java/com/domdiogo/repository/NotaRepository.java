@@ -15,7 +15,9 @@ public class NotaRepository {
 
     public List<NotaEntity> findByMatricula(int matricula) {
         List<NotaEntity> listaNotas = new ArrayList<>();
-        String query = "select * from nota where matricula_aluno = ?";
+        String query = "select n.*, d.nome as disciplina_nome " +
+                "from nota n join disciplina d on n.id_disciplina = d.id " +
+                "where n.matricula_aluno = ?";
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
 
@@ -31,7 +33,8 @@ public class NotaRepository {
                         resultSet.getDouble("n2"),
                         resultSet.getDouble("media"),
                         resultSet.getInt("id_disciplina"),
-                        resultSet.getInt("matricula_aluno")
+                        resultSet.getInt("matricula_aluno"),
+                        resultSet.getString("disciplina_nome")
                 );
                 listaNotas.add(notaEntity);
             }
@@ -46,7 +49,8 @@ public class NotaRepository {
 
     public List<NotaEntity> readAll() {
         List<NotaEntity> listaNotas = new ArrayList<>();
-        String query = "SELECT * FROM nota";
+        String query = "select n.*, d.nome as disciplina_nome " +
+                "from nota n join disciplina d on n.id_disciplina = d.id";
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
 
@@ -61,7 +65,8 @@ public class NotaRepository {
                         rs.getDouble("n2"),
                         rs.getDouble("media"),
                         rs.getInt("id_disciplina"),
-                        rs.getInt("matricula_aluno")
+                        rs.getInt("matricula_aluno"),
+                        rs.getString("disciplina_nome")
                 );
                 listaNotas.add(nota);
             }
@@ -76,8 +81,9 @@ public class NotaRepository {
 
     public List<NotaEntity> findByProfessor(int idProfessor) {
         List<NotaEntity> listaNotas = new ArrayList<>();
-        String query = "select n.* from nota n inner join disciplina d on n.id_disciplina = d.id where d.id_professor = ?";
-
+        String query = "select n.*, d.nome as disciplina_nome " +
+                "from nota n join disciplina d on n.id_disciplina = d.id " +
+                "where d.id_professor = ?";
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
 
@@ -93,7 +99,8 @@ public class NotaRepository {
                         rs.getDouble("n2"),
                         rs.getDouble("media"),
                         rs.getInt("id_disciplina"),
-                        rs.getInt("matricula_aluno")
+                        rs.getInt("matricula_aluno"),
+                        rs.getString("disciplina_nome")
                 );
                 listaNotas.add(nota);
             }
@@ -107,7 +114,7 @@ public class NotaRepository {
     }
 
     public Status update(NotaEntity nota) {
-        String query = "UPDATE nota SET n1 = ?, n2 = ? WHERE id = ?";
+        String query = "update nota set n1 = ?, n2 = ? where id = ?";
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
 
@@ -131,7 +138,7 @@ public class NotaRepository {
     }
 
     public Status zerarNota(int id) {
-        String query = "UPDATE nota SET n1 = 0, n2 = 0 WHERE id = ?";
+        String query = "update nota set n1 = 0, n2 = 0 where id = ?";
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
 
