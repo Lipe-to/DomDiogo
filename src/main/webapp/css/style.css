@@ -71,10 +71,6 @@ a {
     max-width: 200px;
 }
 
-#closed {
-    display: none;
-}
-
 .select-box {
     outline: none;
     appearance: none;
@@ -104,7 +100,7 @@ a {
 }
 
 .required:has(.info)::after {
-    margin-left: 1.5%;
+    margin-left: 0;
 }
 
 .tooltip {
@@ -169,7 +165,7 @@ a {
 }
 
 .msg-identity::after {
-    content: "A palavra-chave é um meio para recuperar sua senha.";
+    content: "A palavra-chave é um meio para recuperar sua senha. Coloque uma palavra que você irá lembrar.";
 }
 
 /* Por padrão, será cinza

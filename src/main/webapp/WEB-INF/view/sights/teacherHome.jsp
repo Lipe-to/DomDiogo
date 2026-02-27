@@ -183,6 +183,7 @@
 
                 <div id="observations">
                     <h1>Observações</h1>
+                    <button></button>
                     <select class="select-box">
                         <option value="">Todas as turmas</option>
                         <option value="">1°E TECH</option>
