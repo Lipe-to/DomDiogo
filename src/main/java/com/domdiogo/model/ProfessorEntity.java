@@ -34,4 +34,20 @@ public class ProfessorEntity {
     public String getPalavra() {
         return this.palavra;
     }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public void setSenha(String novaSenh) {
+        this.senha = novaSenh;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setPalavra(String palavra) {
+        this.palavra = palavra;
+    }
 }

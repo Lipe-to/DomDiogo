@@ -251,7 +251,7 @@ public class AlunoRepository {
     }
 
     public Status validarPalavra(String usuario, String palavra) {
-        String query = "select palavra from professor where usuario = ?";
+        String query = "select palavra from aluno where usuario = ?";
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
         try {

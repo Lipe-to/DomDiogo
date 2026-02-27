@@ -78,18 +78,108 @@ public class LoginServlet extends HttpServlet {
                 break;
 
             case "validarPalavra":
-                Status validarStatus = professorRepository.validarPalavra(
-                        request.getParameter("usuario"),
-                        request.getParameter("palavra")
-                );
-                if (validarStatus == Status.SUCCESS) {
-                    ServletHelper.configureStatus(request, "Palavra validada com sucesso!", StatusColor.GREEN);
-                } else if (validarStatus == Status.NOT_FOUND) {
-                    ServletHelper.configureStatus(request, "Palavra inválida.", StatusColor.RED);
+                String usuarioValidacao = request.getParameter("usuario");
+                String palavraValidacao = request.getParameter("palavra");
+
+                if (usuarioValidacao.contains("@")) {
+                    // VALIDAR PALAVRA - ALUNO
+                    Status validarStatusAluno = alunoRepository.validarPalavra(usuarioValidacao, palavraValidacao);
+
+                    if (validarStatusAluno == Status.SUCCESS) {
+                        AlunoEntity alunoValidacao = alunoRepository.findByUsuario(usuarioValidacao);
+                        request.setAttribute("userId", alunoValidacao.getMatricula());
+                        ServletHelper.configureStatus(request, "Palavra validada com sucesso!", StatusColor.GREEN);
+                        redirect = "/WEB-INF/view/login/reset-password.jsp";
+                    } else if (validarStatusAluno == Status.NOT_FOUND) {
+                        ServletHelper.configureStatus(request, "Palavra inválida.", StatusColor.RED);
+                        redirect = "/pages/login/forgot-password.jsp";
+                    } else {
+                        ServletHelper.configureStatus(request, "Erro interno ao validar palavra.", StatusColor.RED);
+                        redirect = "/pages/login/forgot-password.jsp";
+                    }
                 } else {
-                    ServletHelper.configureStatus(request, "Erro interno ao validar palavra.", StatusColor.RED);
+                    // VALIDAR PALAVRA - PROFESSOR
+                    Status validarStatusProfessor = professorRepository.validarPalavra(usuarioValidacao, palavraValidacao);
+
+                    if (validarStatusProfessor == Status.SUCCESS) {
+                        ProfessorEntity professorValidacao = professorRepository.findByUsuario(usuarioValidacao);
+                        request.setAttribute("userId", professorValidacao.getId());
+                        ServletHelper.configureStatus(request, "Palavra validada com sucesso!", StatusColor.GREEN);
+                        redirect = "/WEB-INF/view/login/reset-password.jsp";
+                    } else if (validarStatusProfessor == Status.NOT_FOUND) {
+                        ServletHelper.configureStatus(request, "Palavra ou usuário inválidos.", StatusColor.RED);
+                        redirect = "/pages/login/forgot-password.jsp";
+                    } else {
+                        ServletHelper.configureStatus(request, "Erro interno ao validar palavra.", StatusColor.RED);
+                        redirect = "/pages/login/forgot-password.jsp";
+                    }
                 }
-                redirect = "/WEB-INF/view/sights/teacherHome.jsp";
+                break;
+
+            case "resetPassword":
+                String novaSenh = request.getParameter("senha");
+                String confirmarSenh = request.getParameter("confirmarSenha");
+                String userIdStr = request.getParameter("userId");
+                String novaPalavra = request.getParameter("palavra");
+
+                if (!novaSenh.equals(confirmarSenh)) {
+                    ServletHelper.configureStatus(request, "As senhas não correspondem.", StatusColor.RED);
+                    redirect = "/WEB-INF/view/login/reset-password.jsp";
+                    request.setAttribute("userId", userIdStr);
+                } else {
+                    try {
+                        int userId = Integer.parseInt(userIdStr);
+
+                        // Tentar atualizar como aluno primeiro
+                        AlunoEntity aluno = alunoRepository.findByMatricula(userId);
+
+                        if (aluno != null) {
+                            aluno.setSenha(novaSenh);
+                            // Atualizar palavra-chave apenas se foi fornecida
+                            if (novaPalavra != null && !novaPalavra.trim().isEmpty()) {
+                                aluno.setPalavra(novaPalavra);
+                            }
+                            Status statusAluno = alunoRepository.update(aluno);
+
+                            if (statusAluno == Status.SUCCESS) {
+                                ServletHelper.configureStatus(request, "Senha atualizada com sucesso!", StatusColor.GREEN);
+                                redirect = "/index.jsp";
+                            } else {
+                                ServletHelper.configureStatus(request, "Erro ao atualizar senha.", StatusColor.RED);
+                                redirect = "/WEB-INF/view/login/reset-password.jsp";
+                                request.setAttribute("userId", userIdStr);
+                            }
+                        } else {
+                            // Tentar como professor
+                            ProfessorEntity professor = professorRepository.findById(userId);
+
+                            if (professor != null) {
+                                // É professor
+                                professor.setSenha(novaSenh);
+                                // Atualizar palavra-chave apenas se foi fornecida
+                                if (novaPalavra != null && !novaPalavra.trim().isEmpty()) {
+                                    professor.setPalavra(novaPalavra);
+                                }
+                                Status statusProfessor = professorRepository.update(professor);
+
+                                if (statusProfessor == Status.SUCCESS) {
+                                    ServletHelper.configureStatus(request, "Senha atualizada com sucesso!", StatusColor.GREEN);
+                                    redirect = "/index.jsp";
+                                } else {
+                                    ServletHelper.configureStatus(request, "Erro ao atualizar senha.", StatusColor.RED);
+                                    redirect = "/WEB-INF/view/login/reset-password.jsp";
+                                    request.setAttribute("userId", userIdStr);
+                                }
+                            } else {
+                                ServletHelper.configureStatus(request, "Usuário não encontrado.", StatusColor.RED);
+                                redirect = "/pages/login/index.jsp";
+                            }
+                        }
+                    } catch (NumberFormatException e) {
+                        ServletHelper.configureStatus(request, "ID inválido.", StatusColor.RED);
+                        redirect = "/pages/login/forgot-password.jsp";
+                    }
+                }
                 break;
 
             default:
