@@ -137,7 +137,7 @@
                                 <label for="search-submit"><img src="${pageContext.request.contextPath}/img/svg/search.svg" alt=""></label>
                                 <input class="search-box" type="text" placeholder="Pesquisar por matrícula">
                                 <button title="Filtrar"><img src="${pageContext.request.contextPath}/img/svg/filter.svg" alt="Filtrar"></button>
-                                <button title="Atualizar notas" popovertarget="popup-grades" > <!-- popovertarget="popup-grades" -->
+                                <button title="Atualizar notas" popovertarget="popup-grades"> <!-- popovertarget="popup-grades" -->
                                     <div><img src="${pageContext.request.contextPath}/img/svg/document.svg"><span>Atualizar notas</span></div>
                                 </button>
                             </div>
@@ -183,14 +183,9 @@
 
                 <div id="observations">
                     <h1>Observações</h1>
-                    <button></button>
+                    <button popovertarget="popup-obs">Add Observacao</button>
                     <select class="select-box">
                         <option value="">Todas as turmas</option>
-                        <option value="">1°E TECH</option>
-                        <option value="">1°F TECH</option>
-                        <option value="">1°G TECH</option>
-                        <option value="">1°H TECH</option>
-                        <option value="">1°I TECH</option>
                     </select>
 
                     <div class="card-container">
@@ -208,7 +203,6 @@
                             <button class="button">Ver detalhes</button>
                         </div>
                         <div id="popup-grades" class="popup" popover="auto">
-                            <!-- Apesar de cada table ter um símbolo de nota específico, o POPUP de notas será único -->
                             <h1><%=obs.getTitulo()%></h1>
                             <div>
                                 <div class="input-major">
@@ -249,6 +243,50 @@
                             <option value="">Nisflei Santos</option>
                         </optgroup>
                     </select>
+                </div>
+
+                <div class="input-container">
+                    <p class="required">Matrícula</p>
+                    <input class="text-box" name="" type="text" value="" readonly>
+                </div>
+
+                <div class="input-container">
+                    <p class="required">N1'</p>
+                    <input class="text-box" name="" type="number" min="0" max="10" step="0.1">
+                </div>
+
+                <div class="input-container">
+                    <p class="required">N2'</p>
+                    <input class="text-box" name="" type="number" min="0" max="10" step="0.1">
+                </div>
+
+                <div class="input-container">
+                    <p class="required">Média final</p>
+                    <input class="text-box" name="" type="text" value="" readonly>
+                </div>
+            </div>
+
+            <button class="button" type="submit">Registrar</button>
+        </form>
+    </div>
+
+    <div id="popup-obs" class="popup" popover="auto">
+        <h1>Adicionar Observação</h1>
+        <form action="${pageContext.request.contextPath}/nota?action=readAll" method="post">
+            <div class="input-major">
+                <div class="email input-container">
+                    <p class="required">Aluno</p>
+                    <input list="students-datalist">
+                    <datalist class="text-box" name="idMatricula" id="students-datalist">
+                        <option disabled selected>Selecione um aluno</option>
+                        <%
+                            for (AlunoEntity aluno : listAlunos) {
+                        %>
+                        <option value="<%=aluno.getMatricula()%>"><%=aluno.getNome()%> (<%=aluno.getTurma()%>)</option>
+                        <%
+                            }
+                        %>
+                    </datalist>
                 </div>
 
                 <div class="input-container">

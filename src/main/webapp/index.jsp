@@ -35,9 +35,9 @@
                     <p class="required">Senha</p>
                     <div class="input-holder">
                         <button class="show-password" name="toggle" type="button">
-                            <img id="open" src="img/svg/eye.svg">
-                            <!-- <i id="open" class="fa-jelly-duo fa-regular fa-eye"></i>
-                            <i id="closed" class="fa-jelly-duo fa-regular fa-eye-slash"></i> -->
+                            <img id="open" src="${pageContext.request.contextPath}/img/svg/eye.svg" alt="Mostrar senha">
+                            <img id="closed" style="display: none;"
+                                 src="${pageContext.request.contextPath}/img/svg/eye-crossed.svg" alt="Ocultar senha">
                         </button>
                         <input class="text-box" name="senha" type="password" placeholder="Insira sua senha" required>
                     </div>
