@@ -22,6 +22,7 @@
 <body id="login" style="overflow: hidden;">
     <div class="login-form">
         <h1>Bem vindo de volta!</h1>
+        <p><%=request.getAttribute("statusMessage")%></p>
         <form action="${pageContext.request.contextPath}/login?action=login" method="post">
             <div class="input-major">
                 <div class="email input-container">

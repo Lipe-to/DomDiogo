@@ -150,13 +150,15 @@ public class ProfessorRepository {
             preparedStatement.setString(1, usuario);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                if (resultSet.getString("palavra").equals(palavra)) {
+                String palavraBD = resultSet.getString("palavra");
+                if (palavraBD.equalsIgnoreCase(palavra)) {
                     return Status.SUCCESS;
                 } else {
                     return Status.NOT_FOUND;
                 }
             } else {
-                return Status.NOT_FOUND;            }
+                return Status.NOT_FOUND;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             return Status.INTERNAL_ERROR;

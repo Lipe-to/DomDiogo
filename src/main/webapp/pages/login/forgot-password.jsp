@@ -20,7 +20,10 @@
 <body id="forgot-password">
     <div class="login-form">
         <h1>Recuperar senha</h1>
+        <p><%=request.getAttribute("statusMessage")%></p>
         <form action="${pageContext.request.contextPath}/login?action=validarPalavra" method="post">
+            <input type="hidden" name="action" value="validarPalavra">
+
             <div class="input-major">
                 <div class="email input-container">
                     <p class="required">Usuário</p>
