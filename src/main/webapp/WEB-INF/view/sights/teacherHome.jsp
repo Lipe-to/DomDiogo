@@ -160,7 +160,8 @@
                                     <%
                                         NotaRepository notaRepository = new NotaRepository();
                                         for (AlunoEntity aluno : listAlunos) {
-                                            for (NotaEntity nota : notaRepository.findByProfessor(idProfessor)) {
+                                            int matriculaAluno = aluno.getMatricula();
+                                            for (NotaEntity nota : notaRepository.findByProfessorAndAluno(idProfessor,matriculaAluno )) {
                                     %>
                                     <tr>
                                         <td><%=aluno.getMatricula()%></td>

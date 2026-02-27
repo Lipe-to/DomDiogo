@@ -79,17 +79,18 @@ public class NotaRepository {
         return listaNotas;
     }
 
-    public List<NotaEntity> findByProfessor(int idProfessor) {
+    public List<NotaEntity> findByProfessorAndAluno(int idProfessor, int matriculaAluno) {
         List<NotaEntity> listaNotas = new ArrayList<>();
         String query = "select n.*, d.nome as disciplina_nome " +
                 "from nota n join disciplina d on n.id_disciplina = d.id " +
-                "where d.id_professor = ?";
+                "where d.id_professor = ? and n.matricula_aluno = ?";
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
 
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, idProfessor);
+            ps.setInt(2, matriculaAluno);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
