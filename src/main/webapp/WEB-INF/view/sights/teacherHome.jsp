@@ -161,7 +161,10 @@
                                         NotaRepository notaRepository = new NotaRepository();
                                         for (AlunoEntity aluno : listAlunos) {
                                             int matriculaAluno = aluno.getMatricula();
-                                            for (NotaEntity nota : notaRepository.findByProfessorAndAluno(idProfessor,matriculaAluno )) {
+                                            List<NotaEntity> listaNotas = notaRepository.findByProfessorAndAluno(idProfessor,matriculaAluno);
+                                            for (NotaEntity nota : listaNotas) {
+                                                System.out.println("Oiwgneopi");
+                                                System.out.println(matriculaAluno);
                                     %>
                                     <tr>
                                         <td><%=aluno.getMatricula()%></td>
@@ -169,8 +172,8 @@
                                         <td><%=aluno.getTurma() == null ? "Não alocado" : aluno.getTurma()%></td>
                                         <td><%=nota.getN1()%></td>
                                         <td><%=nota.getN2()%></td>
-                                        <td class=<%=nota.getMedia() <= 7 ? "appr" : "repr"%>><%=nota.getMedia()%></td>
-                                        <td class="situation"><span <%=nota.getMedia() <= 7 ? "approved" : "reproved"%>><%=nota.getMedia() <= 7 ? "Aprovado" : "Reprovado"%></span></td>
+                                        <td class=<%=nota.getMedia() >= 7 ? "appr" : "repr"%>><%=nota.getMedia()%></td>
+                                        <td class="situation"><span <%=nota.getMedia() >= 7 ? "approved" : "reproved"%>><%=nota.getMedia() <= 7 ? "Aprovado" : "Reprovado"%></span></td>
                                     </tr>
                                     <%
                                             }
