@@ -3,6 +3,9 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.domdiogo.repository.NotaRepository" %>
 <%@ page import="com.domdiogo.model.NotaEntity" %>
+<%@ page import="com.domdiogo.model.ObservacaoEntity" %>
+<%@ page import="com.domdiogo.repository.ObservacaoRepository" %>
+<%@ page import="com.domdiogo.repository.ProfessorRepository" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -172,13 +175,40 @@
                     </select>
 
                     <div class="card-container">
-                        <div class="card">
+                        <%
+                            ObservacaoRepository observacaoRepository = new ObservacaoRepository();
+                            ProfessorRepository professorRepository = new ProfessorRepository();
+
+                            for (ObservacaoEntity obs : observacaoRepository.findByMatriculaAluno(matricula)) {
+                        %>
+                        <div style="background-color: <%=obs.getCor().getHex()%>" class="card">
                             <div>
-                                <h2>Análise individual</h2>
-                                <p>realizada por Daniel Alves</p>
+                                <h2><%=obs.getTitulo()%></h2>
+                                <p>realizada por <%=professorRepository.findById(obs.getIdProfessor()).getNome()%></p>
                             </div>
                             <button class="button">Ver detalhes</button>
                         </div>
+                        <div id="popup-grades" class="popup" popover="auto">
+                            <!-- Apesar de cada table ter um símbolo de nota específico, o POPUP de notas será único -->
+                            <h1><%=obs.getTitulo()%></h1>
+                            <div>
+                                <div class="input-major">
+                                    <div class="input-container">
+                                        <p>Professor</p>
+                                        <input class="text-box" type="text" value="<%=professorRepository.findById(obs.getIdProfessor()).getNome()%>" readonly>
+                                    </div>
+
+                                    <div class="input-container">
+                                        <p class="required">Observação</p>
+                                        <input class="text-box" type="text" value="<%=obs.getObservacao()%>">
+                                    </div>
+                                </div>
+                                <button class="button" type="submit">Fechar</button>
+                            </div>
+                        </div>
+                        <%
+                            }
+                        %>
                     </div>
                 </div>
             </main>

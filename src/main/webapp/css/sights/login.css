@@ -105,17 +105,19 @@ body>:first-child {
 .show-password {
     background: none;
     cursor: pointer;
-    opacity: 80%;
+    opacity: 75%;
     border: 0;
 
     color: var(--black);
-    transform: translateX(-90%);
+    transform: translateX(-120%) translateY(2%);
     position: absolute;
-    
+
     font-size: 1.1rem;
 }
 
-.show-password i, .show-password img {
+.show-password i,
+.show-password img {
+    width: 20px;
     display: inline;
 }
 
@@ -125,7 +127,8 @@ body>:first-child {
     color: var(--black);
 }
 
-#sign-up-redirect, #sign-up-redirect>a {
+#sign-up-redirect,
+#sign-up-redirect>a {
     font-size: 0.9rem;
 }
 
@@ -166,61 +169,61 @@ body>:first-child {
     transition: opacity 0.4s ease-in-out;
 }
 
+input.is-valid:valid {
+    border-color: var(--lake-green);
+}
+
+input.is-valid:invalid {
+    border-color: var(--red);
+}
+
 .input-container:has(input:valid) .required::after {
     opacity: 0;
 }
 
-.email::after {
-    content: "Por favor, insira um e-mail válido";
+.email::after,
+#create-password::after,
+#key-word::after {
     font-size: 0.9rem;
     color: var(--red);
-    opacity: 70%;
+    opacity: 90%;
 
-    display: block;
+    display: none;
     margin-top: 1%;
 }
 
-.email::after {
-    display: none;
+.warning:has(input:placeholder-shown)::after,
+.warning:has(input:valid)::after {
+    display: none !important;
 }
 
-.email:has(input:not(:placeholder-shown):invalid)::after {
+.email:has(input:invalid)::after,
+#create-password:has(input:invalid)::after,
+#key-word:has(input:invalid)::after {
     display: block;
 }
 
-@keyframes shake {
-    0%,
-    100% {
-        transform: translateX(0);
-    }
+.email::after {
+    content: "Por favor, insira um e-mail válido";
+}
 
-    25% {
-        transform: translateX(-4px);
-    }
+#create-password::after {
+    content: "A senha deve conter 8 caracteres";
+}
 
-    50% {
-        transform: translateX(4px);
-    }
-
-    75% {
-        transform: translateX(-4px);
-    }
+#key-word::after {
+    content: "A palavra-chave é curta demais";
 }
 
 .validation:not(:placeholder-shown):invalid {
     border-color: var(--red);
 }
 
-/* 
-.email:has(.validation:not(:placeholder-shown):invalid) .validation:invalid {
-  animation: shake 0.2s ease-in-out 2;
-} */
-
 .admin {
     position: absolute;
     bottom: 0;
     left: 0;
-    
+
     opacity: 60%;
     transform: translateX(15%) translateY(-70%);
 }

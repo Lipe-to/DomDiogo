@@ -37,10 +37,10 @@
                     <p class="required">Senha</p>
                     <div class="input-holder">
                         <button class="show-password" name="toggle" type="button">
-                            <i id="open" class="fa-jelly-duo fa-regular fa-eye"></i>
-                            <i id="closed" class="fa-jelly-duo fa-regular fa-eye-slash"></i>
+                            <img id="open" src="${pageContext.request.contextPath}/img/svg/eye.svg">
+                            <img id="closed" style="display: none;" src="${pageContext.request.contextPath}/img/svg/eye-crossed.svg">
                         </button>
-                        <input class="text-box" name="senha" type="password" placeholder="Insira sua senha" required
+                        <input id="create-password" class="validation text-box" name="senha" type="password" placeholder="Insira sua senha" required
                         pattern=".{8,}">
                     </div>
                 </div>
