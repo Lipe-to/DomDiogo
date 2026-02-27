@@ -208,7 +208,6 @@ public class AlunoRepository {
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
         String query = "update aptos set is_matriculado = not is_matriculado where usuario = ?";
-        System.out.println("passou");
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, usuario);
@@ -259,13 +258,14 @@ public class AlunoRepository {
             preparedStatement.setString(1, usuario);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                if (resultSet.getString("palavra").equals(palavra)) {
+                String palavraBD = resultSet.getString("palavra");
+                if (palavraBD != null && palavraBD.equalsIgnoreCase(palavra)) {
                     return Status.SUCCESS;
                 } else {
                     return Status.NOT_FOUND;
                 }
             } else {
-                return Status.INTERNAL_ERROR;
+                return Status.NOT_FOUND;
             }
         } catch (SQLException e) {
             e.printStackTrace();

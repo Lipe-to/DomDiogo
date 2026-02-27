@@ -22,6 +22,7 @@
         <h1>Informe a nova senha</h1>
         <form action="${pageContext.request.contextPath}/login" method="post">
             <input type="hidden" name="action" value="resetPassword">
+            <input type="hidden" name="usuario" value="<%=request.getAttribute("usuario")%>">
             <br>
             <input type="hidden" name="userId" value="${userId}">
 
