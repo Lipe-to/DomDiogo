@@ -9,8 +9,8 @@
 
     <title>Fazer Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-          integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-          crossorigin="anonymous" referrerpolicy="no-referrer" />
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="css/sights/login.css">
 
@@ -20,47 +20,44 @@
 </head>
 
 <body id="login" style="overflow: hidden;">
-<div class="login-form">
-    <h1>Bem vindo de volta!</h1>
-    <p><%=request.getAttribute("statusMessage")%></p>
-
-    <form id="formLogin" action="${pageContext.request.contextPath}/login" method="post">
-        <div class="input-major">
-            <div class="email input-container">
-                <p class="required">Usuário</p>
-                <input class="validation text-box" id="email" name="usuario" type="text" placeholder="Insira seu usuário"
-                       pattern="^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|[a-zA-Z]\.[a-zA-Z])$" required>
-            </div>
-
-            <div class="input-container">
-                <p class="required">Senha</p>
-                <div class="input-holder">
-                    <button class="show-password" name="toggle" type="button">
-                        <img id="open" src="img/svg/eye.svg">
-                    </button>
-                    <input class="text-box" name="senha" type="password" placeholder="Insira sua senha" required>
+    <div class="login-form">
+        <h1>Bem vindo de volta!</h1>
+        <p><%=request.getAttribute("statusMessage")%></p>
+        <form action="${pageContext.request.contextPath}/login?action=login" method="post">
+            <div class="input-major">
+                <div class="email input-container">
+                    <p class="required">Usuário</p>
+                    <input class="validation text-box" id="email" name="usuario" type="text" placeholder="Insira seu usuário"
+                           pattern="^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|[a-zA-Z]\.[a-zA-Z])$" required>
                 </div>
 
-                <div class="forgot-password">
-                    <a href="pages/login/forgot-password.jsp">Esqueceu a senha?</a>
-                </div>
+                <div class="input-container">
+                    <p class="required">Senha</p>
+                    <div class="input-holder">
+                        <button class="show-password" name="toggle" type="button">
+                            <img id="open" src="${pageContext.request.contextPath}/img/svg/eye.svg" alt="Mostrar senha">
+                            <img id="closed" style="display: none;"
+                                 src="${pageContext.request.contextPath}/img/svg/eye-crossed.svg" alt="Ocultar senha">
+                        </button>
+                        <input class="text-box" name="senha" type="password" placeholder="Insira sua senha" required>
+                    </div>
 
-                <button class="button" type="submit" name="action" value="login">Continuar</button>
+                    <div class="forgot-password">
+                        <a href="pages/login/forgot-password.jsp">Esqueceu a senha?</a>
+                    </div>
+
+                    <button class="button" type="submit">Continuar</button>
+                </form>
+
+                <p id="sign-up-redirect">Ainda não possui uma conta?<a href="pages/login/register.jsp">Registrar-se</a>
+                </p>
             </div>
-        </div>
-    </form>
 
-    <p id="sign-up-redirect">Ainda não possui uma conta?<a href="pages/login/register.jsp">Registrar-se</a>
-    </p>
-</div>
+            <div class="admin">
+                <a href=""><img src="img/svg/lock.svg" alt="">Entrar como administrador</a>
+            </div>
+        </body>
 
-<div class="admin">
-    <button type="submit" form="formLogin" name="action" value="loginAdmin" style="background: transparent; border: none; padding: 0; color: inherit; font: inherit; cursor: pointer; display: flex; align-items: center; gap: 5px;">
-        <img src="img/svg/lock.svg" alt="">Entrar como administrador
-    </button>
-</div>
-</body>
+        <script src="js/password.js"></script>
 
-<script src="js/password.js"></script>
-
-</html>
+        </html>

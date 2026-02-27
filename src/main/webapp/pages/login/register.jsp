@@ -24,35 +24,44 @@
             <div class="input-major">
                 <div class="input-container">
                     <p class="required">Nome completo</p>
-                    <input class="text-box" name="nome" type="text" placeholder="Insira seu nome" required>
+                    <input class="text-box" name="nome" type="text"
+                           placeholder="Insira seu nome" required>
                 </div>
 
-                <div class="email input-container">
+                <div class="email input-container warning">
                     <p class="required">Usuário</p>
-                    <input class="validation text-box" id="email" name="usuario" type="email"
-                        placeholder="Insira seu usuário" pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" required>
+                    <input class="validation text-box" id="email" name="usuario" type="email" placeholder="Insira seu usuário"
+                           pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$" required>
                 </div>
 
-                <div class="input-container">
+                <div id="create-password" class="input-container warning">
                     <p class="required">Senha</p>
                     <div class="input-holder">
                         <button class="show-password" name="toggle" type="button">
-                            <img id="open" src="${pageContext.request.contextPath}/img/svg/eye.svg">
-                            <img id="closed" style="display: none;" src="${pageContext.request.contextPath}/img/svg/eye-crossed.svg">
+                            <img id="open" src="${pageContext.request.contextPath}/img/svg/eye.svg" alt="Mostrar senha">
+                            <img id="closed" style="display: none;"
+                                 src="${pageContext.request.contextPath}/img/svg/eye-crossed.svg" alt="Ocultar senha">
                         </button>
-                        <input id="create-password" class="validation text-box" name="senha" type="password" placeholder="Insira sua senha" required
-                        pattern=".{8,}">
+                        <input class="text-box" name="senha" type="password" placeholder="Insira sua senha"
+                               pattern=".{8,}" required>
                     </div>
                 </div>
 
-                <div class="input-container">
+                <div class="input-container is-valid">
                     <p class="required">Confirmar senha</p>
-                    <input class="text-box" type="password" placeholder="Insira sua senha novamente" required>
+                    <input class="text-box" type="password" placeholder="Insira sua senha novamente"
+                           required>
                 </div>
 
-                <div class="input-container">
-                    <p class="required">Comprovação de identidade <span class="tooltip msg-identity"><img class="info" src="../../img/svg/info.svg"></span></p>
-                    <input class="text-box" name="palavra" type="text" placeholder="Insira uma palavra-chave" required>
+                <div id="key-word" class="input-container warning">
+                    <p class="required">
+                        Comprovação de identidade
+                        <span class="tooltip msg-identity">
+                            <img class="info" src="${pageContext.request.contextPath}/img/svg/info.svg" alt="Informação">
+                        </span>
+                    </p>
+                    <input class="text-box" name="palavra" type="text" placeholder="Insira uma palavra-chave"
+                           pattern=".{3,}" required>
                 </div>
             </div>
 
