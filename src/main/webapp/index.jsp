@@ -41,24 +41,23 @@
                         </button>
                         <input class="text-box" name="senha" type="password" placeholder="Insira sua senha" required>
                     </div>
-                </div>
+
+                    <div class="forgot-password">
+                        <a href="pages/login/forgot-password.jsp">Esqueceu a senha?</a>
+                    </div>
+
+                    <button class="button" type="submit">Continuar</button>
+                </form>
+
+                <p id="sign-up-redirect">Ainda não possui uma conta?<a href="pages/login/register.jsp">Registrar-se</a>
+                </p>
             </div>
 
-            <div class="forgot-password">
-                <a href="pages/login/forgot-password.jsp">Esqueceu a senha?</a>
+            <div class="admin">
+                <a href=""><img src="img/svg/lock.svg" alt="">Entrar como administrador</a>
             </div>
-            
-            <button class="button" type="submit">Continuar</button>
-        </form>
+        </body>
 
-        <p id="sign-up-redirect">Ainda não possui uma conta?<a href="pages/login/register.jsp">Registrar-se</a></p>
-    </div>
+        <script src="js/password.js"></script>
 
-    <div class="admin">
-        <a href=""><img src="img/svg/lock.svg" alt="">Entrar como administrador</a>
-    </div>
-</body>
-
-<script src="js/password.js"></script>
-
-</html>
+        </html>
