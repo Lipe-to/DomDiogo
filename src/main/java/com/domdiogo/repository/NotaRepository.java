@@ -1,6 +1,7 @@
 package com.domdiogo.repository;
 
 import com.domdiogo.ConnectionFactory;
+import com.domdiogo.model.AlunoNotaDTO;
 import com.domdiogo.model.NotaEntity;
 import com.domdiogo.model.Status;
 
@@ -79,39 +80,61 @@ public class NotaRepository {
         return listaNotas;
     }
 
-    public List<NotaEntity> findByProfessorAndAluno(int idProfessor, int matriculaAluno) {
-        List<NotaEntity> listaNotas = new ArrayList<>();
-        String query = "select n.*, d.nome as disciplina_nome " +
-                "from nota n join disciplina d on n.id_disciplina = d.id " +
-                "where d.id_professor = ? and n.matricula_aluno = ?";
-        ConnectionFactory connectionFactory = new ConnectionFactory();
-        Connection connection = connectionFactory.connect();
+    public List<AlunoNotaDTO> findAlunosComNotasByProfessor(int idProfessor) {
 
-        try {
-            PreparedStatement ps = connection.prepareStatement(query);
+        List<AlunoNotaDTO> lista = new ArrayList<>();
+
+        String query = """
+                    SELECT
+                        a.matricula,
+                        a.nome AS aluno_nome,
+                        a.turma,
+                        n.id AS nota_id,
+                        n.n1,
+                        n.n2,
+                        n.media,
+                        n.id_disciplina,
+                        d.nome AS disciplina_nome
+                    FROM aluno a
+                    LEFT JOIN nota n
+                        ON n.matricula_aluno = a.matricula
+                    LEFT JOIN disciplina d
+                        ON n.id_disciplina = d.id
+                    WHERE d.id_professor = ?
+                       OR d.id_professor IS NULL
+                    ORDER BY a.nome
+                       """;
+
+        try (Connection connection = new ConnectionFactory().connect();
+             PreparedStatement ps = connection.prepareStatement(query)) {
+
             ps.setInt(1, idProfessor);
-            ps.setInt(2, matriculaAluno);
-            ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {
-                NotaEntity nota = new NotaEntity(
-                        rs.getInt("id"),
-                        rs.getDouble("n1"),
-                        rs.getDouble("n2"),
-                        rs.getDouble("media"),
-                        rs.getInt("id_disciplina"),
-                        rs.getInt("matricula_aluno"),
-                        rs.getString("disciplina_nome")
-                );
-                listaNotas.add(nota);
+            try (ResultSet rs = ps.executeQuery()) {
+
+                while (rs.next()) {
+
+                    AlunoNotaDTO dto = new AlunoNotaDTO(
+                            rs.getInt("matricula"),
+                            rs.getString("aluno_nome"),
+                            rs.getString("turma"),
+                            rs.getInt("nota_id"),
+                            rs.getDouble("n1"),
+                            rs.getDouble("n2"),
+                            rs.getDouble("media"),
+                            rs.getInt("id_disciplina"),
+                            rs.getString("disciplina_nome")
+                    );
+
+                    lista.add(dto);
+                }
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            connectionFactory.disconnect(connection);
         }
 
-        return listaNotas;
+        return lista;
     }
 
     public Status update(NotaEntity nota) {
