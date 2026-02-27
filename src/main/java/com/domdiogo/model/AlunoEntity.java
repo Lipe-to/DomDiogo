@@ -47,4 +47,24 @@ public class AlunoEntity {
     public String getTurma() {
         return turma;
     }
+
+    public void setSenha(String novaSenh) {
+        this.senha = novaSenh;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public void setPalavra(String palavra) {
+        this.palavra = palavra;
+    }
+
+    public void setTurma(String turma) {
+        this.turma = turma;
+    }
 }
