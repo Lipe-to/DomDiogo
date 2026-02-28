@@ -55,14 +55,13 @@ public class AlunoServlet extends HttpServlet {
                 String usuario = request.getParameter("usuario");
                 if (repository.isApto(usuario)) {
                     AlunoEntity alunoEntity = new AlunoEntity(
-                            request.getParameter("nome"),
                             usuario,
                             request.getParameter("senha"),
                             request.getParameter("palavra")
                     );
                     Status status = repository.create(alunoEntity);
                     if (status == Status.SUCCESS) {
-                        //cria uma entidade de notas para o aluno criado apenas com sua matricula
+                        //cria as notas para o aluno criado apenas com sua matricula
                         repository.createNotas(repository.findByUsuario(usuario).getMatricula());
                         repository.toggleMatriculado(usuario);
                         ServletHelper.configureStatus(request, "Aluno(a) " + alunoEntity.getNome() + " criado com sucesso!", StatusColor.GREEN);

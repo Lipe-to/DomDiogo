@@ -60,22 +60,35 @@ public class AlunoRepository {
     }
 
     public Status create(AlunoEntity alunoEntity) {
-        String query = "insert into aluno (nome, usuario, senha, palavra, turma) values (?, ?, ?, ?, ?)";
+        String selectQuery = "SELECT nome FROM apto WHERE usuario = ?";
+        String insertQuery = "INSERT INTO aluno (nome, usuario, senha, palavra, turma) VALUES (?, ?, ?, ?, ?)";
+
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, alunoEntity.getNome());
-            preparedStatement.setString(2, alunoEntity.getUsuario());
-            preparedStatement.setString(3, alunoEntity.getSenha());
-            preparedStatement.setString(4, alunoEntity.getPalavra());
-            preparedStatement.setString(5, alunoEntity.getTurma());
 
-            int rows = preparedStatement.executeUpdate();
-            if (rows > 0) {
-                return Status.SUCCESS;
+        try {
+            PreparedStatement selectStmt = connection.prepareStatement(selectQuery);
+            selectStmt.setString(1, alunoEntity.getUsuario());
+            ResultSet rs = selectStmt.executeQuery();
+
+            if (rs.next()) {
+                String nome = rs.getString("nome");
+
+                PreparedStatement insertStmt = connection.prepareStatement(insertQuery);
+                insertStmt.setString(1, nome);
+                insertStmt.setString(2, alunoEntity.getUsuario());
+                insertStmt.setString(3, alunoEntity.getSenha());
+                insertStmt.setString(4, alunoEntity.getPalavra());
+                insertStmt.setString(5, alunoEntity.getTurma());
+
+                int rows = insertStmt.executeUpdate();
+                if (rows > 0) {
+                    return Status.SUCCESS;
+                }
+                return Status.NOT_FOUND;
+            } else {
+                return Status.NOT_FOUND;
             }
-            return Status.NOT_FOUND;
         } catch (SQLException e) {
             e.printStackTrace();
             return Status.NOT_FOUND;
