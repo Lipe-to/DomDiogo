@@ -8,6 +8,7 @@
     inset: 0;
 
     position: fixed;
+    z-index: 999;
     max-width: 320px;
  
     text-align: left;
