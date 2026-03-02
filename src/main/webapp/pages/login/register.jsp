@@ -22,12 +22,6 @@
         <h1>Registrar aluno</h1>
         <form action="${pageContext.request.contextPath}/aluno?action=create" method="post">
             <div class="input-major">
-                <div class="input-container">
-                    <p class="required">Nome completo</p>
-                    <input class="text-box" name="nome" type="text"
-                           placeholder="Insira seu nome" required>
-                </div>
-
                 <div class="email input-container warning">
                     <p class="required">Usuário</p>
                     <input class="validation text-box" id="email" name="usuario" type="email" placeholder="Insira seu usuário"
