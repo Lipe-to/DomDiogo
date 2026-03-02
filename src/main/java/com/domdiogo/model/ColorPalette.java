@@ -8,7 +8,8 @@ public enum ColorPalette {
     GREEN("#86d1a8"),
     LIME_GREEN("#b0cf89"),
     SMOOTH_RED("#e08383"),
-    ORANGE("#dfb381");
+    ORANGE("#dfb381"),
+    DEFAULT("#ffffff");
 
     private final String hex;
 
@@ -20,22 +21,15 @@ public enum ColorPalette {
         return hex;
     }
 
-    public static ColorPalette fromString(String text) {
-        if (text == null) return BLUE;
+    public static ColorPalette fromString(String value) {
+        if (value == null) {
+            return DEFAULT;
+        }
 
-        switch (text.toLowerCase()) {
-            case "azul": return BLUE;
-            case "vermelho": return RED;
-            case "verde": return GREEN;
-            case "laranja": return ORANGE;
-            case "amarelo": return ORANGE; // Mapeado para o tom mais próximo disponível
-            default:
-                try {
-                    // Tenta buscar pelo nome da constante (ex: "RED")
-                    return ColorPalette.valueOf(text.toUpperCase());
-                } catch (IllegalArgumentException e) {
-                    return BLUE;
-                }
+        try {
+            return ColorPalette.valueOf(value.trim().toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return DEFAULT;
         }
     }
 }

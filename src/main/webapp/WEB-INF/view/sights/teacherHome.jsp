@@ -212,9 +212,11 @@
                     <%
                         ObservacaoRepository observacaoRepository = new ObservacaoRepository();
                         ProfessorRepository professorRepository = new ProfessorRepository();
-                        Integer idPopover = 0;
 
-                        for (ObservacaoEntity obs : observacaoRepository.findByProfessor(idProfessor)) {
+                        List<ObservacaoEntity> observacaoEntityList = observacaoRepository.findByProfessor(idProfessor);
+                        int idPopover = 0;
+
+                        for (ObservacaoEntity obs : observacaoEntityList) {
                             idPopover++;
                     %>
                     <div style="background-color: <%=obs.getCor().getHex()%>" class="card">
