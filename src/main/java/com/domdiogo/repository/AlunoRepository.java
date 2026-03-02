@@ -190,7 +190,7 @@ public class AlunoRepository {
     public boolean isApto(String usuario) {
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
-        String query = "select usuario from aptos where usuario = ?";
+        String query = "select usuario from apto where usuario = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, usuario);
@@ -207,7 +207,7 @@ public class AlunoRepository {
     public boolean toggleMatriculado(String usuario) {
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
-        String query = "update aptos set is_matriculado = not is_matriculado where usuario = ?";
+        String query = "update apto set is_matriculado = not is_matriculado where usuario = ?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, usuario);

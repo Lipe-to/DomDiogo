@@ -98,9 +98,7 @@
                     <p>Bem vindo de volta!</p>
                 </div>
                 <div class="general-statistic">
-                    <a href="" class="h2">Visão geral <img class="redirect"
-                                                           src="${pageContext.request.contextPath}/img/svg/redirect-blue.svg"
-                                                           alt=""></a>
+                    <a href="" class="h2">Visão geral<img class="redirect" src="${pageContext.request.contextPath}/img/svg/redirect-blue.svg" alt=""></a>
                     <div>
                         <div>
                             <h3><span>32</span></h3>
@@ -146,9 +144,7 @@
                             <button title="Filtrar"><img src="${pageContext.request.contextPath}/img/svg/filter.svg"
                                                          alt="Filtrar"></button>
                             <button title="Atualizar notas" popovertarget="popup-grades">
-                                <!-- popovertarget="popup-grades" -->
-                                <div><img src="${pageContext.request.contextPath}/img/svg/document.svg"><span>Atualizar notas</span>
-                                </div>
+                                <div><img src="${pageContext.request.contextPath}/img/svg/document.svg"><span>Atualizar notas</span></div>
                             </button>
                         </div>
                     </div>
@@ -207,7 +203,7 @@
 
             <div id="observations">
                 <h1>Observações</h1>
-                <button popovertarget="popup-obs">Add Observacao</button>
+                <button popovertarget="popup-obs" type="button">Adicionar Observação</button>
                 <select class="select-box">
                     <option value="">Todas as turmas</option>
                 </select>
@@ -216,8 +212,10 @@
                     <%
                         ObservacaoRepository observacaoRepository = new ObservacaoRepository();
                         ProfessorRepository professorRepository = new ProfessorRepository();
+                        Integer idPopover = 0;
 
                         for (ObservacaoEntity obs : observacaoRepository.findByProfessor(idProfessor)) {
+                            idPopover++;
                     %>
                     <div style="background-color: <%=obs.getCor().getHex()%>" class="card">
                         <div>
@@ -226,9 +224,9 @@
                             <p>realizada por <%=professorRepository.findById(obs.getIdProfessor()).getNome()%>
                             </p>
                         </div>
-                        <button class="button">Ver detalhes</button>
+                        <button popovertarget="<%="popover-id-"+idPopover%>" class="button">Ver detalhes</button>
                     </div>
-                    <div id="popup-grades" class="popup" popover="auto">
+                    <div id="<%="popover-id-"+idPopover%>" class="popup" popover="auto">
                         <h1><%=obs.getTitulo()%>
                         </h1>
                         <div>
@@ -252,12 +250,12 @@
                         }
                     %>
                 </div>
+            </div>
         </main>
     </div>
 </div>
 
 <div id="popup-grades" class="popup" popover="auto">
-    <!-- Apesar de cada table ter um símbolo de nota específico, o POPUP de notas será único -->
     <h1>Gerenciar notas</h1>
     <form action="${pageContext.request.contextPath}/nota?action=readAll" method="post">
         <div class="input-major">
@@ -342,6 +340,7 @@
         <button class="button" type="submit">Registrar</button>
     </form>
 </div>
+
 </body>
 
 </html>
