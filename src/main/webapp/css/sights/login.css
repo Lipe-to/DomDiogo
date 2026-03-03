@@ -1,7 +1,7 @@
 @import url('../variables.css');
 
 body {
-    /* overflow: hidden; */
+    overflow: hidden;
     flex-direction: column;
 }
 
@@ -88,8 +88,14 @@ body>:first-child {
 }
 
 .login-form>:first-child {
-    text-align: center;
-    margin-bottom: 10%;
+    margin-bottom: 15%;
+    justify-self: center;
+}
+
+.login-form>h1 {
+    text-align: left;
+    margin-bottom: 5%;
+    font-size: 1.75rem;
 }
 
 .input-container>:first-child {
@@ -181,14 +187,33 @@ input.is-valid:invalid {
     opacity: 0;
 }
 
+.error-message {
+    margin-bottom: 5%;
+    transform: translateY(-90%);
+    
+}
+
+.email::after,
+#create-password::after,
+#key-word::after,
+.error-message {
+    font-size: 0.9rem;
+    color: var(--red);
+    opacity: 90%;
+    margin-top: 1%;
+}
+
+.email::after,
+#create-password::after,
+#key-word::after {
+    display: none;
+}
 .email::after,
 #create-password::after,
 #key-word::after {
     font-size: 0.9rem;
     color: var(--red);
     opacity: 90%;
-
-    display: none;
     margin-top: 1%;
 }
 

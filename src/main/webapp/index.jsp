@@ -8,22 +8,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Fazer Login</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-          integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="shortcut icon" href="img/branding/favicon.png" type="image/x-icon">
 
     <link rel="stylesheet" href="css/sights/login.css">
-
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/font.css">
 </head>
 
-<body id="login" style="overflow: hidden;">
+<body id="login">
 <div class="login-form">
+    <div style="justify-content: center" class="logo">
+        <img src="img/branding/icone.png">
+        <img src="img/branding/black.png">
+    </div>
     <h1>Bem vindo de volta!</h1>
-    <p class=""><%=request.getAttribute("statusMessage")%>
-    </p>
+    <%
+        String errorDisplay = "block";
+        if (request.getAttribute("statusMessage") == null) {
+            errorDisplay = "none";
+        }
+    %>
+    <p class="error-message" style="display: <%=errorDisplay%>;"><%=request.getAttribute("statusMessage")%></p>
     <form action="${pageContext.request.contextPath}/login?action=login" method="post">
         <div class="input-major">
             <div class="email input-container">

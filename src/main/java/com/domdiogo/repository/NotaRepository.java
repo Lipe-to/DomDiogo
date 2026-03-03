@@ -44,7 +44,6 @@ public class NotaRepository {
         } finally {
             connectionFactory.disconnect(connection);
         }
-
         return listaNotas;
     }
 
