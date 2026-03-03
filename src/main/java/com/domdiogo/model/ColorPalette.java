@@ -19,4 +19,23 @@ public enum ColorPalette {
     public String getHex() {
         return hex;
     }
+
+    public static ColorPalette fromString(String text) {
+        if (text == null) return BLUE;
+
+        switch (text.toLowerCase()) {
+            case "azul": return BLUE;
+            case "vermelho": return RED;
+            case "verde": return GREEN;
+            case "laranja": return ORANGE;
+            case "amarelo": return ORANGE; // Mapeado para o tom mais próximo disponível
+            default:
+                try {
+                    // Tenta buscar pelo nome da constante (ex: "RED")
+                    return ColorPalette.valueOf(text.toUpperCase());
+                } catch (IllegalArgumentException e) {
+                    return BLUE;
+                }
+        }
+    }
 }

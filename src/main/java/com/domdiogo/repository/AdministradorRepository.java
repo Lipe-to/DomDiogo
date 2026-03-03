@@ -15,9 +15,9 @@ public class AdministradorRepository {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, administradorEntity.getNome());
-            preparedStatement.setString(2, administradorEntity.getEmail());
+            preparedStatement.setString(2, administradorEntity.getUsuario());
             preparedStatement.setString(3, administradorEntity.getSenha());
-            preparedStatement.setString(4, administradorEntity.getPalavra());
+            preparedStatement.setString(4, administradorEntity.getPalavra_chave());
             preparedStatement.setInt(5, administradorEntity.getId());
 
             int rows = preparedStatement.executeUpdate();
@@ -55,15 +55,16 @@ public class AdministradorRepository {
         }
     }
 
-    public Status login(String email, String senha) {
-        String query = "select * from administrador where email = ? and senha = ?";
+    public Status login(String usuario, String senha) {
+        String query = "select * from administrador where usuario = ? and senha = ?";
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, email);
+            preparedStatement.setString(1, usuario);
             preparedStatement.setString(2, senha);
             ResultSet resultSet = preparedStatement.executeQuery();
+
             if (resultSet.next()) {
                 return Status.SUCCESS;
             } else {
@@ -78,7 +79,7 @@ public class AdministradorRepository {
     }
 
     public Status validarPalavra(String email, String palavra) {
-        String query = "select palavra from administrador where email = ?";
+        String query = "select palavra from administrador where usuario = ?";
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
         try {
