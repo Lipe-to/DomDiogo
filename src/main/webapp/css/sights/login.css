@@ -226,6 +226,8 @@ input.is-valid:invalid {
 
     opacity: 60%;
     transform: translateX(15%) translateY(-70%);
+    
+    margin-bottom: 0 !important;
 }
 
 .admin a {

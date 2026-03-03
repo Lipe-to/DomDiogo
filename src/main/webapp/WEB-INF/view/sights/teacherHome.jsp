@@ -167,31 +167,48 @@
                             <%
                                 NotaRepository notaRepository = new NotaRepository();
                                 List<AlunoNotaDTO> lista = notaRepository.findAlunosComNotasByProfessor(idProfessor);
-                                    for (AlunoNotaDTO item : lista) {
+                                int idPopoverGrades = 0;
+
+                                for (AlunoNotaDTO item : lista) {
+                                    idPopoverGrades++;
                             %>
                             <tr>
-                                <td><%= item.getMatricula() %>
-                                </td>
-                                <td><%= item.getNomeAluno() %>
-                                </td>
-                                <td><%= item.getTurma() == null ? "Não alocado" : item.getTurma() %>
-                                </td>
-
-                                <td><%= item.getN1() == null ? "-" : item.getN1() %>
-                                </td>
-                                <td><%= item.getN2() == null ? "-" : item.getN2() %>
-                                </td>
-
-                                <td class="<%= item.getSituacaoCss() %>">
-                                    <%= item.getMedia() == null ? "-" : item.getMedia() %>
-                                </td>
-
-                                <td class="situation">
-                                <span>
-                                    <%= item.getSituacao() %>
-                                </span>
-                                </td>
+                                <td><%= item.getMatricula() %></td>
+                                <td><%= item.getNomeAluno() %></td>
+                                <td><%= item.getTurma() == null ? "Não alocado" : item.getTurma() %></td>
+                                <td><%= item.getN1() == null ? "-" : item.getN1() %></td>
+                                <td><%= item.getN2() == null ? "-" : item.getN2() %></td>
+                                <td class="<%= item.getSituacaoCss() %>"><%= item.getMedia() == null ? "-" : item.getMedia() %></td>
+                                <td class="situation"><span><%= item.getSituacao() %></span></td>
+                                <td><button popovertarget="popup-grades-<%=idPopoverGrades%>">Editar</button></td>
                             </tr>
+                            <div id="popup-grades-<%=idPopoverGrades%>" class="popup" popover="auto">
+                                <h1>Gerenciar notas</h1>
+                                <form action="${pageContext.request.contextPath}/nota?action=readAll" method="post">
+                                    <div class="input-major">
+                                        <div class="input-container">
+                                            <p class="required">Matrícula</p>
+                                            <input class="text-box" type="text" value="<%=item.getMatricula()%>" readonly>
+                                        </div>
+
+                                        <div class="input-container">
+                                            <p class="required">N1'</p>
+                                            <input class="text-box" name=n1 type="number" min="0" max="10" step="0.1">
+                                        </div>
+
+                                        <div class="input-container">
+                                            <p class="required">N2'</p>
+                                            <input class="text-box" name="n2" type="number" min="0" max="10" step="0.1">
+                                        </div>
+
+                                        <div class="input-container">
+                                            <p class="required">Média final</p>
+                                            <input class="text-box" name="mediaFinal" type="text" value="" readonly>
+                                        </div>
+                                    </div>
+                                    <button class="button" type="submit">Registrar</button>
+                                </form>
+                            </div>
                             <%
                                 }
                             %>
@@ -214,10 +231,10 @@
                         ProfessorRepository professorRepository = new ProfessorRepository();
 
                         List<ObservacaoEntity> observacaoEntityList = observacaoRepository.findByProfessor(idProfessor);
-                        int idPopover = 0;
+                        int idPopoverObs = 0;
 
                         for (ObservacaoEntity obs : observacaoEntityList) {
-                            idPopover++;
+                            idPopoverObs++;
                     %>
                     <div style="background-color: <%=obs.getCor().getHex()%>" class="card">
                         <div>
@@ -226,9 +243,9 @@
                             <p>realizada por <%=professorRepository.findById(obs.getIdProfessor()).getNome()%>
                             </p>
                         </div>
-                        <button popovertarget="<%="popover-id-"+idPopover%>" class="button">Ver detalhes</button>
+                        <button popovertarget="<%="popover-id-"+idPopoverObs%>" class="button">Ver detalhes</button>
                     </div>
-                    <div id="<%="popover-id-"+idPopover%>" class="popup" popover="auto">
+                    <div id="<%="popover-id-"+idPopoverObs%>" class="popup" popover="auto">
                         <h1><%=obs.getTitulo()%>
                         </h1>
                         <div>
@@ -245,9 +262,10 @@
                                     <input class="text-box" type="text" value="<%=obs.getObservacao()%>">
                                 </div>
                             </div>
-                            <button class="button" type="submit">Fechar</button>
+                            <button class="button fat close-popover" type="button">Fechar</button>
                         </div>
                     </div>
+
                     <%
                         }
                     %>
@@ -257,56 +275,14 @@
     </div>
 </div>
 
-<div id="popup-grades" class="popup" popover="auto">
-    <h1>Gerenciar notas</h1>
-    <form action="${pageContext.request.contextPath}/nota?action=readAll" method="post">
-        <div class="input-major">
-            <div class="email input-container">
-                <p class="required">Aluno</p>
-                <select class="text-box" name="" id="">
-                    <option value="" disabled selected>
-                        Selecione um aluno
-                    </option>
-
-                    <optgroup label="1° Ano TECH">
-                        <option value="">Nisflei Santos</option>
-                    </optgroup>
-                </select>
-            </div>
-
-            <div class="input-container">
-                <p class="required">Matrícula</p>
-                <input class="text-box" name="" type="text" value="" readonly>
-            </div>
-
-            <div class="input-container">
-                <p class="required">N1'</p>
-                <input class="text-box" name="" type="number" min="0" max="10" step="0.1">
-            </div>
-
-            <div class="input-container">
-                <p class="required">N2'</p>
-                <input class="text-box" name="" type="number" min="0" max="10" step="0.1">
-            </div>
-
-            <div class="input-container">
-                <p class="required">Média final</p>
-                <input class="text-box" name="" type="text" value="" readonly>
-            </div>
-        </div>
-
-        <button class="button" type="submit">Registrar</button>
-    </form>
-</div>
-
 <div id="popup-obs" class="popup" popover="auto">
     <h1>Adicionar Observação</h1>
-    <form action="${pageContext.request.contextPath}/nota?action=readAll" method="post">
+    <form action="${pageContext.request.contextPath}/observacao?action=create" method="post">
         <div class="input-major">
             <div class="email input-container">
                 <p class="required">Aluno</p>
-                <input list="students-datalist">
-                <datalist class="text-box" name="idMatricula" id="students-datalist">
+                <input class="text-box" name="matriculaAluno" list="students-datalist" required>
+                <datalist class="text-box" id="students-datalist">
                     <option disabled selected>Selecione um aluno</option>
                     <%
                         for (AlunoEntity aluno : listAlunos) {
@@ -319,30 +295,37 @@
             </div>
 
             <div class="input-container">
-                <p class="required">Matrícula</p>
-                <input class="text-box" name="" type="text" value="" readonly>
+                <p class="required">Título</p>
+                <input class="text-box" name="titulo" type="text" value="">
             </div>
 
             <div class="input-container">
-                <p class="required">N1'</p>
-                <input class="text-box" name="" type="number" min="0" max="10" step="0.1">
+                <p class="required">Conteúdo</p>
+                <textarea class="text-box" name="observacao" id="" cols="30" rows="10"></textarea>
             </div>
 
             <div class="input-container">
-                <p class="required">N2'</p>
-                <input class="text-box" name="" type="number" min="0" max="10" step="0.1">
+                <p class="required">Título</p>
+                <select name="cor" id="">
+                    <option value="BLUE">Azul</option>
+                    <option value="RED">Vermelho</option>
+                    <option value="TEA_BLUE">Azul-Chá</option>
+                    <option value="PURPLE">Roxo</option>
+                    <option value="GREEN">Verde</option>
+                    <option value="LIME_GREEN">Verde-Lima</option>
+                    <option value="SMOOTH_RED">Vermelho-Suave</option>
+                    <option value="ORANGE">Laranja</option>
+                </select>
             </div>
 
-            <div class="input-container">
-                <p class="required">Média final</p>
-                <input class="text-box" name="" type="text" value="" readonly>
-            </div>
+            <input type="hidden" name="idProfessor" value="<%=idProfessor%>">
         </div>
 
         <button class="button" type="submit">Registrar</button>
     </form>
 </div>
-
 </body>
+
+<script src="${pageContext.request.contextPath}/js/popover-close.js"></script>
 
 </html>

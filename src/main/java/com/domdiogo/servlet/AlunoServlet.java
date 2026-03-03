@@ -64,7 +64,7 @@ public class AlunoServlet extends HttpServlet {
                         //cria as notas para o aluno criado apenas com sua matricula
                         repository.createNotas(repository.findByUsuario(usuario).getMatricula());
                         repository.toggleMatriculado(usuario);
-                        ServletHelper.configureStatus(request, "Aluno(a) " + alunoEntity.getNome() + " criado com sucesso!", StatusColor.GREEN);
+                        ServletHelper.configureStatus(request, "Aluno(a) criado com sucesso!", StatusColor.GREEN);
                         redirect = "/index.jsp";
                     } else if (status == Status.NOT_FOUND) {
                         ServletHelper.configureStatus(request, "Já existe um aluno com essas informações, faça login.", StatusColor.RED);
