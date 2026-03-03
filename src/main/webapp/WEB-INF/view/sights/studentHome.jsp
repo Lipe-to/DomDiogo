@@ -152,12 +152,17 @@
                                         for (NotaEntity nota : notas) {
                                     %>
                                     <tr>
-                                        <td><%=nota.getNomeDisciplina()%></td>
-                                        <td><%=nota.getN1()%></td>
-                                        <td><%=nota.getN2()%></td>
-                                        <td><%=nota.getMedia()%></td>
-                                        <td class="situation"><span class="<%=nota.getMedia() >= 7 ? "approved" : "repproved"%>"><%=nota.getMedia() >= 7 ? "Aprovado" : "Reprovado"%></span></td>
+                                        <td><%= nota.getNomeDisciplina() %></td>
+                                        <td><%= nota.getN1() == null ? "-" : nota.getN1() %></td>
+                                        <td><%= nota.getN2() == null ? "-" : nota.getN2() %></td>
+                                        <td><%= nota.getMediaCalculada()%></td>
+                                        <td class="situation">
+                                        <span class="<%= (nota.getMedia() != null && nota.getMedia() >= 7) ? "approved" : "repproved" %>">
+                                        <%= (nota.getMedia() != null && nota.getMedia() >= 7) ? "Aprovado" : "Reprovado" %>
+                                         </span>
+                                        </td>
                                     </tr>
+
                                     <%
                                         }
                                     %>
