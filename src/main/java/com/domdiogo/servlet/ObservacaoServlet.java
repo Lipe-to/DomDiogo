@@ -122,7 +122,7 @@ public class ObservacaoServlet extends HttpServlet {
 
             default:
                 ServletHelper.configureStatus(request, "Ação inválida.", StatusColor.RED);
-                redirect = "/WEB-INF/home.jsp";
+                redirect = "/WEB-INF/view/sights/teacherHome.jsp";
                 break;
         }
 

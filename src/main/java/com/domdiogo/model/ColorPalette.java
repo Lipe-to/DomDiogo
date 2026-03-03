@@ -8,7 +8,8 @@ public enum ColorPalette {
     GREEN("#86d1a8"),
     LIME_GREEN("#b0cf89"),
     SMOOTH_RED("#e08383"),
-    ORANGE("#dfb381");
+    ORANGE("#dfb381"),
+    DEFAULT("#ffffff");
 
     private final String hex;
 
@@ -18,5 +19,17 @@ public enum ColorPalette {
 
     public String getHex() {
         return hex;
+    }
+
+    public static ColorPalette fromString(String value) {
+        if (value == null) {
+            return DEFAULT;
+        }
+
+        try {
+            return ColorPalette.valueOf(value.trim().toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return DEFAULT;
+        }
     }
 }
