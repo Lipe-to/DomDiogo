@@ -184,29 +184,29 @@
                             </tr>
                             <div id="popup-grades-<%=idPopoverGrades%>" class="popup" popover="auto">
                                 <h1>Gerenciar notas</h1>
-                                <form action="${pageContext.request.contextPath}/nota?action=readAll" method="post">
+                                <form action="${pageContext.request.contextPath}/nota?action=update" method="post">
                                     <div class="input-major">
                                         <div class="input-container">
                                             <p class="required">Matrícula</p>
-                                            <input class="text-box" type="text" value="<%=item.getMatricula()%>" readonly>
+                                            <input class="text-box" name="id" type="text" value="<%=item.getMatricula()%>" readonly>
                                         </div>
 
                                         <div class="input-container">
                                             <p class="required">N1'</p>
-                                            <input class="text-box" name=n1 type="number" min="0" max="10" step="0.1">
+                                            <input class="text-box" name=n1 type="number" value="<%=item.getN1()%>" min="0" max="10" step="0.1">
                                         </div>
 
                                         <div class="input-container">
                                             <p class="required">N2'</p>
-                                            <input class="text-box" name="n2" type="number" min="0" max="10" step="0.1">
+                                            <input class="text-box" name="n2" type="number" value="<%=item.getN2()%>" min="0" max="10" step="0.1">
                                         </div>
 
                                         <div class="input-container">
                                             <p class="required">Média final</p>
-                                            <input class="text-box" name="mediaFinal" type="text" value="" readonly>
+                                            <input class="text-box" type="text" readonly>
                                         </div>
                                     </div>
-                                    <button class="button" type="submit">Registrar</button>
+                                    <button class="button fat" type="submit">Atualizar notas</button>
                                 </form>
                             </div>
                             <%
@@ -240,7 +240,7 @@
                         <div>
                             <h2><%=obs.getTitulo()%>
                             </h2>
-                            <p>realizada por <%=professorRepository.findById(obs.getIdProfessor()).getNome()%>
+                            <p>direcionada para <%=alunoRepository.findByMatricula(obs.getMatriculaAluno()).getNome()%>
                             </p>
                         </div>
                         <button popovertarget="<%="popover-id-"+idPopoverObs%>" class="button">Ver detalhes</button>
