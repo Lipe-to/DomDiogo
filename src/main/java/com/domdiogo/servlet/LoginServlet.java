@@ -16,7 +16,6 @@ import jakarta.servlet.http.*;
 public class LoginServlet extends HttpServlet {
 
     private String redirect = "";
-    private final AdministradorRepository administradorRepository = new AdministradorRepository();
     private final AlunoRepository alunoRepository = new AlunoRepository();
     private final ProfessorRepository professorRepository = new ProfessorRepository();
 
@@ -43,7 +42,7 @@ public class LoginServlet extends HttpServlet {
                                 "Login realizado com sucesso!",
                                 StatusColor.GREEN);
 
-                        redirect = "/studentHome";
+                        redirect = "/WEB-INF/view/sights/studentHome.jsp";
                     } else {
                         ServletHelper.configureStatus(request,
                                 "Usuário ou senha inválidos.",
@@ -65,7 +64,7 @@ public class LoginServlet extends HttpServlet {
                                 "Login realizado com sucesso!",
                                 StatusColor.GREEN);
 
-                        redirect = "/teacherHome";
+                        redirect = "/WEB-INF/view/sights/teacherHome.jsp";
                     } else {
                         ServletHelper.configureStatus(request,
                                 "Usuário ou senha inválidos.",
