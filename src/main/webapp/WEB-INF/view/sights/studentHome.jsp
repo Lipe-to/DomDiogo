@@ -156,7 +156,7 @@
                                         <td><%=nota.getN1()%></td>
                                         <td><%=nota.getN2()%></td>
                                         <td><%=nota.getMedia()%></td>
-                                        <td class="situation"><span class="approved">ds</span></td>
+                                        <td class="situation"><span class="<%=nota.getMedia() >= 7 ? "approved" : "repproved"%>"><%=nota.getMedia() >= 7 ? "Aprovado" : "Reprovado"%></span></td>
                                     </tr>
                                     <%
                                         }
@@ -189,7 +189,6 @@
                             <button class="button">Ver detalhes</button>
                         </div>
                         <div id="popup-grades" class="popup" popover="auto">
-                            <!-- Apesar de cada table ter um símbolo de nota específico, o POPUP de notas será único -->
                             <h1><%=obs.getTitulo()%></h1>
                             <div>
                                 <div class="input-major">
