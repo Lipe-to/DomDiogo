@@ -2,7 +2,7 @@
 
 body {
     background-color: var(--blue);
-    justify-content: end !important;
+    justify-content: center;
 }
 
 #major-container {
@@ -11,9 +11,7 @@ body {
 
     display: flex;
     flex-direction: row;
-
-    margin-top: 3%;
-    margin-right: 3%;
+    margin-top: 5%;
 }
 
 #wrap {
@@ -220,6 +218,10 @@ table td input {
 
 .repr {
     color: var(--red);
+}
+
+aside {
+    display: none !important;
 }
 
 aside {

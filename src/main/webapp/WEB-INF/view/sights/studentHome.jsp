@@ -142,8 +142,7 @@
                                         <th>Matéria</th>
                                         <th>N1'</th>
                                         <th>N2'</th>
-                                        <th>Média Final<img class="info" title="(N1' + N2') / 2"
-                                                src="${pageContext.request.contextPath}/img/svg/info-white.svg"></img></th>
+                                        <th>Média Final<img class="info" title="(N1' + N2') / 2" src="${pageContext.request.contextPath}/img/svg/info-white.svg"></img></th>
                                         <th>Situação</th>
                                     </tr>
                                 </thead>
