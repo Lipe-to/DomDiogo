@@ -26,10 +26,10 @@ public class NotaServlet extends HttpServlet {
         if ("readAll".equals(action)) {
             List<NotaEntity> listaNotas = repository.readAll();
             request.setAttribute("listaNotas", listaNotas);
-            redirect = "/WEB-INF/notas.jsp";
+            redirect = "/WEB-INF/view/sights/teacherHome.jsp";
         } else {
             ServletHelper.configureStatus(request, "Ação inexistente.", StatusColor.RED);
-            redirect = "/WEB-INF/home.jsp";
+            redirect = "/WEB-INF/view/sights/teacherHome.jsp";
         }
 
         ServletHelper.redirect(request, response, redirect);
@@ -68,7 +68,7 @@ public class NotaServlet extends HttpServlet {
 
             default:
                 ServletHelper.configureStatus(request, "Ação inválida.", StatusColor.RED);
-                redirect = "/WEB-INF/home.jsp";
+                redirect = "/WEB-INF/view/sights/teacherHome.jsp";
                 break;
         }
 

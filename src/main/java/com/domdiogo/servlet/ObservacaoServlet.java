@@ -29,7 +29,7 @@ public class ObservacaoServlet extends HttpServlet {
                 List<ObservacaoEntity> listaObservacoes = repository.read();
                 request.setAttribute("observacoes", listaObservacoes);
                 ServletHelper.configureStatus(request, "Observações carregadas com sucesso!", StatusColor.GREEN);
-                redirect = "/WEB-INF/observacoes.jsp";
+                redirect = "/WEB-INF/view/sights/teacherHome.jsp";
                 break;
 
             case "findById":
@@ -41,7 +41,7 @@ public class ObservacaoServlet extends HttpServlet {
                 } else {
                     ServletHelper.configureStatus(request, "Observação não encontrada.", StatusColor.RED);
                 }
-                redirect = "/WEB-INF/observacaoDetalhe.jsp";
+                redirect = "/WEB-INF/view/sights/teacherHome.jsp";
                 break;
 
             case "findByMatriculaAluno":
@@ -49,7 +49,7 @@ public class ObservacaoServlet extends HttpServlet {
                 List<ObservacaoEntity> obsAluno = repository.findByMatriculaAluno(matriculaAluno);
                 request.setAttribute("observacoes", obsAluno);
                 ServletHelper.configureStatus(request, "Observações do aluno carregadas.", StatusColor.GREEN);
-                redirect = "/WEB-INF/observacoes.jsp";
+                redirect = "/WEB-INF/view/sights/teacherHome.jsp";
                 break;
 
             case "findByProfessor":
@@ -57,12 +57,12 @@ public class ObservacaoServlet extends HttpServlet {
                 List<ObservacaoEntity> obsProfessor = repository.findByProfessor(idProfessor);
                 request.setAttribute("observacoes", obsProfessor);
                 ServletHelper.configureStatus(request, "Observações do professor carregadas.", StatusColor.GREEN);
-                redirect = "/WEB-INF/observacoes.jsp";
+                redirect = "/WEB-INF/view/sights/teacherHome.jsp";
                 break;
 
             default:
                 ServletHelper.configureStatus(request, "Ação inexistente.", StatusColor.RED);
-                redirect = "/WEB-INF/home.jsp";
+                redirect = "/WEB-INF/view/sights/teacherHome.jsp";
                 break;
         }
 
