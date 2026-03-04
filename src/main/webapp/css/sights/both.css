@@ -5,6 +5,19 @@ body {
     justify-content: center;
 }
 
+.logo {
+    gap: 0.45rem !important;
+}
+
+.logo>:first-child {
+    max-width: 34px;
+}
+
+.logo>:last-child { /* Apenas nas telas de dash */
+    max-width: 130px;
+}
+
+
 #major-container {
     width: 90%;
     height: 100%;

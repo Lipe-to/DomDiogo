@@ -73,24 +73,16 @@ a {
 
 .logo {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     justify-content: left;
     gap: 0.6rem;
-
+    
     cursor: pointer;
 }
 
 .logo.center {
+    align-items: center;
     justify-content: center;
-}
-
-.logo>:first-child {
-    max-width: 50px;
-}
-
-.logo>:last-child {
-    max-width: 200px;
-    opacity: 80%;
 }
 
 .select-box {
