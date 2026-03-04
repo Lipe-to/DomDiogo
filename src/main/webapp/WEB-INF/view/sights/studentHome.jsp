@@ -71,9 +71,14 @@
     <div id="major-container">
         <div id="wrap">
             <header>
-                <a href="#"><img class="logo" src="${pageContext.request.contextPath}/img/branding/teste.png" alt="Logo"></a>
+                <a href="#">
+                    <div class="logo">
+                        <img src="${pageContext.request.contextPath}/img/branding/icone.png">
+                        <img src="${pageContext.request.contextPath}/img/branding/white.png">
+                    </div>
+                </a>
                 <div class="personal-info">
-                    <img src="${pageContext.request.contextPath}/img/neymar.png" alt=""> <!-- Condicional em JSP se não houver bd de perfil -->
+                    <img src="${pageContext.request.contextPath}/img/neymar.png" alt="">
                     <div>
                         <h3>Neymar Santos</h3>
                         <p>Aluno</p>
@@ -121,7 +126,7 @@
                     </select>
 
                     <div class="table-container">
-                        <div class="table-info"> <!-- Contenção da turma -->
+                        <div class="table-info">
                             <div>
                                 <h3>2° Série G Tech</h3>
                                 <sub>Alunos</sub>

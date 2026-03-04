@@ -5,6 +5,15 @@ body {
     flex-direction: column;
 }
 
+.logo>:first-child {
+    max-width: 50px;
+}
+
+.logo>:last-child { /* Apenas nas telas de login */
+    max-width: 200px;
+    opacity: 80%;
+}
+
 #login {
     background-image: url('../../img/flat/dragon.png');
     background-repeat: no-repeat;
