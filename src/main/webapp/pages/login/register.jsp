@@ -16,8 +16,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font.css">
 </head>
 
-<body style="overflow-y: auto" id="sign-up">
-    <div style="margin-top: 10%" class="login-form">
+<body id="sign-up">
+    <div class="login-form">
         <div style="justify-content: center" class="logo">
             <img src="${pageContext.request.contextPath}/img/branding/icone.png">
             <img src="${pageContext.request.contextPath}/img/branding/black.png">

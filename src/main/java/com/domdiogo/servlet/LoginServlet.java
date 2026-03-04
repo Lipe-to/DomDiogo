@@ -3,10 +3,7 @@ package com.domdiogo.servlet;
 import java.io.IOException;
 
 import com.domdiogo.ServletHelper;
-import com.domdiogo.model.AlunoEntity;
-import com.domdiogo.model.ProfessorEntity;
-import com.domdiogo.model.Status;
-import com.domdiogo.model.StatusColor;
+import com.domdiogo.model.*;
 import com.domdiogo.repository.AdministradorRepository;
 import com.domdiogo.repository.AlunoRepository;
 import com.domdiogo.repository.ProfessorRepository;
@@ -19,9 +16,9 @@ import jakarta.servlet.http.*;
 public class LoginServlet extends HttpServlet {
 
     private String redirect = "";
+    private final AdministradorRepository administradorRepository = new AdministradorRepository();
     private final AlunoRepository alunoRepository = new AlunoRepository();
     private final ProfessorRepository professorRepository = new ProfessorRepository();
-    private final AdministradorRepository administradorRepository = new AdministradorRepository();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -186,7 +183,6 @@ public class LoginServlet extends HttpServlet {
             case "loginAdmin":
                 // LOGIN ADMINISTRADOR
                 Status statusAdmin = administradorRepository.login(usuario, senha);
-                System.out.println("Status retornado pelo Repositório de Admin: " + statusAdmin);
 
                 if (statusAdmin == Status.SUCCESS) {
                     HttpSession session = request.getSession();
@@ -194,16 +190,16 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("role", "ADMIN");
 
                     ServletHelper.configureStatus(request,
-                            "Login de Administrador realizado com sucesso!",
+                            "Login de administrador realizado com sucesso!",
                             StatusColor.GREEN);
 
                     redirect = "/adminHome";
                 } else {
                     ServletHelper.configureStatus(request,
-                            "Usuário ou senha de administrador inválidos 22.",
+                            "Usuário ou senha de administrador inválidos.",
                             StatusColor.RED);
 
-                    redirect = "/index.jsp";
+                    redirect = "/pages/login/admin.jsp";
                 }
                 break;
 
