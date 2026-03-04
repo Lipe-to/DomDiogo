@@ -16,6 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Dom Diogo</title>
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/branding/favicon.png" type="image/x-icon">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sights/both.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sights/teacher.css">
@@ -35,7 +36,7 @@
 %>
 
 <body>
-    <aside id="sidebar"> <!-- Position fixed ! -->
+    <aside id="sidebar">
         <ul>
             <div>
                 <li id="menu-icon-container">
@@ -70,9 +71,14 @@
     <div id="major-container">
         <div id="wrap">
             <header>
-                <a href="#"><img class="logo" src="${pageContext.request.contextPath}/img/branding/teste.png" alt="Logo"></a>
+                <a href="#">
+                    <div class="logo">
+                        <img src="${pageContext.request.contextPath}/img/branding/icone.png">
+                        <img src="${pageContext.request.contextPath}/img/branding/white.png">
+                    </div>
+                </a>
                 <div class="personal-info">
-                    <img src="${pageContext.request.contextPath}/img/neymar.png" alt=""> <!-- Condicional em JSP se não houver bd de perfil -->
+                    <img src="${pageContext.request.contextPath}/img/neymar.png" alt="">
                     <div>
                         <h3>Neymar Santos</h3>
                         <p>Aluno</p>
@@ -111,16 +117,14 @@
 
                 <div id="grades">
                     <h1>Boletim</h1>
-                    <select class="select-box">
-                        <option value="">Todas as matérias</option>
-                        <option value="">6º Ano</option>
-                        <option value="">7º Ano</option>
-                        <option value="">8º Ano</option>
-                        <option value="">9º Ano</option>
-                    </select>
+                    <div class="actions-section-container">
+                        <select class="select-box">
+                            <option value="">Todas as matérias</option>
+                        </select>
+                    </div>
 
                     <div class="table-container">
-                        <div class="table-info"> <!-- Contenção da turma -->
+                        <div class="table-info">
                             <div>
                                 <h3>2° Série G Tech</h3>
                                 <sub>Alunos</sub>
@@ -130,7 +134,7 @@
                                 <label for="search-submit"><img src="${pageContext.request.contextPath}/img/svg/search.svg" alt=""></label>
                                 <input class="search-box" type="text" placeholder="Pesquisar por matéria">
                                 <button title="Filtrar"><img src="${pageContext.request.contextPath}/img/svg/filter.svg" alt="Filtrar"></button>
-                                <button title="Gerenciar notas" popovertarget="popup-grades">
+                                <button onclick="gerarBoletim()" title="Gerenciar notas" popovertarget="popup-grades">
                                     <div><img src="${pageContext.request.contextPath}/img/svg/document.svg"><span>Extrair boletim</span></div>
                                 </button>
                             </div>
@@ -142,22 +146,26 @@
                                         <th>Matéria</th>
                                         <th>N1'</th>
                                         <th>N2'</th>
-                                        <th>Média Final<img class="info" title="(N1' + N2') / 2"
-                                                src="${pageContext.request.contextPath}/img/svg/info-white.svg"></img></th>
+                                        <th>Média Final<img class="info" title="(N1' + N2') / 2" src="${pageContext.request.contextPath}/img/svg/info-white.svg"></img></th>
                                         <th>Situação</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <%
-                                        for (NotaEntity nota : notaRepository.findByMatricula(matricula)) {
+                                        for (NotaEntity nota : notas) {
                                     %>
                                     <tr>
-                                        <td><%=nota.getNomeDisciplina()%></td>
-                                        <td><%=nota.getN1()%></td>
-                                        <td><%=nota.getN2()%></td>
-                                        <td><%=nota.getMedia()%></td>
-                                        <td class="situation"><span class="<%=nota.getMedia() >= 7 ? "approved" : "repproved"%>"><%=nota.getMedia() >= 7 ? "Aprovado" : "Reprovado"%></span></td>
+                                        <td><%= nota.getNomeDisciplina() %></td>
+                                        <td><%= nota.getN1() == null ? "-" : nota.getN1() %></td>
+                                        <td><%= nota.getN2() == null ? "-" : nota.getN2() %></td>
+                                        <td><%= nota.getMediaCalculada()%></td>
+                                        <td class="situation">
+                                        <span class="<%= (nota.getMedia() != null && nota.getMedia() >= 7) ? "approved" : "repproved" %>">
+                                        <%= (nota.getMedia() != null && nota.getMedia() >= 7) ? "Aprovado" : "Reprovado" %>
+                                         </span>
+                                        </td>
                                     </tr>
+
                                     <%
                                         }
                                     %>
@@ -169,32 +177,40 @@
 
                 <div id="observations">
                     <h1>Observações</h1>
-                    <select class="select-box">
-                        <option value="">Todos os professores</option>
-                        <option value="">Daniel Lima</option>
-                    </select>
+                    <div class="actions-section-container">
+                        <select class="select-box">
+                            <option value="">Todos os professores</option>
+                        </select>
+                    </div>
 
                     <div class="card-container">
                         <%
                             ObservacaoRepository observacaoRepository = new ObservacaoRepository();
                             ProfessorRepository professorRepository = new ProfessorRepository();
+                            int idPopoverObs = 0;
 
                             for (ObservacaoEntity obs : observacaoRepository.findByMatriculaAluno(matricula)) {
+                                idPopoverObs++;
                         %>
                         <div style="background-color: <%=obs.getCor().getHex()%>" class="card">
                             <div>
-                                <h2><%=obs.getTitulo()%></h2>
-                                <p>realizada por <%=professorRepository.findById(obs.getIdProfessor()).getNome()%></p>
+                                <h2><%=obs.getTitulo()%>
+                                </h2>
+                                <p>realizada por <%=professorRepository.findById(obs.getIdProfessor()).getNome()%>
+                                </p>
                             </div>
-                            <button class="button">Ver detalhes</button>
+                            <button popovertarget="<%="popover-id-"+idPopoverObs%>" class="button">Ver detalhes</button>
                         </div>
-                        <div id="popup-grades" class="popup" popover="auto">
-                            <h1><%=obs.getTitulo()%></h1>
+                        <div id="<%="popover-id-"+idPopoverObs%>" class="popup" popover="auto">
+                            <h1><%=obs.getTitulo()%>
+                            </h1>
                             <div>
                                 <div class="input-major">
                                     <div class="input-container">
                                         <p>Professor</p>
-                                        <input class="text-box" type="text" value="<%=professorRepository.findById(obs.getIdProfessor()).getNome()%>" readonly>
+                                        <input class="text-box" type="text"
+                                            value="<%=professorRepository.findById(obs.getIdProfessor()).getNome()%>"
+                                            readonly>
                                     </div>
 
                                     <div class="input-container">
@@ -202,7 +218,7 @@
                                         <input class="text-box" type="text" value="<%=obs.getObservacao()%>">
                                     </div>
                                 </div>
-                                <button class="button" type="submit">Fechar</button>
+                                <button class="button fat close-popover" type="button">Fechar</button>
                             </div>
                         </div>
                         <%
@@ -213,52 +229,8 @@
             </main>
         </div>
     </div>
-
-    <div id="popup-grades" class="popup" popover="auto">
-        <!-- Apesar de cada table ter um símbolo de nota específico, o POPUP de notas será único -->
-        <h1>Gerenciar notas</h1>
-        <form>
-            <div class="input-major">
-                <div class="email input-container">
-                    <p class="required">Aluno</p>
-                    <select class="text-box" name="" id="">
-                        <option value="" disabled selected>
-                            Selecione um aluno
-                        </option>
-
-                        <optgroup label="1° Ano TECH">
-                            <option value="">6º Ano</option>
-                            <option value="">7º Ano</option>
-                            <option value="">8º Ano</option>
-                            <option value="">9º Ano</option>
-                        </optgroup>
-                    </select>
-                </div>
-
-                <div class="input-container">
-                    <p class="required">Matrícula</p>
-                    <input class="text-box" name="" type="text" value="" readonly>
-                </div>
-
-                <div class="input-container">
-                    <p class="required">N1'</p>
-                    <input class="text-box" name="" type="number" min="0" max="10" step="0.1">
-                </div>
-
-                <div class="input-container">
-                    <p class="required">N2'</p>
-                    <input class="text-box" name="" type="number" min="0" max="10" step="0.1">
-                </div>
-
-                <div class="input-container">
-                    <p class="required">Média final</p>
-                    <input class="text-box" name="" type="text" value="" readonly>
-                </div>
-            </div>
-
-            <button class="button" type="submit">Registrar</button>
-        </form>
-    </div>
 </body>
+
+<script src="${pageContext.request.contextPath}/js/generate-newsletter.js"></script>
 
 </html>

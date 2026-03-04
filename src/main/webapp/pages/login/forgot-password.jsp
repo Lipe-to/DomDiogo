@@ -8,10 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Recuperar senha</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/branding/favicon.png" type="image/x-icon">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sights/login.css">
-
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/variables.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font.css">
@@ -19,11 +18,19 @@
 
 <body id="forgot-password">
     <div class="login-form">
+        <div style="justify-content: center" class="logo">
+            <img src="${pageContext.request.contextPath}/img/branding/icone.png">
+            <img src="${pageContext.request.contextPath}/img/branding/black.png">
+        </div>
         <h1>Recuperar senha</h1>
-        <p><%=request.getAttribute("statusMessage")%></p>
+        <%
+        String errorDisplay = "block";
+        if (request.getAttribute("statusMessage") == null) {
+            errorDisplay = "none";
+        }
+        %>
+        <p class="error-message" style="display: <%=errorDisplay%>;"><%=request.getAttribute("statusMessage")%></p>
         <form action="${pageContext.request.contextPath}/login?action=validarPalavra" method="post">
-            <input type="hidden" name="action" value="validarPalavra">
-
             <div class="input-major">
                 <div class="email input-container">
                     <p class="required">Usuário</p>
@@ -35,10 +42,13 @@
                     <p class="required">Validar identidade</p>
                     <input class="text-box" name="palavra" type="text" placeholder="Insira sua palavra-chave" required>
                 </div>
+                <input type="hidden" name="action" value="validarPalavra">
             </div>
 
             <button class="button" type="submit">Recuperar</button>
         </form>
+        <p id="sign-up-redirect">Lembrou sua senha?<a href="${pageContext.request.contextPath}/index.jsp">Fazer login</a></p>
+    
     </div>
 </body>
 

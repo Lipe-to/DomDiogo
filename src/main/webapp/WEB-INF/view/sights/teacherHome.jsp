@@ -17,6 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Dom Diogo</title>
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/branding/favicon.png" type="image/x-icon">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sights/both.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sights/teacher.css">
@@ -80,12 +81,16 @@
 <div id="major-container">
     <div id="wrap">
         <header>
-            <a href="#"><img class="logo" src="${pageContext.request.contextPath}/img/branding/teste.png"
-                             alt="Logo"></a>
+            <a href="#">
+                <div class="logo">
+                    <img src="${pageContext.request.contextPath}/img/branding/icone.png">
+                    <img src="${pageContext.request.contextPath}/img/branding/white.png">
+                </div>
+            </a>
             <div class="personal-info">
-                <div class="profile-image"></div> <!-- Condicional em JSP se não houver bd de perfil -->
+                <div class="profile-image"></div>
                 <div>
-                    <h3>Neymar Santos</h3>
+                    <h3><%=nome%></h3>
                     <p>Professor</p>
                 </div>
             </div>
@@ -122,16 +127,15 @@
 
             <div id="grades">
                 <h1>Matemática</h1>
-                <select class="select-box">
-                    <option value="">Todas as turmas</option>
-                    <option value="">6º Ano</option>
-                    <option value="">7º Ano</option>
-                    <option value="">8º Ano</option>
-                    <option value="">9º Ano</option>
-                </select>
+                <div class="actions-section-container">
+                    <button type="button">Filtrar</button>
+                    <select class="select-box">
+                        <option value="">Todas as turmas</option>
+                    </select>
+                </div>
 
                 <div class="table-container">
-                    <div class="table-info"> <!-- Contenção da turma -->
+                    <div class="table-info">
                         <div>
                             <h3>Alunos</h3>
                             <sub>Informações e notas</sub>
@@ -157,20 +161,34 @@
                                 <th>Turma</th>
                                 <th>N1'</th>
                                 <th>N2'</th>
-                                <th>Média Final<img class="info" title="(N1' + N2') / 2"
-                                                    src="${pageContext.request.contextPath}/img/svg/info-white.svg"></img>
-                                </th>
+                                <th>Média Final<img class="info" title="(N1' + N2') / 2" src="${pageContext.request.contextPath}/img/svg/info-white.svg"></img></th>
                                 <th>Situação</th>
+                                <th>Ações</th>
                             </tr>
                             </thead>
                             <tbody>
                             <%
                                 NotaRepository notaRepository = new NotaRepository();
-                                List<AlunoNotaDTO> lista = notaRepository.findAlunosComNotasByProfessor(idProfessor);
+                                List<AlunoNotaDTO> lista = notaRepository.findAlunosByProfessor(idProfessor);
                                 int idPopoverGrades = 0;
+                                String situationClass = "";
+                                Boolean temNota = false;
 
                                 for (AlunoNotaDTO item : lista) {
                                     idPopoverGrades++;
+                                    temNota = item.getSituacao().equals("Sem Nota");
+
+                                    if (item.getMedia() == null) {
+                                        situationClass = "";
+                                    }
+                                    else {
+                                        if (item.getMedia() >= 7) {
+                                            situationClass = "approved";
+                                        }
+                                        else {
+                                            situationClass = "failed";
+                                        }
+                                    }
                             %>
                             <tr>
                                 <td><%= item.getMatricula() %></td>
@@ -179,34 +197,44 @@
                                 <td><%= item.getN1() == null ? "-" : item.getN1() %></td>
                                 <td><%= item.getN2() == null ? "-" : item.getN2() %></td>
                                 <td class="<%= item.getSituacaoCss() %>"><%= item.getMedia() == null ? "-" : item.getMedia() %></td>
-                                <td class="situation"><span><%= item.getSituacao() %></span></td>
-                                <td><button popovertarget="popup-grades-<%=idPopoverGrades%>">Editar</button></td>
+                                <td class="situation"><span class="<%=situationClass%>"><%= item.getSituacao() %></span></td>
+                                <td>
+                                    <div class="td-actions">
+                                        <button popovertarget="popup-grades-<%=idPopoverGrades%>">
+                                            <% if (!temNota) {%>
+                                            <img src="${pageContext.request.contextPath}/img/svg/crud/pencil-black.svg">
+                                            <%} else {%>
+                                            <img src="${pageContext.request.contextPath}/img/svg/plus.svg">
+                                            <%}%>
+                                        </button>
+                                    </div>
+                                </td>
                             </tr>
                             <div id="popup-grades-<%=idPopoverGrades%>" class="popup" popover="auto">
                                 <h1>Gerenciar notas</h1>
-                                <form action="${pageContext.request.contextPath}/nota?action=readAll" method="post">
+                                <form action="${pageContext.request.contextPath}/nota?action=update" method="post">
                                     <div class="input-major">
                                         <div class="input-container">
                                             <p class="required">Matrícula</p>
-                                            <input class="text-box" type="text" value="<%=item.getMatricula()%>" readonly>
+                                            <input class="text-box" name="id" type="text" value="<%=item.getMatricula()%>" readonly>
                                         </div>
 
                                         <div class="input-container">
                                             <p class="required">N1'</p>
-                                            <input class="text-box" name=n1 type="number" min="0" max="10" step="0.1">
+                                            <input class="text-box" name=n1 type="number" value="<%=item.getN1()%>" min="0" max="10" step="0.1">
                                         </div>
 
                                         <div class="input-container">
                                             <p class="required">N2'</p>
-                                            <input class="text-box" name="n2" type="number" min="0" max="10" step="0.1">
+                                            <input class="text-box" name="n2" type="number" value="<%=item.getN2()%>" min="0" max="10" step="0.1">
                                         </div>
 
                                         <div class="input-container">
                                             <p class="required">Média final</p>
-                                            <input class="text-box" name="mediaFinal" type="text" value="" readonly>
+                                            <input class="text-box" type="text" readonly>
                                         </div>
                                     </div>
-                                    <button class="button" type="submit">Registrar</button>
+                                    <button class="button fat" type="submit">Atualizar notas</button>
                                 </form>
                             </div>
                             <%
@@ -220,10 +248,12 @@
 
             <div id="observations">
                 <h1>Observações</h1>
-                <button popovertarget="popup-obs" type="button">Adicionar Observação</button>
-                <select class="select-box">
-                    <option value="">Todas as turmas</option>
-                </select>
+                <div class="actions-section-container">
+                    <button popovertarget="popup-obs" type="button">Adicionar Observação</button>
+                    <select class="select-box">
+                        <option value="">Todas as turmas</option>
+                    </select>
+                </div>
 
                 <div class="card-container">
                     <%
@@ -240,7 +270,7 @@
                         <div>
                             <h2><%=obs.getTitulo()%>
                             </h2>
-                            <p>realizada por <%=professorRepository.findById(obs.getIdProfessor()).getNome()%>
+                            <p>direcionada para <%=alunoRepository.findByMatricula(obs.getMatriculaAluno()).getNome()%>
                             </p>
                         </div>
                         <button popovertarget="<%="popover-id-"+idPopoverObs%>" class="button">Ver detalhes</button>
@@ -265,7 +295,6 @@
                             <button class="button fat close-popover" type="button">Fechar</button>
                         </div>
                     </div>
-
                     <%
                         }
                     %>

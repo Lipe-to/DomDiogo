@@ -2,8 +2,21 @@
 
 body {
     background-color: var(--blue);
-    justify-content: end !important;
+    justify-content: center;
 }
+
+.logo {
+    gap: 0.45rem !important;
+}
+
+.logo>:first-child {
+    max-width: 34px;
+}
+
+.logo>:last-child { /* Apenas nas telas de dash */
+    max-width: 130px;
+}
+
 
 #major-container {
     width: 90%;
@@ -11,9 +24,7 @@ body {
 
     display: flex;
     flex-direction: row;
-
-    margin-top: 3%;
-    margin-right: 3%;
+    margin-top: 5%;
 }
 
 #wrap {
@@ -74,17 +85,32 @@ main>*,
     margin: 1% 0;
 }
 
-main .select-box {
-    margin-bottom: 1%;
-}
-
 #grades {
     background-color: var(--white);
-    /*max-height: 500px;*/
 }
 
-main .select-box {
-    margin-top: 0.35%;
+.actions-section-container {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    box-sizing: border-box;
+    gap: 1.25%;
+    margin: 0.35% 0 1%;
+}
+
+.actions-section-container button {
+    border-radius: 5px;
+    border-width: thin;
+    border-style: solid;
+    border-color: #4646462c;
+    background-color: rgba(246, 246, 246, 0.15);
+    color: var(--black);
+    box-shadow: var(--shadow-simple);
+}
+
+.actions-section-container>:nth-child(n) {
+    padding: 0.3% 1% !important;
+    cursor: pointer;
 }
 
 .wrap-for-scroll {
@@ -167,6 +193,10 @@ table td input {
     max-height: none !important;
 }
 
+.table-container sub {
+    font-weight: 400;
+}
+
 .table-container, .card-container {
     background-color: var(--table-background);
     padding: 1% 1.25% 1.5%;
@@ -220,6 +250,10 @@ table td input {
 
 .repr {
     color: var(--red);
+}
+
+aside {
+    display: none !important;
 }
 
 aside {
@@ -546,20 +580,26 @@ header {
     
     background-color: rgb(90, 90, 90);
     
-    color: var(--white);
     background-image: url('../../img/shape/Card.svg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
+.card * {
+    color: var(--card-white);
+}
+
 .card h2 {
-    font-size: 1.2rem;
-    font-weight: 500;
+    font-size: 1.25rem;
+    font-weight: 700;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .card p {
     font-size: 0.75rem;
+    white-space: nowrap;
 }
 
 .card button {
@@ -573,29 +613,33 @@ header {
 }
 
 .td-actions {
-    display: flex;
-    flex-direction: row;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-content: center;
     justify-content: center;
-    align-items: center;
-    gap: 5%;
+    flex-direction: row;
+    gap: 15%;
+}
+
+.td-actions>* {
+    background-color: transparent;
 }
 
 .td-actions button {
     display: flex;
+    padding: 0.25rem;
     border: 0;
     border-radius: 4px;
-    padding: 2%;
     cursor: pointer;
+
+    transition: background-color 0.2s ease-in;
 }
 
-.td-actions .show {
-    background-color: var(--tea-blue);
+.td-actions button:hover {
+    background-color: rgba(0, 0, 0, 0.096);
 }
 
-.td-actions .edit {
-    background-color: var(--orange);
-}
-
-.td-actions .delete {
-    background-color: var(--smooth-red);
+.td-actions img {
+    width: 18px;
+    opacity: 80%;
 }

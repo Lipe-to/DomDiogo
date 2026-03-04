@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dom Diogo</title>
+
+    <link rel="shortcut icon" href="img/branding/favicon.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="css/sights/both.css">
+    <link rel="stylesheet" href="css/sights/teacher.css">
+    <link rel="stylesheet" href="css/popup.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/font.css">
+</head>
+
+<body>
+
+<aside id="sidebar">
+    <ul>
+        <div>
+            <li id="menu-icon-container">
+                <label id="menu-icon" for="menu-checkbox">
+                    <img class="sidebar-icon" src="img/svg/sidebar/menu-burger.svg">
+                </label>
+                <input name="menu-checkbox" id="menu-checkbox" type="checkbox">
+            </li>
+            <p id="menu-text">Menu</p>
+
+            <li class="emphasis">
+                <a href="">
+                    <img class="sidebar-icon" src="img/svg/sidebar/home-emphasis.svg">
+                    <span>Tela Inicial</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="">
+                    <img class="sidebar-icon" src="img/svg/sidebar/dashboard.svg">
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="">
+                    <img class="sidebar-icon" src="img/svg/sidebar/address-book.svg">
+                    <span>Professores</span>
+                </a>
+            </li>
+        </div>
+
+        <li id="sign-out">
+            <button>
+                <img class="sidebar-icon" src="img/svg/sidebar/sign-out.svg">
+                <span>Sair</span>
+            </button>
+        </li>
+    </ul>
+</aside>
+
+<div id="major-container">
+<div id="wrap">
+
+<header>
+    <a href="#">
+        <div class="logo">
+            <img src="img/branding/icone.png">
+            <img src="img/branding/white.png">
+        </div>
+    </a>
+
+    <div class="personal-info">
+        <div class="profile-image"></div>
+        <div>
+            <h3>Nome do Professor</h3>
+            <p>Professor</p>
+        </div>
+    </div>
+</header>
+
+<main>
+
+<div id="front-desk">
+    <div class="castle" id="welcome">
+        <h2>Olá Professor!</h2>
+        <p>Bem vindo de volta!</p>
+    </div>
+
+    <div class="general-statistic">
+        <a href="" class="h2">
+            Visão geral
+            <img class="redirect" src="img/svg/redirect-blue.svg">
+        </a>
+
+        <div>
+            <div>
+                <h3><span>32</span></h3>
+                <span>Total de alunos</span>
+            </div>
+
+            <div>
+                <h3><span>12</span></h3>
+                <span>Total de turmas</span>
+            </div>
+
+            <div>
+                <h3><span class="appr">62</span> %</h3>
+                <span>Alunos aprovados</span>
+            </div>
+
+            <div>
+                <h3><span class="repr">12</span> %</h3>
+                <span>Alunos reprovados</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="grades">
+    <h1>Matemática</h1>
+
+    <div class="actions-section-container">
+        <select class="select-box">
+            <option>Todas as turmas</option>
+            <option>6º Ano</option>
+            <option>7º Ano</option>
+            <option>8º Ano</option>
+            <option>9º Ano</option>
+        </select>
+    </div>
+
+    <div class="table-container">
+
+        <div class="table-info">
+            <div>
+                <h3>Alunos</h3>
+                <sub>Informações e notas</sub>
+            </div>
+
+            <div class="table-actions">
+                <input checked style="display:none;" type="checkbox" id="search-submit">
+                <label for="search-submit">
+                    <img src="img/svg/search.svg">
+                </label>
+
+                <input class="search-box" type="text" placeholder="Pesquisar por matrícula">
+                <button><img src="img/svg/filter.svg"></button>
+                <button popovertarget="popup-grades">
+                    <div>
+                        <img src="img/svg/document.svg">
+                        <span>Atualizar notas</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <div class="table-wrap">
+            <table id="report-card">
+                <thead class="blue">
+                    <tr>
+                        <th>Matrícula</th>
+                        <th>Estudante</th>
+                        <th>Turma</th>
+                        <th>N1'</th>
+                        <th>N2'</th>
+                        <th>Média Final</th>
+                        <th>Situação</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>2023001</td>
+                        <td>Aluno Exemplo</td>
+                        <td>7º Ano</td>
+                        <td>8.5</td>
+                        <td>7.0</td>
+                        <td class="appr">7.75</td>
+                        <td class="situation"><span>Aprovado</span></td>
+                        <td>
+                            <div class="td-actions">
+                                <button class="edit" popovertarget="popup-grades-1"><img src="img/svg/crud/pencil-black.svg"></button>
+                                <button class="edit" popovertarget="popup-grades-1"><img src="img/svg/crud/pencil-black.svg"></button>
+                                <button class="edit" popovertarget="popup-grades-1"><img src="img/svg/crud/pencil-black.svg"></button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<div id="observations">
+    <h1>Observações</h1>
+    <div class="actions-section-container">
+        <button popovertarget="popup-obs" class="add" type="button">Adicionar Observação</button>
+        <select class="select-box">
+            <option>Todas as turmas</option>
+        </select>
+    </div>
+
+    <div class="card-container">
+        <div class="card" style="background-color:#3b82f6;">
+            <div>
+                <h2>Comportamento</h2>
+                <p>direcionada para Aluno Exemplo</p>
+            </div>
+            <button class="button">Ver detalhes</button>
+        </div>
+    </div>
+</div>
+
+</main>
+</div>
+</div>
+
+<div id="popup-obs" class="popup" popover="auto">
+    <h1>Adicionar Observação</h1>
+    <form>
+        <div class="input-major">
+
+            <div class="input-container">
+                <p class="required">Aluno</p>
+                <input class="text-box" required>
+            </div>
+
+            <div class="input-container">
+                <p class="required">Título</p>
+                <input class="text-box" type="text">
+            </div>
+
+            <div class="input-container">
+                <p class="required">Conteúdo</p>
+                <textarea class="text-box" rows="10"></textarea>
+            </div>
+
+            <div class="input-container">
+                <p class="required">Cor</p>
+                <select>
+                    <option>Azul</option>
+                    <option>Vermelho</option>
+                    <option>Roxo</option>
+                    <option>Verde</option>
+                </select>
+            </div>
+
+        </div>
+
+        <button class="button" type="submit">Registrar</button>
+    </form>
+</div>
+
+<script src="js/popover-close.js"></script>
+
+</body>
+</html>

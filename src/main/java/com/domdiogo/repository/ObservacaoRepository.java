@@ -26,7 +26,7 @@ public class ObservacaoRepository {
                         resultSet.getInt("matricula_aluno"),
                         resultSet.getInt("id_professor"),
                         resultSet.getString("observacao"),
-                        ColorPalette.valueOf(resultSet.getString("cor"))
+                        ColorPalette.fromString(resultSet.getString("cor"))
                 );
                 listaObservacoes.add(observacaoEntity);
             }
@@ -125,7 +125,7 @@ public class ObservacaoRepository {
                         resultSet.getInt("matricula_aluno"),
                         resultSet.getInt("id_professor"),
                         resultSet.getString("observacao"),
-                        ColorPalette.valueOf(resultSet.getString("cor"))
+                        ColorPalette.fromString(resultSet.getString("cor"))
                 );
             }
         } catch (SQLException e) {
@@ -152,7 +152,7 @@ public class ObservacaoRepository {
                         resultSet.getInt("matricula_aluno"),
                         resultSet.getInt("id_professor"),
                         resultSet.getString("observacao"),
-                        ColorPalette.valueOf(resultSet.getString("cor"))
+                        ColorPalette.fromString(resultSet.getString("cor"))
                 );
                 listaObservacoes.add(observacaoEntity);
             }

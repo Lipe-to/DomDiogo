@@ -80,6 +80,5 @@ async function gerarBoletim() {
     doc.line(120, finalY, 190, finalY);
     doc.text("Assinatura do Diretor", 120, finalY + 5);
 
-    // Salva o arquivo
     doc.save(`Boletim_${nomeAluno.replace(/\s+/g, '_')}.pdf`);
 }

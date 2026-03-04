@@ -82,7 +82,7 @@ public class AlunoNotaDTO {
     }
 
     public String getSituacao() {
-        if (media == null) return "Sem nota";
+        if (media == null) return "Sem Nota";
         return media >= 7.0 ? "Aprovado" : "Reprovado";
     }
 
@@ -91,8 +91,9 @@ public class AlunoNotaDTO {
         return media >= 7.0 ? "appr" : "repr";
     }
 
-    public double getMediaCalculada() {
-        if (n1 == null || n2 == null) return 0.0;
-        return (n1 + n2) / 2.0;
+    public String getMediaCalculada() {
+        if (n1 == null || n2 == null) return "-";
+        double media = (n1 + n2) / 2.0;
+        return String.format("%.2f", media);
     }
 }

@@ -2,14 +2,14 @@ package com.domdiogo.model;
 
 public class NotaEntity {
     private int id;
-    private double n1;
-    private double n2;
-    private double media;
+    private Double n1;
+    private Double n2;
+    private Double media;
     private int idDisciplina;
     private int matriculaAluno;
     private String nomeDisciplina;
 
-    public NotaEntity(int id, double n1, double n2, double media, int idDisciplina, int matriculaAluno) {
+    public NotaEntity(int id, Double n1, Double n2, Double media, int idDisciplina, int matriculaAluno) {
         this.id = id;
         this.n1 = n1;
         this.n2 = n2;
@@ -18,7 +18,7 @@ public class NotaEntity {
         this.matriculaAluno = matriculaAluno;
     }
 
-    public NotaEntity(int id, double n1, double n2, double media, int idDisciplina, int matriculaAluno, String nomeDisciplina) {
+    public NotaEntity(int id, Double n1, Double n2, Double media, int idDisciplina, int matriculaAluno, String nomeDisciplina) {
         this.id = id;
         this.n1 = n1;
         this.n2 = n2;
@@ -28,7 +28,7 @@ public class NotaEntity {
         this.nomeDisciplina = nomeDisciplina;
     }
 
-    public NotaEntity(int id, double n1, double n2) {
+    public NotaEntity(int id, Double n1, Double n2) {
         this.id = id;
         this.n1 = n1;
         this.n2 = n2;
@@ -38,16 +38,24 @@ public class NotaEntity {
         return this.id;
     }
 
-    public double getN1() {
+    public Double getN1() {
         return this.n1;
     }
 
-    public double getN2() {
+    public Double getN2() {
         return this.n2;
     }
 
-    public double getMedia() {
+    public Double getMedia() {
         return this.media;
+    }
+
+    public String getMediaCalculada() {
+        if (n1 == null || n2 == null) {
+            return "-";
+        }
+        double media = (n1 + n2) / 2;
+        return String.format("%.2f", media);
     }
 
     public int getIdDisciplina() {

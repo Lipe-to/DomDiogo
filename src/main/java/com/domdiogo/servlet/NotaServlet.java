@@ -26,10 +26,10 @@ public class NotaServlet extends HttpServlet {
         if ("readAll".equals(action)) {
             List<NotaEntity> listaNotas = repository.readAll();
             request.setAttribute("listaNotas", listaNotas);
-            redirect = "/WEB-INF/notas.jsp";
+            redirect = "/WEB-INF/view/sights/teacherHome.jsp";
         } else {
             ServletHelper.configureStatus(request, "Ação inexistente.", StatusColor.RED);
-            redirect = "/WEB-INF/home.jsp";
+            redirect = "/WEB-INF/view/sights/teacherHome.jsp";
         }
 
         ServletHelper.redirect(request, response, redirect);
@@ -41,10 +41,21 @@ public class NotaServlet extends HttpServlet {
 
         switch (action) {
             case "update":
+                String n1Param = request.getParameter("n1");
+                String n2Param = request.getParameter("n2");
+
+                Double n1 = (n1Param == null || n1Param.isBlank())
+                        ? null
+                        : Double.valueOf(n1Param);
+
+                Double n2 = (n2Param == null || n2Param.isBlank())
+                        ? null
+                        : Double.valueOf(n2Param);
+
                 NotaEntity notaUpdate = new NotaEntity(
                         Integer.parseInt(request.getParameter("id")),
-                        Double.parseDouble(request.getParameter("n1")),
-                        Double.parseDouble(request.getParameter("n2"))
+                        n1,
+                        n2
                 );
                 Status updateStatus = repository.update(notaUpdate);
                 if (updateStatus == Status.SUCCESS) {
@@ -68,7 +79,7 @@ public class NotaServlet extends HttpServlet {
 
             default:
                 ServletHelper.configureStatus(request, "Ação inválida.", StatusColor.RED);
-                redirect = "/WEB-INF/home.jsp";
+                redirect = "/WEB-INF/view/sights/teacherHome.jsp";
                 break;
         }
 

@@ -5,9 +5,12 @@
 
 * {
   font-family: "Montserrat", sans-serif;
-  /* font-family: "Lato", sans-serif; */
   font-optical-sizing: auto;
   font-style: normal;
+}
+
+h1, h2, h3, p {
+  color: var(--black);
 }
 
 p, a {
