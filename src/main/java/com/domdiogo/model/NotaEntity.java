@@ -2,8 +2,8 @@ package com.domdiogo.model;
 
 public class NotaEntity {
     private int id;
-    private double n1;
-    private double n2;
+    private Double n1;
+    private Double n2;
     private double media;
     private int idDisciplina;
     private int matriculaAluno;
@@ -38,16 +38,22 @@ public class NotaEntity {
         return this.id;
     }
 
-    public double getN1() {
+    public Double getN1() {
         return this.n1;
     }
 
-    public double getN2() {
+    public Double getN2() {
         return this.n2;
     }
 
-    public double getMedia() {
+    public Double getMedia() {
         return this.media;
+    }
+
+    public String getMediaCalculada() {
+        if (n1 == null && n2 == null) return "-";
+        double media = (n1 + n2) / 2.0;
+        return String.format("%.2f", media);
     }
 
     public int getIdDisciplina() {
