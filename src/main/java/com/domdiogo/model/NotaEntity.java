@@ -4,12 +4,12 @@ public class NotaEntity {
     private int id;
     private Double n1;
     private Double n2;
-    private double media;
+    private Double media;
     private int idDisciplina;
     private int matriculaAluno;
     private String nomeDisciplina;
 
-    public NotaEntity(int id, double n1, double n2, double media, int idDisciplina, int matriculaAluno) {
+    public NotaEntity(int id, Double n1, Double n2, Double media, int idDisciplina, int matriculaAluno) {
         this.id = id;
         this.n1 = n1;
         this.n2 = n2;
@@ -18,7 +18,7 @@ public class NotaEntity {
         this.matriculaAluno = matriculaAluno;
     }
 
-    public NotaEntity(int id, double n1, double n2, double media, int idDisciplina, int matriculaAluno, String nomeDisciplina) {
+    public NotaEntity(int id, Double n1, Double n2, Double media, int idDisciplina, int matriculaAluno, String nomeDisciplina) {
         this.id = id;
         this.n1 = n1;
         this.n2 = n2;
@@ -28,7 +28,7 @@ public class NotaEntity {
         this.nomeDisciplina = nomeDisciplina;
     }
 
-    public NotaEntity(int id, double n1, double n2) {
+    public NotaEntity(int id, Double n1, Double n2) {
         this.id = id;
         this.n1 = n1;
         this.n2 = n2;
@@ -51,8 +51,10 @@ public class NotaEntity {
     }
 
     public String getMediaCalculada() {
-        if (n1 == null && n2 == null) return "-";
-        double media = (n1 + n2) / 2.0;
+        if (n1 == null || n2 == null) {
+            return "-";
+        }
+        double media = (n1 + n2) / 2;
         return String.format("%.2f", media);
     }
 
