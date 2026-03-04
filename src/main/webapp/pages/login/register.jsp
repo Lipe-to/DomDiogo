@@ -16,8 +16,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font.css">
 </head>
 
-<body id="sign-up">
-    <div class="login-form">
+<body style="overflow-y: auto" id="sign-up">
+    <div style="margin-top: 10%" class="login-form">
         <div style="justify-content: center" class="logo">
             <img src="${pageContext.request.contextPath}/img/branding/icone.png">
             <img src="${pageContext.request.contextPath}/img/branding/black.png">
@@ -36,23 +36,21 @@
                     <div class="input-holder">
                         <button class="show-password" name="toggle" type="button">
                             <img id="open" src="${pageContext.request.contextPath}/img/svg/eye.svg" alt="Mostrar senha">
-                            <img id="closed" style="display: none;"
-                                 src="${pageContext.request.contextPath}/img/svg/eye-crossed.svg" alt="Ocultar senha">
+                            <img id="closed" style="display: none;" src="${pageContext.request.contextPath}/img/svg/eye-crossed.svg" alt="Ocultar senha">
                         </button>
-                        <input class="text-box" name="senha" type="password" placeholder="Insira sua senha"
-                               pattern=".{8,}" required>
+                        <input id="password-first-validation" class="text-box" name="senha" type="password" placeholder="Insira sua senha"
+                            pattern=".{8,}" required>
                     </div>
                 </div>
 
-                <div class="input-container is-valid">
-                    <p class="required">Confirmar senha</p>
-                    <input class="text-box" type="password" placeholder="Insira sua senha novamente"
-                           required>
+                <div id="password-validation" class="input-container is-valid">
+                    <p id="password-validation-p" class="required-ever">Confirmar senha</p>
+                    <input id="password-second-validation" class="text-box" type="password" placeholder="Insira sua senha novamente"
+                        required>
                 </div>
 
                 <div id="key-word" class="input-container warning">
-                    <p class="required">
-                        Comprovação de identidade
+                    <p class="required">Comprovação de identidade
                         <span class="tooltip msg-identity">
                             <img class="info" src="${pageContext.request.contextPath}/img/svg/info.svg" alt="Informação">
                         </span>
@@ -62,7 +60,7 @@
                 </div>
             </div>
 
-            <button class="button" type="submit">Registrar</button>
+            <button id="button-submit" class="button" type="submit" disabled>Registrar</button>
         </form>
         <p id="sign-up-redirect">Já possui uma conta?<a href="${pageContext.request.contextPath}/index.jsp">Fazer login</a></p>
 
@@ -70,5 +68,6 @@
 </body>
 
 <script src="${pageContext.request.contextPath}/js/password.js"></script>
+<script src="${pageContext.request.contextPath}/js/password-validation.js"></script>
 
 </html>

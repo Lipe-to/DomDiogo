@@ -24,36 +24,40 @@
         </div>
         <h1>Nova senha</h1>
         <form action="${pageContext.request.contextPath}/login" method="post">
-            <input type="hidden" name="action" value="resetPassword">
-            <input type="hidden" name="usuario" value="<%=request.getAttribute("usuario")%>">
-            <input type="hidden" name="userId" value="${userId}">
-
             <div class="input-major">
-                <div class="input-container">
-                    <p class="required">Nova senha</p>
+                <div id="create-password" class="input-container warning">
+                    <p class="required">Atualize sua senha</p>
                     <div class="input-holder">
                         <button class="show-password" name="toggle" type="button">
                             <img id="open" src="${pageContext.request.contextPath}/img/svg/eye.svg" alt="Mostrar senha">
                             <img id="closed" style="display: none;" src="${pageContext.request.contextPath}/img/svg/eye-crossed.svg" alt="Ocultar senha">
                         </button>
-                        <input class="text-box" id="senha" name="senha" type="password" placeholder="Insira sua senha" pattern=".{8,}" required>
+                        <input id="password-first-validation" class="text-box validation" id="senha" name="senha" type="password" placeholder="Insira sua senha" pattern=".{8,}" required>
                     </div>
                 </div>
 
-                <div class="input-container">
-                    <p class="required">Confirmar senha</p>
-                    <input class="text-box" id="confirmarSenha" name="confirmarSenha" type="password" placeholder="Insira sua senha novamente" required>
+                <div id="password-validation" class="input-container is-valid">
+                    <p id="password-validation-p" class="required-ever">Confirmar senha</p>
+                    <input id="password-second-validation" class="text-box validation" name="confirmarSenha" type="password" placeholder="Insira sua senha novamente" required>
                 </div>
 
-                <div class="input-container">
+                <div id="key-word" class="input-container warning">
                     <p>Nova palavra-chave (opcional)</p>
-                    <input class="text-box" id="palavra" name="palavra" type="text" placeholder="Insira sua nova palavra-chave (opcional)">
+                    <input class="text-box validation" id="palavra" name="palavra" type="text" placeholder="Insira sua nova palavra-chave"
+                    pattern=".{3,}">
                 </div>
+
+                <input type="hidden" name="action" value="resetPassword">
+                <input type="hidden" name="usuario" value="<%=request.getAttribute("usuario")%>">
+                <input type="hidden" name="userId" value="${userId}">
             </div>
 
-            <button class="button" type="submit">Recuperar</button>
+            <button id="button-submit" class="button" type="submit">Recuperar</button>
         </form>
     </div>
 </body>
+
+<script src="${pageContext.request.contextPath}/js/password.js"></script>
+<script src="${pageContext.request.contextPath}/js/password-validation.js"></script>
 
 </html>

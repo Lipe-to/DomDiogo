@@ -1,236 +1,292 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="java.util.List" %>
-<%@ page import="com.domdiogo.model.AlunoEntity" %>
-<%@ page import="com.domdiogo.model.NotaEntity" %>
-<%@ page import="com.domdiogo.model.ObservacaoEntity" %>
-<%@ page import="com.domdiogo.model.ColorPalette" %>
-
-<%
-    // Recuperação dos dados enviados pelo AdminServlet
-    Integer totalAlunos = (Integer) request.getAttribute("totalAlunos");
-    Integer totalTurmas = (Integer) request.getAttribute("totalTurmas");
-    String percApp = (String) request.getAttribute("percAprovados");
-    String percRep = (String) request.getAttribute("percReprovados");
-
-    List<AlunoEntity> listaAlunos = (List<AlunoEntity>) request.getAttribute("listaAlunos");
-    List<NotaEntity> listaNotas = (List<NotaEntity>) request.getAttribute("listaNotas");
-    List<ObservacaoEntity> listaObservacoes = (List<ObservacaoEntity>) request.getAttribute("listaObservacoes");
-
-    String context = request.getContextPath();
-%>
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Dom Diogo - Admin</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <title>Dom Diogo</title>
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/branding/favicon.png" type="image/x-icon">
 
-    <link rel="stylesheet" href="<%= context %>/css/sights/both.css">
-    <link rel="stylesheet" href="<%= context %>/css/sights/teacher.css">
-    <link rel="stylesheet" href="<%= context %>/css/popup.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sights/both.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sights/teacher.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/popup.css">
 
-    <link rel="stylesheet" href="<%= context %>/css/style.css">
-    <link rel="stylesheet" href="<%= context %>/css/variables.css">
-    <link rel="stylesheet" href="<%= context %>/css/font.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/variables.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font.css">
 </head>
 
 <body>
-<aside id="sidebar">
-    <ul>
-        <div>
-            <li id="menu-icon-container">
-                <label id="menu-icon" for="menu-checkbox">
-                    <img class="sidebar-icon" src="<%= context %>/img/svg/sidebar/menu-burger.svg">
-                </label>
-                <input name="menu-checkbox" id="menu-checkbox" type="checkbox">
-            </li>
-            <p id="menu-text">Menu</p>
-            <li class="emphasis">
-                <a href="<%= context %>/adminHome">
-                    <img class="sidebar-icon" src="<%= context %>/img/svg/sidebar/home-emphasis.svg" alt="">
-                    <span>Tela Inicial</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img class="sidebar-icon" src="<%= context %>/img/svg/sidebar/dashboard.svg" alt="">
-                    <span>Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img class="sidebar-icon" src="<%= context %>/img/svg/sidebar/address-book.svg" alt="">
-                    <span>Professores</span>
-                </a>
-            </li>
-        </div>
-        <li id="sign-out">
-            <button onclick="window.location.href='<%= context %>/index.jsp'">
-                <img class="sidebar-icon" src="<%= context %>/img/svg/sidebar/sign-out.svg" alt="">
-                <span>Sair</span>
-            </button>
-        </li>
-    </ul>
-</aside>
-
-<div id="major-container">
-    <div id="wrap">
-        <header>
-            <a href="#"><img class="logo" src="<%= context %>/img/branding/teste.png" alt="Logo"></a>
-            <div class="personal-info">
-                <div class="profile-image"></div>
-                <div>
-                    <h3>Administrador</h3>
-                    <p>Gestão Escolar</p>
-                </div>
+    <aside id="sidebar"> <!-- Position fixed ! -->
+        <ul>
+            <div>
+                <li id="menu-icon-container">
+                    <label id="menu-icon" for="menu-checkbox">
+                        <img class="sidebar-icon" src="${pageContext.request.contextPath}/img/svg/sidebar/menu-burger.svg">
+                    </label>
+                    <input name="menu-checkbox" id="menu-checkbox" type="checkbox">
+                </li>
+                <p id="menu-text">Menu</p>
+                <li class="emphasis">
+                    <a href="">
+                        <img class="sidebar-icon" src="${pageContext.request.contextPath}/img/svg/sidebar/home-emphasis.svg" alt="">
+                        <span>Tela Inicial</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <img class="sidebar-icon" src="${pageContext.request.contextPath}/img/svg/sidebar/address-book.svg" alt="">
+                        <span>Professores</span>
+                    </a>
+                </li>
             </div>
-        </header>
+            <li id="sign-out">
+                <button>
+                    <img class="sidebar-icon" src="${pageContext.request.contextPath}/img/svg/sidebar/sign-out.svg" alt="">
+                    <span>Sair</span>
+                </button>
+            </li>
+        </ul>
+    </aside>
 
-        <main>
-            <div id="front-desk">
-                <div class="castle" id="welcome">
-                    <h2>Olá, administrador!</h2>
-                    <p>Bem vindo de volta!</p>
-                </div>
-                <div class="general-statistic">
-                    <a href="" class="h2">Visão geral <img class="redirect" src="<%= context %>/img/svg/redirect-blue.svg" alt=""></a>
+    <div id="major-container">
+        <div id="wrap">
+            <header>
+                <a href="#"><img class="logo" src="${pageContext.request.contextPath}/img/branding/teste.png" alt="Logo"></a>
+                <div class="personal-info">
+                    <img src="${pageContext.request.contextPath}/img/neymar.png" alt=""> <!-- Condicional em JSP se não houver bd de perfil -->
                     <div>
-                        <div>
-                            <h3><span><%= totalAlunos != null ? totalAlunos : 0 %></span></h3>
-                            <span>Total de alunos</span>
-                        </div>
-                        <div>
-                            <h3><span><%= totalTurmas != null ? totalTurmas : 0 %></span></h3>
-                            <span>Total de turmas</span>
-                        </div>
-                        <div>
-                            <h3><span class="appr"><%= percApp != null ? percApp : "0.0" %></span> %</h3>
-                            <span>Alunos aprovados</span>
-                        </div>
-                        <div>
-                            <h3><span class="repr"><%= percRep != null ? percRep : "0.0" %></span> %</h3>
-                            <span>Alunos reprovados</span>
-                        </div>
+                        <h3>Neymar Santos</h3>
+                        <p>Aluno</p>
                     </div>
                 </div>
-            </div>
+            </header>
 
-            <div id="grades">
-                <h1>Alunos</h1>
-                <div class="wrap-for-scroll">
-                    <div class="table-container">
-                        <div class="table-info">
+            <main>
+                <div id="front-desk">
+                    <div class="castle" id="welcome">
+                        <h2>Olá Kesler!</h2>
+                        <p>Bem vindo de volta!</p>
+                    </div>
+                    <div class="general-statistic">
+                        <h2>Visão geral</h2>
+                        <div>
                             <div>
-                                <h3>Informações pessoais</h3>
-                                <sub>Dados sensíveis</sub>
+                                <h3><span>32</span></h3>
+                                <span>Total de alunos</span>
+                            </div>
+                            <div>
+                                <h3><span>8,1</span></h3>
+                                <span>Total de turmas</span>
+                            </div>
+                            <div>
+                                <h3><span>12</span> %</h3>
+                                <span>Alunos reprovados</span>
+                            </div>
+                            <div>
+                                <h3><span>12</span> %</h3>
+                                <span>Alunos reprovados</span>
                             </div>
                         </div>
-                        <div class="table-wrap">
-                            <table>
-                                <thead class="blue">
-                                <tr>
-                                    <th>Estudante</th>
-                                    <th>Usuário</th>
-                                    <th>Senha</th>
-                                    <th>Ações</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <% if (listaAlunos != null) {
-                                    for (AlunoEntity aluno : listaAlunos) { %>
-                                <tr>
-                                    <td><%= aluno.getNome() %></td>
-                                    <td><%= aluno.getUsuario() %></td>
-                                    <td>●●●●●●●●</td>
-                                    <td>
-                                        <div class="td-actions">
-                                            <button class="show"><img src="<%= context %>/img/svg/crud/eye.svg"></button>
-                                            <button class="edit"><img src="<%= context %>/img/svg/crud/pencil.svg"></button>
-                                            <button class="delete"><img src="<%= context %>/img/svg/crud/trash.svg"></button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <% } } %>
-                                </tbody>
-                            </table>
-                        </div>
                     </div>
+                </div>
+
+                <div id="grades">
+                    <h1>Boletim</h1>
+                    <select class="select-box">
+                        <option value="">Todas as matérias</option>
+                        <option value="">6º Ano</option>
+                        <option value="">7º Ano</option>
+                        <option value="">8º Ano</option>
+                        <option value="">9º Ano</option>
+                    </select>
 
                     <div class="table-container">
-                        <div class="table-info">
+                        <div class="table-info"> <!-- Contenção da turma -->
                             <div>
-                                <h3>Informações acadêmicas</h3>
-                                <sub>Geral</sub>
+                                <h3>2° Série G Tech</h3>
+                                <sub>Alunos</sub>
                             </div>
                             <div class="table-actions">
-                                <form action="<%= context %>/adminHome" method="get" style="display: flex;">
-                                    <input class="search-box" type="text" name="materia" placeholder="Filtrar disciplina">
-                                    <button type="submit" style="display: none;"></button>
-                                </form>
+                                <input checked style="display: none;" type="checkbox" id="search-submit">
+                                <label for="search-submit"><img src="${pageContext.request.contextPath}/img/svg/search.svg" alt=""></label>
+                                <input class="search-box" type="text" placeholder="Pesquisar por matéria">
+                                <button title="Filtrar"><img src="${pageContext.request.contextPath}/img/svg/filter.svg" alt="Filtrar"></button>
+                                <button title="Gerenciar notas" popovertarget="popup-grades">
+                                    <div><img src="${pageContext.request.contextPath}/img/svg/document.svg"><span>Extrair boletim</span></div>
+                                </button>
                             </div>
                         </div>
                         <div class="table-wrap">
-                            <table>
-                                <thead class="green">
-                                <tr>
-                                    <th>Disciplina</th>
-                                    <th>Matrícula</th>
-                                    <th>N1'</th>
-                                    <th>N2'</th>
-                                    <th>Média Final</th>
-                                    <th>Situação</th>
-                                </tr>
+                            <table id="report-card">
+                                <thead>
+                                    <tr>
+                                        <th>Matéria</th>
+                                        <th>N1'</th>
+                                        <th>N2'</th>
+                                        <th>Média Final<img class="info" title="(N1' + N2') / 2"
+                                                src="${pageContext.request.contextPath}/img/svg/info-white.svg"></img></th>
+                                        <th>Situação</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <% if (listaNotas != null) {
-                                    for (NotaEntity nota : listaNotas) {
-                                        double media = (nota.getN1() + nota.getN2()) / 2.0; %>
-                                <tr>
-                                    <td><%= nota.getNomeDisciplina() %></td>
-                                    <td><%= nota.getMatriculaAluno() %></td>
-                                    <td><%= String.format("%.1f", nota.getN1()) %></td>
-                                    <td><%= String.format("%.1f", nota.getN2()) %></td>
-                                    <td><%= String.format("%.1f", media) %></td>
-                                    <td class="situation">
-                                                    <span class="<%= media >= 7.0 ? "approved" : "failed" %>">
-                                                        <%= media >= 7.0 ? "Aprovado" : "Reprovado" %>
-                                                    </span>
-                                    </td>
-                                </tr>
-                                <% } } %>
+                                    <tr>
+                                        <td>Matemática</td>
+                                        <td>8,5</td>
+                                        <td>7,5</td>
+                                        <td class="appr">8</td>
+                                        <td class="situation"><span class="approved">Aprovado</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Português</td>
+                                        <td>6</td>
+                                        <td>6,5</td>
+                                        <td class="repr">6</td>
+                                        <td class="situation"><span class="failed">Reprovado</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Física</td>
+                                        <td>7</td>
+                                        <td>9</td>
+                                        <td class="appr">8</td>
+                                        <td class="situation"><span class="approved">Aprovado</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Química</td>
+                                        <td>5,5</td>
+                                        <td>7</td>
+                                        <td class="repr">6</td>
+                                        <td class="situation"><span class="failed">Reprovado</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>História</td>
+                                        <td>9</td>
+                                        <td>8</td>
+                                        <td class="appr">8,5</td>
+                                        <td class="situation"><span class="approved">Aprovado</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Geografia</td>
+                                        <td>6</td>
+                                        <td>7</td>
+                                        <td class="appr">7</td>
+                                        <td class="situation"><span class="approved">Aprovado</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Biologia</td>
+                                        <td>4</td>
+                                        <td>6</td>
+                                        <td class="repr">5</td>
+                                        <td class="situation"><span class="failed">Reprovado</span></td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div id="observations">
-                <h1>Observações</h1>
-                <div class="card-container">
-                    <% if (listaObservacoes != null) {
-                        for (ObservacaoEntity obs : listaObservacoes) {
-                            String corClass = "";
-                            if (obs.getCor() != null) {
-                                corClass = obs.getCor().name().toLowerCase().replace("_", "-");
-                            }
-                    %>
-                    <div class="card <%= corClass %>">
-                        <div>
-                            <h2><%= obs.getTitulo() %></h2>
-                            <p>Professor ID: <%= obs.getIdProfessor() %></p>
+                <div id="observations">
+                    <h1>Observações</h1>
+                    <select class="select-box">
+                        <option value="">Todos os professores</option>
+                        <option value="">Daniel Lima</option>
+                        <option value="">Kesler Santos</option>
+                        <option value="">Mariana Lavinia</option>
+                        <option value="">David Santos</option>
+                    </select>
+
+                    <div class="card-container">
+                        <div class="card">
+                            <div>
+                                <h2>Análise individual</h2>
+                                <p>realizada por Daniel Alves</p>
+                            </div>
+                            <button class="button">Ver detalhes</button>
                         </div>
-                        <button class="button">Ver detalhes</button>
+
+                        <div class="card">
+                            <div>
+                                <h2>Análise individual</h2>
+                                <p>realizada por Daniel Alves</p>
+                            </div>
+                            <button class="button">Ver detalhes</button>
+                        </div>
+                        <div class="card">
+                            <div>
+                                <h2>Análise individual</h2>
+                                <p>realizada por Daniel Alves</p>
+                            </div>
+                            <button class="button">Ver detalhes</button>
+                        </div>
+                        <div class="card">
+                            <div>
+                                <h2>Análise individual</h2>
+                                <p>realizada por Daniel Alves</p>
+                            </div>
+                            <button class="button">Ver detalhes</button>
+                        </div>
+                        <div class="card">
+                            <div>
+                                <h2>Análise individual</h2>
+                                <p>realizada por Daniel Alves</p>
+                            </div>
+                            <button class="button">Ver detalhes</button>
+                        </div>
+
+
                     </div>
-                    <% } } %>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div id="popup-grades" class="popup" popover="auto">
+        <h1>Gerenciar notas</h1>
+        <form action="" method="">
+            <div class="input-major">
+                <div class="email input-container">
+                    <p class="required">Aluno</p>
+                    <select class="text-box" name="" id="">
+                        <option value="" disabled selected>
+                            Selecione um aluno
+                        </option>
+
+                        <optgroup label="1° Ano TECH">
+                            <option value="">6º Ano</option>
+                            <option value="">7º Ano</option>
+                            <option value="">8º Ano</option>
+                            <option value="">9º Ano</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="input-container">
+                    <p class="required">Matrícula</p>
+                    <input class="text-box" name="" type="text" value="" readonly>
+                </div>
+
+                <div class="input-container">
+                    <p class="required">N1'</p>
+                    <input class="text-box" name="" type="number" min="0" max="10" step="0.1">
+                </div>
+
+                <div class="input-container">
+                    <p class="required">N2'</p>
+                    <input class="text-box" name="" type="number" min="0" max="10" step="0.1">
+                </div>
+
+                <div class="input-container">
+                    <p class="required">Média final</p>
+                    <input class="text-box" name="" type="text" value="" readonly>
                 </div>
             </div>
-        </main>
+
+            <button class="button" type="submit">Registrar</button>
+        </form>
     </div>
-</div>
 </body>
+
 </html>

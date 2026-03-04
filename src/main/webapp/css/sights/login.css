@@ -167,7 +167,8 @@ body>:first-child {
     margin-bottom: 5%;
 }
 
-.required::after {
+.required::after,
+.required-ever::after {
     content: "*";
     color: var(--red);
     margin-left: 0.75%;
@@ -179,18 +180,18 @@ input.is-valid:valid {
     border-color: var(--lake-green);
 }
 
-input.is-valid:invalid {
+input.is-valid:invalid, input.invalid  {
     border-color: var(--red);
 }
 
-.input-container:has(input:valid) .required::after {
+.input-container:has(input:valid) .required::after,
+.required-ever.valid::after  {
     opacity: 0;
 }
 
 .error-message {
     margin-bottom: 5%;
     transform: translateY(-90%);
-    
 }
 
 .email::after,
@@ -204,11 +205,14 @@ input.is-valid:invalid {
 }
 
 .email::after,
+/* .wrong-password-validation::after, */
 #create-password::after,
 #key-word::after {
     display: none;
 }
+
 .email::after,
+.wrong-password-validation::after,
 #create-password::after,
 #key-word::after {
     font-size: 0.9rem;
@@ -223,6 +227,7 @@ input.is-valid:invalid {
 }
 
 .email:has(input:invalid)::after,
+/* .wrong-password-validation:has(input:invalid)::after, */
 #create-password:has(input:invalid)::after,
 #key-word:has(input:invalid)::after {
     display: block;
@@ -230,6 +235,10 @@ input.is-valid:invalid {
 
 .email::after {
     content: "Por favor, insira um e-mail válido";
+}
+
+.wrong-password-validation::after {
+    content: "As senhas não conferem";
 }
 
 #create-password::after {

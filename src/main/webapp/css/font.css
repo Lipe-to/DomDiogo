@@ -9,6 +9,10 @@
   font-style: normal;
 }
 
+h1, h2, h3, p {
+  color: var(--black);
+}
+
 p, a {
   font-size: 1.05rem;
   font-weight: 450;
