@@ -17,6 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Dom Diogo</title>
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/branding/favicon.png" type="image/x-icon">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sights/both.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sights/teacher.css">

@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Dom Diogo</title>
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/branding/favicon.png" type="image/x-icon">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sights/both.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sights/teacher.css">
@@ -243,7 +244,6 @@
     </div>
 
     <div id="popup-grades" class="popup" popover="auto">
-        <!-- Apesar de cada table ter um símbolo de nota específico, o POPUP de notas será único -->
         <h1>Gerenciar notas</h1>
         <form action="" method="">
             <div class="input-major">

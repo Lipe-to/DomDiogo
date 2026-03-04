@@ -16,6 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Dom Diogo</title>
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/branding/favicon.png" type="image/x-icon">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sights/both.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sights/teacher.css">
@@ -130,7 +131,7 @@
                                 <label for="search-submit"><img src="${pageContext.request.contextPath}/img/svg/search.svg" alt=""></label>
                                 <input class="search-box" type="text" placeholder="Pesquisar por matéria">
                                 <button title="Filtrar"><img src="${pageContext.request.contextPath}/img/svg/filter.svg" alt="Filtrar"></button>
-                                <button title="Gerenciar notas" popovertarget="popup-grades">
+                                <button onclick="gerarBoletim()" title="Gerenciar notas" popovertarget="popup-grades">
                                     <div><img src="${pageContext.request.contextPath}/img/svg/document.svg"><span>Extrair boletim</span></div>
                                 </button>
                             </div>
@@ -220,5 +221,7 @@
         </div>
     </div>
 </body>
+
+<script src="${pageContext.request.contextPath}/js/generate-newsletter.js"></script>
 
 </html>
