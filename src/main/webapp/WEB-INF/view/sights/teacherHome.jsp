@@ -127,16 +127,15 @@
 
             <div id="grades">
                 <h1>Matemática</h1>
-                <select class="select-box">
-                    <option value="">Todas as turmas</option>
-                    <option value="">6º Ano</option>
-                    <option value="">7º Ano</option>
-                    <option value="">8º Ano</option>
-                    <option value="">9º Ano</option>
-                </select>
+                <div class="actions-section-container">
+                    <button type="button">Filtrar</button>
+                    <select class="select-box">
+                        <option value="">Todas as turmas</option>
+                    </select>
+                </div>
 
                 <div class="table-container">
-                    <div class="table-info"> <!-- Contenção da turma -->
+                    <div class="table-info">
                         <div>
                             <h3>Alunos</h3>
                             <sub>Informações e notas</sub>
@@ -162,20 +161,34 @@
                                 <th>Turma</th>
                                 <th>N1'</th>
                                 <th>N2'</th>
-                                <th>Média Final<img class="info" title="(N1' + N2') / 2"
-                                                    src="${pageContext.request.contextPath}/img/svg/info-white.svg"></img>
-                                </th>
+                                <th>Média Final<img class="info" title="(N1' + N2') / 2" src="${pageContext.request.contextPath}/img/svg/info-white.svg"></img></th>
                                 <th>Situação</th>
+                                <th>Ações</th>
                             </tr>
                             </thead>
                             <tbody>
                             <%
                                 NotaRepository notaRepository = new NotaRepository();
-                                List<AlunoNotaDTO> lista = notaRepository.findAlunosComNotasByProfessor(idProfessor);
+                                List<AlunoNotaDTO> lista = notaRepository.findAlunosByProfessor(idProfessor);
                                 int idPopoverGrades = 0;
+                                String situationClass = "";
+                                Boolean temNota = false;
 
                                 for (AlunoNotaDTO item : lista) {
                                     idPopoverGrades++;
+                                    temNota = item.getSituacao().equals("Sem Nota");
+
+                                    if (item.getMedia() == null) {
+                                        situationClass = "";
+                                    }
+                                    else {
+                                        if (item.getMedia() >= 7) {
+                                            situationClass = "approved";
+                                        }
+                                        else {
+                                            situationClass = "failed";
+                                        }
+                                    }
                             %>
                             <tr>
                                 <td><%= item.getMatricula() %></td>
@@ -184,8 +197,18 @@
                                 <td><%= item.getN1() == null ? "-" : item.getN1() %></td>
                                 <td><%= item.getN2() == null ? "-" : item.getN2() %></td>
                                 <td class="<%= item.getSituacaoCss() %>"><%= item.getMedia() == null ? "-" : item.getMedia() %></td>
-                                <td class="situation"><span><%= item.getSituacao() %></span></td>
-                                <td><button popovertarget="popup-grades-<%=idPopoverGrades%>">Editar</button></td>
+                                <td class="situation"><span class="<%=situationClass%>"><%= item.getSituacao() %></span></td>
+                                <td>
+                                    <div class="td-actions">
+                                        <button popovertarget="popup-grades-<%=idPopoverGrades%>">
+                                            <% if (!temNota) {%>
+                                            <img src="${pageContext.request.contextPath}/img/svg/crud/pencil-black.svg">
+                                            <%} else {%>
+                                            <img src="${pageContext.request.contextPath}/img/svg/plus.svg">
+                                            <%}%>
+                                        </button>
+                                    </div>
+                                </td>
                             </tr>
                             <div id="popup-grades-<%=idPopoverGrades%>" class="popup" popover="auto">
                                 <h1>Gerenciar notas</h1>
@@ -225,10 +248,12 @@
 
             <div id="observations">
                 <h1>Observações</h1>
-                <button popovertarget="popup-obs" type="button">Adicionar Observação</button>
-                <select class="select-box">
-                    <option value="">Todas as turmas</option>
-                </select>
+                <div class="actions-section-container">
+                    <button popovertarget="popup-obs" type="button">Adicionar Observação</button>
+                    <select class="select-box">
+                        <option value="">Todas as turmas</option>
+                    </select>
+                </div>
 
                 <div class="card-container">
                     <%
@@ -270,7 +295,6 @@
                             <button class="button fat close-popover" type="button">Fechar</button>
                         </div>
                     </div>
-
                     <%
                         }
                     %>

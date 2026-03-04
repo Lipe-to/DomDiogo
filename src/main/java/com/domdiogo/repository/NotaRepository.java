@@ -5,6 +5,7 @@ import com.domdiogo.model.AlunoNotaDTO;
 import com.domdiogo.model.NotaEntity;
 import com.domdiogo.model.Status;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -79,10 +80,8 @@ public class NotaRepository {
         return listaNotas;
     }
 
-    public List<AlunoNotaDTO> findAlunosComNotasByProfessor(int idProfessor) {
-
+    public List<AlunoNotaDTO> findAlunosByProfessor(int idProfessor) {
         List<AlunoNotaDTO> lista = new ArrayList<>();
-
         String query = """
                     SELECT
                         a.matricula,
@@ -92,15 +91,14 @@ public class NotaRepository {
                         n.n1,
                         n.n2,
                         n.media,
-                        n.id_disciplina,
+                        d.id AS id_disciplina,
                         d.nome AS disciplina_nome
                     FROM aluno a
+                    LEFT JOIN disciplina d
+                        ON d.id_professor = ?
                     LEFT JOIN nota n
                         ON n.matricula_aluno = a.matricula
-                    LEFT JOIN disciplina d
-                        ON n.id_disciplina = d.id
-                    WHERE d.id_professor = ?
-                       OR d.id_professor IS NULL
+                        AND n.id_disciplina = d.id
                     ORDER BY a.nome
                        """;
 
@@ -112,16 +110,23 @@ public class NotaRepository {
             try (ResultSet rs = ps.executeQuery()) {
 
                 while (rs.next()) {
+                    BigDecimal bdN1 = rs.getBigDecimal("n1");
+                    BigDecimal bdN2 = rs.getBigDecimal("n2");
+                    BigDecimal bdMedia = rs.getBigDecimal("media");
 
+                    Double n1 = bdN1 != null ? bdN1.doubleValue() : null;
+                    Double n2 = bdN2 != null ? bdN2.doubleValue() : null;
+
+                    Double media = bdMedia != null ? bdMedia.doubleValue() : null;
                     AlunoNotaDTO dto = new AlunoNotaDTO(
                             rs.getInt("matricula"),
                             rs.getString("aluno_nome"),
                             rs.getString("turma"),
-                            rs.getInt("nota_id"),
-                            rs.getDouble("n1"),
-                            rs.getDouble("n2"),
-                            rs.getDouble("media"),
-                            rs.getInt("id_disciplina"),
+                            rs.getObject("nota_id", Integer.class),
+                            n1,
+                            n2,
+                            media,
+                            rs.getObject("id_disciplina", Integer.class),
                             rs.getString("disciplina_nome")
                     );
 

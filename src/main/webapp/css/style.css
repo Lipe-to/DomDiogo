@@ -96,8 +96,7 @@ a {
 
     transition: box-shadow 0.3s ease-in-out;
 
-    min-width: 145px;
-    padding: 0.1% 2.5% 0.1% 1%;
+    min-width: 160px;
     background-image: url('../img/svg/caret-down.svg');
     background-size: 12%;
     background-repeat: no-repeat;
