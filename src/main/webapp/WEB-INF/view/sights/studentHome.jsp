@@ -117,13 +117,11 @@
 
                 <div id="grades">
                     <h1>Boletim</h1>
-                    <select class="select-box">
-                        <option value="">Todas as matérias</option>
-                        <option value="">6º Ano</option>
-                        <option value="">7º Ano</option>
-                        <option value="">8º Ano</option>
-                        <option value="">9º Ano</option>
-                    </select>
+                    <div class="actions-section-container">
+                        <select class="select-box">
+                            <option value="">Todas as matérias</option>
+                        </select>
+                    </div>
 
                     <div class="table-container">
                         <div class="table-info">
@@ -179,10 +177,11 @@
 
                 <div id="observations">
                     <h1>Observações</h1>
-                    <button popovertarget="popup-obs" type="button">Adicionar Observação</button>
-                    <select class="select-box">
-                        <option value="">Todas as turmas</option>
-                    </select>
+                    <div class="actions-section-container">
+                        <select class="select-box">
+                            <option value="">Todos os professores</option>
+                        </select>
+                    </div>
 
                     <div class="card-container">
                         <%

@@ -82,7 +82,7 @@ public class AlunoNotaDTO {
     }
 
     public String getSituacao() {
-        if (media == null) return "Sem nota";
+        if (media == null) return "Sem Nota";
         return media >= 7.0 ? "Aprovado" : "Reprovado";
     }
 
