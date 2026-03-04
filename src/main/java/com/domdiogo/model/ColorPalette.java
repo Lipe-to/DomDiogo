@@ -28,7 +28,7 @@ public enum ColorPalette {
 
         try {
             return ColorPalette.valueOf(value.trim().toUpperCase());
-        } catch (Exception e) { // Abrangente para esquivar de incoerências no banco
+        } catch (Exception e) {
             return DEFAULT;
         }
     }

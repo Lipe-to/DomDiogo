@@ -80,7 +80,7 @@ public class ObservacaoServlet extends HttpServlet {
                         Integer.parseInt(request.getParameter("matriculaAluno")),
                         Integer.parseInt(request.getParameter("idProfessor")),
                         request.getParameter("observacao"),
-                        ColorPalette.valueOf(request.getParameter("cor"))
+                        ColorPalette.fromString(request.getParameter("cor"))
                 );
                 Status createStatus = repository.create(novaObservacao);
                 if (createStatus == Status.SUCCESS) {
@@ -98,7 +98,7 @@ public class ObservacaoServlet extends HttpServlet {
                         Integer.parseInt(request.getParameter("matriculaAluno")),
                         Integer.parseInt(request.getParameter("idProfessor")),
                         request.getParameter("observacao"),
-                        ColorPalette.valueOf(request.getParameter("cor"))
+                        ColorPalette.fromString(request.getParameter("cor"))
                 );
                 Status updateStatus = repository.update(observacaoUpdate);
                 if (updateStatus == Status.SUCCESS) {

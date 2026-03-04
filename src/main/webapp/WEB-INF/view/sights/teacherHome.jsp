@@ -81,12 +81,16 @@
 <div id="major-container">
     <div id="wrap">
         <header>
-            <a href="#"><img class="logo" src="${pageContext.request.contextPath}/img/branding/teste.png"
-                             alt="Logo"></a>
+            <a href="#">
+                <div class="logo">
+                    <img src="${pageContext.request.contextPath}/img/branding/icone.png">
+                    <img src="${pageContext.request.contextPath}/img/branding/white.png">
+                </div>
+            </a>
             <div class="personal-info">
-                <div class="profile-image"></div> <!-- Condicional em JSP se não houver bd de perfil -->
+                <div class="profile-image"></div>
                 <div>
-                    <h3>Neymar Santos</h3>
+                    <h3><%=nome%></h3>
                     <p>Professor</p>
                 </div>
             </div>

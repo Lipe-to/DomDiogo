@@ -56,7 +56,7 @@ public class AdministradorRepository {
     }
 
     public Status login(String email, String senha) {
-        String query = "select * from administrador where email = ? and senha = ?";
+        String query = "select * from administrador where usuario = ? and senha = ?";
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
         try {

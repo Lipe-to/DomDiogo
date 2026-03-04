@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page pageEncoding="UTF-8" %>
+<%@ page isErrorPage="true" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +20,7 @@
 <body>
     <div>
         <h1>Oops! Alguma coisa deu errado</h1>
-        <a href="" class="button">Retornar</a>
+        <a href="${pageContext.request.contextPath}/index.jsp" class="button">Retornar</a>
     </div>
 </body>
 

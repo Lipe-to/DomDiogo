@@ -36,7 +36,7 @@
 %>
 
 <body>
-    <aside id="sidebar"> <!-- Position fixed ! -->
+    <aside id="sidebar">
         <ul>
             <div>
                 <li id="menu-icon-container">
