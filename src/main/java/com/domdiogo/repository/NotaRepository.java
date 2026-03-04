@@ -148,15 +148,26 @@ public class NotaRepository {
 
         try {
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setDouble(1, nota.getN1());
-            ps.setDouble(2, nota.getN2());
+
+            // n1
+            if (nota.getN1() != null) {
+                ps.setDouble(1, nota.getN1());
+            } else {
+                ps.setNull(1, java.sql.Types.DOUBLE);
+            }
+
+            // n2
+            if (nota.getN2() != null) {
+                ps.setDouble(2, nota.getN2());
+            } else {
+                ps.setNull(2, java.sql.Types.DOUBLE);
+            }
+
             ps.setInt(3, nota.getId());
 
             int rows = ps.executeUpdate();
-            if (rows > 0) {
-                return Status.SUCCESS;
-            }
-            return Status.NOT_FOUND;
+            return rows > 0 ? Status.SUCCESS : Status.NOT_FOUND;
+
         } catch (SQLException e) {
             e.printStackTrace();
             return Status.INTERNAL_ERROR;
