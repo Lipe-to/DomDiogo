@@ -130,7 +130,28 @@
             <div id="grades">
                 <h1>Matemática</h1>
                 <div class="actions-section-container">
-                    <button type="button">Filtrar</button>
+                    <form id="formBuscaAluno" method="POST" action="${pageContext.request.contextPath}/teacherHome">
+                        <div style="display: flex; gap: 10px; align-items: flex-end;">
+                            <div style="flex: 1;">
+                                <label for="alunoSearch">Buscar Aluno:</label>
+                                <input class="text-box" id="alunoSearch" name="matriculaAluno" list="students-datalist-search" placeholder="Digite matrícula ou nome...">
+                                <datalist id="students-datalist-search">
+                                    <option disabled selected>Selecione um aluno</option>
+                                    <%
+                                        if (listAlunos != null && !listAlunos.isEmpty()) {
+                                            for (AlunoEntity aluno : listAlunos) {
+                                    %>
+                                    <option value="<%=aluno.getMatricula()%>"><%=aluno.getNome()%> (Matrícula: <%=aluno.getMatricula()%>, Turma: <%=aluno.getTurma()%>)</option>
+                                    <%
+                                            }
+                                        }
+                                    %>
+                                </datalist>
+                            </div>
+                            <button class="button" type="submit" name="action" value="buscarAluno">Buscar</button>
+                            <button class="button" type="submit" name="action" value="listarTodos">Listar Todos</button>
+                        </div>
+                    </form>
                     <select class="select-box">
                         <option value="">Todas as turmas</option>
                     </select>
