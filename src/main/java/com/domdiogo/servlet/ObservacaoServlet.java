@@ -88,7 +88,7 @@ public class ObservacaoServlet extends HttpServlet {
                 } else {
                     ServletHelper.configureStatus(request, "Erro ao criar observação.", StatusColor.RED);
                 }
-                redirect = "/observacao?action=readAll";
+                redirect = "/teacherHome";
                 break;
 
             case "update":
@@ -106,7 +106,7 @@ public class ObservacaoServlet extends HttpServlet {
                 } else {
                     ServletHelper.configureStatus(request, "Erro ao atualizar observação.", StatusColor.RED);
                 }
-                redirect = "/observacao?action=readAll";
+                redirect = "/teacherHome";
                 break;
 
             case "delete":
@@ -117,12 +117,12 @@ public class ObservacaoServlet extends HttpServlet {
                 } else {
                     ServletHelper.configureStatus(request, "Erro ao excluir observação.", StatusColor.RED);
                 }
-                redirect = "/observacao?action=readAll";
+                redirect = "/teacherHome";
                 break;
 
             default:
                 ServletHelper.configureStatus(request, "Ação inválida.", StatusColor.RED);
-                redirect = "/WEB-INF/view/sights/teacherHome.jsp";
+                redirect = "/teacherHome";
                 break;
         }
 
