@@ -29,6 +29,11 @@ public class TeacherHomeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
 
         // Verificar se o professor está logado
@@ -39,6 +44,7 @@ public class TeacherHomeServlet extends HttpServlet {
 
         int idProfessor = (int) session.getAttribute("idProfessor");
         String nome = (String) session.getAttribute("nome");
+        String action = request.getParameter("action");
 
         // Carregando todos os alunos
         List<AlunoEntity> listAlunos = alunoRepository.read();
@@ -52,6 +58,29 @@ public class TeacherHomeServlet extends HttpServlet {
         if (alunosNotas == null) {
             alunosNotas = new ArrayList<>();
         }
+
+        // Se foi enviado busca por aluno
+        if ("buscarAluno".equals(action)) {
+            String matriculaStr = request.getParameter("matriculaAluno");
+            if (matriculaStr != null && !matriculaStr.trim().isEmpty()) {
+                try {
+                    int matricula = Integer.parseInt(matriculaStr);
+                    // Filtrar apenas as notas do aluno buscado
+                    List<AlunoNotaDTO> alunosNotasFiltrados = new ArrayList<>();
+                    for (AlunoNotaDTO nota : alunosNotas) {
+                        if (nota.getMatricula() == matricula) {
+                            alunosNotasFiltrados.add(nota);
+                        }
+                    }
+                    alunosNotas = alunosNotasFiltrados;
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+            }
+        } else if ("listarTodos".equals(action)) {
+            // Listar todos (já carregados acima)
+        }
+
         request.setAttribute("alunosNotas", alunosNotas);
 
         // Carregando observações do professor
@@ -66,11 +95,6 @@ public class TeacherHomeServlet extends HttpServlet {
         request.setAttribute("professorRepository", professorRepository);
 
         ServletHelper.redirect(request, response, "/WEB-INF/view/sights/teacherHome.jsp");
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
     }
 }
 
