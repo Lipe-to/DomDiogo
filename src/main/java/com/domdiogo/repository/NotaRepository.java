@@ -155,6 +155,63 @@ public class NotaRepository {
         return lista;
     }
 
+    public List<AlunoNotaDTO> findAllAlunosNotas() {
+        List<AlunoNotaDTO> lista = new ArrayList<>();
+        String query = """
+                    SELECT
+                        a.matricula,
+                        a.nome AS aluno_nome,
+                        a.turma,
+                        n.id AS nota_id,
+                        n.n1,
+                        n.n2,
+                        n.media,
+                        d.id AS id_disciplina,
+                        d.nome AS disciplina_nome
+                    FROM aluno a
+                    LEFT JOIN nota n
+                        ON n.matricula_aluno = a.matricula
+                    LEFT JOIN disciplina d
+                        ON n.id_disciplina = d.id
+                    ORDER BY a.nome, d.nome
+                   """;
+
+        try (Connection connection = new ConnectionFactory().connect();
+             PreparedStatement ps = connection.prepareStatement(query)) {
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    BigDecimal bdN1 = rs.getBigDecimal("n1");
+                    BigDecimal bdN2 = rs.getBigDecimal("n2");
+                    BigDecimal bdMedia = rs.getBigDecimal("media");
+
+                    Double n1 = bdN1 != null ? bdN1.doubleValue() : null;
+                    Double n2 = bdN2 != null ? bdN2.doubleValue() : null;
+                    Double media = bdMedia != null ? bdMedia.doubleValue() : null;
+
+                    AlunoNotaDTO dto = new AlunoNotaDTO(
+                            rs.getInt("matricula"),
+                            rs.getString("aluno_nome"),
+                            rs.getString("turma"),
+                            rs.getObject("nota_id", Integer.class),
+                            n1,
+                            n2,
+                            media,
+                            rs.getObject("id_disciplina", Integer.class),
+                            rs.getString("disciplina_nome")
+                    );
+
+                    lista.add(dto);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
+
     public Status update(NotaEntity nota) {
         String query = "update nota set n1 = ?, n2 = ? where id = ?";
         ConnectionFactory connectionFactory = new ConnectionFactory();

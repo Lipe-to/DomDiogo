@@ -297,32 +297,8 @@ public class AlunoRepository {
         }
     }
 
-    public AlunoEntity login(String usuario, String senha) {
-        String query = "select * from aluno where usuario = ? and senha = ?";
-        ConnectionFactory connectionFactory = new ConnectionFactory();
-        Connection connection = connectionFactory.connect();
-        AlunoEntity alunoEntity = null;
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, usuario);
-            preparedStatement.setString(2, senha);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                alunoEntity = new AlunoEntity(
-                        resultSet.getInt("matricula"),
-                        resultSet.getString("nome"),
-                        resultSet.getString("usuario"),
-                        resultSet.getString("senha"),
-                        resultSet.getString("palavra"),
-                        resultSet.getString("turma")
-                );
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            connectionFactory.disconnect(connection);
-        }
-        return alunoEntity;
+    public AlunoEntity login(String usuario) {
+        return findByUsuario(usuario);
     }
 
     public Status validarPalavra(String usuario, String palavra) {

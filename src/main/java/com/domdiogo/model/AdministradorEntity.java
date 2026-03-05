@@ -41,4 +41,20 @@ public class AdministradorEntity {
     public String getPalavra_chave() {
         return palavra_chave;
     }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public void setPalavra_chave(String palavra_chave) {
+        this.palavra_chave = palavra_chave;
+    }
 }
