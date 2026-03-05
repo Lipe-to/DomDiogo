@@ -26,17 +26,25 @@ public class NotaRepository {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, matricula);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSet rs = preparedStatement.executeQuery();
 
-            while (resultSet.next()) {
+            while (rs.next()) {
+                BigDecimal bdN1 = rs.getBigDecimal("n1");
+                BigDecimal bdN2 = rs.getBigDecimal("n2");
+                BigDecimal bdMedia = rs.getBigDecimal("media");
+
+                Double n1 = bdN1 != null ? bdN1.doubleValue() : null;
+                Double n2 = bdN2 != null ? bdN2.doubleValue() : null;
+                Double media = bdMedia != null ? bdMedia.doubleValue() : null;
+
                 NotaEntity notaEntity = new NotaEntity(
-                        resultSet.getInt("id"),
-                        resultSet.getDouble("n1"),
-                        resultSet.getDouble("n2"),
-                        resultSet.getDouble("media"),
-                        resultSet.getInt("id_disciplina"),
-                        resultSet.getInt("matricula_aluno"),
-                        resultSet.getString("disciplina_nome")
+                        rs.getInt("id"),
+                        n1,
+                        n2,
+                        media,
+                        rs.getInt("id_disciplina"),
+                        rs.getInt("matricula_aluno"),
+                        rs.getString("disciplina_nome")
                 );
                 listaNotas.add(notaEntity);
             }
@@ -60,11 +68,19 @@ public class NotaRepository {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
+                BigDecimal bdN1 = rs.getBigDecimal("n1");
+                BigDecimal bdN2 = rs.getBigDecimal("n2");
+                BigDecimal bdMedia = rs.getBigDecimal("media");
+
+                Double n1 = bdN1 != null ? bdN1.doubleValue() : null;
+                Double n2 = bdN2 != null ? bdN2.doubleValue() : null;
+                Double media = bdMedia != null ? bdMedia.doubleValue() : null;
+
                 NotaEntity nota = new NotaEntity(
                         rs.getInt("id"),
-                        rs.getDouble("n1"),
-                        rs.getDouble("n2"),
-                        rs.getDouble("media"),
+                        n1,
+                        n2,
+                        media,
                         rs.getInt("id_disciplina"),
                         rs.getInt("matricula_aluno"),
                         rs.getString("disciplina_nome")
@@ -116,8 +132,8 @@ public class NotaRepository {
 
                     Double n1 = bdN1 != null ? bdN1.doubleValue() : null;
                     Double n2 = bdN2 != null ? bdN2.doubleValue() : null;
-
                     Double media = bdMedia != null ? bdMedia.doubleValue() : null;
+
                     AlunoNotaDTO dto = new AlunoNotaDTO(
                             rs.getInt("matricula"),
                             rs.getString("aluno_nome"),
@@ -149,14 +165,12 @@ public class NotaRepository {
         try {
             PreparedStatement ps = connection.prepareStatement(query);
 
-            // n1
             if (nota.getN1() != null) {
                 ps.setDouble(1, nota.getN1());
             } else {
                 ps.setNull(1, java.sql.Types.DOUBLE);
             }
 
-            // n2
             if (nota.getN2() != null) {
                 ps.setDouble(2, nota.getN2());
             } else {

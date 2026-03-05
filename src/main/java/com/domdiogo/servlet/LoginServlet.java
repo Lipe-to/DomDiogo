@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
                                 "Login realizado com sucesso!",
                                 StatusColor.GREEN);
 
-                        redirect = "/WEB-INF/view/sights/studentHome.jsp";
+                        redirect = "/studentHome";
                     } else {
                         ServletHelper.configureStatus(request,
                                 "Usuário ou senha inválidos.",
@@ -65,7 +65,7 @@ public class LoginServlet extends HttpServlet {
                                 "Login realizado com sucesso!",
                                 StatusColor.GREEN);
 
-                        redirect = "/WEB-INF/view/sights/teacherHome.jsp";
+                        redirect = "/teacherHome";
                     } else {
                         ServletHelper.configureStatus(request,
                                 "Usuário ou senha inválidos.",
