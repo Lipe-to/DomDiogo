@@ -253,10 +253,6 @@ table td input {
 }
 
 aside {
-    display: none !important;
-}
-
-aside {
     position: fixed;
     left: 0;
     top: 0;
@@ -266,12 +262,24 @@ aside {
     align-items: center;
     justify-content: space-between;
     
-    transition: width 0.3s ease-in-out, padding-right 0.3s ease-in-out, box-shadow 1s ease-in-out;
+    transition: width 0.6s ease-in-out, padding-right 0.6s ease-in-out, box-shadow 1s ease-in-out, opacity 0.8s ease-in-out;
 
     width: 60px;
     height: 100vh;
     padding-right: 1px;
     background-color: var(--white);
+    box-shadow: var(--shadow-aside);
+
+    opacity: 0;
+}
+
+body:has(#menu-checkbox:checked) aside {
+    width: 18.35vw;
+    opacity: 1;
+}
+
+body:has(#menu-checkbox:checked) aside ul li {
+    width: 200px;
 }
 
 aside ul {
@@ -308,13 +316,13 @@ aside ul>div>:first-child {
 
     margin: 0;
     opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 0.2s ease-in-out;
+    transform: translateY(60px);
+    transition: opacity 0.5s ease-in-out, transform 0.6s ease-in-out;
 }
 
-aside:has(#menu-checkbox:checked) #menu-text {
+body:has(#menu-checkbox:checked) aside #menu-text {
     opacity: 75%;
-    transform: translateY(-10px);
+    transform: translateY(80px);
 }
 
 aside li {
@@ -327,7 +335,7 @@ aside li {
     max-height: 20px;
     overflow: hidden;
 
-    transition: width 0.3s ease, background-color 0.2s ease, transform 0.3s ease-in-out;
+    transition: width 0.6s ease-in-out, background-color 0.2s ease, transform 0.3s ease-in-out;
 }
 
 aside li:hover {
@@ -382,6 +390,35 @@ aside #sign-out:active {
     transform: none;
 }
 
+#menu-icon-container {
+    position: fixed;
+    display: flex;
+    left: 12px;
+    top: 20px;
+    width: 36px;
+    aspect-ratio: 1 / 1;
+    
+    padding: 8px;
+    border-radius: 4px;
+    background-color: #ECECEC;
+    
+    white-space: nowrap;
+    width: 20px;
+    max-height: 20px;
+    overflow: hidden;
+    
+    z-index: 1;
+    transition: width 0.3s ease, background-color 0.2s ease, transform 0.3s ease-in-out;
+}
+
+#menu-icon-container>*, #menu-icon-container {
+    cursor:  pointer;
+}
+
+/* aside {
+    transform: translateX(-200%);
+} */
+
 aside a, aside label, aside button {
     display: flex;
     justify-content: flex-start;
@@ -399,31 +436,11 @@ aside img {
     overflow: visible;
 }
 
-#menu-checkbox {
-    display: none;
-}
-
 .sidebar-icon {
     width: 20px;
     height: auto;
  
     transition: background-color 0.2s ease-in-out;
-}
-
-aside:has(#menu-checkbox:checked) {
-    width: 20vw;
-    padding-right: 20px;
-    box-shadow: var(--shadow-aside);
-}
-
-aside:has(#menu-checkbox:checked) li {
-    width: 85%;
-}
-
-@media (max-width: 900px) {
-    aside:has(#menu-checkbox:checked) {
-        width: 40vw;
-    }
 }
 
 header {

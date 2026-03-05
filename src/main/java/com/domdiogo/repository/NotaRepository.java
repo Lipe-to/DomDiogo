@@ -119,12 +119,10 @@ public class NotaRepository {
                        """;
 
         try (Connection connection = new ConnectionFactory().connect();
-             PreparedStatement ps = connection.prepareStatement(query)) {
-
+            PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, idProfessor);
 
             try (ResultSet rs = ps.executeQuery()) {
-
                 while (rs.next()) {
                     BigDecimal bdN1 = rs.getBigDecimal("n1");
                     BigDecimal bdN2 = rs.getBigDecimal("n2");
