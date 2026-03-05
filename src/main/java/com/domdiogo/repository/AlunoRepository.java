@@ -4,6 +4,7 @@ import com.domdiogo.ConnectionFactory;
 import com.domdiogo.model.AlunoEntity;
 import com.domdiogo.model.NotaEntity;
 import com.domdiogo.model.Status;
+import com.domdiogo.model.TipoCount;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -54,6 +55,68 @@ public class AlunoRepository {
         } catch (SQLException e) {
             e.printStackTrace();
             return Status.INTERNAL_ERROR;
+        } finally {
+            connectionFactory.disconnect(connection);
+        }
+    }
+
+    public int countAlunos() {
+        String query = "SELECT COUNT(*) AS total FROM aluno";
+
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        Connection connection = connectionFactory.connect();
+
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(query);
+
+            if (rs.next()) {
+                return rs.getInt("total");
+            } else {
+                return 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        } finally {
+            connectionFactory.disconnect(connection);
+        }
+    }
+
+    public int porcentagemAlunos(TipoCount tipo, int idDisciplina) {
+        int totalAlunos = countAlunos();
+        if (totalAlunos == 0) return 0;
+
+        String query = "";
+        switch (tipo) {
+            case APROVADO:
+                query = "SELECT COUNT(*) AS total FROM nota WHERE id_disciplina = ? AND media >= 7";
+                break;
+            case REPROVADO:
+                query = "SELECT COUNT(*) AS total FROM nota WHERE id_disciplina = ? AND media < 7";
+                break;
+            case SEM_NOTA:
+                query = "SELECT COUNT(*) AS total FROM nota WHERE id_disciplina = ? AND media IS NULL";
+                break;
+        }
+
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        Connection connection = connectionFactory.connect();
+
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setInt(1, idDisciplina);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                int qtd = rs.getInt("total");
+                return (qtd * 100) / totalAlunos;
+            } else {
+                return 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
         } finally {
             connectionFactory.disconnect(connection);
         }
