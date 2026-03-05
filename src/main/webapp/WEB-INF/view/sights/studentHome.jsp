@@ -1,10 +1,6 @@
-<%@ page import="com.domdiogo.repository.AlunoRepository" %>
-<%@ page import="com.domdiogo.model.AlunoEntity" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.domdiogo.repository.NotaRepository" %>
 <%@ page import="com.domdiogo.model.NotaEntity" %>
 <%@ page import="com.domdiogo.model.ObservacaoEntity" %>
-<%@ page import="com.domdiogo.repository.ObservacaoRepository" %>
 <%@ page import="com.domdiogo.repository.ProfessorRepository" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page pageEncoding="UTF-8" %>
@@ -29,10 +25,11 @@
 
 <%
     String nome = (String) session.getAttribute("nome");
-    int matricula = (int) session.getAttribute("matricula");
-
-    NotaRepository notaRepository = new NotaRepository();
-    List<NotaEntity> notas = notaRepository.findByMatricula(matricula);
+    @SuppressWarnings("unchecked")
+    List<NotaEntity> notas = (List<NotaEntity>) request.getAttribute("notas");
+    @SuppressWarnings("unchecked")
+    List<ObservacaoEntity> observacoes = (List<ObservacaoEntity>) request.getAttribute("observacoes");
+    ProfessorRepository professorRepository = (ProfessorRepository) request.getAttribute("professorRepository");
 %>
 
 <body>
@@ -185,11 +182,9 @@
 
                     <div class="card-container">
                         <%
-                            ObservacaoRepository observacaoRepository = new ObservacaoRepository();
-                            ProfessorRepository professorRepository = new ProfessorRepository();
                             int idPopoverObs = 0;
 
-                            for (ObservacaoEntity obs : observacaoRepository.findByMatriculaAluno(matricula)) {
+                            for (ObservacaoEntity obs : observacoes) {
                                 idPopoverObs++;
                         %>
                         <div style="background-color: <%=obs.getCor().getHex()%>" class="card">

@@ -53,7 +53,7 @@ public class NotaServlet extends HttpServlet {
                         : Double.valueOf(n2Param);
 
                 NotaEntity notaUpdate = new NotaEntity(
-                        Integer.parseInt(request.getParameter("id")),
+                        Integer.parseInt(request.getParameter("idNota")),
                         n1,
                         n2
                 );
@@ -63,7 +63,7 @@ public class NotaServlet extends HttpServlet {
                 } else {
                     ServletHelper.configureStatus(request, "Erro ao atualizar a nota.", StatusColor.RED);
                 }
-                redirect = "/nota?action=readAll";
+                redirect = "/teacherHome";
                 break;
 
             case "zerar":
@@ -74,12 +74,12 @@ public class NotaServlet extends HttpServlet {
                 } else {
                     ServletHelper.configureStatus(request, "Erro ao zerar nota.", StatusColor.RED);
                 }
-                redirect = "/nota?action=readAll";
+                redirect = "/teacherHome";
                 break;
 
             default:
                 ServletHelper.configureStatus(request, "Ação inválida.", StatusColor.RED);
-                redirect = "/WEB-INF/view/sights/teacherHome.jsp";
+                redirect = "/teacherHome";
                 break;
         }
 

@@ -1,12 +1,9 @@
 <%@ page import="com.domdiogo.model.AlunoEntity" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.domdiogo.repository.NotaRepository" %>
-<%@ page import="com.domdiogo.model.NotaEntity" %>
+<%@ page import="com.domdiogo.model.AlunoNotaDTO" %>
+<%@ page import="com.domdiogo.model.ObservacaoEntity" %>
 <%@ page import="com.domdiogo.repository.AlunoRepository" %>
 <%@ page import="com.domdiogo.repository.ProfessorRepository" %>
-<%@ page import="com.domdiogo.repository.ObservacaoRepository" %>
-<%@ page import="com.domdiogo.model.ObservacaoEntity" %>
-<%@ page import="com.domdiogo.model.AlunoNotaDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -29,11 +26,16 @@
 </head>
 
 <%
-    AlunoRepository alunoRepository = new AlunoRepository();
-    List<AlunoEntity> listAlunos = alunoRepository.read();
-
     String nome = (String) session.getAttribute("nome");
     int idProfessor = (int) session.getAttribute("idProfessor");
+    @SuppressWarnings("unchecked")
+    List<AlunoEntity> listAlunos = (List<AlunoEntity>) request.getAttribute("listAlunos");
+    @SuppressWarnings("unchecked")
+    List<AlunoNotaDTO> alunosNotas = (List<AlunoNotaDTO>) request.getAttribute("alunosNotas");
+    @SuppressWarnings("unchecked")
+    List<ObservacaoEntity> observacoes = (List<ObservacaoEntity>) request.getAttribute("observacoes");
+    AlunoRepository alunoRepository = (AlunoRepository) request.getAttribute("alunoRepository");
+    ProfessorRepository professorRepository = (ProfessorRepository) request.getAttribute("professorRepository");
 %>
 
 <body>
@@ -168,13 +170,11 @@
                             </thead>
                             <tbody>
                             <%
-                                NotaRepository notaRepository = new NotaRepository();
-                                List<AlunoNotaDTO> lista = notaRepository.findAlunosByProfessor(idProfessor);
                                 int idPopoverGrades = 0;
                                 String situationClass = "";
                                 Boolean temNota = false;
 
-                                for (AlunoNotaDTO item : lista) {
+                                for (AlunoNotaDTO item : alunosNotas) {
                                     idPopoverGrades++;
                                     temNota = item.getSituacao().equals("Sem Nota");
 
@@ -215,8 +215,8 @@
                                 <form action="${pageContext.request.contextPath}/nota?action=update" method="post">
                                     <div class="input-major">
                                         <div class="input-container">
-                                            <p class="required">Matrícula</p>
-                                            <input class="text-box" name="id" type="text" value="<%=item.getMatricula()%>" readonly>
+                                            <p class="required">Aluno</p>
+                                            <input class="text-box" name="nomeAluno" type="text" value="<%=item.getNomeAluno()%>" readonly>
                                         </div>
 
                                         <div class="input-container">
@@ -233,6 +233,8 @@
                                             <p class="required">Média final</p>
                                             <input class="text-box" type="text" readonly>
                                         </div>
+                                            <input class="text-box" name="id" type="text" value="<%=item.getMatricula()%>" hidden>
+                                            <input class="text-box" name="idNota" type="text" value="<%=item.getNotaId()%>" hidden>
                                     </div>
                                     <button class="button fat" type="submit">Atualizar notas</button>
                                 </form>
@@ -257,13 +259,9 @@
 
                 <div class="card-container">
                     <%
-                        ObservacaoRepository observacaoRepository = new ObservacaoRepository();
-                        ProfessorRepository professorRepository = new ProfessorRepository();
-
-                        List<ObservacaoEntity> observacaoEntityList = observacaoRepository.findByProfessor(idProfessor);
                         int idPopoverObs = 0;
 
-                        for (ObservacaoEntity obs : observacaoEntityList) {
+                        for (ObservacaoEntity obs : observacoes) {
                             idPopoverObs++;
                     %>
                     <div style="background-color: <%=obs.getCor().getHex()%>" class="card">
