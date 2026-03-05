@@ -85,7 +85,7 @@ main>*,
     margin: 1% 0;
 }
 
-#grades {
+#grades, .grid-layout {
     background-color: var(--white);
 }
 

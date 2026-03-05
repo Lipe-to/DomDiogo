@@ -118,9 +118,8 @@
                 </div>
             </div>
 
-            <div id="grades">
+            <div class="grid-layout">
                 <h1>Alunos</h1>
-                <div class="wrap-for-scroll">
                     <div class="table-container">
                         <div class="table-info">
                             <div>
@@ -144,7 +143,7 @@
                                 <tr>
                                     <td><%= aluno.getNome() %></td>
                                     <td><%= aluno.getUsuario() %></td>
-                                    <td>●●●●●●●●</td>
+                                    <td><%= aluno.getSenha() %></td>
                                     <td>
                                         <div class="td-actions">
                                             <button class="show"><img src="<%= context %>/img/svg/crud/eye.svg"></button>
@@ -153,58 +152,13 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <% } } %>
+                                <%
+                                        }
+                                    }
+                                %>
                                 </tbody>
                             </table>
                         </div>
-                    </div>
-
-                    <div class="table-container">
-                        <div class="table-info">
-                            <div>
-                                <h3>Informações acadêmicas</h3>
-                                <sub>Geral</sub>
-                            </div>
-                            <div class="table-actions">
-                                <form action="<%= context %>/adminHome" method="get" style="display: flex;">
-                                    <input class="search-box" type="text" name="materia" placeholder="Filtrar disciplina">
-                                    <button type="submit" style="display: none;"></button>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="table-wrap">
-                            <table>
-                                <thead class="green">
-                                <tr>
-                                    <th>Disciplina</th>
-                                    <th>Matrícula</th>
-                                    <th>N1'</th>
-                                    <th>N2'</th>
-                                    <th>Média Final</th>
-                                    <th>Situação</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <% if (listaNotas != null) {
-                                    for (NotaEntity nota : listaNotas) {
-                                        double media = (nota.getN1() + nota.getN2()) / 2.0; %>
-                                <tr>
-                                    <td><%= nota.getNomeDisciplina() %></td>
-                                    <td><%= nota.getMatriculaAluno() %></td>
-                                    <td><%= String.format("%.1f", nota.getN1()) %></td>
-                                    <td><%= String.format("%.1f", nota.getN2()) %></td>
-                                    <td><%= String.format("%.1f", media) %></td>
-                                    <td class="situation">
-                                                    <span class="<%= media >= 7.0 ? "approved" : "failed" %>">
-                                                        <%= media >= 7.0 ? "Aprovado" : "Reprovado" %>
-                                                    </span>
-                                    </td>
-                                </tr>
-                                <% } } %>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -225,7 +179,10 @@
                         </div>
                         <button class="button">Ver detalhes</button>
                     </div>
-                    <% } } %>
+                    <%
+                            }
+                        }
+                    %>
                 </div>
             </div>
         </main>

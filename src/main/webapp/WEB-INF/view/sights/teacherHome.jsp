@@ -113,7 +113,7 @@
                         </div>
                         <div>
                             <h3><span>12</span></h3>
-                            <span>Total de turmas</span>
+                            <span>Alunos sem notas</span>
                         </div>
                         <div>
                             <h3><span class="appr">62</span> %</h3>
@@ -130,28 +130,6 @@
             <div id="grades">
                 <h1>Matemática</h1>
                 <div class="actions-section-container">
-                    <form id="formBuscaAluno" method="POST" action="${pageContext.request.contextPath}/teacherHome">
-                        <div style="display: flex; gap: 10px; align-items: flex-end;">
-                            <div style="flex: 1;">
-                                <label for="alunoSearch">Buscar Aluno:</label>
-                                <input class="text-box" id="alunoSearch" name="matriculaAluno" list="students-datalist-search" placeholder="Digite matrícula ou nome...">
-                                <datalist id="students-datalist-search">
-                                    <option disabled selected>Selecione um aluno</option>
-                                    <%
-                                        if (listAlunos != null && !listAlunos.isEmpty()) {
-                                            for (AlunoEntity aluno : listAlunos) {
-                                    %>
-                                    <option value="<%=aluno.getMatricula()%>"><%=aluno.getNome()%> (Matrícula: <%=aluno.getMatricula()%>, Turma: <%=aluno.getTurma()%>)</option>
-                                    <%
-                                            }
-                                        }
-                                    %>
-                                </datalist>
-                            </div>
-                            <button class="button" type="submit" name="action" value="buscarAluno">Buscar</button>
-                            <button class="button" type="submit" name="action" value="listarTodos">Listar Todos</button>
-                        </div>
-                    </form>
                     <select class="select-box">
                         <option value="">Todas as turmas</option>
                     </select>
@@ -163,17 +141,28 @@
                             <h3>Alunos</h3>
                             <sub>Informações e notas</sub>
                         </div>
-                        <div class="table-actions">
+                        <form class="table-actions" id="formBuscaAluno" method="post" action="${pageContext.request.contextPath}/teacherHome">
                             <input checked style="display: none;" type="checkbox" id="search-submit">
-                            <label for="search-submit"><img src="${pageContext.request.contextPath}/img/svg/search.svg"
-                                                            alt=""></label>
-                            <input class="search-box" type="text" placeholder="Pesquisar por matrícula">
-                            <button title="Filtrar"><img src="${pageContext.request.contextPath}/img/svg/filter.svg"
-                                                         alt="Filtrar"></button>
-                            <button title="Atualizar notas" popovertarget="popup-grades">
-                                <div><img src="${pageContext.request.contextPath}/img/svg/document.svg"><span>Atualizar notas</span></div>
+                            <label for="search-submit"><img src="${pageContext.request.contextPath}/img/svg/search.svg" alt=""></label>
+                            <input class="search-box" id="alunoSearch" name="matriculaAluno" list="students-datalist-search" type="text" placeholder="Pesquisar por matrícula ou nome">
+                            <datalist id="students-datalist-search">
+                                <option disabled selected>Selecione um aluno</option>
+                                <%
+                                    if (listAlunos != null && !listAlunos.isEmpty()) {
+                                        for (AlunoEntity aluno : listAlunos) {
+                                %>
+                                    <option value="<%=aluno.getMatricula()%>"><%=aluno.getNome()%> (Matrícula: <%=aluno.getMatricula()%>, Turma: <%=aluno.getTurma()%>)</option>
+                                <%
+                                        }
+                                    }
+                                %>
+                            </datalist>
+
+                            <button title="Filtrar" name="action" value="buscarAluno" type="submit"><img src="${pageContext.request.contextPath}/img/svg/filter.svg" alt="Filtrar"></button>
+                            <button title="Filtrar" name="action" value="listarTodos" type="submit"><img src="${pageContext.request.contextPath}/img/svg/cross-small.svg" alt="Remover filtros"></button>
+                            <button title="Atualizar notas" popovertarget="popup-grades"><div><img src="${pageContext.request.contextPath}/img/svg/document.svg"><span>Atualizar notas</span></div>
                             </button>
-                        </div>
+                        </form>
                     </div>
                     <div class="table-wrap">
                         <table id="report-card">
@@ -349,12 +338,12 @@
 
             <div class="input-container">
                 <p class="required">Conteúdo</p>
-                <textarea class="text-box" name="observacao" id="" cols="30" rows="10"></textarea>
+                <textarea class="text-box" name="observacao"></textarea>
             </div>
 
             <div class="input-container">
-                <p class="required">Título</p>
-                <select name="cor" id="">
+                <p class="required">Cores</p>
+                <select class="text-box" name="cor">
                     <option value="BLUE">Azul</option>
                     <option value="RED">Vermelho</option>
                     <option value="TEA_BLUE">Azul-Chá</option>
@@ -375,5 +364,6 @@
 </body>
 
 <script src="${pageContext.request.contextPath}/js/popover-close.js"></script>
+<script src="${pageContext.request.contextPath}/js/calculate-sum.js"></script>
 
 </html>

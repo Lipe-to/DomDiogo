@@ -191,8 +191,14 @@
                             <div>
                                 <h2><%=obs.getTitulo()%>
                                 </h2>
-                                <p>realizada por <%=professorRepository.findById(obs.getIdProfessor()).getNome()%>
-                                </p>
+                                <%
+                                    if (professorRepository.findById(obs.getIdProfessor()) != null) {
+                                        String professorNome = professorRepository.findById(obs.getIdProfessor()).getNome();
+                                %>
+                                <p>realizada por <%=professorNome%></p>
+                                <%
+                                    }
+                                %>
                             </div>
                             <button popovertarget="<%="popover-id-"+idPopoverObs%>" class="button">Ver detalhes</button>
                         </div>
@@ -226,6 +232,8 @@
     </div>
 </body>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/generate-newsletter.js"></script>
 
 </html>

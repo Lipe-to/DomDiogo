@@ -1,224 +1,473 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dom Diogo</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="shortcut icon" href="img/branding/favicon.png" type="image/x-icon">
+<title>Dom Diogo</title>
 
-    <link rel="stylesheet" href="css/sights/both.css">
-    <link rel="stylesheet" href="css/sights/teacher.css">
-    <link rel="stylesheet" href="css/popup.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/font.css">
+<link rel="shortcut icon" href="img/branding/favicon.png">
+
+<link rel="stylesheet" href="css/sights/both.css">
+<link rel="stylesheet" href="css/sights/teacher.css">
+<link rel="stylesheet" href="css/popup.css">
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/font.css">
 </head>
 
 <body>
 
-    <li id="menu-icon-container">
-                <label id="menu-icon" for="menu-checkbox">
-                    <img class="sidebar-icon" src="img/svg/sidebar/menu-burger.svg">
-            </label>
-        <input name="menu-checkbox" id="menu-checkbox" type="checkbox" hidden>
-    </li>
-    <aside id="sidebar">
-        <ul>
-            <div>
-                <p id="menu-text">Menu</p>
-                <li style="margin-top: 40px;" class="emphasis">
-                    <a href="#">
-                        <img class="sidebar-icon" src="img/svg/sidebar/home-emphasis.svg" alt="">
-                        <span>Tela Inicial</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <img class="sidebar-icon" src="img/svg/sidebar/address-book.svg" alt="">
-                        <span>Professores</span>
-                    </a>
-                </li>
-            </div>
-            <li id="sign-out">
-                <button>
-                    <img class="sidebar-icon" src="img/svg/sidebar/sign-out.svg" alt="">
-                    <span>Sair</span>
-                </button>
-            </li>
-        </ul>
-    </aside>
+<aside id="sidebar">
+<ul>
 
-    <div id="major-container">
-        <div id="wrap">
-            <header>
-                <a href="#">
-                    <div class="logo">
-                        <img src="img/branding/icone.png">
-                        <img src="img/branding/white.png">
-                    </div>
-                </a>
-                <div class="personal-info">
-                    <img src="img/neymar.png" alt="">
-                    <div>
-                        <h3>Neymar Santos</h3>
-                        <p>Aluno</p>
-                    </div>
-                </div>
-            </header>
+<div>
 
-            <main>
+<li id="menu-icon-container">
+<label id="menu-icon" for="menu-checkbox">
+<img class="sidebar-icon" src="img/svg/sidebar/menu-burger.svg">
+</label>
 
-                <div id="front-desk">
-                    <div class="castle" id="welcome">
-                        <h2>Olá Neymar!</h2>
-                        <p>Bem vindo de volta!</p>
-                    </div>
+<input id="menu-checkbox" type="checkbox">
+</li>
 
-                    <div class="general-statistic">
-                        <h2>Visão geral</h2>
-                        <div>
-                            <div>
-                                <h3><span>32</span></h3>
-                                <span>Total de alunos</span>
-                            </div>
-                            <div>
-                                <h3><span>8,1</span></h3>
-                                <span>Total de turmas</span>
-                            </div>
-                            <div>
-                                <h3><span>12</span> %</h3>
-                                <span>Alunos reprovados</span>
-                            </div>
-                            <div>
-                                <h3><span>12</span> %</h3>
-                                <span>Alunos reprovados</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<p id="menu-text">Menu</p>
 
-                <div id="grades">
-                    <h1>Boletim</h1>
+<li class="emphasis">
+<a href="#">
+<img class="sidebar-icon" src="img/svg/sidebar/home-emphasis.svg">
+<span>Tela Inicial</span>
+</a>
+</li>
 
-                    <div class="actions-section-container">
-                        <select class="select-box">
-                            <option value="">Todas as matérias</option>
-                        </select>
-                    </div>
+<li>
+<a href="#">
+<img class="sidebar-icon" src="img/svg/sidebar/dashboard.svg">
+<span>Dashboard</span>
+</a>
+</li>
 
-                    <div class="table-container">
-                        <div class="table-info">
-                            <div>
-                                <h3>2° Série G Tech</h3>
-                                <sub>Alunos</sub>
-                            </div>
+<li>
+<a href="#">
+<img class="sidebar-icon" src="img/svg/sidebar/address-book.svg">
+<span>Professores</span>
+</a>
+</li>
 
-                            <div class="table-actions">
-                                <input checked style="display: none;" type="checkbox" id="search-submit">
-                                <label for="search-submit">
-                                    <img src="img/svg/search.svg" alt="">
-                                </label>
-                                <input class="search-box" type="text" placeholder="Pesquisar por matéria">
-                                <button title="Filtrar">
-                                    <img src="img/svg/filter.svg" alt="Filtrar">
-                                </button>
-                                <button onclick="gerarBoletim()" title="Gerenciar notas" popovertarget="popup-grades">
-                                    <div>
-                                        <img src="img/svg/document.svg">
-                                        <span>Extrair boletim</span>
-                                    </div>
-                                </button>
-                            </div>
-                        </div>
+</div>
 
-                        <div class="table-wrap">
-                            <table id="report-card">
-                                <thead>
-                                    <tr>
-                                        <th>Matéria</th>
-                                        <th>N1'</th>
-                                        <th>N2'</th>
-                                        <th>
-                                            Média Final
-                                            <img class="info" title="(N1' + N2') / 2" src="img/svg/info-white.svg">
-                                        </th>
-                                        <th>Situação</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Matemática</td>
-                                        <td>8.0</td>
-                                        <td>7.0</td>
-                                        <td>7.5</td>
-                                        <td class="situation">
-                                            <span class="approved">Aprovado</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Português</td>
-                                        <td>5.0</td>
-                                        <td>6.0</td>
-                                        <td>5.5</td>
-                                        <td class="situation">
-                                            <span class="repproved">Reprovado</span>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+<li id="sign-out">
+<button>
+<img class="sidebar-icon" src="img/svg/sidebar/sign-out.svg">
+<span>Sair</span>
+</button>
+</li>
 
-                <div id="observations">
-                    <h1>Observações</h1>
+</ul>
+</aside>
 
-                    <div class="actions-section-container">
-                        <select class="select-box">
-                            <option value="">Todos os professores</option>
-                        </select>
-                    </div>
+<div id="major-container">
+<div id="wrap">
 
-                    <div class="card-container">
+<header>
 
-                        <div style="background-color: #FFD966;" class="card">
-                            <div>
-                                <h2>Participação em sala</h2>
-                                <p>realizada por Professor Carlos</p>
-                            </div>
-                            <button popovertarget="popover-id-1" class="button">Ver detalhes</button>
-                        </div>
+<a href="#">
+<div class="logo">
+<img src="img/branding/icone.png">
+<img src="img/branding/white.png">
+</div>
+</a>
 
-                        <div id="popover-id-1" class="popup" popover="auto">
-                            <h1>Participação em sala</h1>
-                            <div>
-                                <div class="input-major">
-                                    <div class="input-container">
-                                        <p>Professor</p>
-                                        <input class="text-box" type="text" value="Professor Carlos" readonly>
-                                    </div>
+<div class="personal-info">
+<div class="profile-image"></div>
 
-                                    <div class="input-container">
-                                        <p class="required">Observação</p>
-                                        <input class="text-box" type="text"
-                                            value="Aluno demonstra boa participação nas atividades.">
-                                    </div>
-                                </div>
-                                <button class="button fat close-popover" type="button">Fechar</button>
-                            </div>
-                        </div>
+<div>
+<h3 id="prof-name"></h3>
+<p>Professor</p>
+</div>
 
-                    </div>
-                </div>
+</div>
+</header>
 
-            </main>
-        </div>
-    </div>
+<main>
 
-    <script src="js/generate-newsletter.js"></script>
+<div id="front-desk">
+
+<div class="castle" id="welcome">
+<h2 id="welcome-text"></h2>
+<p>Bem vindo de volta!</p>
+</div>
+
+<div class="general-statistic">
+
+<a href="#" class="h2">
+Visão geral
+<img class="redirect" src="img/svg/redirect-blue.svg">
+</a>
+
+<div>
+
+<div>
+<h3><span id="total-alunos"></span></h3>
+<span>Total de alunos</span>
+</div>
+
+<div>
+<h3><span id="sem-nota"></span></h3>
+<span>Alunos sem notas</span>
+</div>
+
+<div>
+<h3><span class="appr" id="aprovados"></span>%</h3>
+<span>Alunos aprovados</span>
+</div>
+
+<div>
+<h3><span class="repr" id="reprovados"></span>%</h3>
+<span>Alunos reprovados</span>
+</div>
+
+</div>
+</div>
+</div>
+
+<div id="grades">
+
+<h1>Matemática</h1>
+
+<div class="actions-section-container">
+<select class="select-box">
+<option>Todas as turmas</option>
+</select>
+</div>
+
+<div class="table-container">
+
+<div class="table-info">
+
+<div>
+<h3>Alunos</h3>
+<sub>Informações e notas</sub>
+</div>
+
+<form class="table-actions">
+
+<input checked style="display:none" type="checkbox" id="search-submit">
+
+<label for="search-submit">
+<img src="img/svg/search.svg">
+</label>
+
+<input class="search-box" list="students-datalist-search" placeholder="Pesquisar por matrícula ou nome">
+
+<datalist id="students-datalist-search"></datalist>
+
+<button title="Filtrar">
+<img src="img/svg/filter.svg">
+</button>
+
+<button title="Remover filtros">
+<img src="img/svg/cross-small.svg">
+</button>
+
+<button title="Atualizar notas" popovertarget="popup-grades">
+<div>
+<img src="img/svg/document.svg">
+<span>Atualizar notas</span>
+</div>
+</button>
+
+</form>
+</div>
+
+<div class="table-wrap">
+
+<table id="report-card">
+
+<thead class="blue">
+<tr>
+<th>Matrícula</th>
+<th>Estudante</th>
+<th>Turma</th>
+<th>N1'</th>
+<th>N2'</th>
+<th>Média Final</th>
+<th>Situação</th>
+<th>Ações</th>
+</tr>
+</thead>
+
+<tbody id="table-body"></tbody>
+
+</table>
+
+</div>
+</div>
+</div>
+
+<div id="observations">
+
+<h1>Observações</h1>
+
+<div class="actions-section-container">
+<button popovertarget="popup-obs">Adicionar Observação</button>
+
+<select class="select-box">
+<option>Todas as turmas</option>
+</select>
+</div>
+
+<div class="card-container" id="obs-container"></div>
+
+</div>
+
+</main>
+</div>
+</div>
+
+
+<div id="popup-obs" class="popup" popover="auto">
+
+<h1>Adicionar Observação</h1>
+
+<form>
+
+<div class="input-major">
+
+<div class="input-container">
+
+<p>Aluno</p>
+
+<input class="text-box" list="students-datalist">
+
+<datalist id="students-datalist"></datalist>
+
+</div>
+
+<div class="input-container">
+<p>Título</p>
+<input class="text-box">
+</div>
+
+<div class="input-container">
+<p>Conteúdo</p>
+<textarea class="text-box"></textarea>
+</div>
+
+<div class="input-container">
+
+<p>Cor</p>
+
+<select>
+
+<option>Azul</option>
+<option>Vermelho</option>
+<option>Roxo</option>
+<option>Verde</option>
+
+</select>
+
+</div>
+
+</div>
+
+<button class="button">Registrar</button>
+
+</form>
+</div>
+
+
+<script src="js/popover-close.js"></script>
+
+<script>
+
+/* DADOS SIMULADOS */
+
+const professor = {
+nome: "Carlos Silva"
+}
+
+const alunos = [
+{matricula:1,nome:"Ana Souza",turma:"1A",n1:8,n2:9},
+{matricula:2,nome:"Pedro Lima",turma:"1A",n1:null,n2:null},
+{matricula:3,nome:"Lucas Rocha",turma:"2B",n1:5,n2:6}
+]
+
+const observacoes = [
+{
+titulo:"Comportamento",
+aluno:"Ana Souza",
+texto:"Muito participativa",
+cor:"#6fa8dc"
+},
+{
+titulo:"Atenção",
+aluno:"Pedro Lima",
+texto:"Precisa melhorar nas tarefas",
+cor:"#e06666"
+}
+]
+
+/* PROFESSOR */
+
+document.getElementById("prof-name").innerText = professor.nome
+document.getElementById("welcome-text").innerText = "Olá "+professor.nome+"!"
+
+
+/* LISTA DE ALUNOS */
+
+const table = document.getElementById("table-body")
+const datalist = document.getElementById("students-datalist")
+const datalistSearch = document.getElementById("students-datalist-search")
+
+let aprovados = 0
+let reprovados = 0
+let semNota = 0
+
+alunos.forEach((a,i)=>{
+
+let media = null
+let situacao = "Sem Nota"
+let css = ""
+
+if(a.n1!=null && a.n2!=null){
+
+media = ((a.n1+a.n2)/2).toFixed(1)
+
+if(media>=7){
+situacao="Aprovado"
+css="approved"
+aprovados++
+}else{
+situacao="Reprovado"
+css="failed"
+reprovados++
+}
+
+}else{
+semNota++
+}
+
+table.innerHTML += `
+
+<tr>
+
+<td>${a.matricula}</td>
+
+<td>${a.nome}</td>
+
+<td>${a.turma}</td>
+
+<td>${a.n1??"-"}</td>
+
+<td>${a.n2??"-"}</td>
+
+<td>${media??"-"}</td>
+
+<td class="situation"><span class="${css}">${situacao}</span></td>
+
+<td>
+
+<div class="td-actions">
+
+<button popovertarget="popup-grades-${i}">
+<img src="img/svg/crud/pencil-black.svg">
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+<div id="popup-grades-${i}" class="popup" popover="auto">
+
+<h1>Gerenciar notas</h1>
+
+<form>
+
+<div class="input-major">
+
+<div class="input-container">
+<p>Aluno</p>
+<input class="text-box" value="${a.nome}" readonly>
+</div>
+
+<div class="input-container">
+<p>N1</p>
+<input class="text-box" type="number" value="${a.n1??""}">
+</div>
+
+<div class="input-container">
+<p>N2</p>
+<input class="text-box" type="number" value="${a.n2??""}">
+</div>
+
+</div>
+
+<button class="button fat">Atualizar</button>
+
+</form>
+
+</div>
+`
+
+datalist.innerHTML += `<option value="${a.matricula}">${a.nome}</option>`
+datalistSearch.innerHTML += `<option value="${a.matricula}">${a.nome}</option>`
+
+})
+
+/* ESTATISTICAS */
+
+const total = alunos.length
+
+document.getElementById("total-alunos").innerText = total
+document.getElementById("sem-nota").innerText = semNota
+document.getElementById("aprovados").innerText = Math.round(aprovados/total*100)
+document.getElementById("reprovados").innerText = Math.round(reprovados/total*100)
+
+/* OBSERVAÇÕES */
+
+const obsContainer = document.getElementById("obs-container")
+
+observacoes.forEach((o,i)=>{
+
+obsContainer.innerHTML += `
+
+<div style="background:${o.cor}" class="card">
+
+<div>
+<h2>${o.titulo}</h2>
+<p>direcionada para ${o.aluno}</p>
+</div>
+
+<button popovertarget="obs-${i}" class="button">Ver detalhes</button>
+
+</div>
+
+<div id="obs-${i}" class="popup" popover="auto">
+
+<h1>${o.titulo}</h1>
+
+<div class="input-major">
+
+<div class="input-container">
+<p>Observação</p>
+<input class="text-box" value="${o.texto}">
+</div>
+
+</div>
+
+<button class="button fat close-popover">Fechar</button>
+
+</div>
+`
+
+})
+
+</script>
 
 </body>
-
 </html>

@@ -221,3 +221,8 @@ a {
 .orange {
     background-color: var(--orange);
 }
+
+textarea {
+    resize: vertical;
+    max-height: 150px;
+}
