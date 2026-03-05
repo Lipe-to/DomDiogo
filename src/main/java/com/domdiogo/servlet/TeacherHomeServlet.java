@@ -4,6 +4,7 @@ import com.domdiogo.ServletHelper;
 import com.domdiogo.model.AlunoEntity;
 import com.domdiogo.model.AlunoNotaDTO;
 import com.domdiogo.model.ObservacaoEntity;
+import com.domdiogo.model.TipoCount;
 import com.domdiogo.repository.AlunoRepository;
 import com.domdiogo.repository.NotaRepository;
 import com.domdiogo.repository.ObservacaoRepository;
@@ -89,6 +90,11 @@ public class TeacherHomeServlet extends HttpServlet {
             observacoes = new ArrayList<>();
         }
         request.setAttribute("observacoes", observacoes);
+
+        request.setAttribute("countAlunos", alunoRepository.countAlunos());
+        request.setAttribute("countAlunosReprovados", alunoRepository.porcentagemAlunos(TipoCount.APROVADO, idProfessor));
+        request.setAttribute("countAlunosAprovado", alunoRepository.porcentagemAlunos(TipoCount.REPROVADO, idProfessor));
+        request.setAttribute("countAlunosSemNota", alunoRepository.porcentagemAlunos(TipoCount.SEM_NOTA, idProfessor));
 
         // Passando repositórios que serão usados no JSP
         request.setAttribute("alunoRepository", alunoRepository);
