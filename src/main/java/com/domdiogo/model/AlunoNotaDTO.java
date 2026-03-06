@@ -2,32 +2,21 @@ package com.domdiogo.model;
 
 public class AlunoNotaDTO {
 
-    // ===== DADOS DO ALUNO =====
     private int matricula;
     private String nomeAluno;
     private String turma;
 
-    // ===== DADOS DA NOTA =====
-    private Integer notaId;          // Pode ser null (LEFT JOIN)
-    private Double n1;               // Pode ser null
-    private Double n2;               // Pode ser null
-    private Double media;            // Pode ser null
-    private Integer idDisciplina;    // Pode ser null
-    private String disciplinaNome;   // Pode ser null
+    private Integer notaId;
+    private Double n1;
+    private Double n2;
+    private Double media;
+    private Integer idDisciplina;
+    private String disciplinaNome;
+    private String ultimoLogin;
 
-    // ===== CONSTRUTOR COMPLETO =====
-    public AlunoNotaDTO(int matricula,
-                        String nomeAluno,
-                        String turma,
-                        Integer notaId,
-                        Double n1,
-                        Double n2,
-                        Double media,
-                        Integer idDisciplina,
-                        String disciplinaNome) {
 
-        this.matricula = matricula;
-        this.nomeAluno = nomeAluno;
+    public AlunoNotaDTO(int matricula, String nomeAluno, String turma, Integer notaId, Double n1, Double n2, Double media, Integer idDisciplina, String disciplinaNome, String ultimoLogin) {
+        this.matricula = matricula; this.nomeAluno = nomeAluno;
         this.turma = turma;
         this.notaId = notaId;
         this.n1 = n1;
@@ -35,9 +24,8 @@ public class AlunoNotaDTO {
         this.media = media;
         this.idDisciplina = idDisciplina;
         this.disciplinaNome = disciplinaNome;
+        this.ultimoLogin = ultimoLogin;
     }
-
-    // ===== GETTERS =====
 
     public int getMatricula() {
         return matricula;
@@ -74,8 +62,6 @@ public class AlunoNotaDTO {
     public String getDisciplinaNome() {
         return disciplinaNome;
     }
-
-    // ===== MÉTODOS AUXILIARES =====
 
     public boolean isAprovado() {
         return media != null && media >= 7.0;
