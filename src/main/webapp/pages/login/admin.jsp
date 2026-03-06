@@ -22,7 +22,7 @@
         <img src="${pageContext.request.contextPath}/img/branding/icone.png">
         <img src="${pageContext.request.contextPath}/img/branding/black.png">
     </div>
-    <h1>Bem vindo de volta!</h1>
+    <h1 style="whitespace: nowrap">Entrar como administrador</h1>
     <%
         String errorDisplay = "block";
         if (request.getAttribute("statusMessage") == null) {

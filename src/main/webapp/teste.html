@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Fazer Login</title>
+    <link rel="shortcut icon" href="img/branding/favicon.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="css/sights/login.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/font.css">
+</head>
+
+<body id="admin">
+<div class="login-form">
+    <div style="justify-content: center" class="logo">
+        <img src="img/branding/icone.png">
+        <img src="img/branding/black.png">
+    </div>
+
+    <h1>Bem vindo de volta!</h1>
+
+    <!-- mensagem de erro (oculta por padrão) -->
+    <p class="error-message" style="display: none;"></p>
+
+    <form action="/login?action=loginAdmin" method="post">
+        <div class="input-major">
+
+            <div class="email input-container">
+                <p class="required">Usuário</p>
+                <input class="validation text-box"
+                       id="email"
+                       name="usuario"
+                       type="text"
+                       placeholder="Insira seu usuário"
+                       required>
+            </div>
+
+            <div class="input-container">
+                <p class="required">Senha</p>
+
+                <div class="input-holder">
+                    <button class="show-password" name="toggle" type="button">
+                        <img id="open" src="img/svg/eye.svg" alt="Mostrar senha">
+                        <img id="closed" style="display:none;"
+                             src="img/svg/eye-crossed.svg"
+                             alt="Ocultar senha">
+                    </button>
+
+                    <input class="text-box"
+                           name="senha"
+                           type="password"
+                           placeholder="Insira sua senha"
+                           required>
+                </div>
+            </div>
+
+            <button class="button fat" type="submit">Continuar</button>
+
+        </div>
+    </form>
+
+    <p id="sign-up-redirect">
+        Não é um administrador?
+        <a href="index.html">Fazer login</a>
+    </p>
+</div>
+
+<script src="js/password.js"></script>
+
+</body>
+</html>

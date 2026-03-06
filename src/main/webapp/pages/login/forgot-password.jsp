@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Recuperar senha</title>
+    <title>Recuperar sua senha</title>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/branding/favicon.png" type="image/x-icon">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sights/login.css">

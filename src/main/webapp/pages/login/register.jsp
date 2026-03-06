@@ -22,7 +22,7 @@
             <img src="${pageContext.request.contextPath}/img/branding/icone.png">
             <img src="${pageContext.request.contextPath}/img/branding/black.png">
         </div>
-        <h1>Registrar aluno</h1>
+        <h1>Registrar novo aluno</h1>
         <form action="${pageContext.request.contextPath}/aluno?action=create" method="post">
             <div class="input-major">
                 <div class="email input-container warning">
