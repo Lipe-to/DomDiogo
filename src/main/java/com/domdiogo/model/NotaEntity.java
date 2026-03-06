@@ -58,6 +58,11 @@ public class NotaEntity {
         return String.format("%.2f", media);
     }
 
+    public String getSituacao() {
+        if (media == null) return "Sem Nota";
+        return media >= 7.0 ? "Aprovado" : "Reprovado";
+    }
+
     public int getIdDisciplina() {
         return this.idDisciplina;
     }
