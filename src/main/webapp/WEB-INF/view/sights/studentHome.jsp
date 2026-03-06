@@ -119,8 +119,7 @@
                             <option value="">Todas as matérias</option>
                         </select>
                     </div>
-                    <% String messageStatus = (String) request.getAttribute("statusMessage");%>
-                    <p style="color: <%=request.getAttribute("colorMessage")%>" class="message"><%= messageStatus == null ? "" : messageStatus %></p>
+
                     <div class="table-container">
                         <div class="table-info">
                             <div>
@@ -149,17 +148,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <%
-                                    for (NotaEntity nota : notas) {
-                                        boolean semNota = (nota.getN1() == null && nota.getN2() == null);
-                                        String situationClass = "";
+                                    <%
+                                        for (NotaEntity nota : notas) {
+                                    %>
+                                    <tr>
+                                        <td><%= nota.getNomeDisciplina() %></td>
+                                        <td><%= nota.getN1() == null ? "-" : nota.getN1() %></td>
+                                        <td><%= nota.getN2() == null ? "-" : nota.getN2() %></td>
+                                        <td><%= nota.getMediaCalculada()%></td>
+                                        <td class="situation">
+                                        <span class="<%= (nota.getMedia() != null && nota.getMedia() >= 7) ? "approved" : "repproved" %>">
+                                        <%= (nota.getMedia() != null && nota.getMedia() >= 7) ? "Aprovado" : "Reprovado" %>
+                                         </span>
+                                        </td>
+                                    </tr>
 
-                                        if (semNota) {
-                                            situationClass = "no-grade";
-                                        } else if (nota.getMedia() != null && nota.getMedia() >= 7) {
-                                            situationClass = "approved";
-                                        } else {
-                                            situationClass = "repproved";
+                                    <%
                                         }
                                 %>
                                 <tr>

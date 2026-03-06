@@ -301,42 +301,8 @@ public class AlunoRepository {
         }
     }
 
-    public AlunoEntity login(String usuario, String senha) {
-        String query = "SELECT * FROM aluno WHERE usuario = ? AND senha = ?";
-        ConnectionFactory connectionFactory = new ConnectionFactory();
-        Connection connection = connectionFactory.connect();
-        AlunoEntity alunoEntity = null;
-
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, usuario);
-            preparedStatement.setString(2, senha);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            if (resultSet.next()) {
-                alunoEntity = new AlunoEntity(
-                        resultSet.getInt("matricula"),
-                        resultSet.getString("nome"),
-                        resultSet.getString("usuario"),
-                        resultSet.getString("senha"),
-                        resultSet.getString("palavra"),
-                        resultSet.getString("turma"),
-                        ServletHelper.formatarUltimoLogin(resultSet)
-                );
-
-                String updateQuery = "UPDATE aluno SET ultimo_login = ? WHERE matricula = ?";
-                PreparedStatement updateStmt = connection.prepareStatement(updateQuery);
-                updateStmt.setTimestamp(1, new Timestamp(System.currentTimeMillis()));
-                updateStmt.setInt(2, alunoEntity.getMatricula());
-                updateStmt.executeUpdate();
-                updateStmt.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            connectionFactory.disconnect(connection);
-        }
-        return alunoEntity;
+    public AlunoEntity login(String usuario) {
+        return findByUsuario(usuario);
     }
 
     public Status validarPalavra(String usuario, String palavra) {

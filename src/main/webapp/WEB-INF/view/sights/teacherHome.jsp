@@ -102,7 +102,7 @@
             <div id="front-desk">
                 <div class="castle" id="welcome">
                     <h2>Olá <%=nome%>!</h2>
-                    <p>Bem-vindo(a) de volta!</p>
+                    <p>Bem vindo de volta!</p>
                 </div>
                 <div class="general-statistic">
                     <a href="" class="h2">Visão geral<img class="redirect" src="${pageContext.request.contextPath}/img/svg/redirect-blue.svg" alt=""></a>
