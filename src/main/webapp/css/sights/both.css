@@ -1,8 +1,15 @@
 @import url('../variables.css');
 
 body {
-    background-color: var(--blue);
     justify-content: center;
+}
+
+#blue-theme {
+    background-color: var(--blue);
+    background-image: url('../../img/shape/background-blue.svg');
+    background-position: 50% 0;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .logo {
@@ -47,7 +54,7 @@ body {
 
 #welcome {
     width: 40%;
-    min-height: 90px;
+    min-height: 120px; /* Dita a height de todo #front-desk */
 }
 
 #welcome.castle {
@@ -57,8 +64,41 @@ body {
     background-image: url('../../img/flat/castle.png');
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: 50% 100%;
-    background-size: 100%;
+    background-position: 90% 100%;
+    background-size: 120%;
+}
+
+.notice-board {
+    width: 60%;
+    position: relative;
+    background-color: var(--notice-board);
+    border-style: solid;
+    border-color: var(--notice-board-border);
+    border-width: 5px;
+}
+
+.notice-board * {
+    color: var(--notice-board-color);
+}
+
+.screw {
+    position: absolute;
+    width: 16px;
+    cursor: pointer;
+}
+
+.screw.right-top {
+    right: 0;
+    top: 0;
+    margin-top: 1.25%;
+    margin-right: 1.25%;
+}
+
+.screw.left-top {
+    left: 0;
+    top: 0;
+    margin-top: 1.25%;
+    margin-left: 1.25%;
 }
 
 .general-statistic {
@@ -70,6 +110,24 @@ body {
     display: flex;
     gap: 5%;
     margin-top: 2%;
+}
+
+#front-desk .button {
+    border: 0;
+    border-radius: 4px;
+    
+    width: 40%;
+    max-width: 160px;
+    padding: 0.4rem 5%;
+    
+    color: var(--white);
+    font-size: 0.875rem;
+}
+
+#front-desk>* {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 main {

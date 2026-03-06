@@ -32,7 +32,7 @@
     ProfessorRepository professorRepository = (ProfessorRepository) request.getAttribute("professorRepository");
 %>
 
-<body>
+<body id="blue-theme">
     <aside id="sidebar">
         <ul>
             <div>
@@ -86,29 +86,16 @@
             <main>
                 <div id="front-desk">
                     <div class="castle" id="welcome">
-                        <h2>Olá <%=nome%>!</h2>
+                        <h2>Olá, <%=nome%></h2>
                         <p>Bem vindo de volta!</p>
+                        <a class="button">Ir ao quadro</a>
                     </div>
-                    <div class="general-statistic">
-                        <h2>Visão geral</h2>
-                        <div>
-                            <div>
-                                <h3><span>32</span></h3>
-                                <span>Total de alunos</span>
-                            </div>
-                            <div>
-                                <h3><span>8,1</span></h3>
-                                <span>Total de turmas</span>
-                            </div>
-                            <div>
-                                <h3><span>12</span> %</h3>
-                                <span>Alunos reprovados</span>
-                            </div>
-                            <div>
-                                <h3><span>12</span> %</h3>
-                                <span>Alunos reprovados</span>
-                            </div>
-                        </div>
+                    <div class="notice-board">
+                        <h2>Quadro de avisos</h2>
+                        <a class="button">Ir ao quadro</a>
+
+                        <img style="rotate: 15deg;" class="screw right-top" src="img/flat/screw.png">
+                        <img style="rotate: 84deg;" class="screw left-top" src="img/flat/screw.png">
                     </div>
                 </div>
 
