@@ -92,9 +92,9 @@ public class TeacherHomeServlet extends HttpServlet {
         request.setAttribute("observacoes", observacoes);
 
         request.setAttribute("countAlunos", alunoRepository.countAlunos());
-        request.setAttribute("countAlunosReprovados", alunoRepository.porcentagemAlunos(TipoCount.APROVADO, idProfessor));
-        request.setAttribute("countAlunosAprovado", alunoRepository.porcentagemAlunos(TipoCount.REPROVADO, idProfessor));
-        request.setAttribute("countAlunosSemNota", alunoRepository.porcentagemAlunos(TipoCount.SEM_NOTA, idProfessor));
+        request.setAttribute("percentAlunosReprovados", alunoRepository.porcentagemAlunos(TipoCount.APROVADO, idProfessor));
+        request.setAttribute("percentAlunosAprovado", alunoRepository.porcentagemAlunos(TipoCount.REPROVADO, idProfessor));
+        request.setAttribute("percentAlunosSemNota", alunoRepository.porcentagemAlunos(TipoCount.SEM_NOTA, idProfessor));
 
         // Passando repositórios que serão usados no JSP
         request.setAttribute("alunoRepository", alunoRepository);

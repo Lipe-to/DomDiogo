@@ -1,6 +1,7 @@
 package com.domdiogo.repository;
 
 import com.domdiogo.ConnectionFactory;
+import com.domdiogo.ServletHelper;
 import com.domdiogo.model.AlunoNotaDTO;
 import com.domdiogo.model.NotaEntity;
 import com.domdiogo.model.Status;
@@ -141,7 +142,8 @@ public class NotaRepository {
                             n2,
                             media,
                             rs.getObject("id_disciplina", Integer.class),
-                            rs.getString("disciplina_nome")
+                            rs.getString("disciplina_nome"),
+                            ServletHelper.formatarUltimoLogin(rs)
                     );
 
                     lista.add(dto);

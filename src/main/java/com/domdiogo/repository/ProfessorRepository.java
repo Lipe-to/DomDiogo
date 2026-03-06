@@ -1,6 +1,7 @@
 package com.domdiogo.repository;
 
 import com.domdiogo.ConnectionFactory;
+import com.domdiogo.ServletHelper;
 import com.domdiogo.model.ProfessorEntity;
 import com.domdiogo.model.Status;
 
@@ -25,7 +26,8 @@ public class ProfessorRepository {
                         resultSet.getString("nome"),
                         resultSet.getString("usuario"),
                         resultSet.getString("senha"),
-                        resultSet.getString("palavra")
+                        resultSet.getString("palavra"),
+                        ServletHelper.formatarUltimoLogin(resultSet)
                 );
             }
         } catch (SQLException e) {
@@ -50,7 +52,8 @@ public class ProfessorRepository {
                         resultSet.getString("nome"),
                         resultSet.getString("usuario"),
                         resultSet.getString("senha"),
-                        resultSet.getString("palavra")
+                        resultSet.getString("palavra"),
+                        ServletHelper.formatarUltimoLogin(resultSet)
                 );
                 professores.add(professor);
             }
@@ -104,7 +107,9 @@ public class ProfessorRepository {
                         resultSet.getString("nome"),
                         resultSet.getString("usuario"),
                         resultSet.getString("senha"),
-                        resultSet.getString("palavra")
+                        resultSet.getString("palavra"),
+                        ServletHelper.formatarUltimoLogin(resultSet)
+
                 );
             }
         } catch (SQLException e) {
@@ -130,7 +135,8 @@ public class ProfessorRepository {
                         resultSet.getString("nome"),
                         resultSet.getString("usuario"),
                         resultSet.getString("senha"),
-                        resultSet.getString("palavra")
+                        resultSet.getString("palavra"),
+                        ServletHelper.formatarUltimoLogin(resultSet)
                 );
             }
         } catch (SQLException e) {
