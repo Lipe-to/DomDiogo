@@ -7,10 +7,12 @@ body {
 
 #blue-theme {
     background-color: var(--blue);
-    background-image: url('../../img/shape/background-blue.svg');
-    background-position: 50% 0;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-image:
+        url('../../img/shape/background-blue.svg'),
+        linear-gradient(to bottom, #538cdb 50%, #1C457E 50%);
+    background-position: 50% 0, 50% 0;
+    background-repeat: no-repeat, repeat-y;
+    background-size: cover, 100%;
 }
 
 .logo {
@@ -24,7 +26,6 @@ body {
 .logo>:last-child { /* Apenas nas telas de dash */
     max-width: 130px;
 }
-
 
 #major-container {
     width: 90%;
@@ -65,7 +66,7 @@ body {
     background-image: url('../../img/flat/castle.png');
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: 90% 100%;
+    background-position: 90% 99%;
     background-size: 120%;
 }
 
