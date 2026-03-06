@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', function () {
     const senhaInput = document.querySelector('input[name="senha"]');
     const confirmSenhaInput = document.querySelectorAll('input[type="password"]')[1];
 
@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    confirmSenhaInput.addEventListener("input", validarSenha);
-    senhaInput.addEventListener("input", validarSenha);
+    confirmSenhaInput.addEventListener('input', validarSenha);
+    senhaInput.addEventListener('input', validarSenha);
 });
 
