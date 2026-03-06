@@ -30,11 +30,11 @@ async function gerarBoletim() {
         const colunas = linha.querySelectorAll("td");
         if (colunas.length > 0) {
             dadosBoletim.push([
-                colunas[0].innerText,
-                colunas[1].innerText,
-                colunas[2].innerText,
-                colunas[3].innerText,
-                colunas[4].innerText
+                colunas[0].innerText, // materia
+                colunas[1].innerText, // n1
+                colunas[2].innerText, // n2
+                colunas[3].innerText, // media
+                colunas[4].innerText // situacao
             ]);
         }
     });
@@ -57,7 +57,7 @@ async function gerarBoletim() {
             0: { halign: 'left', fontStyle: 'bold', cellWidth: 60 },
         },
         didParseCell: function (data) {
-            // Lógica para colorir Aprovado/Reprovado
+            // logica para colorir situacao
             if (data.section === 'body' && data.column.index === 4) {
                 const texto = data.cell.raw.trim().toUpperCase();
                 if (texto === "APROVADO") {
@@ -80,6 +80,5 @@ async function gerarBoletim() {
     doc.line(120, finalY, 190, finalY);
     doc.text("Assinatura do Diretor", 120, finalY + 5);
 
-    // Salva o arquivo
     doc.save(`Boletim_${nomeAluno.replace(/\s+/g, '_')}.pdf`);
 }
