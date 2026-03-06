@@ -203,6 +203,15 @@ public class LoginServlet extends HttpServlet {
                 }
                 break;
 
+            case "logout":
+                HttpSession session = request.getSession(false);
+                if (session != null) {
+                    session.invalidate();
+                }
+                ServletHelper.configureStatus(request, "Logout realizado com sucesso!", StatusColor.GREEN);
+                redirect = "/index.jsp";
+                break;
+
             default:
                 ServletHelper.configureStatus(request, "Ação inválida.", StatusColor.RED);
                 redirect = "/index.jsp";
