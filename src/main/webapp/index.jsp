@@ -1,3 +1,4 @@
+<%@ page import="com.domdiogo.model.StatusColor" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page pageEncoding="UTF-8" %>
 <%@ page errorPage="pages/error.jsp" %>
@@ -23,14 +24,9 @@
         <img src="img/branding/icone.png">
         <img src="img/branding/black.png">
     </div>
-    <h1>Bem vindo de volta!</h1>
-    <%
-        String errorDisplay = "block";
-        if (request.getAttribute("statusMessage") == null) {
-            errorDisplay = "none";
-        }
-    %>
-    <p class="error-message" style="display: <%=errorDisplay%>;"><%=request.getAttribute("statusMessage")%></p>
+    <h1>Bem-vindo(a) de volta!</h1>
+    <% String statusMessage = (String) request.getAttribute("statusMessage");%>
+    <p style="color: <%=(String)request.getAttribute("statusColor")%>"><%= statusMessage == null ? "" : statusMessage %></p>
     <form action="${pageContext.request.contextPath}/login?action=login" method="post">
         <div class="input-major">
             <div class="email input-container">

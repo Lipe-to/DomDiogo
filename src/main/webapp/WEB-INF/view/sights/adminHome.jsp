@@ -16,13 +16,13 @@
     <title>Dom Diogo - Administrador</title>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/branding/favicon.png" type="image/x-icon">
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sights/both.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sights/teacher.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/popup.css">
+    <link rel="stylesheet" href="<%= context %>/css/sights/both.css">
+    <link rel="stylesheet" href="<%= context %>/css/sights/teacher.css">
+    <link rel="stylesheet" href="<%= context %>/css/popup.css">
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/variables.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font.css">
+    <link rel="stylesheet" href="<%= context %>/css/style.css">
+    <link rel="stylesheet" href="<%= context %>/css/variables.css">
+    <link rel="stylesheet" href="<%= context %>/css/font.css">
 </head>
 
 <%
@@ -159,6 +159,7 @@
                         <button class="button" type="submit">Filtrar</button>
                     </form>
                 </div>
+            </div>
 
                 <div class="table-container">
                     <div class="table-info">

@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet {
                                 "Login realizado com sucesso!",
                                 StatusColor.GREEN);
 
-                        redirect = "/WEB-INF/view/sights/studentHome.jsp";
+                        redirect = "/studentHome";
                     } else {
                         ServletHelper.configureStatus(request,
                                 "Usuário ou senha inválidos.",
@@ -78,7 +78,7 @@ public class LoginServlet extends HttpServlet {
                                 "Login realizado com sucesso!",
                                 StatusColor.GREEN);
 
-                        redirect = "/WEB-INF/view/sights/teacherHome.jsp";
+                        redirect = "/teacherHome";
                     } else {
                         ServletHelper.configureStatus(request,
                                 "Usuário ou senha inválidos.",
@@ -220,6 +220,38 @@ public class LoginServlet extends HttpServlet {
 
                     redirect = "/pages/login/admin.jsp";
                 }
+                break;
+
+            case "loginAdmin":
+                // LOGIN ADMINISTRADOR
+                Status statusAdmin = administradorRepository.login(usuario, senha);
+
+                if (statusAdmin == Status.SUCCESS) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("usuario", usuario);
+                    session.setAttribute("role", "ADMIN");
+
+                    ServletHelper.configureStatus(request,
+                            "Login de administrador realizado com sucesso!",
+                            StatusColor.GREEN);
+
+                    redirect = "/adminHome";
+                } else {
+                    ServletHelper.configureStatus(request,
+                            "Usuário ou senha de administrador inválidos.",
+                            StatusColor.RED);
+
+                    redirect = "/pages/login/admin.jsp";
+                }
+                break;
+
+            case "logout":
+                HttpSession session = request.getSession(false);
+                if (session != null) {
+                    session.invalidate();
+                }
+                ServletHelper.configureStatus(request, "Logout realizado com sucesso!", StatusColor.GREEN);
+                redirect = "/index.jsp";
                 break;
 
             default:

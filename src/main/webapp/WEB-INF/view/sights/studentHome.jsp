@@ -87,7 +87,7 @@
                 <div id="front-desk">
                     <div class="castle" id="welcome">
                         <h2>Olá <%=nome%>!</h2>
-                        <p>Bem vindo de volta!</p>
+                        <p>Bem-vindo(a) de volta!</p>
                     </div>
                     <div class="general-statistic">
                         <h2>Visão geral</h2>
@@ -165,7 +165,19 @@
 
                                     <%
                                         }
-                                    %>
+                                %>
+                                <tr>
+                                    <td><%= nota.getNomeDisciplina() %></td>
+                                    <td><%= nota.getN1() == null ? "-" : nota.getN1() %></td>
+                                    <td><%= nota.getN2() == null ? "-" : nota.getN2() %></td>
+                                    <td><%= nota.getMedia() == null ? "-" : nota.getMediaCalculada() %></td>
+                                    <td class="situation">
+                                        <span class="<%= situationClass %>"><%= nota.getSituacao() %></span>
+                                    </td>
+                                </tr>
+                                <%
+                                    }
+                                %>
                                 </tbody>
                             </table>
                         </div>
