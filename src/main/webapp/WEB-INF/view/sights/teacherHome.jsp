@@ -86,8 +86,8 @@
         <header>
             <a href="#">
                 <div class="logo">
-                    <img src="${pageContext.request.contextPath}/img/branding/icone.png">
-                    <img src="${pageContext.request.contextPath}/img/branding/white.png">
+                    <img src="${pageContext.request.contextPath}/img/branding/icone.png" draggable="false">
+                    <img src="${pageContext.request.contextPath}/img/branding/white.png" draggable="false">
                 </div>
             </a>
             <div class="personal-info">
