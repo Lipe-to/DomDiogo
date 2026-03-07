@@ -208,7 +208,6 @@ input.is-valid:invalid, input.invalid  {
 }
 
 .error-message {
-    margin-bottom: 5%;
     transform: translateY(-90%);
 }
 
