@@ -39,47 +39,62 @@
     ProfessorRepository professorRepository = (ProfessorRepository) request.getAttribute("professorRepository");
 %>
 
-<body id="red-theme">
-<aside id="sidebar">
-    <ul>
+<body id="red-theme" class="white">
+    <li id="menu-icon-container">
+        <label id="menu-icon" for="menu-checkbox">
+            <img class="sidebar-icon expand white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/menu-burger.svg">
+            <img class="sidebar-icon reduce white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/reduce-menu.svg">
+
+            <img class="sidebar-icon expand black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/menu-burger.svg">
+            <img class="sidebar-icon reduce black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/reduce-menu.svg">
+        </label>
+        <input name="menu-checkbox" id="menu-checkbox" type="checkbox" checked hidden>
+    </li>
+    <aside id="sidebar">
         <div>
-            <li id="menu-icon-container">
-                <label id="menu-icon" for="menu-checkbox">
-                    <img class="sidebar-icon" src="${pageContext.request.contextPath}/img/svg/sidebar/menu-burger.svg">
-                </label>
-                <input name="menu-checkbox" id="menu-checkbox" type="checkbox">
-            </li>
-            <p id="menu-text">Menu</p>
-            <li class="emphasis">
-                <a href="">
-                    <img class="sidebar-icon" src="${pageContext.request.contextPath}/img/svg/sidebar/home-emphasis.svg"
-                        >
-                    <span>Tela Inicial</span>
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <img class="sidebar-icon" src="${pageContext.request.contextPath}/img/svg/sidebar/dashboard.svg"
-                        >
-                    <span>Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <img class="sidebar-icon" src="${pageContext.request.contextPath}/img/svg/sidebar/address-book.svg"
-                        >
-                    <span>Professores</span>
-                </a>
-            </li>
+            <div class="logo">
+                <img src="${pageContext.request.contextPath}/img/branding/icone.png" draggable="false">
+                <img src="${pageContext.request.contextPath}/img/branding/white.png" draggable="false">
+            </div>
+            <ul>
+                <li class="emphasis">
+                    <a href="adminHome">
+                        <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/home.svg">
+                        <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/home.svg">
+                        <span>Tela Inicial</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/dashboard.svg">
+                        <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/dashboard.svg">
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/address-book.svg">
+                        <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/address-book.svg">
+                        <span>Professores</span>
+                    </a>
+                </li>
+                <li class="divide">
+                    <a href="#">
+                        <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/user.svg">
+                        <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/user.svg">
+                        <span>Meu perfil</span>
+                    </a>
+                </li>
+                <li id="sign-out">
+                    <button onclick="window.location.href='/index.jsp'">
+                        <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/sign-out.svg">
+                        <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/sign-out.svg">
+                        <span>Sair</span>
+                    </button>
+                </li>
+            </ul>
         </div>
-        <li id="sign-out">
-            <button>
-                <img class="sidebar-icon" src="${pageContext.request.contextPath}/img/svg/sidebar/sign-out.svg">
-                <span>Sair</span>
-            </button>
-        </li>
-    </ul>
-</aside>
+    </aside>
 
 <div id="major-container">
     <div id="wrap">

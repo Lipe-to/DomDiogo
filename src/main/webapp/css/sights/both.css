@@ -343,6 +343,19 @@ table td input {
 
 #sidebar, #menu-icon-container {
     transition: transform 0.4s ease-out;
+    z-index: 2;
+}
+
+#grey-theme #sidebar * {
+    color: var(--white);
+}
+
+#grey-theme #sidebar {
+    background-color: #3b3b3b;
+    
+    border: 0 solid rgba(48, 48, 48, 0.363);
+    border-right-width: 2px;
+    border-style: solid;
 }
 
 #sidebar {
@@ -358,13 +371,8 @@ table td input {
     width: 50vh;
     height: 100vh;
     
-    background-color: rgb(219, 219, 219);
     box-shadow: var(--shadow-aside);
     
-    border-style: solid;
-    border: 0 solid rgb(0, 0, 0);
-    border-right-width: 2px;
-
     transform: translateX(-120%);
     transition: transform 0.4s ease-out;
 }
@@ -376,6 +384,10 @@ table td input {
     height: 90%;
     width: 90%;
     gap: 3%;
+}
+
+#sidebar .logo {
+    margin-bottom: 5%;
 }
 
 #sidebar ul {
@@ -406,10 +418,25 @@ table td input {
     white-space: nowrap;
     overflow: hidden;
     
-    background-color: var(--sidebar-icon);
-    
+    background-color: rgba(158, 158, 158, 0.050);
     cursor: pointer;
     transition: width 0.6s ease-in-out, background-color 0.2s ease, transform 0.3s ease-in-out;
+}
+
+#sidebar li a {
+    opacity: 80%;
+}
+
+#sidebar li:hover {
+    background-color: rgba(158, 158, 158, 0.301);
+}
+
+#sidebar li.emphasis, #menu-icon-container {
+    background-color: rgb(80, 80, 80)
+}
+
+#sidebar li.emphasis a {
+    opacity: 100%;
 }
 
 #sidebar li::marker {
@@ -436,7 +463,6 @@ table td input {
 #sidebar #sign-out * {
     border: none;
     background-color: transparent;
-    color: var(--red);
 }
 
 #menu-icon-container, #menu-icon {
@@ -453,11 +479,17 @@ table td input {
     width: 36px;
     aspect-ratio: 1 / 1;
     padding: 0.5rem;
-    
     border-radius: 4px;
-    background-color: #ECECEC;
     
     z-index: 1;
+}
+
+body.white #sidebar .black, body.white #menu-icon .black {
+    display: none;
+}
+
+body.black #sidebar .white, body.black #menu-icon .white {
+    display: none;
 }
 
 body:has(#menu-checkbox:checked) #sidebar {
@@ -468,25 +500,36 @@ body:has(#menu-checkbox:checked) #menu-icon-container {
     transform: translateX(50vh);
 }
 
+body:has(#menu-checkbox:checked) #menu-icon .expand {
+    display: none;
+}
+
+body:has(#menu-checkbox:not(:checked)) #menu-icon .reduce {
+    display: none;
+}
+
 body::before {
     content: "";
-    position: absolute;
+    position: fixed;
     inset: 0;
     
     background-color: black;
     opacity: 0%;
     
+    z-index: -1;
     transition: opacity 1.6s cubic-bezier(0, 0, 0.2, 1);
 }
 
 body:has(#menu-checkbox:checked)::before {
+    z-index: 1;
     opacity: 60%;
 }
 
 .sidebar-icon {
-    width: 20px;
+    width: 16px;
     height: auto;
- 
+    
+    opacity: 80%;
     transition: background-color 0.2s ease-in-out;
 }
 

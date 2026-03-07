@@ -28,58 +28,76 @@
     <title>Dom Diogo - Admin</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
 
-    <link rel="stylesheet" href="<%= context %>/css/sights/both.css">
-    <link rel="stylesheet" href="<%= context %>/css/sights/teacher.css">
-    <link rel="stylesheet" href="<%= context %>/css/popup.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sights/both.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sights/teacher.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/popup.css">
 
-    <link rel="stylesheet" href="<%= context %>/css/style.css">
-    <link rel="stylesheet" href="<%= context %>/css/variables.css">
-    <link rel="stylesheet" href="<%= context %>/css/font.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/variables.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font.css">
 </head>
 
-<body id="grey-theme">
-<aside id="sidebar">
-    <ul>
+<body id="grey-theme" class="white">
+<li id="menu-icon-container">
+        <label id="menu-icon" for="menu-checkbox">
+            <img class="sidebar-icon expand white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/menu-burger.svg">
+            <img class="sidebar-icon reduce white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/reduce-menu.svg">
+
+            <img class="sidebar-icon expand black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/menu-burger.svg">
+            <img class="sidebar-icon reduce black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/reduce-menu.svg">
+        </label>
+        <input name="menu-checkbox" id="menu-checkbox" type="checkbox" checked hidden>
+    </li>
+    <aside id="sidebar">
         <div>
-            <li id="menu-icon-container">
-                <label id="menu-icon" for="menu-checkbox">
-                    <img class="sidebar-icon" src="<%= context %>/img/svg/sidebar/menu-burger.svg">
-                </label>
-                <input name="menu-checkbox" id="menu-checkbox" type="checkbox">
-            </li>
-            <p id="menu-text">Menu</p>
-            <li class="emphasis">
-                <a href="<%= context %>/adminHome">
-                    <img class="sidebar-icon" src="<%= context %>/img/svg/sidebar/home-emphasis.svg">
-                    <span>Tela Inicial</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img class="sidebar-icon" src="<%= context %>/img/svg/sidebar/dashboard.svg">
-                    <span>Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img class="sidebar-icon" src="<%= context %>/img/svg/sidebar/address-book.svg">
-                    <span>Professores</span>
-                </a>
-            </li>
+            <div class="logo">
+                <img src="${pageContext.request.contextPath}/img/branding/icone.png" draggable="false">
+                <img src="${pageContext.request.contextPath}/img/branding/white.png" draggable="false">
+            </div>
+            <ul>
+                <li class="emphasis">
+                    <a href="adminHome">
+                        <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/home.svg">
+                        <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/home.svg">
+                        <span>Tela Inicial</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/dashboard.svg">
+                        <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/dashboard.svg">
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/address-book.svg">
+                        <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/address-book.svg">
+                        <span>Professores</span>
+                    </a>
+                </li>
+                <li class="divide">
+                    <a href="#">
+                        <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/user.svg">
+                        <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/user.svg">
+                        <span>Meu perfil</span>
+                    </a>
+                </li>
+                <li id="sign-out">
+                    <button onclick="window.location.href='/index.jsp'">
+                        <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/sign-out.svg">
+                        <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/sign-out.svg">
+                        <span>Sair</span>
+                    </button>
+                </li>
+            </ul>
         </div>
-        <li id="sign-out">
-            <button onclick="window.location.href='<%= context %>/index.jsp'">
-                <img class="sidebar-icon" src="<%= context %>/img/svg/sidebar/sign-out.svg">
-                <span>Sair</span>
-            </button>
-        </li>
-    </ul>
-</aside>
+    </aside>
 
 <div id="major-container">
     <div id="wrap">
         <header>
-            <a href="#"><img class="logo" src="<%= context %>/img/branding/teste.png" alt="Logo"></a>
+            <a href="#"><img class="logo" src="${pageContext.request.contextPath}/img/branding/teste.png" alt="Logo"></a>
             <div class="personal-info">
                 <div class="profile-image"></div>
                 <div>
@@ -98,7 +116,7 @@
                     </div>
                 </div>
                 <div class="general-statistic">
-                    <a href="" class="h2">Visão geral <img class="redirect" src="<%= context %>/img/svg/redirect-blue.svg"></a>
+                    <a href="" class="h2">Visão geral <img class="redirect" src="${pageContext.request.contextPath}/img/svg/redirect-blue.svg"></a>
                     <div>
                         <div>
                             <h3><span><%= totalAlunos != null ? totalAlunos : 0 %></span></h3>
@@ -148,9 +166,9 @@
                                     <td><%= aluno.getSenha() %></td>
                                     <td>
                                         <div class="td-actions">
-                                            <button class="show"><img src="<%= context %>/img/svg/crud/eye.svg"></button>
-                                            <button class="edit"><img src="<%= context %>/img/svg/crud/pencil.svg"></button>
-                                            <button class="delete"><img src="<%= context %>/img/svg/crud/trash.svg"></button>
+                                            <button class="show"><img src="${pageContext.request.contextPath}/img/svg/crud/eye.svg"></button>
+                                            <button class="edit"><img src="${pageContext.request.contextPath}/img/svg/crud/pencil.svg"></button>
+                                            <button class="delete"><img src="${pageContext.request.contextPath}/img/svg/crud/trash.svg"></button>
                                         </div>
                                     </td>
                                 </tr>
