@@ -222,29 +222,6 @@ public class LoginServlet extends HttpServlet {
                 }
                 break;
 
-            case "loginAdmin":
-                // LOGIN ADMINISTRADOR
-                Status statusAdmin = administradorRepository.login(usuario, senha);
-
-                if (statusAdmin == Status.SUCCESS) {
-                    HttpSession session = request.getSession();
-                    session.setAttribute("usuario", usuario);
-                    session.setAttribute("role", "ADMIN");
-
-                    ServletHelper.configureStatus(request,
-                            "Login de administrador realizado com sucesso!",
-                            StatusColor.GREEN);
-
-                    redirect = "/adminHome";
-                } else {
-                    ServletHelper.configureStatus(request,
-                            "Usuário ou senha de administrador inválidos.",
-                            StatusColor.RED);
-
-                    redirect = "/pages/login/admin.jsp";
-                }
-                break;
-
             case "logout":
                 HttpSession session = request.getSession(false);
                 if (session != null) {
