@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="css/font.css">
 </head>
 
-<body id="grey-theme" class="white">
+<body id="blue-theme" class="black">
     <li id="menu-icon-container">
         <label id="menu-icon" for="menu-checkbox">
             <img class="sidebar-icon expand white" src="img/svg/sidebar/white/menu-burger.svg">
@@ -26,13 +26,14 @@
             <img class="sidebar-icon expand black" src="img/svg/sidebar/black/menu-burger.svg">
             <img class="sidebar-icon reduce black" src="img/svg/sidebar/black/reduce-menu.svg">
         </label>
-        <input name="menu-checkbox" id="menu-checkbox" type="checkbox" checked hidden>
+        <input name="menu-checkbox" id="menu-checkbox" type="checkbox" hidden>
     </li>
     <aside id="sidebar">
         <div>
             <div class="logo">
                 <img src="img/branding/icone.png" draggable="false">
-                <img src="img/branding/white.png" draggable="false">
+                <img class="white" src="img/branding/white.png" draggable="false">
+                <img style="opacity: 80%;" class="black" src="img/branding/black.png" draggable="false">
             </div>
             <ul>
                 <li class="emphasis">
@@ -164,45 +165,13 @@
                                 <tbody>
 
                                     <tr>
-                                        <td>João Silva</td>
-                                        <td>joao.silva</td>
-                                        <td>123456</td>
-                                        <td>
-                                            <div class="td-actions">
-                                                <button class="show">
-                                                    <img src="img/svg/crud/eye.svg">
-                                                </button>
-
-                                                <button class="edit">
-                                                    <img src="img/svg/crud/pencil.svg">
-                                                </button>
-
-                                                <button class="delete">
-                                                    <img src="img/svg/crud/trash.svg">
-                                                </button>
+                                        <th colspan="4">
+                                        <div class="card-container">
+                                            <div class="any-card">
+                                                <h3 style="opacity: 60%; width: 100%;">Nenhuma observação atribuída</h3>
                                             </div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Maria Souza</td>
-                                        <td>maria.souza</td>
-                                        <td>654321</td>
-                                        <td>
-                                            <div class="td-actions">
-                                                <button class="show">
-                                                    <img src="img/svg/crud/eye.svg">
-                                                </button>
-
-                                                <button class="edit">
-                                                    <img src="img/svg/crud/pencil.svg">
-                                                </button>
-
-                                                <button class="delete">
-                                                    <img src="img/svg/crud/trash.svg">
-                                                </button>
-                                            </div>
-                                        </td>
+                                        </div>
+                                        </th>
                                     </tr>
 
                                 </tbody>
@@ -217,23 +186,9 @@
                     <h1>Observações</h1>
 
                     <div class="card-container">
-
-                        <div class="card yellow">
-                            <div>
-                                <h2>Falta recorrente</h2>
-                                <p>Professor ID: 3</p>
-                            </div>
-                            <button class="button">Ver detalhes</button>
+                        <div class="any-card">
+                            <h3 style="opacity: 60%; width: 100%;">Nenhuma observação atribuída</h3>
                         </div>
-
-                        <div class="card blue">
-                            <div>
-                                <h2>Bom desempenho</h2>
-                                <p>Professor ID: 2</p>
-                            </div>
-                            <button class="button">Ver detalhes</button>
-                        </div>
-
                     </div>
                 </div>
 

@@ -39,62 +39,77 @@
     ProfessorRepository professorRepository = (ProfessorRepository) request.getAttribute("professorRepository");
 %>
 
-<body id="red-theme" class="white">
-    <li id="menu-icon-container">
-        <label id="menu-icon" for="menu-checkbox">
-            <img class="sidebar-icon expand white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/menu-burger.svg">
-            <img class="sidebar-icon reduce white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/reduce-menu.svg">
+<body id="red-theme" class="black">
+<li id="menu-icon-container">
+    <label id="menu-icon" for="menu-checkbox">
+        <img class="sidebar-icon expand white"
+             src="${pageContext.request.contextPath}/img/svg/sidebar/white/menu-burger.svg">
+        <img class="sidebar-icon reduce white"
+             src="${pageContext.request.contextPath}/img/svg/sidebar/white/reduce-menu.svg">
 
-            <img class="sidebar-icon expand black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/menu-burger.svg">
-            <img class="sidebar-icon reduce black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/reduce-menu.svg">
-        </label>
-        <input name="menu-checkbox" id="menu-checkbox" type="checkbox" checked hidden>
-    </li>
-    <aside id="sidebar">
-        <div>
-            <div class="logo">
-                <img src="${pageContext.request.contextPath}/img/branding/icone.png" draggable="false">
-                <img src="${pageContext.request.contextPath}/img/branding/white.png" draggable="false">
-            </div>
-            <ul>
-                <li class="emphasis">
-                    <a href="adminHome">
-                        <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/home.svg">
-                        <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/home.svg">
-                        <span>Tela Inicial</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/dashboard.svg">
-                        <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/dashboard.svg">
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/address-book.svg">
-                        <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/address-book.svg">
-                        <span>Professores</span>
-                    </a>
-                </li>
-                <li class="divide">
-                    <a href="#">
-                        <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/user.svg">
-                        <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/user.svg">
-                        <span>Meu perfil</span>
-                    </a>
-                </li>
-                <li id="sign-out">
-                    <button onclick="window.location.href='/index.jsp'">
-                        <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/sign-out.svg">
-                        <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/sign-out.svg">
-                        <span>Sair</span>
-                    </button>
-                </li>
-            </ul>
+        <img class="sidebar-icon expand black"
+             src="${pageContext.request.contextPath}/img/svg/sidebar/black/menu-burger.svg">
+        <img class="sidebar-icon reduce black"
+             src="${pageContext.request.contextPath}/img/svg/sidebar/black/reduce-menu.svg">
+    </label>
+    <input name="menu-checkbox" id="menu-checkbox" type="checkbox" hidden>
+</li>
+<aside id="sidebar">
+    <div>
+        <div class="logo">
+            <img class="white" src="${pageContext.request.contextPath}/img/branding/icone.png" draggable="false">
+            <img style="opacity: 80%;" class="black" src="${pageContext.request.contextPath}/img/branding/white.png"
+                 draggable="false">
         </div>
-    </aside>
+        <ul>
+            <li class="emphasis">
+                <a href="adminHome">
+                    <img class="sidebar-icon white"
+                         src="${pageContext.request.contextPath}/img/svg/sidebar/white/home.svg">
+                    <img class="sidebar-icon black"
+                         src="${pageContext.request.contextPath}/img/svg/sidebar/black/home.svg">
+                    <span>Tela Inicial</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="sidebar-icon white"
+                         src="${pageContext.request.contextPath}/img/svg/sidebar/white/dashboard.svg">
+                    <img class="sidebar-icon black"
+                         src="${pageContext.request.contextPath}/img/svg/sidebar/black/dashboard.svg">
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img class="sidebar-icon white"
+                         src="${pageContext.request.contextPath}/img/svg/sidebar/white/address-book.svg">
+                    <img class="sidebar-icon black"
+                         src="${pageContext.request.contextPath}/img/svg/sidebar/black/address-book.svg">
+                    <span>Professores</span>
+                </a>
+            </li>
+            <li class="divide">
+                <a href="#">
+                    <img class="sidebar-icon white"
+                         src="${pageContext.request.contextPath}/img/svg/sidebar/white/user.svg">
+                    <img class="sidebar-icon black"
+                         src="${pageContext.request.contextPath}/img/svg/sidebar/black/user.svg">
+                    <span>Meu perfil</span>
+                </a>
+            </li>
+            <li id="sign-out">
+                <button onclick="window.location.href='/index.jsp'">
+                    <img class="sidebar-icon white"
+                         src="${pageContext.request.contextPath}/img/svg/sidebar/white/sign-out.svg">
+                    <img class="sidebar-icon black"
+                         src="${pageContext.request.contextPath}/img/svg/sidebar/black/sign-out.svg">
+                    <span>Sair</span>
+                </button>
+            </li>
+        </ul>
+    </div>
+</aside>
 
 <div id="major-container">
     <div id="wrap">
@@ -108,7 +123,8 @@
             <div class="personal-info">
                 <div class="profile-image"></div>
                 <div>
-                    <h3><%=nome%></h3>
+                    <h3><%=nome%>
+                    </h3>
                     <p>Professor</p>
                 </div>
             </div>
@@ -124,7 +140,8 @@
                     <a class="button">Gerenciar observações</a>
                 </div>
                 <div class="general-statistic">
-                    <a href="" class="h2">Visão geral<img class="redirect" src="${pageContext.request.contextPath}/img/svg/redirect-blue.svg"></a>
+                    <a href="" class="h2">Visão geral<img class="redirect"
+                                                          src="${pageContext.request.contextPath}/img/svg/redirect-blue.svg"></a>
                     <div>
                         <%
                             String apprClass = "";
@@ -133,7 +150,7 @@
                             if (alunoRepository.porcentagemAlunos(TipoCount.APROVADO, idProfessor) != 0) {
                                 apprClass = "appr";
                             }
-                            if (alunoRepository.porcentagemAlunos(TipoCount.REPROVADO, idProfessor) != 0 ) {
+                            if (alunoRepository.porcentagemAlunos(TipoCount.REPROVADO, idProfessor) != 0) {
                                 reprClass = "repr";
                             }
                         %>
@@ -142,15 +159,20 @@
                             <span>Total de alunos</span>
                         </div>
                         <div>
-                            <h3><span><%=alunoRepository.porcentagemAlunos(TipoCount.SEM_NOTA, idProfessor)%></span> %</h3>
+                            <h3><span><%=alunoRepository.porcentagemAlunos(TipoCount.SEM_NOTA, idProfessor)%></span> %
+                            </h3>
                             <span>Alunos sem notas</span>
                         </div>
                         <div>
-                            <h3><span class="<%=apprClass%>"><%=alunoRepository.porcentagemAlunos(TipoCount.APROVADO, idProfessor)%></span> %</h3>
+                            <h3><span
+                                    class="<%=apprClass%>"><%=alunoRepository.porcentagemAlunos(TipoCount.APROVADO, idProfessor)%></span>
+                                %</h3>
                             <span>Alunos aprovados</span>
                         </div>
                         <div>
-                            <h3><span class="<%=reprClass%>"><%=alunoRepository.porcentagemAlunos(TipoCount.REPROVADO, idProfessor)%></span> %</h3>
+                            <h3><span
+                                    class="<%=reprClass%>"><%=alunoRepository.porcentagemAlunos(TipoCount.REPROVADO, idProfessor)%></span>
+                                %</h3>
                             <span>Alunos reprovados</span>
                         </div>
                     </div>
@@ -171,26 +193,36 @@
                             <h3>Alunos</h3>
                             <sub>Informações e notas</sub>
                         </div>
-                        <form class="table-actions" id="formBuscaAluno" method="post" action="${pageContext.request.contextPath}/teacherHome">
+                        <form class="table-actions" id="formBuscaAluno" method="post"
+                              action="${pageContext.request.contextPath}/teacherHome">
                             <input checked style="display: none;" type="checkbox" id="search-submit">
                             <label for="search-submit"><img src="${pageContext.request.contextPath}/img/svg/search.svg"></label>
-                            <input class="search-box" id="alunoSearch" name="matriculaAluno" list="students-datalist-search" type="text" placeholder="Pesquisar por matrícula ou nome">
+                            <input class="search-box" id="alunoSearch" name="matriculaAluno"
+                                   list="students-datalist-search" type="text"
+                                   placeholder="Pesquisar por matrícula ou nome">
                             <datalist id="students-datalist-search">
                                 <option disabled selected>Selecione um aluno</option>
                                 <%
                                     if (listAlunos != null && !listAlunos.isEmpty()) {
                                         for (AlunoEntity aluno : listAlunos) {
                                 %>
-                                    <option value="<%=aluno.getMatricula()%>"><%=aluno.getNome()%> (Matrícula: <%=aluno.getMatricula()%>, Turma: <%=aluno.getTurma()%>)</option>
+                                <option value="<%=aluno.getMatricula()%>"><%=aluno.getNome()%>
+                                    (Matrícula: <%=aluno.getMatricula()%>, Turma: <%=aluno.getTurma()%>)
+                                </option>
                                 <%
                                         }
                                     }
                                 %>
                             </datalist>
 
-                            <button title="Filtrar" name="action" value="buscarAluno" type="submit"><img src="${pageContext.request.contextPath}/img/svg/filter.svg" alt="Filtrar"></button>
-                            <button title="Filtrar" name="action" value="listarTodos" type="submit"><img src="${pageContext.request.contextPath}/img/svg/cross-small.svg" alt="Remover filtros"></button>
-                            <button title="Atualizar notas" popovertarget="popup-grades"><div><img src="${pageContext.request.contextPath}/img/svg/document.svg"><span>Atualizar notas</span></div>
+                            <button title="Filtrar" name="action" value="buscarAluno" type="submit"><img
+                                    src="${pageContext.request.contextPath}/img/svg/filter.svg" alt="Filtrar"></button>
+                            <button title="Filtrar" name="action" value="listarTodos" type="submit"><img
+                                    src="${pageContext.request.contextPath}/img/svg/cross-small.svg"
+                                    alt="Remover filtros"></button>
+                            <button title="Atualizar notas" popovertarget="popup-grades">
+                                <div><img src="${pageContext.request.contextPath}/img/svg/document.svg"><span>Atualizar notas</span>
+                                </div>
                             </button>
                         </form>
                     </div>
@@ -203,7 +235,9 @@
                                 <th>Turma</th>
                                 <th>N1'</th>
                                 <th>N2'</th>
-                                <th>Média Final<img class="info" title="(N1' + N2') / 2" src="${pageContext.request.contextPath}/img/svg/info-white.svg"></img></th>
+                                <th>Média Final<img class="info" title="(N1' + N2') / 2"
+                                                    src="${pageContext.request.contextPath}/img/svg/info-white.svg"></img>
+                                </th>
                                 <th>Situação</th>
                                 <th>Ações</th>
                             </tr>
@@ -220,24 +254,29 @@
 
                                     if (item.getMedia() == null) {
                                         situationClass = "";
-                                    }
-                                    else {
+                                    } else {
                                         if (item.getMedia() >= 7) {
                                             situationClass = "approved";
-                                        }
-                                        else {
+                                        } else {
                                             situationClass = "failed";
                                         }
                                     }
                             %>
                             <tr>
-                                <td><%= item.getMatricula() %></td>
-                                <td><%= item.getNomeAluno() %></td>
-                                <td><%= item.getTurma() == null ? "Não alocado" : item.getTurma() %></td>
-                                <td><%= item.getN1() == null ? "-" : item.getN1() %></td>
-                                <td><%= item.getN2() == null ? "-" : item.getN2() %></td>
-                                <td class="<%= item.getSituacaoCss() %>"><%= item.getMedia() == null ? "-" : item.getMedia() %></td>
-                                <td class="situation"><span class="<%=situationClass%>"><%= item.getSituacao() %></span></td>
+                                <td><%= item.getMatricula() %>
+                                </td>
+                                <td><%= item.getNomeAluno() %>
+                                </td>
+                                <td><%= item.getTurma() == null ? "Não alocado" : item.getTurma() %>
+                                </td>
+                                <td><%= item.getN1() == null ? "-" : item.getN1() %>
+                                </td>
+                                <td><%= item.getN2() == null ? "-" : item.getN2() %>
+                                </td>
+                                <td class="<%= item.getSituacaoCss() %>"><%= item.getMedia() == null ? "-" : item.getMedia() %>
+                                </td>
+                                <td class="situation"><span class="<%=situationClass%>"><%= item.getSituacao() %></span>
+                                </td>
                                 <td>
                                     <div class="td-actions">
                                         <button popovertarget="popup-grades-<%=idPopoverGrades%>">
@@ -250,40 +289,69 @@
                                     </div>
                                 </td>
                             </tr>
-                            <div id="popup-grades-<%=idPopoverGrades%>" class="popup" popover="auto">
-                                <h1>Gerenciar notas</h1>
-                                <form action="${pageContext.request.contextPath}/nota?action=update" method="post">
-                                    <div class="input-major">
-                                        <div class="input-container">
-                                            <p class="required">Aluno</p>
-                                            <input class="text-box" name="nomeAluno" type="text" value="<%=item.getNomeAluno()%>" readonly>
-                                        </div>
-
-                                        <div class="input-container">
-                                            <p class="required">N1'</p>
-                                            <input class="text-box" name=n1 type="number" value="<%=item.getN1()%>" min="0" max="10" step="0.1">
-                                        </div>
-
-                                        <div class="input-container">
-                                            <p class="required">N2'</p>
-                                            <input class="text-box" name="n2" type="number" value="<%=item.getN2()%>" min="0" max="10" step="0.1">
-                                        </div>
-
-                                        <div class="input-container">
-                                            <p class="required">Média final</p>
-                                            <input class="text-box" type="text" readonly>
-                                        </div>
-                                            <input class="text-box" name="id" type="text" value="<%=item.getMatricula()%>" hidden>
-                                            <input class="text-box" name="idNota" type="text" value="<%=item.getNotaId()%>" hidden>
-                                    </div>
-                                    <button class="button fat" type="submit">Atualizar notas</button>
-                                </form>
-                            </div>
+                            <%
+                                }
+                            %>
+                            <%
+                                if (idPopoverGrades == 0) {
+                            %>
+                            <tr colspan="8">
+                                <div class="any-grade">
+                                    <h3 style="opacity: 60%; width: 100%;">Nenhum aluno cadastrado nessa disciplina</h3>
+                                </div>
+                            </tr>
                             <%
                                 }
                             %>
                             </tbody>
                         </table>
+
+                        <%
+                            int idPopoverGradesId = 0;
+
+                            for (AlunoNotaDTO item : alunosNotas) {
+                                idPopoverGradesId++;
+                        %>
+                        <div id="popup-grades-<%=idPopoverGradesId%>" class="popup" popover="auto">
+                            <h1>Gerenciar notas</h1>
+                            <form action="${pageContext.request.contextPath}/nota?action=update" method="post">
+                                <div class="input-major">
+                                    <div class="input-container">
+                                        <p class="required">Aluno</p>
+                                        <input class="text-box" name="nomeAluno" type="text"
+                                               value="<%=item.getNomeAluno()%>" readonly>
+                                    </div>
+
+                                    <div class="input-container">
+                                        <p class="required">N1'</p>
+                                        <input class="text-box grade-n1" name=n1 type="number"
+                                               value="<%= item.getN1() == null ? "" : item.getN1() %>" min="0" max="10"
+                                               step="0.1">
+                                    </div>
+
+                                    <div class="input-container">
+                                        <p class="required">N2'</p>
+                                        <input class="text-box grade-n2" name="n2" type="number"
+                                               value="<%= item.getN2() == null ? "" : item.getN2() %>" min="0" max="10"
+                                               step="0.1">
+                                    </div>
+
+                                    <div class="input-container">
+                                        <p class="required">Média final</p>
+                                        <input class="text-box final-grade" type="text" name="media" readonly>
+                                    </div>
+                                    <input class="text-box" name="id" type="text" value="<%=item.getMatricula()%>"
+                                           hidden>
+                                    <input class="text-box" name="idNota" type="text" value="<%=item.getNotaId()%>"
+                                           hidden>
+                                </div>
+                                <button class="button fat" type="submit">Atualizar notas</button>
+                            </form>
+                        </div>
+                        <%
+                            }
+                        %>
+
                     </div>
                 </div>
             </div>
@@ -300,7 +368,6 @@
                 <div class="card-container">
                     <%
                         int idPopoverObs = 0;
-
                         for (ObservacaoEntity obs : observacoes) {
                             idPopoverObs++;
                     %>
@@ -333,6 +400,15 @@
                             <button class="button fat close-popover" type="button">Fechar</button>
                         </div>
                     </div>
+                    <%
+                        }
+                    %>
+                    <%
+                        if (idPopoverObs == 0) {
+                    %>
+                        <div class="any-card">
+                            <h3 style="opacity: 60%; width: 100%;">Nenhuma observação atribuída</h3>
+                        </div>
                     <%
                         }
                     %>

@@ -46,13 +46,13 @@
             <img class="sidebar-icon expand black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/menu-burger.svg">
             <img class="sidebar-icon reduce black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/reduce-menu.svg">
         </label>
-        <input name="menu-checkbox" id="menu-checkbox" type="checkbox" checked hidden>
+        <input name="menu-checkbox" id="menu-checkbox" type="checkbox" hidden>
     </li>
     <aside id="sidebar">
         <div>
             <div class="logo">
-                <img src="${pageContext.request.contextPath}/img/branding/icone.png" draggable="false">
-                <img src="${pageContext.request.contextPath}/img/branding/white.png" draggable="false">
+                <img class="white" src="${pageContext.request.contextPath}/img/branding/icone.png" draggable="false">
+                <img style="opacity: 80%;" class="black" src="${pageContext.request.contextPath}/img/branding/white.png" draggable="false">
             </div>
             <ul>
                 <li class="emphasis">

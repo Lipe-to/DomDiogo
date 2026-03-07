@@ -1,21 +1,28 @@
-document.querySelectorAll('.popup').forEach(popup => {
-    const n1 = popup.querySelector('.n1')
-    const n2 = popup.querySelector('.n2')
-    const media = popup.querySelector('.media')
+document.addEventListener("DOMContentLoaded", () => {
 
-    if (!n1 || !n2 || !media) return
+    document.querySelectorAll(".popup form").forEach(form => {
 
-    function calcularMedia(){
-        const v1 = parseFloat(n1.value)
-        const v2 = parseFloat(n2.value)
+        const n1 = form.querySelector(".grade-n1");
+        const n2 = form.querySelector(".grade-n2");
+        const media = form.querySelector(".final-grade");
 
-        if(!isNaN(v1) && !isNaN(v2)){
-            media.value = ((v1 + v2) / 2).toFixed(1)
-        } else {
-            media.value = 'Valor faltante'
+        if (!n1 || !n2 || !media) return;
+
+        function calcular() {
+            const v1 = parseFloat(n1.value);
+            const v2 = parseFloat(n2.value);
+
+            if (!isNaN(v1) && !isNaN(v2)) {
+                media.value = ((v1 + v2) / 2).toFixed(1);
+            } else {
+                media.value = "";
+            }
         }
-    }
 
-    n1.addEventListener('input', calcularMedia)
-    n2.addEventListener('input', calcularMedia)
-})
+        n1.addEventListener("input", calcular);
+        n2.addEventListener("input", calcular);
+
+        calcular();
+    });
+
+});
