@@ -69,4 +69,14 @@ public class NotaEntity {
     public String getNomeDisciplina() {
         return this.nomeDisciplina;
     }
+
+    public String getSituacao() {
+        if (media == null) return "Calma, ainda sem nota(s)!";
+        return media >= 7.0 ? "Aprovado" : "Reprovado";
+    }
+
+    public String getSituacaoCss() {
+        if (media == null) return "";
+        return media >= 7.0 ? "appr" : "repr";
+    }
 }

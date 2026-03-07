@@ -102,7 +102,7 @@
                 <div class="personal-info">
                     <img src="${pageContext.request.contextPath}/img/neymar.png">
                     <div>
-                        <h3>Neymar Santos</h3>
+                        <h3><%=nome%></h3>
                         <p>Aluno</p>
                     </div>
                 </div>
@@ -128,12 +128,6 @@
 
                 <div id="grades">
                     <h1>Boletim</h1>
-                    <div class="actions-section-container">
-                        <select class="select-box">
-                            <option value="">Todas as matérias</option>
-                        </select>
-                    </div>
-
                     <div class="table-container">
                         <div class="table-info">
                             <div>
@@ -198,11 +192,6 @@
 
                 <div id="observations">
                     <h1>Observações</h1>
-                    <div class="actions-section-container">
-                        <select class="select-box">
-                            <option value="">Todos os professores</option>
-                        </select>
-                    </div>
 
                     <div class="card-container">
                         <%

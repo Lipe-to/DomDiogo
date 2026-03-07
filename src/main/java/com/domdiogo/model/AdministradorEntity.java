@@ -3,23 +3,23 @@ package com.domdiogo.model;
 public class AdministradorEntity {
     private int id;
     private String nome;
-    private String email;
+    private String usuario;
     private String senha;
-    private String palavra;
+    private String palavra_chave;
 
-    public AdministradorEntity(int id, String nome, String email, String senha, String palavra) {
+    public AdministradorEntity(int id, String nome, String usuario, String senha, String palavra_chave) {
         this.id = id;
         this.nome = nome;
-        this.email = email;
+        this.usuario = usuario;
         this.senha = senha;
-        this.palavra = palavra;
+        this.palavra_chave = palavra_chave;
     }
 
-    public AdministradorEntity(String nome, String email, String senha, String palavra) {
+    public AdministradorEntity(String nome, String usuario, String senha, String palavra_chave) {
         this.nome = nome;
-        this.email = email;
+        this.usuario = usuario;
         this.senha = senha;
-        this.palavra = palavra;
+        this.palavra_chave = palavra_chave;
     }
 
     public String getNome() {
@@ -30,15 +30,31 @@ public class AdministradorEntity {
         return id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsuario() {
+        return usuario;
     }
 
     public String getSenha() {
         return senha;
     }
 
-    public String getPalavra() {
-        return palavra;
+    public String getPalavra_chave() {
+        return palavra_chave;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public void setPalavra_chave(String palavra_chave) {
+        this.palavra_chave = palavra_chave;
     }
 }

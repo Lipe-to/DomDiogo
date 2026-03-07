@@ -1,3 +1,4 @@
+<%@ page import="com.domdiogo.model.StatusColor" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page pageEncoding="UTF-8" %>
 <%@ page errorPage="pages/error.jsp" %>

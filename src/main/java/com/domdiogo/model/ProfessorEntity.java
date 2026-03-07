@@ -6,6 +6,16 @@ public class ProfessorEntity {
     private String usuario;
     private String senha;
     private String palavra;
+    private String ultimoLogin;
+
+    public ProfessorEntity(int id, String nome, String usuario, String senha, String palavra, String ultimoLogin) {
+        this.id = id;
+        this.nome = nome;
+        this.usuario = usuario;
+        this.senha = senha;
+        this.palavra = palavra;
+        this.ultimoLogin = ultimoLogin;
+    }
 
     public ProfessorEntity(int id, String nome, String usuario, String senha, String palavra) {
         this.id = id;

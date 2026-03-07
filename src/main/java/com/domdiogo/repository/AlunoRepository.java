@@ -1,6 +1,7 @@
 package com.domdiogo.repository;
 
 import com.domdiogo.ConnectionFactory;
+import com.domdiogo.ServletHelper;
 import com.domdiogo.model.AlunoEntity;
 import com.domdiogo.model.NotaEntity;
 import com.domdiogo.model.Status;
@@ -27,7 +28,8 @@ public class AlunoRepository {
                         resultSet.getString("usuario"),
                         resultSet.getString("senha"),
                         resultSet.getString("palavra"),
-                        resultSet.getString("turma")
+                        resultSet.getString("turma"),
+                        ServletHelper.formatarUltimoLogin(resultSet)
                 );
                 listaAlunos.add(alunoEntity);
             }
@@ -198,7 +200,8 @@ public class AlunoRepository {
                         resultSet.getString("usuario"),
                         resultSet.getString("senha"),
                         resultSet.getString("palavra"),
-                        resultSet.getString("turma")
+                        resultSet.getString("turma"),
+                        ServletHelper.formatarUltimoLogin(resultSet)
                 );
             }
         } catch (SQLException e) {
@@ -225,7 +228,8 @@ public class AlunoRepository {
                         resultSet.getString("usuario"),
                         resultSet.getString("senha"),
                         resultSet.getString("palavra"),
-                        resultSet.getString("turma")
+                        resultSet.getString("turma"),
+                        ServletHelper.formatarUltimoLogin(resultSet)
                 );
             }
         } catch (SQLException e) {
@@ -297,32 +301,8 @@ public class AlunoRepository {
         }
     }
 
-    public AlunoEntity login(String usuario, String senha) {
-        String query = "select * from aluno where usuario = ? and senha = ?";
-        ConnectionFactory connectionFactory = new ConnectionFactory();
-        Connection connection = connectionFactory.connect();
-        AlunoEntity alunoEntity = null;
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, usuario);
-            preparedStatement.setString(2, senha);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                alunoEntity = new AlunoEntity(
-                        resultSet.getInt("matricula"),
-                        resultSet.getString("nome"),
-                        resultSet.getString("usuario"),
-                        resultSet.getString("senha"),
-                        resultSet.getString("palavra"),
-                        resultSet.getString("turma")
-                );
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            connectionFactory.disconnect(connection);
-        }
-        return alunoEntity;
+    public AlunoEntity login(String usuario) {
+        return findByUsuario(usuario);
     }
 
     public Status validarPalavra(String usuario, String palavra) {

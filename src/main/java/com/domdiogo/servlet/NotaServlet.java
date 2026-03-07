@@ -13,23 +13,32 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet({"/nota", "/nota/*"})
 public class NotaServlet extends HttpServlet {
-    private String redirect = "";
     private final NotaRepository repository = new NotaRepository();
+
+    private String getRedirectPath(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null && "ADMIN".equals(session.getAttribute("role"))) {
+            return "/adminHome";
+        }
+        return "/teacherHome";
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String action = request.getParameter("action");
+        String redirect;
 
         if ("readAll".equals(action)) {
             List<NotaEntity> listaNotas = repository.readAll();
             request.setAttribute("listaNotas", listaNotas);
-            redirect = "/WEB-INF/view/sights/teacherHome.jsp";
+            redirect = getRedirectPath(request);
         } else {
             ServletHelper.configureStatus(request, "Ação inexistente.", StatusColor.RED);
-            redirect = "/WEB-INF/view/sights/teacherHome.jsp";
+            redirect = getRedirectPath(request);
         }
 
         ServletHelper.redirect(request, response, redirect);
@@ -38,6 +47,7 @@ public class NotaServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String action = request.getParameter("action");
+        String redirect;
 
         switch (action) {
             case "update":
@@ -63,7 +73,7 @@ public class NotaServlet extends HttpServlet {
                 } else {
                     ServletHelper.configureStatus(request, "Erro ao atualizar a nota.", StatusColor.RED);
                 }
-                redirect = "/teacherHome";
+                redirect = getRedirectPath(request);
                 break;
 
             case "zerar":
@@ -74,12 +84,12 @@ public class NotaServlet extends HttpServlet {
                 } else {
                     ServletHelper.configureStatus(request, "Erro ao zerar nota.", StatusColor.RED);
                 }
-                redirect = "/teacherHome";
+                redirect = getRedirectPath(request);
                 break;
 
             default:
                 ServletHelper.configureStatus(request, "Ação inválida.", StatusColor.RED);
-                redirect = "/teacherHome";
+                redirect = getRedirectPath(request);
                 break;
         }
 

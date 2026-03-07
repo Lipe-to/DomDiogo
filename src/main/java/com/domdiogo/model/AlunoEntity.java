@@ -7,6 +7,17 @@ public class AlunoEntity {
     private String senha;
     private String palavra;
     private String turma;
+    private String ultimoLogin;
+
+    public AlunoEntity(int matricula, String nome, String usuario, String senha, String palavra, String turma, String ultimoLogin) {
+        this.matricula = matricula;
+        this.nome = nome;
+        this.usuario = usuario;
+        this.senha = senha;
+        this.palavra = palavra;
+        this.turma = turma;
+        this.ultimoLogin = ultimoLogin;
+    }
 
     public AlunoEntity(int matricula, String nome, String usuario, String senha, String palavra, String turma) {
         this.matricula = matricula;
