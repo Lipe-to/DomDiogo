@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dom Diogo</title>
+    <link rel="shortcut icon" href="img/branding/favicon.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="css/sights/both.css">
+    <link rel="stylesheet" href="css/sights/notice-board.css">
+    <link rel="stylesheet" href="css/popup.css">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/font.css">
+</head>
+
+<body id="blue-theme">
+    <aside id="sidebar">
+        <ul>
+            <div>
+                <li id="menu-icon-container">
+                    <label id="menu-icon" for="menu-checkbox">
+                        <img class="sidebar-icon" src="img/svg/sidebar/menu-burger.svg">
+                    </label>
+                    <input name="menu-checkbox" id="menu-checkbox" type="checkbox">
+                </li>
+                <p id="menu-text">Menu</p>
+                <li class="emphasis">
+                    <a href="">
+                        <img class="sidebar-icon" src="img/svg/sidebar/home-emphasis.svg" alt="">
+                        <span>Tela Inicial</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <img class="sidebar-icon" src="img/svg/sidebar/address-book.svg" alt="">
+                        <span>Professores</span>
+                    </a>
+                </li>
+            </div>
+            <li id="sign-out">
+                <button>
+                    <img class="sidebar-icon" src="img/svg/sidebar/sign-out.svg" alt="">
+                    <span>Sair</span>
+                </button>
+            </li>
+        </ul>
+    </aside>
+
+    <div id="major-container">
+        <div id="wrap">
+            <header>
+                <a href="#">
+                    <div class="logo">
+                        <img src="img/branding/icone.png">
+                        <img src="img/branding/white.png">
+                    </div>
+                </a>
+                <div class="personal-info">
+                    <img src="img/neymar.png" alt="">
+                    <div>
+                        <h3>Neymar Santos</h3>
+                        <p>Aluno</p>
+                    </div>
+                </div>
+            </header>
+
+            <main>
+                <div id="filter-container">
+                    <h1>Filtros</h1>
+                    <div class="filters">
+                        <form>
+                            <label for="search-submit"><button><img src="img/svg/search.svg"></button></label>
+                            <input class="search-box" type="text" placeholder="Digite o número do aviso aqui">
+                        </form>
+                        <form>
+                            <label for="search-submit"><button><img src="img/svg/search.svg"></button></label>
+                            <input class="search-box" type="text" placeholder="Digite o número do aviso aqui">
+                        </form>
+                        <form>
+                            <label for="search-submit"><button><img src="img/svg/search.svg"></button></label>
+                            <input class="search-box" type="text" placeholder="Digite o número do aviso aqui">
+                        </form>
+                    </div>
+                </div>
+                <div id="front-desk">
+                    <div class="notice-board">
+                        <h2>Quadro de avisos <span>Matemática</span></h2>
+                        <img style="rotate: 15deg;" class="screw right-top" src="img/flat/screw.png">
+                        <img style="rotate: 84deg;" class="screw left-top" src="img/flat/screw.png">
+
+                        <div id="postit-container">
+                            <div>
+                                <div class="postit">
+                                    <div>
+                                        <img class="tape" src="img/shape/tape.svg">
+                                        <div>
+                                            <h3>Aviso <span>26/02/20026</span></h3>
+                                            <sub>Aviso #001</sub>
+                                        </div>
+                                        <p>Olá alunos, só avisando que a prova marcada para a quarta foii adiada para a
+                                            sexta. Tudo certo? Beijos!</p>
+                                    </div>
+                                    <div class="button-container">
+                                        <button class="button">Expandir</button>
+                                        <button class="button">Excluir</button>
+                                    </div>
+                                </div>
+                                <div class="postit">
+                                    <div>
+                                        <img class="tape" src="img/shape/tape.svg">
+                                        <div>
+                                            <h3>Aviso <span>26/02/20026</span></h3>
+                                            <sub>Aviso #001</sub>
+                                        </div>
+                                        <p>Olá alunos, só avisando que a prova marcada para a quarta foii adiada para a
+                                            sexta. Tudo certo? Beijos!</p>
+                                    </div>
+                                    <div class="button-container">
+                                        <button class="button">Expandir</button>
+                                        <button class="button">Excluir</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <!-- Por meio de diretivas, recebe o big caso esteja sozinho em uma div -->
+                                <div class="postit big">
+                                    <img class="tape" src="img/shape/tape.svg">
+                                    <div>
+                                        <div>
+                                            <h3>Aviso <span>26/02/20026</span></h3>
+                                            <sub>Aviso #001</sub>
+                                        </div>
+                                        <p>
+                                            Olá alunos, só avisando que a prova marcada para a quarta foii adiada para a
+                                            Olá alunos, só avisando que a prova marcada para a quarta foii adiada para a
+                                            Olá alunos, só avisando que a prova marcada para a quarta foii adiada para a
+                                            sexta. Tudo certo? Beijos!
+                                        </p>
+                                    </div>
+                                    <div class="button-container">
+                                        <button class="button">Expandir</button>
+                                        <button class="button">Excluir</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+<script src="js/generate-newsletter.js"></script>
+
+</html>

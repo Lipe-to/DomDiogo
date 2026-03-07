@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="<%= context %>/css/font.css">
 </head>
 
-<body>
+<body id="grey-theme">
 <aside id="sidebar">
     <ul>
         <div>
@@ -50,26 +50,26 @@
             <p id="menu-text">Menu</p>
             <li class="emphasis">
                 <a href="<%= context %>/adminHome">
-                    <img class="sidebar-icon" src="<%= context %>/img/svg/sidebar/home-emphasis.svg" alt="">
+                    <img class="sidebar-icon" src="<%= context %>/img/svg/sidebar/home-emphasis.svg">
                     <span>Tela Inicial</span>
                 </a>
             </li>
             <li>
                 <a href="#">
-                    <img class="sidebar-icon" src="<%= context %>/img/svg/sidebar/dashboard.svg" alt="">
+                    <img class="sidebar-icon" src="<%= context %>/img/svg/sidebar/dashboard.svg">
                     <span>Dashboard</span>
                 </a>
             </li>
             <li>
                 <a href="#">
-                    <img class="sidebar-icon" src="<%= context %>/img/svg/sidebar/address-book.svg" alt="">
+                    <img class="sidebar-icon" src="<%= context %>/img/svg/sidebar/address-book.svg">
                     <span>Professores</span>
                 </a>
             </li>
         </div>
         <li id="sign-out">
             <button onclick="window.location.href='<%= context %>/index.jsp'">
-                <img class="sidebar-icon" src="<%= context %>/img/svg/sidebar/sign-out.svg" alt="">
+                <img class="sidebar-icon" src="<%= context %>/img/svg/sidebar/sign-out.svg">
                 <span>Sair</span>
             </button>
         </li>
@@ -92,11 +92,13 @@
         <main>
             <div id="front-desk">
                 <div class="castle" id="welcome">
-                    <h2>Olá, administrador!</h2>
-                    <p>Bem vindo de volta!</p>
+                    <div>
+                        <h2>Olá, administrador!</h2>
+                        <p>Bem vindo de volta!</p>
+                    </div>
                 </div>
                 <div class="general-statistic">
-                    <a href="" class="h2">Visão geral <img class="redirect" src="<%= context %>/img/svg/redirect-blue.svg" alt=""></a>
+                    <a href="" class="h2">Visão geral <img class="redirect" src="<%= context %>/img/svg/redirect-blue.svg"></a>
                     <div>
                         <div>
                             <h3><span><%= totalAlunos != null ? totalAlunos : 0 %></span></h3>

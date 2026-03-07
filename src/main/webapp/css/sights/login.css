@@ -20,7 +20,7 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 70% auto;
-    background-position: right 65%;
+    background-position: right bottom;
 }
 
 #login {

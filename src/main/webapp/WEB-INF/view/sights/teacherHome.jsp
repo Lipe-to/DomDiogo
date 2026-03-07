@@ -4,6 +4,7 @@
 <%@ page import="com.domdiogo.model.ObservacaoEntity" %>
 <%@ page import="com.domdiogo.repository.AlunoRepository" %>
 <%@ page import="com.domdiogo.repository.ProfessorRepository" %>
+<%@ page import="com.domdiogo.model.TipoCount" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -38,7 +39,7 @@
     ProfessorRepository professorRepository = (ProfessorRepository) request.getAttribute("professorRepository");
 %>
 
-<body>
+<body id="red-theme">
 <aside id="sidebar">
     <ul>
         <div>
@@ -52,28 +53,28 @@
             <li class="emphasis">
                 <a href="">
                     <img class="sidebar-icon" src="${pageContext.request.contextPath}/img/svg/sidebar/home-emphasis.svg"
-                         alt="">
+                        >
                     <span>Tela Inicial</span>
                 </a>
             </li>
             <li>
                 <a href="">
                     <img class="sidebar-icon" src="${pageContext.request.contextPath}/img/svg/sidebar/dashboard.svg"
-                         alt="">
+                        >
                     <span>Dashboard</span>
                 </a>
             </li>
             <li>
                 <a href="">
                     <img class="sidebar-icon" src="${pageContext.request.contextPath}/img/svg/sidebar/address-book.svg"
-                         alt="">
+                        >
                     <span>Professores</span>
                 </a>
             </li>
         </div>
         <li id="sign-out">
             <button>
-                <img class="sidebar-icon" src="${pageContext.request.contextPath}/img/svg/sidebar/sign-out.svg" alt="">
+                <img class="sidebar-icon" src="${pageContext.request.contextPath}/img/svg/sidebar/sign-out.svg">
                 <span>Sair</span>
             </button>
         </li>
@@ -101,26 +102,40 @@
         <main>
             <div id="front-desk">
                 <div class="castle" id="welcome">
-                    <h2>Olá <%=nome%>!</h2>
-                    <p>Bem vindo de volta!</p>
+                    <div>
+                        <h2>Olá <%=nome%>!</h2>
+                        <p>Bem vindo de volta!</p>
+                    </div>
+                    <a class="button">Gerenciar observações</a>
                 </div>
                 <div class="general-statistic">
-                    <a href="" class="h2">Visão geral<img class="redirect" src="${pageContext.request.contextPath}/img/svg/redirect-blue.svg" alt=""></a>
+                    <a href="" class="h2">Visão geral<img class="redirect" src="${pageContext.request.contextPath}/img/svg/redirect-blue.svg"></a>
                     <div>
+                        <%
+                            String apprClass = "";
+                            String reprClass = "";
+
+                            if (alunoRepository.porcentagemAlunos(TipoCount.APROVADO, idProfessor) != 0) {
+                                apprClass = "appr";
+                            }
+                            if (alunoRepository.porcentagemAlunos(TipoCount.REPROVADO, idProfessor) != 0 ) {
+                                reprClass = "repr";
+                            }
+                        %>
                         <div>
-                            <h3><span>32</span></h3>
+                            <h3><span><%=alunoRepository.countAlunos()%></span></h3>
                             <span>Total de alunos</span>
                         </div>
                         <div>
-                            <h3><span>12</span></h3>
+                            <h3><span><%=alunoRepository.porcentagemAlunos(TipoCount.SEM_NOTA, idProfessor)%></span> %</h3>
                             <span>Alunos sem notas</span>
                         </div>
                         <div>
-                            <h3><span class="appr">62</span> %</h3>
+                            <h3><span class="<%=apprClass%>"><%=alunoRepository.porcentagemAlunos(TipoCount.APROVADO, idProfessor)%></span> %</h3>
                             <span>Alunos aprovados</span>
                         </div>
                         <div>
-                            <h3><span class="repr">12</span> %</h3>
+                            <h3><span class="<%=reprClass%>"><%=alunoRepository.porcentagemAlunos(TipoCount.REPROVADO, idProfessor)%></span> %</h3>
                             <span>Alunos reprovados</span>
                         </div>
                     </div>
@@ -143,7 +158,7 @@
                         </div>
                         <form class="table-actions" id="formBuscaAluno" method="post" action="${pageContext.request.contextPath}/teacherHome">
                             <input checked style="display: none;" type="checkbox" id="search-submit">
-                            <label for="search-submit"><img src="${pageContext.request.contextPath}/img/svg/search.svg" alt=""></label>
+                            <label for="search-submit"><img src="${pageContext.request.contextPath}/img/svg/search.svg"></label>
                             <input class="search-box" id="alunoSearch" name="matriculaAluno" list="students-datalist-search" type="text" placeholder="Pesquisar por matrícula ou nome">
                             <datalist id="students-datalist-search">
                                 <option disabled selected>Selecione um aluno</option>
