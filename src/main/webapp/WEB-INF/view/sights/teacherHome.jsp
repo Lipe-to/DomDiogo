@@ -137,7 +137,7 @@
                         <h2>Olá <%=nome%>!</h2>
                         <p>Bem vindo de volta!</p>
                     </div>
-                    <a class="button">Gerenciar observações</a>
+                    <a class="button">Ver observações</a>
                 </div>
                 <div class="general-statistic">
                     <a href="" class="h2">Visão geral<img class="redirect"
@@ -181,30 +181,8 @@
 
             <div id="grades">
                 <h1>Matemática</h1>
-                <div class="actions-section-container">
-                    <form id="formBuscaAluno" method="POST" action="${pageContext.request.contextPath}/teacherHome">
-                        <div style="display: flex; gap: 10px; align-items: flex-end;">
-                            <div style="flex: 1;">
-                                <label for="alunoSearch">Buscar Aluno:</label>
-                                <input autocomplete="off" class="text-box" id="alunoSearch" name="matriculaAluno" list="students-datalist-search" placeholder="Digite matrícula ou nome...">
-                                <datalist id="students-datalist-search">
-                                    <option disabled selected>Selecione um aluno</option>
-                                    <%
-                                        if (listAlunos != null && !listAlunos.isEmpty()) {
-                                            for (AlunoEntity aluno : listAlunos) {
-                                    %>
-                                    <option value="<%=aluno.getMatricula()%>"><%=aluno.getNome()%> (Matrícula: <%=aluno.getMatricula()%>, Turma: <%=aluno.getTurma()%>)</option>
-                                    <%
-                                            }
-                                        }
-                                    %>
-                                </datalist>
-                            </div>
-                            <button class="button" type="submit" name="action" value="buscarAluno">Buscar</button>
-                            <button class="button" type="submit" name="action" value="listarTodos">Listar Todos</button>
-                        </div>
-                    </form>
-                </div>
+                <%-- <div class="actions-section-container">
+                </div> --%>
 
                 <div class="table-container">
                     <div class="table-info">
