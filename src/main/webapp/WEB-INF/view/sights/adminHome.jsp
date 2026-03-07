@@ -51,8 +51,9 @@
     <aside id="sidebar">
         <div>
             <div class="logo">
-                <img class="white" src="${pageContext.request.contextPath}/img/branding/icone.png" draggable="false">
-                <img style="opacity: 80%;" class="black" src="${pageContext.request.contextPath}/img/branding/white.png" draggable="false">
+                <img src="${pageContext.request.contextPath}/img/branding/icone.png" draggable="false">
+                <img class="white" src="${pageContext.request.contextPath}/img/branding/white.png" draggable="false">
+                <img style="opacity: 80%;" class="black" src="${pageContext.request.contextPath}/img/branding/black.png" draggable="false">
             </div>
             <ul>
                 <li class="emphasis">

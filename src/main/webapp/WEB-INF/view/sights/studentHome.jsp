@@ -46,8 +46,9 @@
     <aside id="sidebar">
         <div>
             <div class="logo">
-                <img class="white" src="${pageContext.request.contextPath}/img/branding/icone.png" draggable="false">
-                <img style="opacity: 80%;" class="black" src="${pageContext.request.contextPath}/img/branding/white.png" draggable="false">
+                <img src="${pageContext.request.contextPath}/img/branding/icone.png" draggable="false">
+                <img class="white" src="${pageContext.request.contextPath}/img/branding/white.png" draggable="false">
+                <img style="opacity: 80%;" class="black" src="${pageContext.request.contextPath}/img/branding/black.png" draggable="false">
             </div>
             <ul>
                 <li class="emphasis">
@@ -162,7 +163,17 @@
                                 </thead>
                                 <tbody>
                                     <%
+                                        String situationClass = "";
+                                        String situationMessage = "";
                                         for (NotaEntity nota : notas) {
+                                            if (nota.getN1() == null && nota.getN2() == null) {
+                                                situationClass = "";
+                                                situationMessage = "Em análise";
+                                            }
+                                            else {
+                                                situationClass = (nota.getMedia() != null && nota.getMedia() >= 7) ? "approved" : "failed";
+                                                situationMessage = (nota.getMedia() != null && nota.getMedia() >= 7) ? "Aprovado" : "Reprovado";
+                                            }
                                     %>
                                     <tr>
                                         <td><%= nota.getNomeDisciplina() %></td>
@@ -170,9 +181,9 @@
                                         <td><%= nota.getN2() == null ? "-" : nota.getN2() %></td>
                                         <td><%= nota.getMediaCalculada()%></td>
                                         <td class="situation">
-                                        <span class="<%= (nota.getMedia() != null && nota.getMedia() >= 7) ? "approved" : "repproved" %>">
-                                        <%= (nota.getMedia() != null && nota.getMedia() >= 7) ? "Aprovado" : "Reprovado" %>
-                                         </span>
+                                        <span class="<%=situationClass%>">
+                                        <%=situationMessage%>
+                                        </span>
                                         </td>
                                     </tr>
 
