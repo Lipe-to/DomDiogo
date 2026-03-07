@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Recuperar senha</title>
+    <title>Recuperar sua senha</title>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/branding/favicon.png" type="image/x-icon">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sights/login.css">
@@ -19,17 +19,19 @@
 <body id="forgot-password">
     <div class="login-form">
         <div style="justify-content: center" class="logo">
-            <img src="${pageContext.request.contextPath}/img/branding/icone.png">
-            <img src="${pageContext.request.contextPath}/img/branding/black.png">
+            <img src="${pageContext.request.contextPath}/img/branding/icone.png" draggable="false">
+            <img src="${pageContext.request.contextPath}/img/branding/black.png" draggable="false">
         </div>
         <h1>Recuperar senha</h1>
         <%
-        String errorDisplay = "block";
-        if (request.getAttribute("statusMessage") == null) {
-            errorDisplay = "none";
-        }
+            String errorDisplay = "block";
+            String color = (String) request.getAttribute("statusColor");
+
+            if (request.getAttribute("statusMessage") == null) {
+                errorDisplay = "none";
+            }
         %>
-        <p class="error-message" style="display: <%=errorDisplay%>;"><%=request.getAttribute("statusMessage")%></p>
+        <p class="error-message" style="display: <%=errorDisplay%>; color: <%=color%>"><%=request.getAttribute("statusMessage")%></p>
         <form action="${pageContext.request.contextPath}/login?action=validarPalavra" method="post">
             <div class="input-major">
                 <div class="email input-container">

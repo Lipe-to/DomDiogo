@@ -16,13 +16,13 @@
     <title>Dom Diogo - Administrador</title>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/branding/favicon.png" type="image/x-icon">
 
-    <link rel="stylesheet" href="<%= context %>/css/sights/both.css">
-    <link rel="stylesheet" href="<%= context %>/css/sights/teacher.css">
-    <link rel="stylesheet" href="<%= context %>/css/popup.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sights/both.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sights/teacher.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/popup.css">
 
-    <link rel="stylesheet" href="<%= context %>/css/style.css">
-    <link rel="stylesheet" href="<%= context %>/css/variables.css">
-    <link rel="stylesheet" href="<%= context %>/css/font.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/variables.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font.css">
 </head>
 
 <%
@@ -102,8 +102,10 @@
             <!-- ===== FRONT DESK - Boas vindas + Estatísticas ===== -->
             <div id="front-desk">
                 <div class="castle" id="welcome">
-                    <h2>Olá, administrador!</h2>
-                    <p>Bem vindo de volta!</p>
+                    <div>
+                        <h2>Olá, administrador!</h2>
+                        <p>Bem vindo de volta!</p>
+                    </div>
                 </div>
                 <div class="general-statistic">
                     <a href="" class="h2">Visão geral<img class="redirect" src="${pageContext.request.contextPath}/img/svg/redirect-blue.svg" alt=""></a>

@@ -24,9 +24,16 @@
         <img src="img/branding/icone.png">
         <img src="img/branding/black.png">
     </div>
-    <h1>Bem-vindo(a) de volta!</h1>
-    <% String statusMessage = (String) request.getAttribute("statusMessage");%>
-    <p style="color: <%=(String)request.getAttribute("statusColor")%>"><%= statusMessage == null ? "" : statusMessage %></p>
+    <h1>Bem vindo de volta!</h1>
+    <%
+        String errorDisplay = "block";
+        String color = (String) request.getAttribute("statusColor");
+
+        if (request.getAttribute("statusMessage") == null) {
+            errorDisplay = "none";
+        }
+    %>
+    <p class="error-message" style="display: <%=errorDisplay%>; color: <%=color%>"><%=request.getAttribute("statusMessage")%></p>
     <form action="${pageContext.request.contextPath}/login?action=login" method="post">
         <div class="input-major">
             <div class="email input-container">

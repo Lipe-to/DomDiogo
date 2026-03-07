@@ -19,10 +19,19 @@
 <body id="sign-up">
     <div class="login-form">
         <div style="justify-content: center" class="logo">
-            <img src="${pageContext.request.contextPath}/img/branding/icone.png">
-            <img src="${pageContext.request.contextPath}/img/branding/black.png">
+            <img src="${pageContext.request.contextPath}/img/branding/icone.png" draggable="false">
+            <img src="${pageContext.request.contextPath}/img/branding/black.png" draggable="false">
         </div>
-        <h1>Registrar aluno</h1>
+        <h1>Registrar novo aluno</h1>
+        <%
+            String errorDisplay = "block";
+            String color = (String) request.getAttribute("statusColor");
+
+            if (request.getAttribute("statusMessage") == null) {
+                errorDisplay = "none";
+            }
+        %>
+        <p class="error-message" style="display: <%=errorDisplay%>; color: <%=color%>"><%=request.getAttribute("statusMessage")%></p>
         <form action="${pageContext.request.contextPath}/aluno?action=create" method="post">
             <div class="input-major">
                 <div class="email input-container warning">

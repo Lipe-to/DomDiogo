@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dom Diogo - Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+
+    <link rel="stylesheet" href="css/sights/both.css">
+    <link rel="stylesheet" href="css/sights/teacher.css">
+    <link rel="stylesheet" href="css/popup.css">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/font.css">
+</head>
+
+<body id="blue-theme" class="black">
+    <li id="menu-icon-container">
+        <label id="menu-icon" for="menu-checkbox">
+            <img class="sidebar-icon expand white" src="img/svg/sidebar/white/menu-burger.svg">
+            <img class="sidebar-icon reduce white" src="img/svg/sidebar/white/reduce-menu.svg">
+
+            <img class="sidebar-icon expand black" src="img/svg/sidebar/black/menu-burger.svg">
+            <img class="sidebar-icon reduce black" src="img/svg/sidebar/black/reduce-menu.svg">
+        </label>
+        <input name="menu-checkbox" id="menu-checkbox" type="checkbox" hidden>
+    </li>
+    <aside id="sidebar">
+        <div>
+            <div class="logo">
+                <img src="img/branding/icone.png" draggable="false">
+                <img class="white" src="img/branding/white.png" draggable="false">
+                <img style="opacity: 80%;" class="black" src="img/branding/black.png" draggable="false">
+            </div>
+            <ul>
+                <li class="emphasis">
+                    <a href="adminHome">
+                        <img class="sidebar-icon white" src="img/svg/sidebar/white/home.svg">
+                        <img class="sidebar-icon black" src="img/svg/sidebar/black/home.svg">
+                        <span>Tela Inicial</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img class="sidebar-icon white" src="img/svg/sidebar/white/dashboard.svg">
+                        <img class="sidebar-icon black" src="img/svg/sidebar/black/dashboard.svg">
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img class="sidebar-icon white" src="img/svg/sidebar/white/address-book.svg">
+                        <img class="sidebar-icon black" src="img/svg/sidebar/black/address-book.svg">
+                        <span>Professores</span>
+                    </a>
+                </li>
+                <li class="divide">
+                    <a href="#">
+                        <img class="sidebar-icon white" src="img/svg/sidebar/white/user.svg">
+                        <img class="sidebar-icon black" src="img/svg/sidebar/black/user.svg">
+                        <span>Meu perfil</span>
+                    </a>
+                </li>
+                <li id="sign-out">
+                    <button onclick="window.location.href='/index.jsp'">
+                        <img class="sidebar-icon white" src="img/svg/sidebar/white/sign-out.svg">
+                        <img class="sidebar-icon black" src="img/svg/sidebar/black/sign-out.svg">
+                        <span>Sair</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </aside>
+
+    <div id="major-container">
+        <div id="wrap">
+
+            <header>
+                <a href="#">
+                    <img class="logo" src="img/branding/teste.png" alt="Logo">
+                </a>
+
+                <div class="personal-info">
+                    <div class="profile-image"></div>
+                    <div>
+                        <h3>Administrador</h3>
+                        <p>Gestão Escolar</p>
+                    </div>
+                </div>
+            </header>
+
+            <main>
+
+                <div id="front-desk">
+
+                    <div class="castle" id="welcome">
+                        <div>
+                            <h2>Olá, administrador!</h2>
+                            <p>Bem vindo de volta!</p>
+                        </div>
+                    </div>
+
+                    <div class="general-statistic">
+
+                        <a href="" class="h2">
+                            Visão geral
+                            <img class="redirect" src="img/svg/redirect-blue.svg">
+                        </a>
+
+                        <div>
+
+                            <div>
+                                <h3><span>120</span></h3>
+                                <span>Total de alunos</span>
+                            </div>
+
+                            <div>
+                                <h3><span>8</span></h3>
+                                <span>Total de turmas</span>
+                            </div>
+
+                            <div>
+                                <h3><span class="appr">82.5</span> %</h3>
+                                <span>Alunos aprovados</span>
+                            </div>
+
+                            <div>
+                                <h3><span class="repr">17.5</span> %</h3>
+                                <span>Alunos reprovados</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-layout">
+
+                    <h1>Alunos</h1>
+
+                    <div class="table-container">
+
+                        <div class="table-info">
+                            <div>
+                                <h3>Informações pessoais</h3>
+                                <sub>Dados sensíveis</sub>
+                            </div>
+                        </div>
+
+                        <div class="table-wrap">
+
+                            <table>
+
+                                <thead class="blue">
+                                    <tr>
+                                        <th>Estudante</th>
+                                        <th>Usuário</th>
+                                        <th>Senha</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    <tr>
+                                        <th colspan="4">
+                                        <div class="card-container">
+                                            <div class="any-card">
+                                                <h3 style="opacity: 60%; width: 100%;">Nenhuma observação atribuída</h3>
+                                            </div>
+                                        </div>
+                                        </th>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div id="observations">
+
+                    <h1>Observações</h1>
+
+                    <div class="card-container">
+                        <div class="any-card">
+                            <h3 style="opacity: 60%; width: 100%;">Nenhuma observação atribuída</h3>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -32,62 +32,37 @@
     ProfessorRepository professorRepository = (ProfessorRepository) request.getAttribute("professorRepository");
 %>
 
-<body id="blue-theme" class="black">
-    <li id="menu-icon-container">
-        <label id="menu-icon" for="menu-checkbox">
-            <img class="sidebar-icon expand white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/menu-burger.svg">
-            <img class="sidebar-icon reduce white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/reduce-menu.svg">
-
-            <img class="sidebar-icon expand black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/menu-burger.svg">
-            <img class="sidebar-icon reduce black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/reduce-menu.svg">
-        </label>
-        <input name="menu-checkbox" id="menu-checkbox" type="checkbox" hidden>
-    </li>
+<body id="blue-theme">
     <aside id="sidebar">
-        <div>
-            <div class="logo">
-                <img src="${pageContext.request.contextPath}/img/branding/icone.png" draggable="false">
-                <img class="white" src="${pageContext.request.contextPath}/img/branding/white.png" draggable="false">
-                <img style="opacity: 80%;" class="black" src="${pageContext.request.contextPath}/img/branding/black.png" draggable="false">
-            </div>
-            <ul>
+        <ul>
+            <div>
+                <li id="menu-icon-container">
+                    <label id="menu-icon" for="menu-checkbox">
+                        <img class="sidebar-icon" src="${pageContext.request.contextPath}/img/svg/sidebar/menu-burger.svg">
+                    </label>
+                    <input name="menu-checkbox" id="menu-checkbox" type="checkbox">
+                </li>
+                <p id="menu-text">Menu</p>
                 <li class="emphasis">
-                    <a href="adminHome">
-                        <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/home.svg">
-                        <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/home.svg">
+                    <a href="">
+                        <img class="sidebar-icon" src="${pageContext.request.contextPath}/img/svg/sidebar/home-emphasis.svg">
                         <span>Tela Inicial</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
-                        <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/dashboard.svg">
-                        <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/dashboard.svg">
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/address-book.svg">
-                        <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/address-book.svg">
+                    <a href="">
+                        <img class="sidebar-icon" src="${pageContext.request.contextPath}/img/svg/sidebar/address-book.svg">
                         <span>Professores</span>
                     </a>
                 </li>
-                <li class="divide">
-                    <a href="#">
-                        <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/user.svg">
-                        <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/user.svg">
-                        <span>Meu perfil</span>
-                    </a>
-                </li>
-                <li id="sign-out">
-                    <button onclick="window.location.href='/index.jsp'">
-                        <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/sign-out.svg">
-                        <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/sign-out.svg">
-                        <span>Sair</span>
-                    </button>
-                </li>
-            </ul>
-        </div>
+            </div>
+            <li id="sign-out">
+                <button>
+                    <img class="sidebar-icon" src="${pageContext.request.contextPath}/img/svg/sidebar/sign-out.svg">
+                    <span>Sair</span>
+                </button>
+            </li>
+        </ul>
     </aside>
 
     <div id="major-container">
@@ -95,14 +70,14 @@
             <header>
                 <a href="#">
                     <div class="logo">
-                        <img src="${pageContext.request.contextPath}/img/branding/icone.png" draggable="false">
-                        <img src="${pageContext.request.contextPath}/img/branding/white.png" draggable="false">
+                        <img src="${pageContext.request.contextPath}/img/branding/icone.png">
+                        <img src="${pageContext.request.contextPath}/img/branding/white.png">
                     </div>
                 </a>
                 <div class="personal-info">
                     <img src="${pageContext.request.contextPath}/img/neymar.png">
                     <div>
-                        <h3><%=nome%></h3>
+                        <h3>Neymar Santos</h3>
                         <p>Aluno</p>
                     </div>
                 </div>
@@ -121,13 +96,19 @@
                         <h2>Quadro de avisos</h2>
                         <a class="button">Ir ao quadro</a>
 
-                        <img style="rotate: 15deg;" class="screw right-top" src="${pageContext.request.contextPath}/img/flat/screw.png">
-                        <img style="rotate: 84deg;" class="screw left-top" src="${pageContext.request.contextPath}/img/flat/screw.png">
+                        <img style="rotate: 15deg;" class="screw right-top" src="img/flat/screw.png">
+                        <img style="rotate: 84deg;" class="screw left-top" src="img/flat/screw.png">
                     </div>
                 </div>
 
                 <div id="grades">
                     <h1>Boletim</h1>
+                    <div class="actions-section-container">
+                        <select class="select-box">
+                            <option value="">Todas as matérias</option>
+                        </select>
+                    </div>
+
                     <div class="table-container">
                         <div class="table-info">
                             <div>
@@ -157,17 +138,7 @@
                                 </thead>
                                 <tbody>
                                     <%
-                                        String situationClass = "";
-                                        String situationMessage = "";
                                         for (NotaEntity nota : notas) {
-                                            if (nota.getN1() == null && nota.getN2() == null) {
-                                                situationClass = "";
-                                                situationMessage = "Em análise";
-                                            }
-                                            else {
-                                                situationClass = (nota.getMedia() != null && nota.getMedia() >= 7) ? "approved" : "failed";
-                                                situationMessage = (nota.getMedia() != null && nota.getMedia() >= 7) ? "Aprovado" : "Reprovado";
-                                            }
                                     %>
                                     <tr>
                                         <td><%= nota.getNomeDisciplina() %></td>
@@ -175,9 +146,9 @@
                                         <td><%= nota.getN2() == null ? "-" : nota.getN2() %></td>
                                         <td><%= nota.getMediaCalculada()%></td>
                                         <td class="situation">
-                                        <span class="<%=situationClass%>">
-                                        <%=situationMessage%>
-                                        </span>
+                                        <span class="<%= (nota.getMedia() != null && nota.getMedia() >= 7) ? "approved" : "repproved" %>">
+                                        <%= (nota.getMedia() != null && nota.getMedia() >= 7) ? "Aprovado" : "Reprovado" %>
+                                         </span>
                                         </td>
                                     </tr>
 
@@ -192,6 +163,11 @@
 
                 <div id="observations">
                     <h1>Observações</h1>
+                    <div class="actions-section-container">
+                        <select class="select-box">
+                            <option value="">Todos os professores</option>
+                        </select>
+                    </div>
 
                     <div class="card-container">
                         <%

@@ -1,8 +1,8 @@
 package com.domdiogo.model;
 
 public enum StatusColor {
-    RED("red"),
-    GREEN("green");
+    RED("#D13E3E"),
+    GREEN("#86d1a8");
 
     private final String value;
 

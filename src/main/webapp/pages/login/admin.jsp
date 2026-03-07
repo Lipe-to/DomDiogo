@@ -19,17 +19,19 @@
 <body id="admin">
 <div class="login-form">
     <div style="justify-content: center" class="logo">
-        <img src="${pageContext.request.contextPath}/img/branding/icone.png">
-        <img src="${pageContext.request.contextPath}/img/branding/black.png">
+        <img src="${pageContext.request.contextPath}/img/branding/icone.png" draggable="false">
+        <img src="${pageContext.request.contextPath}/img/branding/black.png" draggable="false">
     </div>
-    <h1>Bem-vindo(a) de volta!</h1>
+    <h1 style="whitespace: nowrap">Portal de acesso à diretoria</h1>
     <%
         String errorDisplay = "block";
+        String color = (String) request.getAttribute("statusColor");
+
         if (request.getAttribute("statusMessage") == null) {
             errorDisplay = "none";
         }
     %>
-    <p class="error-message" style="display: <%=errorDisplay%>;"><%=request.getAttribute("statusMessage")%></p>
+    <p class="error-message" style="display: <%=errorDisplay%>; color: <%=color%>"><%=request.getAttribute("statusMessage")%></p>
     <form action="${pageContext.request.contextPath}/login?action=loginAdmin" method="post">
         <div class="input-major">
             <div class="email input-container">

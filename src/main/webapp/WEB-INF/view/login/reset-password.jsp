@@ -19,8 +19,8 @@
 <body id="forgot-password">
     <div class="login-form">
         <div style="justify-content: center" class="logo">
-            <img src="${pageContext.request.contextPath}/img/branding/icone.png">
-            <img src="${pageContext.request.contextPath}/img/branding/black.png">
+            <img src="${pageContext.request.contextPath}/img/branding/icone.png" draggable="false">
+            <img src="${pageContext.request.contextPath}/img/branding/black.png" draggable="false">
         </div>
         <h1>Nova senha</h1>
         <form action="${pageContext.request.contextPath}/login" method="post">

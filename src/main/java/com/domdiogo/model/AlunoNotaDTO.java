@@ -2,12 +2,10 @@ package com.domdiogo.model;
 
 public class AlunoNotaDTO {
 
-    // ===== DADOS DO ALUNO =====
     private int matricula;
     private String nomeAluno;
     private String turma;
 
-    // ===== DADOS DA NOTA =====
     private Integer notaId;          // Pode ser null (LEFT JOIN)
     private Double n1;               // Pode ser null
     private Double n2;               // Pode ser null
@@ -15,7 +13,6 @@ public class AlunoNotaDTO {
     private Integer idDisciplina;    // Pode ser null
     private String disciplinaNome;   // Pode ser null
 
-    // ===== CONSTRUTOR COMPLETO =====
     public AlunoNotaDTO(int matricula,
                         String nomeAluno,
                         String turma,
