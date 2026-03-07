@@ -74,9 +74,6 @@ public class AlunoNotaDTO {
 
     // ===== MÉTODOS AUXILIARES =====
 
-    public boolean isAprovado() {
-        return media != null && media >= 7.0;
-    }
 
     public String getSituacao() {
         if (media == null) return "Sem Nota";
@@ -86,11 +83,5 @@ public class AlunoNotaDTO {
     public String getSituacaoCss() {
         if (media == null) return "";
         return media >= 7.0 ? "appr" : "repr";
-    }
-
-    public String getMediaCalculada() {
-        if (n1 == null || n2 == null) return "-";
-        double media = (n1 + n2) / 2.0;
-        return String.format("%.2f", media);
     }
 }
