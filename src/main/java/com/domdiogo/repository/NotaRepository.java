@@ -1,6 +1,7 @@
 package com.domdiogo.repository;
 
 import com.domdiogo.ConnectionFactory;
+import com.domdiogo.ServletHelper;
 import com.domdiogo.model.AlunoNotaDTO;
 import com.domdiogo.model.NotaEntity;
 import com.domdiogo.model.Status;
@@ -136,6 +137,7 @@ public class NotaRepository {
                             rs.getInt("matricula"),
                             rs.getString("aluno_nome"),
                             rs.getString("turma"),
+                            ServletHelper.formatarUltimoLogin(rs),
                             rs.getObject("nota_id", Integer.class),
                             n1,
                             n2,
@@ -193,6 +195,112 @@ public class NotaRepository {
                             rs.getInt("matricula"),
                             rs.getString("aluno_nome"),
                             rs.getString("turma"),
+                            ServletHelper.formatarUltimoLogin(rs),
+                            rs.getObject("nota_id", Integer.class),
+                            n1,
+                            n2,
+                            media,
+                            rs.getObject("id_disciplina", Integer.class),
+                            rs.getString("disciplina_nome")
+                    );
+
+                    lista.add(dto);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
+
+    public List<AlunoNotaDTO> findAlunosNotasByTurma(String turma) {
+        List<AlunoNotaDTO> lista = new ArrayList<>();
+        String query = """
+                SELECT
+                    a.matricula,
+                    a.nome AS aluno_nome,
+                    a.turma,
+                    n.id AS nota_id,
+                    n.n1,
+                    n.n2,
+                    n.media,
+                    d.id AS id_disciplina,
+                    d.nome AS disciplina_nome
+                FROM aluno a
+                LEFT JOIN nota n
+                    ON n.matricula_aluno = a.matricula
+                LEFT JOIN disciplina d
+                    ON n.id_disciplina = d.id
+                WHERE a.turma = ?
+                ORDER BY a.nome, d.nome
+               """;
+
+        try (Connection connection = new ConnectionFactory().connect();
+             PreparedStatement ps = connection.prepareStatement(query)) {
+
+            ps.setString(1, turma);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    BigDecimal bdN1 = rs.getBigDecimal("n1");
+                    BigDecimal bdN2 = rs.getBigDecimal("n2");
+                    BigDecimal bdMedia = rs.getBigDecimal("media");
+
+                    Double n1 = bdN1 != null ? bdN1.doubleValue() : null;
+                    Double n2 = bdN2 != null ? bdN2.doubleValue() : null;
+                    Double media = bdMedia != null ? bdMedia.doubleValue() : null;
+
+                    AlunoNotaDTO dto = new AlunoNotaDTO(
+                            rs.getInt("matricula"),
+                            rs.getString("aluno_nome"),
+                            rs.getString("turma"),
+                            ServletHelper.formatarUltimoLogin(rs),
+                            rs.getObject("nota_id", Integer.class),
+                            n1,
+                            n2,
+                            media,
+                            rs.getObject("id_disciplina", Integer.class),
+                            rs.getString("disciplina_nome")
+                    );
+
+                    lista.add(dto);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
+
+    public List<AlunoNotaDTO> findAlunosNotasByTurmaAndProfessor(String turma, int idProfessor) {
+        List<AlunoNotaDTO> lista = new ArrayList<>();
+        String query = "SELECT a.matricula, a.nome AS aluno_nome, a.turma, n.id AS nota_id, n.n1, n.n2, n.media, d.id AS id_disciplina, d.nome AS disciplina_nome FROM aluno a LEFT JOIN disciplina d ON d.id_professor = ? LEFT JOIN nota n ON n.matricula_aluno = a.matricula AND n.id_disciplina = d.id WHERE a.turma = ? ORDER BY a.nome, d.nome";
+
+        try (Connection connection = new ConnectionFactory().connect();
+             PreparedStatement ps = connection.prepareStatement(query)) {
+
+            ps.setInt(1, idProfessor);
+            ps.setString(2, turma);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    BigDecimal bdN1 = rs.getBigDecimal("n1");
+                    BigDecimal bdN2 = rs.getBigDecimal("n2");
+                    BigDecimal bdMedia = rs.getBigDecimal("media");
+
+                    Double n1 = bdN1 != null ? bdN1.doubleValue() : null;
+                    Double n2 = bdN2 != null ? bdN2.doubleValue() : null;
+                    Double media = bdMedia != null ? bdMedia.doubleValue() : null;
+
+                    AlunoNotaDTO dto = new AlunoNotaDTO(
+                            rs.getInt("matricula"),
+                            rs.getString("aluno_nome"),
+                            rs.getString("turma"),
+                            ServletHelper.formatarUltimoLogin(rs),
                             rs.getObject("nota_id", Integer.class),
                             n1,
                             n2,
@@ -244,26 +352,4 @@ public class NotaRepository {
             connectionFactory.disconnect(connection);
         }
     }
-
-    public Status zerarNota(int id) {
-        String query = "update nota set n1 = 0, n2 = 0 where id = ?";
-        ConnectionFactory connectionFactory = new ConnectionFactory();
-        Connection connection = connectionFactory.connect();
-
-        try {
-            PreparedStatement ps = connection.prepareStatement(query);
-            ps.setInt(1, id);
-
-            int rows = ps.executeUpdate();
-            if (rows > 0) {
-                return Status.SUCCESS;
-            }
-            return Status.NOT_FOUND;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return Status.INTERNAL_ERROR;
-        } finally {
-            connectionFactory.disconnect(connection);
-        }
     }
-}

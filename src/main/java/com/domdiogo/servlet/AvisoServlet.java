@@ -6,6 +6,8 @@ import com.domdiogo.model.Status;
 import com.domdiogo.repository.AvisoRepository;
 import com.domdiogo.repository.AlunoRepository;
 import com.domdiogo.model.AlunoEntity;
+import com.domdiogo.repository.ProfessorRepository;
+import com.domdiogo.repository.TurmaRepository;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -26,7 +28,7 @@ public class AvisoServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String turmaParam = request.getParameter("turma");
+        String turmaAluno = request.getParameter("turma"); // turma do aluno logado
         String regex1 = request.getParameter("regex");
         String byProfessorParam = request.getParameter("byProfessor");
         String action = request.getParameter("action");
@@ -55,8 +57,8 @@ public class AvisoServlet extends HttpServlet {
                             avisos = new ArrayList<>();
                         }
                     } else if (idProfessorSession != null) {
-                        if (turmaParam != null && !turmaParam.trim().isEmpty()) {
-                            avisos = avisoRepository.findByProfessorAndTurma(idProfessorSession, turmaParam.trim());
+                        if (turmaAluno != null && !turmaAluno.trim().isEmpty()) {
+                            avisos = avisoRepository.findByProfessorAndTurma(idProfessorSession, turmaAluno.trim());
                         } else {
                             avisos = avisoRepository.findByProfessor(idProfessorSession);
                         }
@@ -81,8 +83,8 @@ public class AvisoServlet extends HttpServlet {
 
             case "professor":
                 if (idProfessorSession != null) {
-                    if (turmaParam != null) {
-                        avisos = avisoRepository.findByProfessorAndTurma(idProfessorSession, turmaParam.trim());
+                    if (turmaAluno != null) {
+                        avisos = avisoRepository.findByProfessorAndTurma(idProfessorSession, turmaAluno.trim());
                     } else {
                         avisos = avisoRepository.findByProfessor(idProfessorSession);
                     }
@@ -92,8 +94,8 @@ public class AvisoServlet extends HttpServlet {
                 break;
 
             case "turma":
-                if (turmaParam != null) {
-                    avisos = avisoRepository.findByTurma(turmaParam.trim());
+                if (turmaAluno != null) {
+                    avisos = avisoRepository.findByTurma(turmaAluno.trim());
                 } else {
                     avisos = avisoRepository.findAll();
                 }
@@ -102,16 +104,16 @@ public class AvisoServlet extends HttpServlet {
             case "admin":
                 // Admin pode tudo: regex, turma, professor
                 if (regex1 != null && !regex1.trim().isEmpty()) {
-                    if (turmaParam != null && !turmaParam.trim().isEmpty()) {
-                        avisos = avisoRepository.findByAvisoRegexAndTurma(regex1.trim(), turmaParam.trim());
+                    if (turmaAluno != null && !turmaAluno.trim().isEmpty()) {
+                        avisos = avisoRepository.findByAvisoRegexAndTurma(regex1.trim(), turmaAluno.trim());
                     } else {
                         avisos = avisoRepository.findByAvisoRegex(regex1.trim());
                     }
-                } else if (turmaParam != null && !turmaParam.trim().isEmpty()) {
-                    avisos = avisoRepository.findByTurma(turmaParam.trim());
+                } else if (turmaAluno != null && !turmaAluno.trim().isEmpty()) {
+                    avisos = avisoRepository.findByTurma(turmaAluno.trim());
                 } else if (byProfessorParam != null && idProfessorSession != null) {
-                    if (turmaParam != null && !turmaParam.trim().isEmpty()) {
-                        avisos = avisoRepository.findByProfessorAndTurma(idProfessorSession, turmaParam.trim());
+                    if (turmaAluno != null && !turmaAluno.trim().isEmpty()) {
+                        avisos = avisoRepository.findByProfessorAndTurma(idProfessorSession, turmaAluno.trim());
                     } else {
                         avisos = avisoRepository.findByProfessor(idProfessorSession);
                     }
@@ -133,7 +135,8 @@ public class AvisoServlet extends HttpServlet {
                 }
                 break;
         }
-
+        request.setAttribute("turmas", new TurmaRepository().read());
+        request.setAttribute("professores", new ProfessorRepository().read());
         request.setAttribute("avisos", avisos);
         ServletHelper.redirect(request, response, "/WEB-INF/view/aviso/list.jsp");
     }
@@ -157,11 +160,14 @@ public class AvisoServlet extends HttpServlet {
                     String aviso = request.getParameter("aviso");
                     String prazoStr = request.getParameter("prazo");
                     String cor = request.getParameter("cor");
-                    String turmasParam = request.getParameter("turmas");
-                    LocalDate prazo = (prazoStr == null || prazoStr.trim().isEmpty()) ? null : LocalDate.parse(prazoStr);
-                    List<String> turmas = parseTurmasParam(turmasParam);
+
+                    // Agora usamos getParameterValues para turmasFiltro
+                    String[] turmasFiltroArray = request.getParameterValues("turmasFiltro");
+                    List<String> turmasFiltro = parseTurmasFiltro(turmasFiltroArray);
+
+                    LocalDate prazo = LocalDate.parse(prazoStr);
                     AvisoEntity a = new AvisoEntity(titulo, aviso, prazo, idProfessor, cor);
-                    Status s = avisoRepository.create(a, turmas);
+                    Status s = avisoRepository.create(a, turmasFiltro);
                     if (s == Status.SUCCESS) {
                         ServletHelper.configureStatus(request, "Aviso criado com sucesso.", com.domdiogo.model.StatusColor.GREEN);
                     } else {
@@ -193,15 +199,11 @@ public class AvisoServlet extends HttpServlet {
         }
     }
 
-    private List<String> parseTurmasParam(String turmasParam) {
-        if (turmasParam == null) return null;
-        turmasParam = turmasParam.trim();
-        if (turmasParam.isEmpty()) return null;
-        String[] arr = turmasParam.split(",");
+    private List<String> parseTurmasFiltro(String[] turmasArray) {
+        if (turmasArray == null || turmasArray.length == 0) return null;
         List<String> out = new ArrayList<>();
-        for (String t : arr) {
-            t = t.trim();
-            if (!t.isEmpty()) out.add(t);
+        for (String t : turmasArray) {
+                out.add(t.trim());
         }
         return out;
     }

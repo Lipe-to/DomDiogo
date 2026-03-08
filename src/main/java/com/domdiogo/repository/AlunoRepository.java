@@ -330,4 +330,23 @@ public class AlunoRepository {
             connectionFactory.disconnect(connection);
         }
     }
+    public Status updateUltimoLogin(int matricula) {
+        String query = "UPDATE aluno SET ultimo_login = CURRENT_TIMESTAMP WHERE matricula = ?";
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        Connection connection = connectionFactory.connect();
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, matricula);
+
+            int rows = ps.executeUpdate();
+            return rows > 0 ? Status.SUCCESS : Status.NOT_FOUND;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return Status.INTERNAL_ERROR;
+        } finally {
+            connectionFactory.disconnect(connection);
+        }
+    }
 }
