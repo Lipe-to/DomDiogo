@@ -72,7 +72,12 @@ public class AvisoRepository {
         return lista;
     }
 
-    // Busca por regex mas limitada a uma turma específica (join com aviso_turma)
+    /**
+     Busca por regex mas limitada a uma turma específica
+     * @param regex
+     * @param turma
+     * @return lidta de avisos
+     */
     public List<AvisoEntity> findByAvisoRegexAndTurma(String regex, String turma) {
         String query = "select a.* from aviso a join aviso_turma at on a.id_aviso = at.id_aviso where at.id_turma = ? and a.aviso ~* ? order by a.id_aviso desc";
         List<AvisoEntity> lista = new ArrayList<>();
@@ -95,7 +100,37 @@ public class AvisoRepository {
         return lista;
     }
 
-    // Busca por professor (todos os avisos criados por esse professor)
+    /**
+     Busca por regex mas limitada a uma turma específica
+     * @param regex
+     * @return lista de avisos
+     */
+    public List<AvisoEntity> findByAvisoRegex(String regex) {
+        String query = "select * from aviso where aviso ~* ? order by id_aviso desc";
+        List<AvisoEntity> lista = new ArrayList<>();
+        ConnectionFactory cf = new ConnectionFactory();
+        Connection conn = cf.connect();
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, regex); // agora só tem um parâmetro
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                AvisoEntity a = mapResultSet(rs);
+                lista.add(a);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            cf.disconnect(conn);
+        }
+        return lista;
+    }
+
+    /**
+     * Busca por professor
+     * @param idProfessor
+     * @return lista de avisos
+     */
     public List<AvisoEntity> findByProfessor(int idProfessor) {
         String query = "select * from aviso where id_professor = ? order by id_aviso desc";
         List<AvisoEntity> lista = new ArrayList<>();
@@ -117,7 +152,11 @@ public class AvisoRepository {
         return lista;
     }
 
-    // Busca por professor e turma (apenas avisos do professor para a turma especificada)
+    /**
+     * Busca por professor e turma
+     * @param idProfessor
+     * @return lista de avisos
+     */
     public List<AvisoEntity> findByProfessorAndTurma(int idProfessor, String turma) {
         String query = "select a.* from aviso a join aviso_turma at on a.id_aviso = at.id_aviso where a.id_professor = ? and at.id_turma = ? order by a.id_aviso desc";
         List<AvisoEntity> lista = new ArrayList<>();
@@ -147,6 +186,7 @@ public class AvisoRepository {
         Connection conn = cf.connect();
         if (conn == null) return Status.INTERNAL_ERROR;
         try {
+            //atomicidade
             conn.setAutoCommit(false);
             PreparedStatement ps = conn.prepareStatement(insertAviso, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, avisoEntity.getTitulo());
@@ -183,54 +223,7 @@ public class AvisoRepository {
             return Status.SUCCESS;
         } catch (SQLException e) {
             e.printStackTrace();
-            try { conn.rollback(); } catch (SQLException ex) { ex.printStackTrace(); }
-            return Status.INTERNAL_ERROR;
-        } finally {
-            try { conn.setAutoCommit(true); } catch (SQLException ignored) {}
-            cf.disconnect(conn);
-        }
-    }
-
-    public Status update(AvisoEntity avisoEntity, List<String> turmas) {
-        String updateAviso = "update aviso set titulo = ?, aviso = ?, prazo = ?, cor = ? where id_aviso = ?";
-        String deleteTurmas = "delete from aviso_turma where id_aviso = ?";
-        String insertAvisoTurma = "insert into aviso_turma (id_aviso, id_turma) values (?, ?)";
-        ConnectionFactory cf = new ConnectionFactory();
-        Connection conn = cf.connect();
-        if (conn == null) return Status.INTERNAL_ERROR;
-        try {
-            conn.setAutoCommit(false);
-            PreparedStatement ps = conn.prepareStatement(updateAviso);
-            ps.setString(1, avisoEntity.getTitulo());
-            ps.setString(2, avisoEntity.getAviso());
-            if (avisoEntity.getPrazo() != null) {
-                ps.setDate(3, Date.valueOf(avisoEntity.getPrazo()));
-            } else {
-                ps.setNull(3, Types.DATE);
-            }
-            ps.setString(4, avisoEntity.getCor());
-            ps.setInt(5, avisoEntity.getId());
-            int rows = ps.executeUpdate();
-            if (rows == 0) {
-                conn.rollback();
-                return Status.NOT_FOUND;
-            }
-            // replace turma links
-            PreparedStatement psDel = conn.prepareStatement(deleteTurmas);
-            psDel.setInt(1, avisoEntity.getId());
-            psDel.executeUpdate();
-            if (turmas != null) {
-                PreparedStatement psTurma = conn.prepareStatement(insertAvisoTurma);
-                for (String turma : turmas) {
-                    psTurma.setInt(1, avisoEntity.getId());
-                    psTurma.setString(2, turma);
-                    try { psTurma.executeUpdate(); } catch (SQLException ignored) {}
-                }
-            }
-            conn.commit();
-            return Status.SUCCESS;
-        } catch (SQLException e) {
-            e.printStackTrace();
+            //atomicidade
             try { conn.rollback(); } catch (SQLException ex) { ex.printStackTrace(); }
             return Status.INTERNAL_ERROR;
         } finally {
@@ -246,44 +239,6 @@ public class AvisoRepository {
         try {
             PreparedStatement ps = conn.prepareStatement(deleteAviso);
             ps.setInt(1, idAviso);
-            int rows = ps.executeUpdate();
-            if (rows > 0) return Status.SUCCESS;
-            return Status.NOT_FOUND;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return Status.INTERNAL_ERROR;
-        } finally {
-            cf.disconnect(conn);
-        }
-    }
-
-    public Status addAvisoToTurma(int avisoId, String turma) {
-        String insertAvisoTurma = "insert into aviso_turma (id_aviso, id_turma) values (?, ?)";
-        ConnectionFactory cf = new ConnectionFactory();
-        Connection conn = cf.connect();
-        try {
-            PreparedStatement ps = conn.prepareStatement(insertAvisoTurma);
-            ps.setInt(1, avisoId);
-            ps.setString(2, turma);
-            int rows = ps.executeUpdate();
-            if (rows > 0) return Status.SUCCESS;
-            return Status.NOT_FOUND;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return Status.INTERNAL_ERROR;
-        } finally {
-            cf.disconnect(conn);
-        }
-    }
-
-    public Status removeAvisoFromTurma(int avisoId, String turma) {
-        String delete = "delete from aviso_turma where id_aviso = ? and id_turma = ?";
-        ConnectionFactory cf = new ConnectionFactory();
-        Connection conn = cf.connect();
-        try {
-            PreparedStatement ps = conn.prepareStatement(delete);
-            ps.setInt(1, avisoId);
-            ps.setString(2, turma);
             int rows = ps.executeUpdate();
             if (rows > 0) return Status.SUCCESS;
             return Status.NOT_FOUND;
