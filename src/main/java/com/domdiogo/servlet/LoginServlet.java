@@ -45,10 +45,12 @@ public class LoginServlet extends HttpServlet {
                         HttpSession session = request.getSession();
                         session.setAttribute("nome", aluno.getNome());
                         session.setAttribute("matricula", aluno.getMatricula());
+                        session.setAttribute("turma", aluno.getTurma());
 
                         ServletHelper.configureStatus(request,
                                 "Login realizado com sucesso!",
                                 StatusColor.GREEN);
+                        alunoRepository.updateUltimoLogin(aluno.getMatricula());
 
                         redirect = "/studentHome";
                     } else {
@@ -77,7 +79,7 @@ public class LoginServlet extends HttpServlet {
                         ServletHelper.configureStatus(request,
                                 "Login realizado com sucesso!",
                                 StatusColor.GREEN);
-
+                        professorRepository.updateUltimoLogin(professor.getId());
                         redirect = "/teacherHome";
                     } else {
                         ServletHelper.configureStatus(request,
