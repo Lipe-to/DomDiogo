@@ -590,28 +590,18 @@
                                 String nomeAluno = alunoObs != null ? alunoObs.getNome() : "Aluno";
 
                                 String nomeProfessor = professorRepository.findById(obs.getIdProfessor()).getNome();
-
                     %>
 
                     <div style="background-color:<%=obs.getCor().getHex()%>" class="card">
-
                         <div>
-
-                            <h2><%=obs.getTitulo()%>
-                            </h2>
-
-                            <p>Para <%=nomeAluno%>
-                            </p>
-
+                            <h2><%=obs.getTitulo()%></h2>
+                            <p>Para <%=nomeAluno%></p>
                         </div>
 
-                        <button popovertarget="popover-obs-<%=idPopoverObs%>" class="button">
-                            Ver detalhes
-                        </button>
-
+                        <button popovertarget="popover-obs-<%=idPopoverObs%>" class="button">Ver detalhes</button>
                     </div>
 
-                    <div id="popover-obs-<%=idPopoverObs%>" class="popup obs" popover="auto">
+                    <div id="popover-obs-<%=idPopoverObs%>" style="--color-obs-card:<%=obs.getCor().getHex()%>;" class="popup obs" popover="auto">
                         <h1><%=obs.getTitulo()%>
                         </h1>
 

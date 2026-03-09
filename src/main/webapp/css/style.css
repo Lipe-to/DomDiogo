@@ -226,5 +226,6 @@ a {
 
 textarea {
     resize: vertical;
-    max-height: 150px;
+    min-height: 32px;
+    max-height: 200px;
 }

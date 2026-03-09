@@ -376,7 +376,7 @@
                         </div>
                         <button popovertarget="<%="popover-id-"+idPopoverObs%>" class="button">Ver detalhes</button>
                     </div>
-                    <div id="<%="popover-id-"+idPopoverObs%>" class="popup obs" popover="auto">
+                    <div id="<%="popover-id-"+idPopoverObs%>" style="--color-obs-card:<%=obs.getCor().getHex()%>;" class="popup obs" popover="auto">
                         <h1><%=obs.getTitulo()%>
                         </h1>
                         <div>
@@ -445,16 +445,44 @@
 
             <div class="input-container">
                 <p class="required">Cores</p>
-                <select class="text-box" name="cor">
-                    <option value="BLUE">Azul</option>
-                    <option value="RED">Vermelho</option>
-                    <option value="TEA_BLUE">Azul-Chá</option>
-                    <option value="PURPLE">Roxo</option>
-                    <option value="GREEN">Verde</option>
-                    <option value="LIME_GREEN">Verde-Lima</option>
-                    <option value="SMOOTH_RED">Vermelho-Suave</option>
-                    <option value="ORANGE">Laranja</option>
-                </select>
+                <div class="colors">
+                    <div>
+                        <input style="background-color: #3C71BA;" class="text-box" type="radio" name="cor" value="BLUE" checked>
+                        <img class="check-circle" src="img/svg/check.svg">
+                    </div>
+                    <div>
+                        <input style="background-color: #D13E3E;" class="text-box" type="radio" name="cor" value="RED">
+                        <img class="check-circle" src="img/svg/check.svg">
+                    </div>
+                    <div>
+                        <input style="background-color: #8D99D6;" class="text-box" type="radio" name="cor" value="TEA_BLUE">
+                        <img class="check-circle" src="img/svg/check.svg">
+                    </div>
+                    <div>
+                        <input style="background-color: #ca93c7;" class="text-box" type="radio" name="cor" value="PURPLE">
+                        <img class="check-circle" src="img/svg/check.svg">
+                    </div>
+                    <div>
+                        <input style="background-color: #86d1a8;" class="text-box" type="radio" name="cor" value="GREEN">
+                        <img class="check-circle" src="img/svg/check.svg">
+                    </div>
+                    <div>
+                        <input style="background-color: #b0cf89;" class="text-box" type="radio" name="cor" value="LIME_GREEN">
+                        <img class="check-circle" src="img/svg/check.svg">
+                    </div>
+                    <div>
+                        <input style="background-color: #e08383;" class="text-box" type="radio" name="cor" value="SMOOTH_RED">
+                        <img class="check-circle" src="img/svg/check.svg">
+                    </div>
+                    <div>
+                        <input style="background-color: #dfb381;" class="text-box" type="radio" name="cor" value="ORANGE">
+                        <img class="check-circle" src="img/svg/check.svg">
+                    </div>
+                    <div>
+                        <input style="background-color: #b5b5b5;" class="text-box" type="radio" name="cor" value="DEFAULT">
+                        <img class="check-circle" src="img/svg/check.svg">
+                    </div>
+                </div>
             </div>
 
             <input type="hidden" name="idProfessor" value="<%=idProfessor%>">

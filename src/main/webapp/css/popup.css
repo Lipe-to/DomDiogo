@@ -10,7 +10,7 @@
 
     position: fixed;
     max-width: 320px;
-    max-height: 75vh;
+    max-height: 70vh;
     overflow: auto;
  
     text-align: left;
@@ -59,16 +59,88 @@
     opacity: 80%;
 }
 
-/* .popup.obs::before {
+.popup.obs button {
+    margin-top: 15%;
+}
+
+.popup.obs h1 {
+    color: var(--white);
+    margin-bottom: 18%;
+}
+
+.popup.obs::before {
     content: "";
     inset: 0;
-    top: 0;
 
-    transform: rotate(180deg);
     position: absolute;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 25%, 0% 25%);
+
+    background-image: url('../img/shape/card.svg');
+    /* background-color: rgb(90, 90, 90); */
+    background-color: var(--color-obs-card);
+
     background-size: cover;
-    background-image: url('../img/shape/Background-blue.svg');
-    background-position: bottom;
     background-repeat: no-repeat;
+    background-position: 0;
     z-index: -1;
-} */
+}
+
+.colors {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    margin-top: 2%;
+    gap: 0.9rem;
+}
+
+.colors>* {
+    position: relative;
+}
+
+.colors * {
+    cursor: pointer;
+}
+
+.check-circle {
+    width: 12px;
+    aspect-ratio: 1 / 1;
+    position: absolute;
+    cursor: default;
+
+    border-radius: 25px;
+    border: 4px solid var(--hyperlink-blue);
+    outline: 2.5px solid var(--white);
+    background-color: var(--hyperlink-blue);
+
+    right: -8px;
+    transition: opacity 0.1s ease !important;
+}
+
+.colors input:not(:checked) + .check-circle {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.colors input:checked + .check-circle {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.colors::-webkit-scrollbar {
+    display: none;
+}
+
+.colors input, .colors {
+    box-shadow: none !important;
+    transition: none !important;
+    /* Por algum motivo, o CSS do input=radio briga comigo */
+}
+
+.colors input {
+    appearance: none;
+    width: 32px;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    border: 0;
+}

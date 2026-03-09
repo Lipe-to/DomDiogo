@@ -85,6 +85,21 @@ body {
     white-space: nowrap;
 }
 
+@media (max-width: 1100px) {
+    #front-desk {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #front-desk>* {
+        width: auto !important;
+    }
+
+    #welcome {
+        min-height: 240px;
+    }
+}
+
 #welcome {
     width: 40%;
 }
@@ -608,21 +623,30 @@ header {
     justify-content: end;
     align-items: center;
     overflow: hidden;
+}
+
+.personal-info h3, .personal-info p {
     color: var(--white);
+    opacity: 90%;
 }
 
 .profile-image {
-    width: 34px;
+    width: 40px;
     aspect-ratio: 1 / 1;
 
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
 
+    cursor: grab;
     border-width: 1px;
     border-style: solid;
     border-radius: 100%;
     border-color: var(--white);
+}
+
+.profile-image:active {
+    cursor: grabbing;
 }
 
 .foto-1 {

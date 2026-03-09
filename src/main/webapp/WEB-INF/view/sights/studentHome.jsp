@@ -222,7 +222,7 @@
                             </div>
                             <button popovertarget="<%="popover-id-"+idPopoverObs%>" class="button">Ver detalhes</button>
                         </div>
-                        <div id="<%="popover-id-"+idPopoverObs%>" class="popup obs" popover="auto">
+                        <div id="<%="popover-id-"+idPopoverObs%>" style="--color-obs-card:<%=obs.getCor().getHex()%>;" class="popup obs" popover="auto">
                             <h1><%=obs.getTitulo()%>
                             </h1>
                             <div>
