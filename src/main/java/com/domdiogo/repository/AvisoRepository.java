@@ -12,236 +12,330 @@ import java.util.List;
 public class AvisoRepository {
 
     public List<AvisoEntity> findAll() {
-        String query = "select * from aviso order by id_aviso desc";
+        String query = "SELECT * FROM aviso ORDER BY id_aviso DESC";
         List<AvisoEntity> lista = new ArrayList<>();
+
         ConnectionFactory cf = new ConnectionFactory();
         Connection conn = cf.connect();
-        try {
-            PreparedStatement ps = conn.prepareStatement(query);
-            ResultSet rs = ps.executeQuery();
+
+        try (PreparedStatement ps = conn.prepareStatement(query);
+             ResultSet rs = ps.executeQuery()) {
+
             while (rs.next()) {
-                AvisoEntity a = mapResultSet(rs);
-                lista.add(a);
+                lista.add(mapResultSet(rs));
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             cf.disconnect(conn);
         }
+
         return lista;
     }
 
     public AvisoEntity findById(int id) {
-        String query = "select * from aviso where id_aviso = ?";
+        String query = "SELECT * FROM aviso WHERE id_aviso = ?";
         ConnectionFactory cf = new ConnectionFactory();
         Connection conn = cf.connect();
+
         AvisoEntity aviso = null;
-        try {
-            PreparedStatement ps = conn.prepareStatement(query);
+
+        try (PreparedStatement ps = conn.prepareStatement(query)) {
+
             ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                aviso = mapResultSet(rs);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    aviso = mapResultSet(rs);
+                }
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             cf.disconnect(conn);
         }
+
         return aviso;
     }
 
     public List<AvisoEntity> findByTurma(String turma) {
-        String query = "select a.* from aviso a join aviso_turma at on a.id_aviso = at.id_aviso where at.id_turma = ? order by a.id_aviso desc";
+
+        String query = """
+                SELECT DISTINCT a.*
+                FROM aviso a
+                JOIN aviso_turma at ON a.id_aviso = at.id_aviso
+                WHERE at.id_turma = ?
+                ORDER BY a.id_aviso DESC
+                """;
+
         List<AvisoEntity> lista = new ArrayList<>();
+
         ConnectionFactory cf = new ConnectionFactory();
         Connection conn = cf.connect();
-        try {
-            PreparedStatement ps = conn.prepareStatement(query);
+
+        try (PreparedStatement ps = conn.prepareStatement(query)) {
+
             ps.setString(1, turma);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                AvisoEntity a = mapResultSet(rs);
-                lista.add(a);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    lista.add(mapResultSet(rs));
+                }
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             cf.disconnect(conn);
         }
+
         return lista;
     }
 
-    /**
-     Busca por regex mas limitada a uma turma específica
-     * @param regex
-     * @param turma
-     * @return lidta de avisos
-     */
     public List<AvisoEntity> findByAvisoRegexAndTurma(String regex, String turma) {
-        String query = "select a.* from aviso a join aviso_turma at on a.id_aviso = at.id_aviso where at.id_turma = ? and a.aviso ~* ? order by a.id_aviso desc";
+
+        String query = """
+                SELECT DISTINCT a.*
+                FROM aviso a
+                JOIN aviso_turma at ON a.id_aviso = at.id_aviso
+                WHERE at.id_turma = ?
+                AND (
+                    a.titulo ~* ?
+                    OR a.aviso ~* ?
+                    OR a.cor ~* ?
+                    OR CAST(a.prazo AS TEXT) ~* ?
+                )
+                ORDER BY a.id_aviso DESC
+                """;
+
         List<AvisoEntity> lista = new ArrayList<>();
+
         ConnectionFactory cf = new ConnectionFactory();
         Connection conn = cf.connect();
-        try {
-            PreparedStatement ps = conn.prepareStatement(query);
+
+        try (PreparedStatement ps = conn.prepareStatement(query)) {
+
             ps.setString(1, turma);
             ps.setString(2, regex);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                AvisoEntity a = mapResultSet(rs);
-                lista.add(a);
+            ps.setString(3, regex);
+            ps.setString(4, regex);
+            ps.setString(5, regex);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    lista.add(mapResultSet(rs));
+                }
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             cf.disconnect(conn);
         }
+
         return lista;
     }
 
-    /**
-     Busca por regex mas limitada a uma turma específica
-     * @param regex
-     * @return lista de avisos
-     */
     public List<AvisoEntity> findByAvisoRegex(String regex) {
-        String query = "select * from aviso where aviso ~* ? order by id_aviso desc";
+
+        String query = """
+                SELECT *
+                FROM aviso
+                WHERE
+                    titulo ~* ?
+                    OR aviso ~* ?
+                    OR cor ~* ?
+                    OR CAST(prazo AS TEXT) ~* ?
+                ORDER BY id_aviso DESC
+                """;
+
         List<AvisoEntity> lista = new ArrayList<>();
+
         ConnectionFactory cf = new ConnectionFactory();
         Connection conn = cf.connect();
-        try {
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, regex); // agora só tem um parâmetro
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                AvisoEntity a = mapResultSet(rs);
-                lista.add(a);
+
+        try (PreparedStatement ps = conn.prepareStatement(query)) {
+
+            ps.setString(1, regex);
+            ps.setString(2, regex);
+            ps.setString(3, regex);
+            ps.setString(4, regex);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    lista.add(mapResultSet(rs));
+                }
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             cf.disconnect(conn);
         }
+
         return lista;
     }
 
-    /**
-     * Busca por professor
-     * @param idProfessor
-     * @return lista de avisos
-     */
     public List<AvisoEntity> findByProfessor(int idProfessor) {
-        String query = "select * from aviso where id_professor = ? order by id_aviso desc";
+
+        String query = """
+                SELECT *
+                FROM aviso
+                WHERE id_professor = ?
+                ORDER BY id_aviso DESC
+                """;
+
         List<AvisoEntity> lista = new ArrayList<>();
+
         ConnectionFactory cf = new ConnectionFactory();
         Connection conn = cf.connect();
-        try {
-            PreparedStatement ps = conn.prepareStatement(query);
+
+        try (PreparedStatement ps = conn.prepareStatement(query)) {
+
             ps.setInt(1, idProfessor);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                AvisoEntity a = mapResultSet(rs);
-                lista.add(a);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    lista.add(mapResultSet(rs));
+                }
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             cf.disconnect(conn);
         }
+
         return lista;
     }
 
-    /**
-     * Busca por professor e turma
-     * @param idProfessor
-     * @return lista de avisos
-     */
     public List<AvisoEntity> findByProfessorAndTurma(int idProfessor, String turma) {
-        String query = "select a.* from aviso a join aviso_turma at on a.id_aviso = at.id_aviso where a.id_professor = ? and at.id_turma = ? order by a.id_aviso desc";
+
+        String query = """
+                SELECT DISTINCT a.*
+                FROM aviso a
+                JOIN aviso_turma at ON a.id_aviso = at.id_aviso
+                WHERE a.id_professor = ?
+                AND at.id_turma = ?
+                ORDER BY a.id_aviso DESC
+                """;
+
         List<AvisoEntity> lista = new ArrayList<>();
+
         ConnectionFactory cf = new ConnectionFactory();
         Connection conn = cf.connect();
-        try {
-            PreparedStatement ps = conn.prepareStatement(query);
+
+        try (PreparedStatement ps = conn.prepareStatement(query)) {
+
             ps.setInt(1, idProfessor);
             ps.setString(2, turma);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                AvisoEntity a = mapResultSet(rs);
-                lista.add(a);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    lista.add(mapResultSet(rs));
+                }
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             cf.disconnect(conn);
         }
+
         return lista;
     }
 
     public Status create(AvisoEntity avisoEntity, List<String> turmas) {
-        String insertAviso = "insert into aviso (titulo, aviso, prazo, id_professor, cor) values (?, ?, ?, ?, ?)";
-        String insertAvisoTurma = "insert into aviso_turma (id_aviso, id_turma) values (?, ?)";
+
+        String insertAviso =
+                "INSERT INTO aviso (titulo, aviso, prazo, id_professor, cor) VALUES (?, ?, ?, ?, ?)";
+
+        String insertAvisoTurma =
+                "INSERT INTO aviso_turma (id_aviso, id_turma) VALUES (?, ?)";
+
         ConnectionFactory cf = new ConnectionFactory();
         Connection conn = cf.connect();
+
         if (conn == null) return Status.INTERNAL_ERROR;
+
         try {
-            //atomicidade
+
             conn.setAutoCommit(false);
-            PreparedStatement ps = conn.prepareStatement(insertAviso, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, avisoEntity.getTitulo());
-            ps.setString(2, avisoEntity.getAviso());
-            if (avisoEntity.getPrazo() != null) {
-                ps.setDate(3, Date.valueOf(avisoEntity.getPrazo()));
-            } else {
-                ps.setNull(3, Types.DATE);
-            }
-            ps.setInt(4, avisoEntity.getIdProfessor());
-            ps.setString(5, avisoEntity.getCor());
-            int rows = ps.executeUpdate();
-            if (rows == 0) {
-                conn.rollback();
-                return Status.INTERNAL_ERROR;
-            }
-            ResultSet keys = ps.getGeneratedKeys();
-            int avisoId = -1;
-            if (keys.next()) {
+
+            int avisoId;
+
+            try (PreparedStatement ps = conn.prepareStatement(insertAviso, Statement.RETURN_GENERATED_KEYS)) {
+
+                ps.setString(1, avisoEntity.getTitulo());
+                ps.setString(2, avisoEntity.getAviso());
+
+                if (avisoEntity.getPrazo() != null)
+                    ps.setDate(3, Date.valueOf(avisoEntity.getPrazo()));
+                else
+                    ps.setNull(3, Types.DATE);
+
+                ps.setInt(4, avisoEntity.getIdProfessor());
+                ps.setString(5, avisoEntity.getCor());
+
+                ps.executeUpdate();
+
+                ResultSet keys = ps.getGeneratedKeys();
+                keys.next();
                 avisoId = keys.getInt(1);
             }
-            if (turmas != null) {
-                PreparedStatement psTurma = conn.prepareStatement(insertAvisoTurma);
-                for (String turma : turmas) {
-                    psTurma.setInt(1, avisoId);
-                    psTurma.setString(2, turma);
-                    try {
+
+            if (turmas != null && !turmas.isEmpty()) {
+
+                try (PreparedStatement psTurma = conn.prepareStatement(insertAvisoTurma)) {
+
+                    for (String turma : turmas) {
+                        psTurma.setInt(1, avisoId);
+                        psTurma.setString(2, turma);
                         psTurma.executeUpdate();
-                    } catch (SQLException ex) {
                     }
                 }
             }
+
             conn.commit();
             return Status.SUCCESS;
+
         } catch (SQLException e) {
+
+            try {
+                conn.rollback();
+            } catch (SQLException ignored) {}
+
             e.printStackTrace();
-            //atomicidade
-            try { conn.rollback(); } catch (SQLException ex) { ex.printStackTrace(); }
             return Status.INTERNAL_ERROR;
+
         } finally {
-            try { conn.setAutoCommit(true); } catch (SQLException ignored) {}
+
+            try {
+                conn.setAutoCommit(true);
+            } catch (SQLException ignored) {}
+
             cf.disconnect(conn);
         }
     }
 
     public Status delete(int idAviso) {
-        String deleteAviso = "delete from aviso where id_aviso = ?";
+
+        String query = "DELETE FROM aviso WHERE id_aviso = ?";
+
         ConnectionFactory cf = new ConnectionFactory();
         Connection conn = cf.connect();
-        try {
-            PreparedStatement ps = conn.prepareStatement(deleteAviso);
+
+        try (PreparedStatement ps = conn.prepareStatement(query)) {
+
             ps.setInt(1, idAviso);
+
             int rows = ps.executeUpdate();
+
             if (rows > 0) return Status.SUCCESS;
             return Status.NOT_FOUND;
+
         } catch (SQLException e) {
             e.printStackTrace();
             return Status.INTERNAL_ERROR;
@@ -251,14 +345,17 @@ public class AvisoRepository {
     }
 
     private AvisoEntity mapResultSet(ResultSet rs) throws SQLException {
+
         int id = rs.getInt("id_aviso");
         String titulo = rs.getString("titulo");
         String aviso = rs.getString("aviso");
+
         Date prazoDate = rs.getDate("prazo");
         LocalDate prazo = prazoDate != null ? prazoDate.toLocalDate() : null;
+
         int idProfessor = rs.getInt("id_professor");
         String cor = rs.getString("cor");
+
         return new AvisoEntity(id, titulo, aviso, prazo, idProfessor, cor);
     }
 }
-

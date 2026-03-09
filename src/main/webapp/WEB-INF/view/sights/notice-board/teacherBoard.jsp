@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.domdiogo.model.AvisoEntity" %>
-<%@ page import="com.domdiogo.model.ProfessorEntity" %>
 <%@ page import="com.domdiogo.model.ColorPalette" %>
 <%@ page import="com.domdiogo.repository.ProfessorRepository" %>
 
@@ -9,8 +8,9 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Quadro de Avisos - Aluno</title>
-    <link rel="shortcut icon" href="<%=request.getContextPath()%>/img/branding/favicon.png" type="image/x-icon">
+    <title>Quadro de Avisos - Professor</title>
+
+    <link rel="shortcut icon" href="<%=request.getContextPath()%>/img/branding/favicon.png">
 
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/sights/both.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/sights/notice-board.css">
@@ -23,9 +23,7 @@
 <body id="blue-theme">
 
 <div id="major-container">
-
     <div id="wrap">
-
         <main>
 
             <div id="filter-container">
@@ -36,17 +34,15 @@
 
                     <form action="<%=request.getContextPath()%>/aviso" method="get">
 
-                        <input type="hidden" name="action" value="aluno"/>
+                        <input type="hidden" name="action" value="professor"/>
 
                         <div>
                             <p>Pesquisa por texto:</p>
 
-                            <input
-                                    class="search-box"
-                                    type="text"
-                                    name="search"
-                                    placeholder="Digite parte do aviso"
-                            >
+                            <input class="search-box"
+                                   type="text"
+                                   name="search"
+                                   placeholder="Digite parte do aviso">
 
                         </div>
 
@@ -54,26 +50,24 @@
 
                         <div>
 
-                            <p>Professor:</p>
+                            <p>Turmas:</p>
 
-                            <select name="professor" class="search-box">
-
-                                <option value="">Selecione o professor</option>
+                            <select name="turmas[]" class="search-box" multiple >
 
                                 <%
 
-                                    List<ProfessorEntity> professores =
-                                            (List<ProfessorEntity>) request.getAttribute("professores");
+                                    List<String> turmas =
+                                            (List<String>) request.getAttribute("turmas");
 
-                                    if (professores != null) {
+                                    if(turmas != null){
 
-                                        for (ProfessorEntity p : professores) {
+                                        for(String t : turmas){
 
                                 %>
 
-                                <option value="<%=p.getId()%>">
+                                <option value="<%=t%>">
 
-                                    <%=p.getNome()%>
+                                    <%=t%>
 
                                 </option>
 
@@ -89,6 +83,16 @@
 
                         </div>
 
+                        <br><br>
+
+                        <div>
+
+                            <p>Prazo:</p>
+
+                            <input type="date" name="prazo" class="search-box">
+
+                        </div>
+
                         <button type="submit">
 
                             <img src="<%=request.getContextPath()%>/img/svg/search.svg">
@@ -101,18 +105,19 @@
 
             </div>
 
+
             <div id="front-desk">
 
                 <div class="notice-board">
 
-                    <h2>Quadro de avisos <span>Aluno</span></h2>
+                    <h2>Quadro de avisos <span>Professor</span></h2>
 
                     <br><br>
 
-                    <img style="rotate: 15deg;" class="screw right-top"
+                    <img style="rotate:15deg;" class="screw right-top"
                          src="<%=request.getContextPath()%>/img/flat/screw.png">
 
-                    <img style="rotate: 84deg;" class="screw left-top"
+                    <img style="rotate:84deg;" class="screw left-top"
                          src="<%=request.getContextPath()%>/img/flat/screw.png">
 
                     <div id="postit-container">
@@ -122,25 +127,24 @@
                             List<AvisoEntity> avisos =
                                     (List<AvisoEntity>) request.getAttribute("avisos");
 
-                            if (avisos != null && !avisos.isEmpty()) {
+                            if(avisos != null && !avisos.isEmpty()){
+
                                 ProfessorRepository professorRepository = new ProfessorRepository();
-                                for (AvisoEntity aviso : avisos) {
+
+                                for(AvisoEntity aviso : avisos){
 
                         %>
 
-                        <div
-                                class="postit"
-                                style="background-color: <%=ColorPalette.valueOf(aviso.getCor()).getHex()%>;"
-                        >
+                        <div class="postit"
+                             style="background-color:<%=ColorPalette.valueOf(aviso.getCor()).getHex()%>;">
 
                             <div>
 
-                                <img
-                                        class="tape"
-                                        src="<%=request.getContextPath()%>/img/shape/tape.svg"
-                                >
+                                <img class="tape"
+                                     src="<%=request.getContextPath()%>/img/shape/tape.svg">
 
                                 <div>
+
                                     <sub>
                                         <%="Por "+professorRepository.findById(aviso.getIdProfessor())+":"%>
                                     </sub>
@@ -150,10 +154,8 @@
                                         <%=aviso.getTitulo()%>
 
                                         <span>
-
-                                            <%=aviso.getPrazo()==null ? "" : "Prazo: "+aviso.getPrazo()%>
-
-                                        </span>
+<%=aviso.getPrazo()==null?"":"Prazo: "+aviso.getPrazo()%>
+</span>
 
                                     </h3>
 
@@ -179,11 +181,11 @@
 
                             }
 
-                        } else {
+                        }else{
 
                         %>
 
-                        <p style="margin:20px; font-size:18px;">
+                        <p style="margin:20px;font-size:18px;">
                             Nenhum aviso encontrado.
                         </p>
 
@@ -198,12 +200,10 @@
                 </div>
 
             </div>
+
         </main>
     </div>
-
 </div>
 
 </body>
-
 </html>
-
