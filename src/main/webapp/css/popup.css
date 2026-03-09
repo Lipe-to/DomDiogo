@@ -85,6 +85,33 @@
     z-index: -1;
 }
 
+.popup.popup.exclude p {
+    text-align: center;
+    font-size: 0.95rem;
+    opacity: 80%;
+}
+
+.popup.exclude h1 {
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+.popup.exclude .confirm {
+    background: none;
+    background-color: var(--red);
+}
+
+.popup.exclude>div {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10%;
+    gap: 0.25rem;
+}
+
+.popup.exclude button {
+    margin-top: 0;
+}
+
 .colors {
     display: flex;
     overflow-x: auto;

@@ -125,24 +125,16 @@
         </header>
 
         <main>
-
-            <!-- FRONT DESK -->
-
             <div id="front-desk">
-
                 <div class="castle" id="welcome">
                     <div>
                         <h2>Olá administrador!</h2>
                         <p>Bem vindo de volta!</p>
                     </div>
                 </div>
-
                 <div class="general-statistic">
-
                     <h2>Visão geral</h2>
-
                     <div>
-
                         <div>
                             <h3><span><%= totalAlunos != null ? totalAlunos : 0 %></span></h3>
                             <span>Total de alunos</span>
@@ -166,10 +158,6 @@
                     </div>
                 </div>
             </div>
-
-
-            <!-- PAINEL ACADÊMICO -->
-
             <div id="grades">
                 <h1>Painel Acadêmico</h1>
                 <div class="table-container">
@@ -222,7 +210,6 @@
                                 <img src="${pageContext.request.contextPath}/img/svg/filter.svg" alt="Filtrar">
                             </button>
 
-                            <!-- Removendo o seletor de last-child das table actions -->
                             <button style="width: auto; min-width: 0;" title="Remover filtros" name="action" value="listarTodos" type="submit">
                                 <img src="${pageContext.request.contextPath}/img/svg/cross-small.svg"
                                      alt="Remover filtros">
@@ -478,23 +465,26 @@
                                             <img src="${pageContext.request.contextPath}/img/svg/crud/pencil-black.svg">
                                         </button>
 
-                                        <form action="${pageContext.request.contextPath}/aluno?action=delete"
-                                              method="post">
-
-                                            <input type="hidden" name="matricula" value="<%=aluno.getMatricula()%>">
-
-                                            <button class="delete">
+                                        <div>
+                                            <button popovertarget="popup-exclude-conf-<%=idPopoverAluno%>" class="delete">
                                                 <img src="${pageContext.request.contextPath}/img/svg/crud/trash.svg">
                                             </button>
-
-                                        </form>
-
+                                        </div>
                                     </div>
-
                                 </td>
-
                             </tr>
 
+                            <div id="popup-exclude-conf-<%=idPopoverAluno%>" class="popup exclude" popover="auto">
+                                <h1>Excluir Aluno</h1>
+                                <p>Você tem certeza que deseja excluir <%=aluno.getNome()%> do sistema? Essa ação não pode ser desfeita.</p>
+                                <div>
+                                    <button class="button fat close-popover" type="submit">Cancelar</button>
+                                    <form style="display: flex;" action="${pageContext.request.contextPath}/aluno?action=delete" method="post">
+                                        <input type="hidden" name="matricula" value="<%=aluno.getMatricula()%>">
+                                        <button class="button fat confirm" type="submit">Excluir aluno</button>
+                                    </form>
+                                </div>
+                            </div>
                             <%
                                     }
                                 }

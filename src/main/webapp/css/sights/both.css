@@ -402,7 +402,7 @@ body.white #sidebar {
 }
 
 body.white #sidebar li.emphasis,
-#menu-icon-container {
+body.white #menu-icon-container {
     background-color: rgb(80, 80, 80)
 }
 
@@ -427,7 +427,7 @@ body.black #sidebar {
 }
 
 body.black #sidebar li.emphasis,
-#menu-icon-container {
+body.black #menu-icon-container {
     background-color: rgb(231, 231, 231)
 }
 

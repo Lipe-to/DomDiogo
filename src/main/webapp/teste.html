@@ -163,7 +163,7 @@
                 <div id="grades">
 
                     <h1>Matemática</h1>
-
+                    <button popovertarget="popup-exclude-conf">OOOOOO</button>
                     <div class="table-container">
 
                         <div class="table-info">
@@ -366,7 +366,8 @@
 
                 <div class="input-container">
                     <p>Observação</p>
-                    <p class="content">Aluno apresentou ótimo desempenho em sala, demonstrando engajamento e colaboração, sempre colaborando com os colegas.</p>
+                    <p class="content">Aluno apresentou ótimo desempenho em sala, demonstrando engajamento e
+                        colaboração, sempre colaborando com os colegas.</p>
                 </div>
 
             </div>
@@ -425,11 +426,13 @@
 
                     <div class="colors">
                         <div>
-                            <input style="background-color: #5f9cff;" class="text-box" type="radio" name="color" value="azul" checked>
+                            <input style="background-color: #5f9cff;" class="text-box" type="radio" name="color"
+                                value="azul" checked>
                             <img class="check-circle" src="img/svg/check.svg">
                         </div>
                         <div>
-                            <input style="background-color: #d13e3e;" class="text-box" type="radio" name="color" value="vermelho">
+                            <input style="background-color: #d13e3e;" class="text-box" type="radio" name="color"
+                                value="vermelho">
                             <img class="check-circle" src="img/svg/check.svg">
                         </div>
                     </div>
@@ -445,8 +448,21 @@
 
     </div>
 
-    
-                <!-- <select class="text-box" name="cor">
+    <div id="popup-exclude-conf" class="popup exclude" popover="auto">
+        <h1>Excluir Aluno</h1>
+        <p>Você tem certeza que deseja excluir este aluno do sistema? Essa ação não pode ser desfeita.</p>
+        <div>
+            <button class="button fat close-popover" type="submit">Cancelar</button>
+            <form style="display: flex;">
+                <button class="button fat" type="submit">Excluir aluno</button>
+            </form>
+        </div>
+    </div>
+
+
+  
+
+    <!-- <select class="text-box" name="cor">
                     <option value="BLUE">Azul</option>
                     <option value="RED">Vermelho</option>
                     <option value="TEA_BLUE">Azul-Chá</option>
