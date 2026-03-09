@@ -3,14 +3,15 @@
 
 body {
     justify-content: center;
-    background-color: var(--blue); /* Default, viabilizando sobreescrita */
+    background-color: var(--blue);
+    /* Default, viabilizando sobreescrita */
 }
 
 #blue-theme {
     background-color: #538cdb;
     background-image:
         url('../../img/shape/background-blue.svg'),
-        linear-gradient(to bottom, #538cdb 50%, #538cdb  50%),
+        linear-gradient(to bottom, #538cdb 50%, #538cdb 50%),
         linear-gradient(to bottom, #1C457E 50%, #1C457E 50%);
     background-position: 50% 0;
     background-repeat: no-repeat, no-repeat, repeat-y;
@@ -21,7 +22,7 @@ body {
     background-color: #CB4C4C;
     background-image:
         url('../../img/shape/background-red.svg'),
-        linear-gradient(to bottom, #CB4C4C 50%, #CB4C4C  50%),
+        linear-gradient(to bottom, #CB4C4C 50%, #CB4C4C 50%),
         linear-gradient(to bottom, #8F3131 50%, #8F3131 50%);
     background-position: 50% 0;
     background-repeat: no-repeat, no-repeat, repeat-y;
@@ -32,7 +33,7 @@ body {
     background-color: #838383;
     background-image:
         url('../../img/shape/background-grey.svg'),
-        linear-gradient(to bottom, #838383 50%, #838383  50%),
+        linear-gradient(to bottom, #838383 50%, #838383 50%),
         linear-gradient(to bottom, #404040 50%, #404040 50%);
     background-position: 50% 0;
     background-repeat: no-repeat, no-repeat, repeat-y;
@@ -47,7 +48,8 @@ body {
     max-width: 34px;
 }
 
-.logo>:last-child { /* Apenas nas telas de dash */
+.logo>:last-child, .logo>:nth-child(2) {
+    /* Apenas nas telas de dash */
     max-width: 130px;
 }
 
@@ -145,11 +147,11 @@ body {
 #front-desk .button {
     border: 0;
     border-radius: 4px;
-    
+
     width: 40%;
     max-width: 160px;
     padding: 0.4rem 5%;
-    
+
     color: var(--white);
     font-size: 0.875rem;
 }
@@ -158,6 +160,10 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    min-height: 90px;
+}
+
+#front-desk:has(.notice-board)>* {
     min-height: 120px;
 }
 
@@ -174,11 +180,14 @@ main>*,
     margin: 1% 0;
 }
 
-#grades>:first-child {
+#grades>:first-child,
+#students>:first-child {
     margin-bottom: 1%;
 }
 
-#grades, .grid-layout {
+#grades,
+#students,
+.grid-layout {
     background-color: var(--white);
 }
 
@@ -248,11 +257,13 @@ table td {
     padding: 2.45% 0;
 }
 
-#report-card th {
+#report-card th,
+#students-info th {
     padding: 1.45%;
 }
 
-#report-card td {
+#report-card td,
+#students-info td {
     padding: 1.55%;
 }
 
@@ -282,15 +293,17 @@ table td input {
     overflow-y: auto;
 }
 
-.table-wrap:has(#report-card) {
+/* Não sei pq coloquei isso, mas não vou tirar por conta do insp */
+/* .table-wrap:has(#report-card) {
     max-height: none !important;
-}
+} */
 
 .table-container sub {
     font-weight: 400;
 }
 
-.table-container, .card-container {
+.table-container,
+.card-container {
     background-color: var(--table-background);
     padding: 1% 1.25% 1.5%;
     border-radius: 6px;
@@ -345,7 +358,8 @@ table td input {
     color: var(--red);
 }
 
-#sidebar, #menu-icon-container {
+#sidebar,
+#menu-icon-container {
     transition: transform 0.4s ease-out;
     z-index: 2;
 }
@@ -354,23 +368,26 @@ table td input {
     color: var(--white);
 }
 
-body.white #sidebar .black, body.white #menu-icon .black {
+body.white #sidebar .black,
+body.white #menu-icon .black {
     display: none;
 }
 
-body.black #sidebar .white, body.black #menu-icon .white {
+body.black #sidebar .white,
+body.black #menu-icon .white {
     display: none;
 }
 
 body.white #sidebar {
     background-color: #3b3b3b;
-    
+
     border: 0 solid rgba(48, 48, 48, 0.363);
     border-right-width: 2px;
     border-style: solid;
 }
 
-body.white #sidebar li.emphasis, #menu-icon-container {
+body.white #sidebar li.emphasis,
+#menu-icon-container {
     background-color: rgb(80, 80, 80)
 }
 
@@ -388,13 +405,14 @@ body.white #sidebar * {
 
 body.black #sidebar {
     background-color: #ffffff;
-    
+
     border: 0 solid rgba(179, 179, 179, 0.363);
     border-right-width: 2px;
     border-style: solid;
 }
 
-body.black #sidebar li.emphasis, #menu-icon-container {
+body.black #sidebar li.emphasis,
+#menu-icon-container {
     background-color: rgb(231, 231, 231)
 }
 
@@ -414,17 +432,17 @@ body.black #sidebar * {
     position: fixed;
     left: 0;
     top: 0;
-    
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
+
     width: 50vh;
     height: 100vh;
-    
+
     box-shadow: var(--shadow-aside);
-    
+
     transform: translateX(-120%);
     transition: transform 0.4s ease-out;
 }
@@ -462,14 +480,14 @@ body.black #sidebar * {
     padding: 0.4rem;
     padding-left: 0.9rem;
     border-radius: 8px;
-    
+
     width: 100%;
     height: 40px;
     max-height: 40px;
-    
+
     white-space: nowrap;
     overflow: hidden;
-    
+
     cursor: pointer;
     transition: width 0.6s ease-in-out, background-color 0.2s ease, transform 0.3s ease-in-out;
 }
@@ -486,13 +504,16 @@ body.black #sidebar * {
     display: none;
 }
 
-#sidebar a, #sidebar label, #sidebar button {
+#sidebar a,
+#sidebar label,
+#sidebar button {
     display: flex;
     justify-content: flex-start;
     align-items: center;
 }
 
-#sidebar a, #sidebar button {
+#sidebar a,
+#sidebar button {
     font-size: 0.95rem;
     font-weight: 450;
     gap: 0.6rem;
@@ -507,8 +528,10 @@ body.black #sidebar * {
     background-color: transparent;
 }
 
-#menu-icon-container, #menu-icon {
-    width: fit-content !important; /* É necessário o !important por conta do :has() */
+#menu-icon-container,
+#menu-icon {
+    width: fit-content !important;
+    /* É necessário o !important por conta do :has() */
     cursor: pointer;
 }
 
@@ -522,7 +545,7 @@ body.black #sidebar * {
     aspect-ratio: 1 / 1;
     padding: 0.5rem;
     border-radius: 4px;
-    
+
     z-index: 1;
 }
 
@@ -546,10 +569,10 @@ body::before {
     content: "";
     position: fixed;
     inset: 0;
-    
+
     background-color: black;
     opacity: 0%;
-    
+
     z-index: -1;
     transition: opacity 1.6s cubic-bezier(0, 0, 0.2, 1);
 }
@@ -562,7 +585,7 @@ body:has(#menu-checkbox:checked)::before {
 .sidebar-icon {
     width: 16px;
     height: auto;
-    
+
     opacity: 80%;
     transition: background-color 0.2s ease-in-out;
 }
@@ -713,13 +736,13 @@ header {
     align-items: start;
     flex-direction: column;
     justify-content: space-between;
-    
+
     height: 7rem;
     padding: 4% 0 7% 6%;
     border-radius: 8px;
-    
+
     background-color: rgb(90, 90, 90);
-    
+
     background-image: url('../../img/shape/card.svg');
     background-position: center;
     background-repeat: no-repeat;
@@ -748,7 +771,8 @@ header {
     border-radius: 4px;
 }
 
-.any-card, .any-grade {
+.any-card,
+.any-grade {
     display: flex;
     width: 100%;
     height: 100px;
@@ -778,17 +802,14 @@ header {
     gap: 15%;
 }
 
-.td-actions>* {
-    background-color: transparent;
-}
-
 .td-actions button {
     display: flex;
     padding: 0.25rem;
     border: 0;
     border-radius: 4px;
     cursor: pointer;
-
+    
+    background-color: transparent;
     transition: background-color 0.2s ease-in;
 }
 
