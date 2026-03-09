@@ -23,7 +23,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        HttpSession session = request.getSession();
         String action = request.getParameter("action");
         String usuario = request.getParameter("usuario");
         String senha = request.getParameter("senha");
@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
                             alunoRepository.update(aluno);
                         }
 
-                        HttpSession session = request.getSession();
+
                         session.setAttribute("nome", aluno.getNome());
                         session.setAttribute("matricula", aluno.getMatricula());
                         session.setAttribute("turma", aluno.getTurma());
@@ -71,7 +71,6 @@ public class LoginServlet extends HttpServlet {
                             professorRepository.update(professor);
                         }
 
-                        HttpSession session = request.getSession();
                         session.setAttribute("usuario", professor.getUsuario());
                         session.setAttribute("nome", professor.getNome());
                         session.setAttribute("idProfessor", professor.getId());
@@ -206,7 +205,6 @@ public class LoginServlet extends HttpServlet {
                         administradorRepository.update(admin);
                     }
 
-                    HttpSession session = request.getSession();
                     session.setAttribute("usuario", usuario);
                     session.setAttribute("role", "ADMIN");
 
@@ -225,7 +223,6 @@ public class LoginServlet extends HttpServlet {
                 break;
 
             case "logout":
-                HttpSession session = request.getSession(false);
                 if (session != null) {
                     session.invalidate();
                 }
