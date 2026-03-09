@@ -23,9 +23,9 @@ public class ObservacaoServlet extends HttpServlet {
     private String getRedirectPath(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session != null && "ADMIN".equals(session.getAttribute("role"))) {
-            return "/adminHome";
+            return "/adminObs";
         }
-        return "/teacherHome";
+        return "/teacherObs";
     }
 
     @Override

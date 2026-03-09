@@ -99,13 +99,15 @@
                 </a>
             </li>
             <li id="sign-out">
-                <button onclick="window.location.href='/index.jsp'">
-                    <img class="sidebar-icon white"
-                         src="${pageContext.request.contextPath}/img/svg/sidebar/white/sign-out.svg">
-                    <img class="sidebar-icon black"
-                         src="${pageContext.request.contextPath}/img/svg/sidebar/black/sign-out.svg">
-                    <span>Sair</span>
-                </button>
+                <form style="display: flex" action="${pageContext.request.contextPath}/login?action=logout" method="post">
+                    <button type="submit">
+                        <img class="sidebar-icon white"
+                            src="${pageContext.request.contextPath}/img/svg/sidebar/white/sign-out.svg">
+                        <img class="sidebar-icon black"
+                            src="${pageContext.request.contextPath}/img/svg/sidebar/black/sign-out.svg">
+                        <span>Sair</span>
+                    </button>
+                </form>
             </li>
         </ul>
     </div>
@@ -292,11 +294,11 @@
                             <%
                                 if (idPopoverGrades == 0) {
                             %>
-                            <tr colspan="8">
-                                <div class="any-grade">
-                                    <h3 style="opacity: 60%; width: 100%;">Nenhum aluno cadastrado nessa disciplina</h3>
-                                </div>
-                            </tr>
+                                <tr>
+                                    <td colspan="8" class="any-grade">
+                                        <h3 style="opacity: 60%; width: 100%;">Nenhum aluno cadastrado nessa disciplina</h3>
+                                    </td>
+                                </tr>
                             <%
                                 }
                             %>
@@ -356,7 +358,7 @@
             <div id="observations">
                 <h1>Observações</h1>
                 <div class="actions-section-container">
-                    <button popovertarget="popup-obs" type="button">Adicionar Observação</button>
+                    <button popovertarget="popup-obs" type="button">+ Adicionar Observação</button>
                 </div>
 
                 <div class="card-container">
@@ -374,7 +376,7 @@
                         </div>
                         <button popovertarget="<%="popover-id-"+idPopoverObs%>" class="button">Ver detalhes</button>
                     </div>
-                    <div id="<%="popover-id-"+idPopoverObs%>" class="popup" popover="auto">
+                    <div id="<%="popover-id-"+idPopoverObs%>" class="popup obs" popover="auto">
                         <h1><%=obs.getTitulo()%>
                         </h1>
                         <div>
@@ -387,8 +389,8 @@
                                 </div>
 
                                 <div class="input-container">
-                                    <p class="required">Observação</p>
-                                    <textarea readonly class="text-box" name="observacao" id="" cols="30" rows="10"><%=obs.getObservacao()%></textarea>
+                                    <p>Observação</p>
+                                    <p class="content"><%=obs.getObservacao()%></p>
                                 </div>
                             </div>
                             <button class="button fat close-popover" type="button">Fechar</button>

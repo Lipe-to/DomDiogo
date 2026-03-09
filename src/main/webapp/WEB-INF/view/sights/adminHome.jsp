@@ -95,11 +95,15 @@
                     </a>
                 </li>
                 <li id="sign-out">
-                    <button onclick="window.location.href='/index.jsp'">
-                        <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/sign-out.svg">
-                        <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/sign-out.svg">
-                        <span>Sair</span>
-                    </button>
+                    <form style="display: flex" action="${pageContext.request.contextPath}/login?action=logout" method="post">
+                        <button type="submit">
+                            <img class="sidebar-icon white"
+                                src="${pageContext.request.contextPath}/img/svg/sidebar/white/sign-out.svg">
+                            <img class="sidebar-icon black"
+                                src="${pageContext.request.contextPath}/img/svg/sidebar/black/sign-out.svg">
+                            <span>Sair</span>
+                        </button>
+                    </form>
                 </li>
             </ul>
         </div>
@@ -607,8 +611,7 @@
 
                     </div>
 
-                    <div id="popover-obs-<%=idPopoverObs%>" class="popup" popover="auto">
-
+                    <div id="popover-obs-<%=idPopoverObs%>" class="popup obs" popover="auto">
                         <h1><%=obs.getTitulo()%>
                         </h1>
 
@@ -621,13 +624,12 @@
 
                             <div class="input-container">
                                 <p>Observação</p>
-                                <textarea class="text-box" readonly><%=obs.getObservacao()%></textarea>
+                                <p class="content"><%=obs.getObservacao()%></p>
                             </div>
 
                         </div>
 
                         <button class="button fat close-popover">Fechar</button>
-
                     </div>
 
                     <%
