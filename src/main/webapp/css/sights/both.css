@@ -160,6 +160,10 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    min-height: 90px;
+}
+
+#front-desk:has(.notice-board)>* {
     min-height: 120px;
 }
 
