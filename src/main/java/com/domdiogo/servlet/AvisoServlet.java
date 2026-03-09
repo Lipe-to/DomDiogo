@@ -8,6 +8,8 @@ import com.domdiogo.repository.AlunoRepository;
 import com.domdiogo.model.AlunoEntity;
 import com.domdiogo.repository.ProfessorRepository;
 import com.domdiogo.repository.TurmaRepository;
+
+import jakarta.servlet.Servlet;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,6 +27,7 @@ public class AvisoServlet extends HttpServlet {
 
     private final AvisoRepository avisoRepository = new AvisoRepository();
     private final AlunoRepository alunoRepository = new AlunoRepository();
+    private String redirect = "";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -82,6 +85,8 @@ public class AvisoServlet extends HttpServlet {
                 break;
 
             case "professor":
+                redirect = "/WEB-INF/view/sights/notice-board/teacherBoard.jsp";
+
                 if (idProfessorSession != null) {
                     if (turmaAluno != null) {
                         avisos = avisoRepository.findByProfessorAndTurma(idProfessorSession, turmaAluno.trim());
@@ -94,6 +99,8 @@ public class AvisoServlet extends HttpServlet {
                 break;
 
             case "turma":
+                redirect = "/WEB-INF/view/sights/notice-board/studentBoard.jsp";    
+
                 if (turmaAluno != null) {
                     avisos = avisoRepository.findByTurma(turmaAluno.trim());
                 } else {
@@ -102,6 +109,8 @@ public class AvisoServlet extends HttpServlet {
                 break;
 
             case "admin":
+                redirect = "/WEB-INF/view/sights/notice-board/adminBoard.jsp";
+
                 // Admin pode tudo: regex, turma, professor
                 if (regex1 != null && !regex1.trim().isEmpty()) {
                     if (turmaAluno != null && !turmaAluno.trim().isEmpty()) {
@@ -138,7 +147,8 @@ public class AvisoServlet extends HttpServlet {
         request.setAttribute("turmas", new TurmaRepository().read());
         request.setAttribute("professores", new ProfessorRepository().read());
         request.setAttribute("avisos", avisos);
-        ServletHelper.redirect(request, response, "/WEB-INF/view/aviso/list.jsp");
+
+        ServletHelper.redirect(request, response, redirect);
     }
 
     @Override
@@ -197,6 +207,8 @@ public class AvisoServlet extends HttpServlet {
             ServletHelper.configureStatus(request, "Erro interno.", com.domdiogo.model.StatusColor.RED);
             doGet(request, response);
         }
+
+        ServletHelper.redirect(request, response, redirect);
     }
 
     private List<String> parseTurmasFiltro(String[] turmasArray) {

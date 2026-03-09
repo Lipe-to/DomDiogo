@@ -95,7 +95,7 @@
                     </a>
                 </li>
                 <li id="sign-out">
-                    <form style="display: flex" action="/login?action=logout" method="post">
+                    <form style="display: flex" action="${pageContext.request.contextPath}/login?action=logout" method="post">
                         <button type="submit">
                             <img class="sidebar-icon white"
                                 src="${pageContext.request.contextPath}/img/svg/sidebar/white/sign-out.svg">
@@ -611,8 +611,7 @@
 
                     </div>
 
-                    <div id="popover-obs-<%=idPopoverObs%>" class="popup" popover="auto">
-
+                    <div id="popover-obs-<%=idPopoverObs%>" class="popup obs" popover="auto">
                         <h1><%=obs.getTitulo()%>
                         </h1>
 
@@ -625,13 +624,12 @@
 
                             <div class="input-container">
                                 <p>Observação</p>
-                                <textarea class="text-box" readonly><%=obs.getObservacao()%></textarea>
+                                <p class="content"><%=obs.getObservacao()%></p>
                             </div>
 
                         </div>
 
                         <button class="button fat close-popover">Fechar</button>
-
                     </div>
 
                     <%

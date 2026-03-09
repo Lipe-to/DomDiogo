@@ -66,11 +66,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
-                        <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/address-book.svg">
-                        <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/address-book.svg">
-                        <span>Professores</span>
-                    </a>
+                    <form style="display: flex" action="${pageContext.request.contextPath}/observacao?action=findByMatriculaAluno">
+                        <button type="submit">
+                            <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/address-book.svg">
+                            <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/address-book.svg">
+                            <span>Observações</span>
+                        </button>
+                    </form>
                 </li>
                 <li class="divide">
                     <a href="#">
@@ -80,7 +82,7 @@
                     </a>
                 </li>
                 <li id="sign-out">
-                    <form style="display: flex" action="/login?action=logout" method="post">
+                    <form style="display: flex" action="${pageContext.request.contextPath}/login?action=logout" method="post">
                         <button type="submit">
                             <img class="sidebar-icon white"
                                 src="${pageContext.request.contextPath}/img/svg/sidebar/white/sign-out.svg">
@@ -119,11 +121,11 @@
                             <h2>Olá, <%=nome%></h2>
                             <p>Bem vindo de volta!</p>
                         </div>
-                        <a class="button">Ir ao quadro</a>
+                        <a class="button">Ver observações</a>
                     </div>
                     <div class="notice-board">
                         <h2>Quadro de avisos</h2>
-                        <a class="button">Ir ao quadro</a>
+                        <a class="button" href="${pageContext.request.contextPath}/aviso?action=turma">Ir ao quadro</a>
 
                         <img style="rotate: 15deg;" class="screw right-top" src="${pageContext.request.contextPath}/img/flat/screw.png">
                         <img style="rotate: 84deg;" class="screw left-top" src="${pageContext.request.contextPath}/img/flat/screw.png">
@@ -220,7 +222,7 @@
                             </div>
                             <button popovertarget="<%="popover-id-"+idPopoverObs%>" class="button">Ver detalhes</button>
                         </div>
-                        <div id="<%="popover-id-"+idPopoverObs%>" class="popup" popover="auto">
+                        <div id="<%="popover-id-"+idPopoverObs%>" class="popup obs" popover="auto">
                             <h1><%=obs.getTitulo()%>
                             </h1>
                             <div>
@@ -233,8 +235,8 @@
                                     </div>
 
                                     <div class="input-container">
-                                        <p class="required">Observação</p>
-                                        <input class="text-box" type="text" value="<%=obs.getObservacao()%>">
+                                        <p>Observação</p>
+                                        <p class="content"><%=obs.getObservacao()%></p>
                                     </div>
                                 </div>
                                 <button class="button fat close-popover" type="button">Fechar</button>
