@@ -75,18 +75,6 @@ public class NotaServlet extends HttpServlet {
                 }
                 redirect = getRedirectPath(request);
                 break;
-
-            // case "zerar":
-            //     int idZerar = Integer.parseInt(request.getParameter("id"));
-            //     Status zerarStatus = repository.zerarNota(idZerar);
-            //     if (zerarStatus == Status.SUCCESS) {
-            //         ServletHelper.configureStatus(request, "Nota zerada com sucesso!", StatusColor.GREEN);
-            //     } else {
-            //         ServletHelper.configureStatus(request, "Erro ao zerar nota.", StatusColor.RED);
-            //     }
-            //     redirect = getRedirectPath(request);
-            //     break;
-
             default:
                 ServletHelper.configureStatus(request, "Ação inválida.", StatusColor.RED);
                 redirect = getRedirectPath(request);

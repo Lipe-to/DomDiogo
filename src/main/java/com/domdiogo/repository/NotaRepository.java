@@ -104,6 +104,7 @@ public class NotaRepository {
                         a.matricula,
                         a.nome AS aluno_nome,
                         a.turma,
+                        a.ultimo_login,
                         n.id AS nota_id,
                         n.n1,
                         n.n2,
@@ -164,6 +165,7 @@ public class NotaRepository {
                         a.matricula,
                         a.nome AS aluno_nome,
                         a.turma,
+                        a.ultimo_login,
                         n.id AS nota_id,
                         n.n1,
                         n.n2,
@@ -222,6 +224,7 @@ public class NotaRepository {
                     a.matricula,
                     a.nome AS aluno_nome,
                     a.turma,
+                    a.ultimo_login,
                     n.id AS nota_id,
                     n.n1,
                     n.n2,
@@ -278,7 +281,7 @@ public class NotaRepository {
 
     public List<AlunoNotaDTO> findAlunosNotasByTurmaAndProfessor(String turma, int idProfessor) {
         List<AlunoNotaDTO> lista = new ArrayList<>();
-        String query = "SELECT a.matricula, a.nome AS aluno_nome, a.turma, n.id AS nota_id, n.n1, n.n2, n.media, d.id AS id_disciplina, d.nome AS disciplina_nome FROM aluno a LEFT JOIN disciplina d ON d.id_professor = ? LEFT JOIN nota n ON n.matricula_aluno = a.matricula AND n.id_disciplina = d.id WHERE a.turma = ? ORDER BY a.nome, d.nome";
+        String query = "SELECT a.matricula, a.nome AS aluno_nome, a.turma, a.ultimo_login, n.id AS nota_id, n.n1, n.n2, n.media, d.id AS id_disciplina, d.nome AS disciplina_nome FROM aluno a LEFT JOIN disciplina d ON d.id_professor = ? LEFT JOIN nota n ON n.matricula_aluno = a.matricula AND n.id_disciplina = d.id WHERE a.turma = ? ORDER BY a.nome, d.nome";
 
         try (Connection connection = new ConnectionFactory().connect();
              PreparedStatement ps = connection.prepareStatement(query)) {
