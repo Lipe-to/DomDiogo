@@ -140,8 +140,8 @@
                     <a class="button">Ver observações</a>
                 </div>
                 <div class="general-statistic">
-                    <a href="" class="h2">Visão geral<img class="redirect"
-                                                          src="${pageContext.request.contextPath}/img/svg/redirect-blue.svg"></a>
+                    <h2>Visão geral</h2>
+                    <%-- <a href="" class="h2">Visão geral<img class="redirect" src="${pageContext.request.contextPath}/img/svg/redirect-blue.svg"></a> --%>
                     <div>
                         <%
                             String apprClass = "";
@@ -196,7 +196,7 @@
                             <label for="search-submit"><img src="${pageContext.request.contextPath}/img/svg/search.svg"></label>
                             <input class="search-box" id="alunoSearch" name="matriculaAluno"
                                    list="students-datalist-search" type="text"
-                                   placeholder="Pesquisar por matrícula ou nome">
+                                   placeholder="Pesquisar aluno">
                             <datalist id="students-datalist-search">
                                 <option disabled selected>Selecione um aluno</option>
                                 <%
