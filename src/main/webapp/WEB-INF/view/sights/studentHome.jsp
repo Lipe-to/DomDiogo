@@ -121,11 +121,11 @@
                             <h2>Olá, <%=nome%></h2>
                             <p>Bem vindo de volta!</p>
                         </div>
-                        <a class="button">Ver observações</a>
+                        <a href="#observations" class="button">Ver observações</a>
                     </div>
                     <div class="notice-board">
                         <h2>Quadro de avisos</h2>
-                        <a class="button" href="${pageContext.request.contextPath}/aviso?action=turma">Ir ao quadro</a>
+                        <a class="button" href="${pageContext.request.contextPath}/aviso?action=aluno">Ir ao quadro</a>
 
                         <img style="rotate: 15deg;" class="screw right-top" src="${pageContext.request.contextPath}/img/flat/screw.png">
                         <img style="rotate: 84deg;" class="screw left-top" src="${pageContext.request.contextPath}/img/flat/screw.png">

@@ -72,7 +72,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="${pageContext.request.contextPath}/aviso?action=professor">
                     <img class="sidebar-icon white"
                          src="${pageContext.request.contextPath}/img/svg/sidebar/white/dashboard.svg">
                     <img class="sidebar-icon black"
