@@ -32,4 +32,5 @@ public enum ColorPalette {
             return DEFAULT;
         }
     }
+
 }

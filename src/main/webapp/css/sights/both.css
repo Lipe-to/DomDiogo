@@ -103,7 +103,7 @@ body {
 .notice-board {
     width: 60%;
     position: relative;
-    background-color: var(--notice-board);
+    background-color: var(--card-white);
     border-style: solid;
     border-color: var(--notice-board-border);
     border-width: 5px;
