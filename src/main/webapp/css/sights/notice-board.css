@@ -154,3 +154,20 @@
 .filters img {
     width: 16px;
 }
+
+.student-board-filters div form {
+    display: flex;
+    height: fit-content;
+    max-height: 30px;
+}
+
+.student-board-filters div form>* {
+    height: 100%;
+    padding: 0.35rem;
+}
+.student-board-filters input, .student-board-filters select {
+    box-sizing: border-box;
+    padding-left: 1% !important;
+    border-radius: 5px;
+    min-height: 30px;
+}

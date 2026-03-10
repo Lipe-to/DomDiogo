@@ -52,14 +52,14 @@
             </div>
             <ul>
                 <li class="emphasis">
-                    <a href="adminHome">
+                    <a>
                         <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/home.svg">
                         <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/home.svg">
                         <span>Tela Inicial</span>
                     </a>
                 </li>
                 <li>
-                    <form style="display: flex" action="${pageContext.request.contextPath}/observacao?action=findByMatriculaAluno">
+                    <form style="display: flex" action="${pageContext.request.contextPath}/aviso?action=aluno" method="get">
                         <button type="submit">
                             <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/address-book.svg">
                             <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/address-book.svg">

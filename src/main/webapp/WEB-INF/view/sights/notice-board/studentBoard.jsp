@@ -20,6 +20,11 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/font.css">
 </head>
 
+<%
+    String nome = (String) session.getAttribute("nome");
+    String fotoPerfil = (String) session.getAttribute("fotoPerfil");
+%>
+
 <body id="blue-theme" class="black">
 <li id="menu-icon-container">
         <label id="menu-icon" for="menu-checkbox">
@@ -77,8 +82,8 @@
         </div>
     </aside>
 <div id="major-container">
-
-    <header>
+    <div id="wrap">
+        <header>
         <a href="#">
             <div class="logo">
                 <img src="${pageContext.request.contextPath}/img/branding/icone.png" draggable="false">
@@ -93,33 +98,30 @@
                 </div>
             </div>
         </header>
-    <div id="wrap">
 
         <main>
 
-            <div id="filter-container">
+            <div id="filter-container" class="student-board-filters">
                 <h1>Filtros</h1>
-                <form action="<%=request.getContextPath()%>/aviso" method="get" style="flex-direction: column;" class="filters">
-                    <div>
-                        <p style="margin-bottom: 1%;">Pesquisar por título ou conteúdo:</p>
-                        <div>
-                            <input type="hidden" name="action" value="aluno">
-                            <label style="cursor: pointer;" for="search-submit"><button type="submit"><img src="img/svg/search.svg"></button></label>
+                <div class="filters">
+                    <form action="<%=request.getContextPath()%>/aviso" method="get">
+                        <input type="hidden" name="action" value="aluno">
+                            <label style="cursor:pointer;">
+                                <button type="submit">
+                                    <img src="${pageContext.request.contextPath}/img/svg/search.svg">
+                                </button>
+                            </label>
                             <input class="search-box"
-                                    type="text"
-                                    name="regex"
-                                    placeholder="Digite parte do aviso">
-                        </div>
-                    </div>
-                    <div>
-                        <p style="margin-bottom: 1%;">Selecione o professor:</p>
-                        <div>
-                            <input type="hidden" name="action" value="aluno">
-                            <select name="professor" class="search-box">
+                                type="text"
+                                name="regex"
+                                placeholder="Digite parte do aviso">
+
+                            <select name="professor" class="search-box text-box">
                                 <option disabled selected>Selecione o professor</option>
                                 <%
                                     List<ProfessorEntity> professores =
                                             (List<ProfessorEntity>) request.getAttribute("professores");
+
                                     if (professores != null) {
                                         for (ProfessorEntity p : professores) {
                                 %>
@@ -127,14 +129,12 @@
                                     <%=p.getNome()%>
                                 </option>
                                 <%
-                                    }}
+                                        }
+                                    }
                                 %>
                             </select>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
+                    </form>
+                </div>
             </div>
 
             <div id="front-desk">
