@@ -224,12 +224,16 @@ public class LoginServlet extends HttpServlet {
                 break;
 
             case "alterarFoto":
-                if (session.getAttribute("id_professor") != null) {
+
+                if (session.getAttribute("idProfessor") != null) {
                     professorRepository.atualizarFotoPerfil((int)session.getAttribute("id_professor"), request.getParameter("avatar"));
                     session.setAttribute("fotoPerfil", professorRepository.getFotoPerfil((int)session.getAttribute("id_professor")));
+                    redirect = "/teacherHome.jsp";
                 }else {
                     alunoRepository.atualizarFotoPerfil((int)session.getAttribute("matricula"), request.getParameter("avatar"));
                     session.setAttribute("fotoPerfil", alunoRepository.getFotoPerfil((int)session.getAttribute("matricula")));
+                    redirect = "/studentHome.jsp";
+
                 }
 
             default:
