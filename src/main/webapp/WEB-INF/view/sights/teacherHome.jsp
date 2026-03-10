@@ -31,12 +31,10 @@
     int idProfessor = (int) session.getAttribute("idProfessor");
     String fotoPerfil = (String) session.getAttribute("fotoPerfil");
 
-    @SuppressWarnings("unchecked")
     List<AlunoEntity> listAlunos = (List<AlunoEntity>) request.getAttribute("listAlunos");
-    @SuppressWarnings("unchecked")
     List<AlunoNotaDTO> alunosNotas = (List<AlunoNotaDTO>) request.getAttribute("alunosNotas");
-    @SuppressWarnings("unchecked")
     List<ObservacaoEntity> observacoes = (List<ObservacaoEntity>) request.getAttribute("observacoes");
+    
     AlunoRepository alunoRepository = (AlunoRepository) request.getAttribute("alunoRepository");
     ProfessorRepository professorRepository = (ProfessorRepository) request.getAttribute("professorRepository");
 
