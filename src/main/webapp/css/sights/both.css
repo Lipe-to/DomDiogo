@@ -115,6 +115,28 @@ body {
     background-size: cover;
 }
 
+#welcome.apple {
+    color: #31372D;
+    background-color: #31372D;
+
+    background-image: url('../../img/flat/apple.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 90% 99%;
+    background-size: cover;
+}
+
+#welcome.admin {
+    color: var(--black);
+    background-color: var(--black);
+
+    background-image: url('../../img/flat/admin.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 90% 99%;
+    background-size: cover;
+}
+
 .notice-board {
     width: 60%;
     position: relative;
@@ -648,15 +670,13 @@ header {
     width: 40px;
     aspect-ratio: 1 / 1;
 
+    background-image: url('../../img/avatar/default.png');
     background-repeat: no-repeat;
     background-position: center;
-    background-size: cover;
+    background-size: 105%;
 
     cursor: grab;
-    border-width: 1px;
-    border-style: solid;
     border-radius: 100%;
-    border-color: var(--white);
 }
 
 .profile-image:active {
