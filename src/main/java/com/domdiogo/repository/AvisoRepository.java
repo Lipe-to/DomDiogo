@@ -211,6 +211,49 @@ public class AvisoRepository {
         return lista;
     }
 
+    public List<AvisoEntity> findByAvisoRegexAndProfessor(String regex, int idProfessor) {
+
+        String query = """
+            SELECT *
+            FROM aviso
+            WHERE id_professor = ?
+            AND (
+                titulo ~* ?
+                OR aviso ~* ?
+                OR cor ~* ?
+                OR CAST(prazo AS TEXT) ~* ?
+            )
+            ORDER BY id_aviso DESC
+            """;
+
+        List<AvisoEntity> lista = new ArrayList<>();
+
+        ConnectionFactory cf = new ConnectionFactory();
+        Connection conn = cf.connect();
+
+        try (PreparedStatement ps = conn.prepareStatement(query)) {
+
+            ps.setInt(1, idProfessor);
+            ps.setString(2, regex);
+            ps.setString(3, regex);
+            ps.setString(4, regex);
+            ps.setString(5, regex);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    lista.add(mapResultSet(rs));
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            cf.disconnect(conn);
+        }
+
+        return lista;
+    }
+
     public List<AvisoEntity> findByProfessorAndTurma(int idProfessor, String turma) {
 
         String query = """
