@@ -147,6 +147,50 @@ public class ProfessorRepository {
             connectionFactory.disconnect(connection);
         }
     }
+
+    public Status atualizarFotoPerfil(int id, String fotoPerfil) {
+        String query = "update aluno set foto_perfil = ? where id = ?";
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        Connection connection = connectionFactory.connect();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, fotoPerfil);
+            preparedStatement.setInt(2, id);
+
+            int rows = preparedStatement.executeUpdate();
+            if (rows > 0) {
+                return Status.SUCCESS;
+            } else {
+                return Status.NOT_FOUND;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return Status.INTERNAL_ERROR;
+        } finally {
+            connectionFactory.disconnect(connection);
+        }
+    }
+
+    public String getFotoPerfil(int id) {
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        Connection connection = connectionFactory.connect();
+        String query = "select foto_perfil from professor where id = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                return resultSet.getString("foto_perfil");
+            }
+            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            connectionFactory.disconnect(connection);
+        }
+    }
+
     public Status updateUltimoLogin(int idProfessor) {
         String query = "UPDATE professor SET ultimo_login = CURRENT_TIMESTAMP WHERE id = ?";
         ConnectionFactory connectionFactory = new ConnectionFactory();

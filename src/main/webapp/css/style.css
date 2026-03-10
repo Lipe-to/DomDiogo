@@ -248,10 +248,58 @@ textarea {
     opacity: 80%;
 }
 
-.diver {
-    background-image: url('../img/flat/diver.png');
+.apple {
+    background-image: url('../img/avatar/apple.png');
+}
+
+.basket {
+    background-image: url('../img/avatar/basket.png');
+}
+
+.bird {
+    background-image: url('../img/avatar/bird.png');
+}
+
+.castle {
+    background-image: url('../img/avatar/castle.png');
+}
+
+.cd {
+    background-image: url('../img/avatar/cd.png');
 }
 
 .dino {
-    background-image: url('../img/flat/dino.png');
+    background-image: url('../img/avatar/dino.png');
+}
+
+.diver {
+    background-image: url('../img/avatar/diver.png');
+}
+
+.dragon {
+    background-image: url('../img/avatar/dragon.png');
+}
+
+.flag {
+    background-image: url('../img/avatar/flag.png');
+}
+
+.monster {
+    background-image: url('../img/avatar/monster.png');
+}
+
+.music {
+    background-image: url('../img/avatar/music.png');
+}
+
+.onigiri {
+    background-image: url('../img/avatar/onigiri.png');
+}
+
+.sword {
+    background-image: url('../img/avatar/sword.png');
+}
+
+.default {
+    background-image: url('../img/avatar/default.png');
 }

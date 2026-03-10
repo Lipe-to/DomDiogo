@@ -116,7 +116,7 @@
 
         <main>
             <div id="front-desk">
-                <div class="castle" id="welcome">
+                <div class="admin" id="welcome">
                     <div>
                         <h2>Olá administrador!</h2>
                         <p>Bem vindo de volta!</p>
@@ -388,9 +388,6 @@
                 </div>
             </div>
 
-
-            <!-- DADOS DOS ALUNOS -->
-
             <div id="students">
 
                 <h1>Dados dos Alunos</h1>
@@ -546,7 +543,7 @@
 
             <div id="fit-in">
 
-                <h1>Dados dos Alunos</h1>
+                <h1>Aptos à Registro</h1>
 
                 <div class="table-container">
 
@@ -693,11 +690,6 @@
                 <h1>Observações</h1>
 
                 <div class="actions-section-container">
-
-                    <button popovertarget="popup-obs">
-                        Adicionar Observação
-                    </button>
-
                 </div>
 
                 <div class="card-container">

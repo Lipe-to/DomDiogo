@@ -51,6 +51,7 @@ public class LoginServlet extends HttpServlet {
                                 "Login realizado com sucesso!",
                                 StatusColor.GREEN);
                         alunoRepository.updateUltimoLogin(aluno.getMatricula());
+                        session.setAttribute("fotoPerfil", alunoRepository.getFotoPerfil(aluno.getMatricula()));
 
                         redirect = "/studentHome";
                     } else {
@@ -79,6 +80,7 @@ public class LoginServlet extends HttpServlet {
                                 "Login realizado com sucesso!",
                                 StatusColor.GREEN);
                         professorRepository.updateUltimoLogin(professor.getId());
+                        session.setAttribute("fotoPerfil", professorRepository.getFotoPerfil(professor.getId()));
                         redirect = "/teacherHome";
                     } else {
                         ServletHelper.configureStatus(request,
@@ -229,6 +231,15 @@ public class LoginServlet extends HttpServlet {
                 ServletHelper.configureStatus(request, "Logout realizado com sucesso!", StatusColor.GREEN);
                 redirect = "/index.jsp";
                 break;
+
+            case "alterarFoto":
+                if (session.getAttribute("id_professor") != null) {
+                    professorRepository.atualizarFotoPerfil((int)session.getAttribute("id_professor"), request.getParameter("avatar"));
+                    session.setAttribute("fotoPerfil", professorRepository.getFotoPerfil((int)session.getAttribute("id_professor")));
+                }else {
+                    alunoRepository.atualizarFotoPerfil((int)session.getAttribute("matricula"), request.getParameter("avatar"));
+                    session.setAttribute("fotoPerfil", alunoRepository.getFotoPerfil((int)session.getAttribute("matricula")));
+                }
 
             default:
                 ServletHelper.configureStatus(request, "Ação inválida.", StatusColor.RED);
