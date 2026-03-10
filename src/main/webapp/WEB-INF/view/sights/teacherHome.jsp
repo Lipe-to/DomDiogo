@@ -126,7 +126,7 @@
 
         <main>
             <div id="front-desk">
-                <div class="apple" id="welcome">
+                <div class="apple-teacher" id="welcome">
                     <div>
                         <h2>Olá <%=nome%>!</h2>
                         <p>Bem vindo de volta!</p>
@@ -216,7 +216,7 @@
                     </div>
                     <div class="table-wrap">
                         <table id="report-card">
-                            <thead class="blue">
+                            <thead class="red">
                             <tr>
                                 <th>Matrícula</th>
                                 <th>Estudante</th>
@@ -589,7 +589,7 @@
                 </div>
             </form>
             
-            <form style="display:flex">
+            <form style="display:flex" action="${pageContext.request.contextPath}/login?action=logout" method="post">
                 <button class="button" type="submit">
                     <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/sign-out.svg">
                     <span>Logout</span>

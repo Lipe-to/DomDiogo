@@ -346,7 +346,7 @@
                 </div>
             </form>
             
-            <form style="display:flex">
+            <form style="display:flex" action="${pageContext.request.contextPath}/login?action=logout" method="post">
                 <button class="button" type="submit">
                     <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/sign-out.svg">
                     <span>Logout</span>

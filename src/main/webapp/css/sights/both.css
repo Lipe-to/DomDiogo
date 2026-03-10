@@ -105,7 +105,6 @@ body {
 }
 
 #welcome.castle {
-    color: #2C4D50;
     background-color: #2C4D50;
 
     background-image: url('../../img/flat/castle.png');
@@ -115,9 +114,8 @@ body {
     background-size: cover;
 }
 
-#welcome.apple {
-    color: #31372D;
-    background-color: #31372D;
+#welcome.apple-teacher {
+    background-color: var(--white);
 
     background-image: url('../../img/flat/apple.png');
     background-size: cover;
@@ -126,10 +124,13 @@ body {
     background-size: cover;
 }
 
-#welcome.admin {
-    color: var(--black);
-    background-color: var(--black);
+#welcome.apple-teacher * {
+    color: var(--white) !important;
+}
 
+#welcome.admin {
+    background-color: var(--black);
+    
     background-image: url('../../img/flat/admin.png');
     background-size: cover;
     background-repeat: no-repeat;

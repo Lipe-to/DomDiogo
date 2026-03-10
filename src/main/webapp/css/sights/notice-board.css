@@ -24,10 +24,6 @@
     font-weight: 600;
 }
 
-.notice-board * {
-    color: var(--white);
-}
-
 #postit-container {
     display: flex;
     flex-direction: column;
@@ -56,7 +52,11 @@
     padding: 1% 2% 2%;
     border-radius: 6px;
     
-    background-color: yellow;
+    background-color: var(--orange);
+}
+
+.postit * {
+    color: var(--white) !important;
 }
 
 .postit>div div:first-of-type {
