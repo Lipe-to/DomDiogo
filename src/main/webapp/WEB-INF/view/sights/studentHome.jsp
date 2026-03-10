@@ -1,10 +1,6 @@
-<%@ page import="com.domdiogo.repository.AlunoRepository" %>
-<%@ page import="com.domdiogo.model.AlunoEntity" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.domdiogo.repository.NotaRepository" %>
 <%@ page import="com.domdiogo.model.NotaEntity" %>
 <%@ page import="com.domdiogo.model.ObservacaoEntity" %>
-<%@ page import="com.domdiogo.repository.ObservacaoRepository" %>
 <%@ page import="com.domdiogo.repository.ProfessorRepository" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page pageEncoding="UTF-8" %>
@@ -16,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Dom Diogo</title>
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/img/branding/favicon.png" type="image/x-icon">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sights/both.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sights/teacher.css">
@@ -28,53 +25,90 @@
 
 <%
     String nome = (String) session.getAttribute("nome");
-    int matricula = (int) session.getAttribute("matricula");
-
-    NotaRepository notaRepository = new NotaRepository();
-    List<NotaEntity> notas = notaRepository.findByMatricula(matricula);
+    @SuppressWarnings("unchecked")
+    List<NotaEntity> notas = (List<NotaEntity>) request.getAttribute("notas");
+    @SuppressWarnings("unchecked")
+    List<ObservacaoEntity> observacoes = (List<ObservacaoEntity>) request.getAttribute("observacoes");
+    ProfessorRepository professorRepository = (ProfessorRepository) request.getAttribute("professorRepository");
 %>
 
-<body>
-    <aside id="sidebar"> <!-- Position fixed ! -->
-        <ul>
-            <div>
-                <li id="menu-icon-container">
-                    <label id="menu-icon" for="menu-checkbox">
-                        <img class="sidebar-icon" src="${pageContext.request.contextPath}/img/svg/sidebar/menu-burger.svg">
-                    </label>
-                    <input name="menu-checkbox" id="menu-checkbox" type="checkbox">
-                </li>
-                <p id="menu-text">Menu</p>
+<body id="blue-theme" class="black">
+    <li id="menu-icon-container">
+        <label id="menu-icon" for="menu-checkbox">
+            <img class="sidebar-icon expand white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/menu-burger.svg">
+            <img class="sidebar-icon reduce white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/reduce-menu.svg">
+
+            <img class="sidebar-icon expand black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/menu-burger.svg">
+            <img class="sidebar-icon reduce black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/reduce-menu.svg">
+        </label>
+        <input name="menu-checkbox" id="menu-checkbox" type="checkbox" hidden>
+    </li>
+    <aside id="sidebar">
+        <div>
+            <div class="logo">
+                <img src="${pageContext.request.contextPath}/img/branding/icone.png" draggable="false">
+                <img class="white" src="${pageContext.request.contextPath}/img/branding/white.png" draggable="false">
+                <img style="opacity: 80%;" class="black" src="${pageContext.request.contextPath}/img/branding/black.png" draggable="false">
+            </div>
+            <ul>
                 <li class="emphasis">
-                    <a href="">
-                        <img class="sidebar-icon" src="${pageContext.request.contextPath}/img/svg/sidebar/home-emphasis.svg" alt="">
+                    <a href="adminHome">
+                        <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/home.svg">
+                        <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/home.svg">
                         <span>Tela Inicial</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
-                        <img class="sidebar-icon" src="${pageContext.request.contextPath}/img/svg/sidebar/address-book.svg" alt="">
-                        <span>Professores</span>
+                    <a href="#">
+                        <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/dashboard.svg">
+                        <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/dashboard.svg">
+                        <span>Dashboard</span>
                     </a>
                 </li>
-            </div>
-            <li id="sign-out">
-                <button>
-                    <img class="sidebar-icon" src="${pageContext.request.contextPath}/img/svg/sidebar/sign-out.svg" alt="">
-                    <span>Sair</span>
-                </button>
-            </li>
-        </ul>
+                <li>
+                    <form style="display: flex" action="${pageContext.request.contextPath}/observacao?action=findByMatriculaAluno">
+                        <button type="submit">
+                            <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/address-book.svg">
+                            <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/address-book.svg">
+                            <span>Observações</span>
+                        </button>
+                    </form>
+                </li>
+                <li class="divide">
+                    <a href="#">
+                        <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/user.svg">
+                        <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/user.svg">
+                        <span>Meu perfil</span>
+                    </a>
+                </li>
+                <li id="sign-out">
+                    <form style="display: flex" action="${pageContext.request.contextPath}/login?action=logout" method="post">
+                        <button type="submit">
+                            <img class="sidebar-icon white"
+                                src="${pageContext.request.contextPath}/img/svg/sidebar/white/sign-out.svg">
+                            <img class="sidebar-icon black"
+                                src="${pageContext.request.contextPath}/img/svg/sidebar/black/sign-out.svg">
+                            <span>Sair</span>
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </div>
     </aside>
 
     <div id="major-container">
         <div id="wrap">
             <header>
-                <a href="#"><img class="logo" src="${pageContext.request.contextPath}/img/branding/teste.png" alt="Logo"></a>
+                <a href="#">
+                    <div class="logo">
+                        <img src="${pageContext.request.contextPath}/img/branding/icone.png" draggable="false">
+                        <img src="${pageContext.request.contextPath}/img/branding/white.png" draggable="false">
+                    </div>
+                </a>
                 <div class="personal-info">
-                    <img src="${pageContext.request.contextPath}/img/neymar.png" alt=""> <!-- Condicional em JSP se não houver bd de perfil -->
+                    <img src="${pageContext.request.contextPath}/img/neymar.png">
                     <div>
-                        <h3>Neymar Santos</h3>
+                        <h3><%=nome%></h3>
                         <p>Aluno</p>
                     </div>
                 </div>
@@ -83,54 +117,35 @@
             <main>
                 <div id="front-desk">
                     <div class="castle" id="welcome">
-                        <h2>Olá <%=nome%>!</h2>
-                        <p>Bem vindo de volta!</p>
-                    </div>
-                    <div class="general-statistic">
-                        <h2>Visão geral</h2>
                         <div>
-                            <div>
-                                <h3><span>32</span></h3>
-                                <span>Total de alunos</span>
-                            </div>
-                            <div>
-                                <h3><span>8,1</span></h3>
-                                <span>Total de turmas</span>
-                            </div>
-                            <div>
-                                <h3><span>12</span> %</h3>
-                                <span>Alunos reprovados</span>
-                            </div>
-                            <div>
-                                <h3><span>12</span> %</h3>
-                                <span>Alunos reprovados</span>
-                            </div>
+                            <h2>Olá, <%=nome%></h2>
+                            <p>Bem vindo de volta!</p>
                         </div>
+                        <a href="#observations" class="button">Ver observações</a>
+                    </div>
+                    <div class="notice-board">
+                        <h2>Quadro de avisos</h2>
+                        <a class="button" href="${pageContext.request.contextPath}/aviso?action=aluno">Ir ao quadro</a>
+
+                        <img style="rotate: 15deg;" class="screw right-top" src="${pageContext.request.contextPath}/img/flat/screw.png">
+                        <img style="rotate: 84deg;" class="screw left-top" src="${pageContext.request.contextPath}/img/flat/screw.png">
                     </div>
                 </div>
 
                 <div id="grades">
                     <h1>Boletim</h1>
-                    <select class="select-box">
-                        <option value="">Todas as matérias</option>
-                        <option value="">6º Ano</option>
-                        <option value="">7º Ano</option>
-                        <option value="">8º Ano</option>
-                        <option value="">9º Ano</option>
-                    </select>
-
                     <div class="table-container">
-                        <div class="table-info"> <!-- Contenção da turma -->
+                        <div class="table-info">
                             <div>
                                 <h3>2° Série G Tech</h3>
                                 <sub>Alunos</sub>
                             </div>
                             <div class="table-actions">
                                 <input checked style="display: none;" type="checkbox" id="search-submit">
-                                <label for="search-submit"><img src="${pageContext.request.contextPath}/img/svg/search.svg" alt=""></label>
+                                <label for="search-submit"><img src="${pageContext.request.contextPath}/img/svg/search.svg"></label>
                                 <input class="search-box" type="text" placeholder="Pesquisar por matéria">
                                 <button title="Filtrar"><img src="${pageContext.request.contextPath}/img/svg/filter.svg" alt="Filtrar"></button>
-                                <button title="Gerenciar notas" popovertarget="popup-grades">
+                                <button onclick="gerarBoletim()">
                                     <div><img src="${pageContext.request.contextPath}/img/svg/document.svg"><span>Extrair boletim</span></div>
                                 </button>
                             </div>
@@ -142,22 +157,36 @@
                                         <th>Matéria</th>
                                         <th>N1'</th>
                                         <th>N2'</th>
-                                        <th>Média Final<img class="info" title="(N1' + N2') / 2"
-                                                src="${pageContext.request.contextPath}/img/svg/info-white.svg"></img></th>
+                                        <th>Média Final<img class="info" title="(N1' + N2') / 2" src="${pageContext.request.contextPath}/img/svg/info-white.svg"></img></th>
                                         <th>Situação</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <%
-                                        for (NotaEntity nota : notaRepository.findByMatricula(matricula)) {
+                                        String situationClass = "";
+                                        String situationMessage = "";
+                                        for (NotaEntity nota : notas) {
+                                            if (nota.getN1() == null && nota.getN2() == null) {
+                                                situationClass = "";
+                                                situationMessage = "Em análise";
+                                            }
+                                            else {
+                                                situationClass = (nota.getMedia() != null && nota.getMedia() >= 7) ? "approved" : "failed";
+                                                situationMessage = (nota.getMedia() != null && nota.getMedia() >= 7) ? "Aprovado" : "Reprovado";
+                                            }
                                     %>
                                     <tr>
-                                        <td><%=nota.getNomeDisciplina()%></td>
-                                        <td><%=nota.getN1()%></td>
-                                        <td><%=nota.getN2()%></td>
-                                        <td><%=nota.getMedia()%></td>
-                                        <td class="situation"><span class="approved">ds</span></td>
+                                        <td><%= nota.getNomeDisciplina() %></td>
+                                        <td><%= nota.getN1() == null ? "-" : nota.getN1() %></td>
+                                        <td><%= nota.getN2() == null ? "-" : nota.getN2() %></td>
+                                        <td><%= nota.getMediaCalculada()%></td>
+                                        <td class="situation">
+                                        <span class="<%=situationClass%>">
+                                        <%=situationMessage%>
+                                        </span>
+                                        </td>
                                     </tr>
+
                                     <%
                                         }
                                     %>
@@ -169,41 +198,48 @@
 
                 <div id="observations">
                     <h1>Observações</h1>
-                    <select class="select-box">
-                        <option value="">Todos os professores</option>
-                        <option value="">Daniel Lima</option>
-                    </select>
 
                     <div class="card-container">
                         <%
-                            ObservacaoRepository observacaoRepository = new ObservacaoRepository();
-                            ProfessorRepository professorRepository = new ProfessorRepository();
+                            int idPopoverObs = 0;
 
-                            for (ObservacaoEntity obs : observacaoRepository.findByMatriculaAluno(matricula)) {
+                            for (ObservacaoEntity obs : observacoes) {
+                                idPopoverObs++;
                         %>
                         <div style="background-color: <%=obs.getCor().getHex()%>" class="card">
                             <div>
-                                <h2><%=obs.getTitulo()%></h2>
-                                <p>realizada por <%=professorRepository.findById(obs.getIdProfessor()).getNome()%></p>
+                                <h2><%=obs.getTitulo()%>
+                                </h2>
+                                <%
+                                    String professorNome = "";
+                                    if (professorRepository.findById(obs.getIdProfessor()) != null) {
+                                        professorNome = professorRepository.findById(obs.getIdProfessor()).getNome();
+                                %>
+                                <p>realizada por <%=professorNome%></p>
+                                <%
+                                    }
+                                %>
                             </div>
-                            <button class="button">Ver detalhes</button>
+                            <button popovertarget="<%="popover-id-"+idPopoverObs%>" class="button">Ver detalhes</button>
                         </div>
-                        <div id="popup-grades" class="popup" popover="auto">
-                            <!-- Apesar de cada table ter um símbolo de nota específico, o POPUP de notas será único -->
-                            <h1><%=obs.getTitulo()%></h1>
+                        <div id="<%="popover-id-"+idPopoverObs%>" class="popup obs" popover="auto">
+                            <h1><%=obs.getTitulo()%>
+                            </h1>
                             <div>
                                 <div class="input-major">
                                     <div class="input-container">
                                         <p>Professor</p>
-                                        <input class="text-box" type="text" value="<%=professorRepository.findById(obs.getIdProfessor()).getNome()%>" readonly>
+                                        <input class="text-box" type="text"
+                                            value="<%=professorNome%>"
+                                            readonly>
                                     </div>
 
                                     <div class="input-container">
-                                        <p class="required">Observação</p>
-                                        <input class="text-box" type="text" value="<%=obs.getObservacao()%>">
+                                        <p>Observação</p>
+                                        <p class="content"><%=obs.getObservacao()%></p>
                                     </div>
                                 </div>
-                                <button class="button" type="submit">Fechar</button>
+                                <button class="button fat close-popover" type="button">Fechar</button>
                             </div>
                         </div>
                         <%
@@ -214,52 +250,14 @@
             </main>
         </div>
     </div>
-
-    <div id="popup-grades" class="popup" popover="auto">
-        <!-- Apesar de cada table ter um símbolo de nota específico, o POPUP de notas será único -->
-        <h1>Gerenciar notas</h1>
-        <form>
-            <div class="input-major">
-                <div class="email input-container">
-                    <p class="required">Aluno</p>
-                    <select class="text-box" name="" id="">
-                        <option value="" disabled selected>
-                            Selecione um aluno
-                        </option>
-
-                        <optgroup label="1° Ano TECH">
-                            <option value="">6º Ano</option>
-                            <option value="">7º Ano</option>
-                            <option value="">8º Ano</option>
-                            <option value="">9º Ano</option>
-                        </optgroup>
-                    </select>
-                </div>
-
-                <div class="input-container">
-                    <p class="required">Matrícula</p>
-                    <input class="text-box" name="" type="text" value="" readonly>
-                </div>
-
-                <div class="input-container">
-                    <p class="required">N1'</p>
-                    <input class="text-box" name="" type="number" min="0" max="10" step="0.1">
-                </div>
-
-                <div class="input-container">
-                    <p class="required">N2'</p>
-                    <input class="text-box" name="" type="number" min="0" max="10" step="0.1">
-                </div>
-
-                <div class="input-container">
-                    <p class="required">Média final</p>
-                    <input class="text-box" name="" type="text" value="" readonly>
-                </div>
-            </div>
-
-            <button class="button" type="submit">Registrar</button>
-        </form>
-    </div>
 </body>
+<div style="display: none;">
+    <img id="img-logo-pdf" src="${pageContext.request.contextPath}/img/branding/logo.png">
+    <img id="img-assinatura-dir" src="${pageContext.request.contextPath}/img/branding/directorSignature.png">
+    <img id="img-assinatura-sec" src="${pageContext.request.contextPath}/img/branding/secretarySignature.png">
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/generate-bulletin.js"></script>
 
 </html>

@@ -1,0 +1,32 @@
+@charset "UTF-8";
+@import url('../variables.css');
+
+#profile {
+    background-color: var(--white);
+    padding-bottom: 2.5%;
+    margin-top: 2%;
+}
+
+#profile-image {
+    width: 140px;
+    aspect-ratio: 1 / 1;
+    border-radius: 100%;
+
+    background-color: black;
+    background-position: center;
+    background-size: 160%;
+
+    margin-top: 6%;
+    margin-left: 2.5%;
+}
+
+.diver {
+    background-image: url('../../img/flat/dragon.png');
+}
+
+.info {
+    display: flex;
+    margin-top: 2.5%;
+    flex-direction: column;
+    white-space: nowrap;
+}

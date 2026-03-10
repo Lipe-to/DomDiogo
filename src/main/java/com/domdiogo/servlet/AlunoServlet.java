@@ -2,6 +2,7 @@ package com.domdiogo.servlet;
 
 import java.io.IOException;
 
+import com.domdiogo.PasswordUtil;
 import com.domdiogo.ServletHelper;
 import com.domdiogo.model.AlunoEntity;
 import com.domdiogo.model.Status;
@@ -13,17 +14,25 @@ import jakarta.servlet.annotation.*;
 
 @WebServlet({"/aluno", "/aluno/*"})
 public class AlunoServlet extends HttpServlet {
-    private String redirect = "";
     private final AlunoRepository repository = new AlunoRepository();
+
+    private String getRedirectPath(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null && "ADMIN".equals(session.getAttribute("role"))) {
+            return "/adminHome";
+        }
+        return "/teacherHome";
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String action = request.getParameter("action");
+        String redirect;
 
         switch (action) {
             case "read":
                 request.setAttribute("listaAlunos", repository.read());
-                redirect = "";
+                redirect = getRedirectPath(request);
                 break;
 
             case "findByMatricula":
@@ -35,12 +44,12 @@ public class AlunoServlet extends HttpServlet {
                 } else {
                     ServletHelper.configureStatus(request, "Aluno não encontrado", StatusColor.RED);
                 }
-                redirect = "";
+                redirect = getRedirectPath(request);
                 break;
 
             default:
                 ServletHelper.configureStatus(request, "Ação inexistente, erro interno", StatusColor.RED);
-                redirect = "/WEB-INF/home.jsp";
+                redirect = getRedirectPath(request);
         }
 
         ServletHelper.redirect(request, response, redirect);
@@ -49,23 +58,23 @@ public class AlunoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String action = request.getParameter("action");
+        String redirect;
 
         switch (action) {
             case "create":
                 String usuario = request.getParameter("usuario");
                 if (repository.isApto(usuario)) {
                     AlunoEntity alunoEntity = new AlunoEntity(
-                            request.getParameter("nome"),
                             usuario,
-                            request.getParameter("senha"),
+                            PasswordUtil.hash(request.getParameter("senha")),
                             request.getParameter("palavra")
                     );
                     Status status = repository.create(alunoEntity);
                     if (status == Status.SUCCESS) {
-                        //cria uma entidade de notas para o aluno criado apenas com sua matricula
+                        //cria as notas para o aluno criado apenas com sua matricula
                         repository.createNotas(repository.findByUsuario(usuario).getMatricula());
                         repository.toggleMatriculado(usuario);
-                        ServletHelper.configureStatus(request, "Aluno(a) " + alunoEntity.getNome() + " criado com sucesso!", StatusColor.GREEN);
+                        ServletHelper.configureStatus(request, "Aluno(a) criado com sucesso!", StatusColor.GREEN);
                         redirect = "/index.jsp";
                     } else if (status == Status.NOT_FOUND) {
                         ServletHelper.configureStatus(request, "Já existe um aluno com essas informações, faça login.", StatusColor.RED);
@@ -76,15 +85,28 @@ public class AlunoServlet extends HttpServlet {
                     }
                 } else {
                     ServletHelper.configureStatus(request, "Você não está apto a se cadastrar.", StatusColor.RED);
+                    redirect = "/pages/login/register.jsp";
                 }
                 break;
 
             case "update":
+                String senhaUpdate = request.getParameter("senha");
+                int matriculaUpdate = Integer.parseInt(request.getParameter("matricula"));
+
+                // Se a senha veio vazia, manter a atual do banco
+                if (senhaUpdate == null || senhaUpdate.trim().isEmpty()) {
+                    AlunoEntity atual = repository.findByMatricula(matriculaUpdate);
+                    senhaUpdate = (atual != null) ? atual.getSenha() : "";
+                } else if (!PasswordUtil.isHashed(senhaUpdate)) {
+                    // Senha nova em plain-text: fazer hash
+                    senhaUpdate = PasswordUtil.hash(senhaUpdate);
+                }
+
                 AlunoEntity alunoUpdate = new AlunoEntity(
-                        Integer.parseInt(request.getParameter("matricula")),
+                        matriculaUpdate,
                         request.getParameter("nome"),
                         request.getParameter("usuario"),
-                        request.getParameter("senha"),
+                        senhaUpdate,
                         request.getParameter("palavra"),
                         request.getParameter("turma")
                 );
@@ -96,7 +118,7 @@ public class AlunoServlet extends HttpServlet {
                 } else {
                     ServletHelper.configureStatus(request, "Erro interno ao atualizar.", StatusColor.RED);
                 }
-                redirect = "/WEB-INF/home.jsp";
+                redirect = getRedirectPath(request);
                 break;
 
             case "delete":
@@ -109,12 +131,12 @@ public class AlunoServlet extends HttpServlet {
                 } else {
                     ServletHelper.configureStatus(request, "Erro interno ao deletar.", StatusColor.RED);
                 }
-                redirect = "/WEB-INF/home.jsp";
+                redirect = getRedirectPath(request);
                 break;
 
             default:
                 ServletHelper.configureStatus(request, "Ação inválida.", StatusColor.RED);
-                redirect = "/WEB-INF/home.jsp";
+                redirect = getRedirectPath(request);
                 break;
         }
 

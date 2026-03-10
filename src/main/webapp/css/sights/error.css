@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url('../variables.css');
 
 body {
@@ -27,9 +28,14 @@ h1 {
 }
 
 a {
-    text-align: center;
-    width: 40%;
     padding: 1% !important;
     color: var(--white) !important;
     border: 0;
+
+    width: 60%;
+    min-height: 32px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

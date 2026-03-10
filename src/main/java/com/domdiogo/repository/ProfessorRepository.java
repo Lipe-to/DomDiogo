@@ -1,6 +1,7 @@
 package com.domdiogo.repository;
 
 import com.domdiogo.ConnectionFactory;
+import com.domdiogo.ServletHelper;
 import com.domdiogo.model.ProfessorEntity;
 import com.domdiogo.model.Status;
 
@@ -25,7 +26,8 @@ public class ProfessorRepository {
                         resultSet.getString("nome"),
                         resultSet.getString("usuario"),
                         resultSet.getString("senha"),
-                        resultSet.getString("palavra")
+                        resultSet.getString("palavra"),
+                        ServletHelper.formatarUltimoLogin(resultSet)
                 );
             }
         } catch (SQLException e) {
@@ -50,7 +52,8 @@ public class ProfessorRepository {
                         resultSet.getString("nome"),
                         resultSet.getString("usuario"),
                         resultSet.getString("senha"),
-                        resultSet.getString("palavra")
+                        resultSet.getString("palavra"),
+                        ServletHelper.formatarUltimoLogin(resultSet)
                 );
                 professores.add(professor);
             }
@@ -88,31 +91,8 @@ public class ProfessorRepository {
         }
     }
 
-    public ProfessorEntity login(String usuario, String senha) {
-        String query = "select * from professor where usuario = ? and senha = ?";
-        ConnectionFactory connectionFactory = new ConnectionFactory();
-        Connection connection = connectionFactory.connect();
-        ProfessorEntity professorEntity = null;
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, usuario);
-            preparedStatement.setString(2, senha);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                professorEntity = new ProfessorEntity(
-                        resultSet.getInt("id"),
-                        resultSet.getString("nome"),
-                        resultSet.getString("usuario"),
-                        resultSet.getString("senha"),
-                        resultSet.getString("palavra")
-                );
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            connectionFactory.disconnect(connection);
-        }
-        return professorEntity;
+    public ProfessorEntity login(String usuario) {
+        return findByUsuario(usuario);
     }
 
     public ProfessorEntity findByUsuario(String usuario) {
@@ -130,7 +110,8 @@ public class ProfessorRepository {
                         resultSet.getString("nome"),
                         resultSet.getString("usuario"),
                         resultSet.getString("senha"),
-                        resultSet.getString("palavra")
+                        resultSet.getString("palavra"),
+                        ServletHelper.formatarUltimoLogin(resultSet)
                 );
             }
         } catch (SQLException e) {
@@ -159,6 +140,25 @@ public class ProfessorRepository {
             } else {
                 return Status.NOT_FOUND;
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return Status.INTERNAL_ERROR;
+        } finally {
+            connectionFactory.disconnect(connection);
+        }
+    }
+    public Status updateUltimoLogin(int idProfessor) {
+        String query = "UPDATE professor SET ultimo_login = CURRENT_TIMESTAMP WHERE id = ?";
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        Connection connection = connectionFactory.connect();
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, idProfessor);
+
+            int rows = ps.executeUpdate();
+            return rows > 0 ? Status.SUCCESS : Status.NOT_FOUND;
+
         } catch (SQLException e) {
             e.printStackTrace();
             return Status.INTERNAL_ERROR;

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dom Diogo</title>
+    <link rel="shortcut icon" href="img/branding/favicon.png">
+
+    <link rel="stylesheet" href="css/sights/both.css">
+    <link rel="stylesheet" href="css/sights/teacher.css">
+    <link rel="stylesheet" href="css/popup.css">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/font.css">
+</head>
+
+<body id="red-theme" class="black">
+
+    <li id="menu-icon-container">
+        <label id="menu-icon" for="menu-checkbox">
+
+            <img class="sidebar-icon expand white" src="img/svg/sidebar/white/menu-burger.svg">
+            <img class="sidebar-icon reduce white" src="img/svg/sidebar/white/reduce-menu.svg">
+
+            <img class="sidebar-icon expand black" src="img/svg/sidebar/black/menu-burger.svg">
+            <img class="sidebar-icon reduce black" src="img/svg/sidebar/black/reduce-menu.svg">
+
+        </label>
+        <input id="menu-checkbox" type="checkbox" hidden>
+    </li>
+
+    <aside id="sidebar">
+        <div>
+
+            <div class="logo">
+                <img src="img/branding/icone.png" draggable="false">
+                <img class="white" src="img/branding/white.png">
+                <img class="black" src="img/branding/black.png">
+            </div>
+
+            <ul>
+
+                <li class="emphasis">
+                    <a href="#">
+                        <img class="sidebar-icon white" src="img/svg/sidebar/white/home.svg">
+                        <img class="sidebar-icon black" src="img/svg/sidebar/black/home.svg">
+                        <span>Tela Inicial</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <img class="sidebar-icon white" src="img/svg/sidebar/white/dashboard.svg">
+                        <img class="sidebar-icon black" src="img/svg/sidebar/black/dashboard.svg">
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <img class="sidebar-icon white" src="img/svg/sidebar/white/address-book.svg">
+                        <img class="sidebar-icon black" src="img/svg/sidebar/black/address-book.svg">
+                        <span>Professores</span>
+                    </a>
+                </li>
+
+                <li class="divide">
+                    <a href="#">
+                        <img class="sidebar-icon white" src="img/svg/sidebar/white/user.svg">
+                        <img class="sidebar-icon black" src="img/svg/sidebar/black/user.svg">
+                        <span>Meu perfil</span>
+                    </a>
+                </li>
+
+                <li id="sign-out">
+                    <form style="display:flex">
+                        <button type="submit">
+
+                            <img class="sidebar-icon white" src="img/svg/sidebar/white/sign-out.svg">
+                            <img class="sidebar-icon black" src="img/svg/sidebar/black/sign-out.svg">
+
+                            <span>Sair</span>
+
+                        </button>
+                    </form>
+                </li>
+
+            </ul>
+        </div>
+    </aside>
+
+    <div id="major-container">
+        <div id="wrap">
+
+            <header>
+
+                <a href="#">
+                    <div class="logo">
+                        <img src="img/branding/icone.png">
+                        <img src="img/branding/white.png">
+                    </div>
+                </a>
+
+                <div class="personal-info">
+
+                    <div class="profile-image"></div>
+
+                    <div>
+                        <h3>Professor João</h3>
+                        <p>Professor</p>
+                    </div>
+
+                </div>
+
+            </header>
+
+            <main>
+
+                <div id="front-desk">
+
+                    <div class="castle" id="welcome">
+                        <div>
+                            <h2>Olá Professor João!</h2>
+                            <p>Bem vindo de volta!</p>
+                        </div>
+                        <a class="button">Ver observações</a>
+                    </div>
+
+                    <div class="general-statistic">
+
+                        <h2>Visão geral</h2>
+
+                        <div>
+
+                            <div>
+                                <h3><span>120</span></h3>
+                                <span>Total de alunos</span>
+                            </div>
+
+                            <div>
+                                <h3><span>10</span>%</h3>
+                                <span>Alunos sem notas</span>
+                            </div>
+
+                            <div>
+                                <h3><span class="appr">75</span>%</h3>
+                                <span>Alunos aprovados</span>
+                            </div>
+
+                            <div>
+                                <h3><span class="repr">15</span>%</h3>
+                                <span>Alunos reprovados</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="grades">
+
+                    <h1>Matemática</h1>
+
+                    <div class="table-container">
+
+                        <div class="table-info">
+
+                            <div>
+                                <h3>Alunos</h3>
+                                <sub>Informações e notas</sub>
+                            </div>
+
+                            <form class="table-actions">
+
+                                <input style="display:none" type="checkbox">
+
+                                <label>
+                                    <img src="img/svg/search.svg">
+                                </label>
+
+                                <input class="search-box" list="students-datalist-search" type="text"
+                                    placeholder="Pesquisar aluno">
+
+                                <datalist id="students-datalist-search">
+
+                                    <option>Maria Silva (Matrícula: 123)</option>
+                                    <option>Pedro Souza (Matrícula: 456)</option>
+
+                                </datalist>
+
+                                <button type="submit">
+                                    <img src="img/svg/filter.svg">
+                                </button>
+
+                                <button type="button">
+                                    <img src="img/svg/cross-small.svg">
+                                </button>
+
+                                <button popovertarget="popup-grades">
+                                    <div>
+                                        <img src="img/svg/document.svg">
+                                        <span>Atualizar notas</span>
+                                    </div>
+                                </button>
+
+                            </form>
+                        </div>
+
+                        <div class="table-wrap">
+
+                            <table id="report-card">
+
+                                <thead class="blue">
+
+                                    <tr>
+
+                                        <th>Matrícula</th>
+                                        <th>Estudante</th>
+                                        <th>Turma</th>
+                                        <th>N1'</th>
+                                        <th>N2'</th>
+                                        <th>Média Final
+                                            <img class="info" src="img/svg/info-white.svg">
+                                        </th>
+                                        <th>Situação</th>
+                                        <th>Ações</th>
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody>
+
+                                    <tr>
+
+                                        <td>123</td>
+                                        <td>Maria Silva</td>
+                                        <td>3A</td>
+                                        <td>8.0</td>
+                                        <td>9.0</td>
+                                        <td class="approved">8.5</td>
+
+                                        <td class="situation">
+                                            <span class="approved">Aprovado</span>
+                                        </td>
+
+                                        <td>
+                                            <div class="td-actions">
+                                                <button popovertarget="popup-grades">
+                                                    <img src="img/svg/crud/pencil-black.svg">
+                                                </button>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- POPUP NOTAS -->
+
+                <div id="popup-grades" class="popup" popover="auto">
+
+                    <h1>Gerenciar notas</h1>
+
+                    <form>
+
+                        <div class="input-major">
+
+                            <div class="input-container">
+
+                                <p class="required">Aluno</p>
+                                <input class="text-box" type="text" value="Maria Silva" readonly>
+
+                            </div>
+
+                            <div class="input-container">
+
+                                <p class="required">N1'</p>
+                                <input class="text-box grade-n1" type="number">
+
+                            </div>
+
+                            <div class="input-container">
+
+                                <p class="required">N2'</p>
+                                <input class="text-box grade-n2" type="number">
+
+                            </div>
+
+                            <div class="input-container">
+
+                                <p class="required">Média final</p>
+                                <input class="text-box final-grade" type="text" readonly>
+
+                            </div>
+
+                        </div>
+
+                        <button class="button fat" type="submit">
+                            Atualizar notas
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <div id="observations">
+
+                    <h1>Observações</h1>
+
+                    <div class="actions-section-container">
+                        <button popovertarget="popup-obs">
+                            + Adicionar Observação
+                        </button>
+                    </div>
+
+                    <div class="card-container">
+
+                        <div style="background-color:#5f9cff" class="card">
+
+                            <div>
+                                <h2>Comportamento</h2>
+                                <p>direcionada para Maria Silva</p>
+                            </div>
+
+                            <button popovertarget="popover-id-1" class="button">
+                                Ver detalhes
+                            </button>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+
+    <!-- POPUP DETALHES OBS -->
+
+    <div id="popover-id-1" class="popup obs" popover="auto">
+
+        <h1>Comportamento</h1>
+
+        <div>
+
+            <div class="input-major">
+
+                <div class="input-container">
+
+                    <p>Professor</p>
+                    <input class="text-box" type="text" value="Professor João" readonly>
+
+                </div>
+
+                <div class="input-container">
+                    <p>Observação</p>
+                    <p class="content">Aluno apresentou ótimo desempenho em sala, demonstrando engajamento e colaboração, sempre colaborando com os colegas.</p>
+                </div>
+
+            </div>
+
+            <button class="button fat close-popover">
+                Fechar
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- POPUP NOVA OBS -->
+
+    <div id="popup-obs" class="popup" popover="auto">
+
+        <h1>Adicionar Observação</h1>
+
+        <form>
+
+            <div class="input-major">
+
+                <div class="input-container">
+
+                    <p class="required">Aluno</p>
+
+                    <input class="text-box" list="students-datalist">
+
+                    <datalist id="students-datalist">
+
+                        <option>Maria Silva</option>
+                        <option>Pedro Souza</option>
+
+                    </datalist>
+
+                </div>
+
+                <div class="input-container">
+
+                    <p class="required">Título</p>
+                    <input class="text-box" type="text">
+
+                </div>
+
+                <div class="input-container">
+
+                    <p class="required">Conteúdo</p>
+                    <textarea class="text-box"></textarea>
+
+                </div>
+
+                <div class="input-container">
+
+                    <p class="required">Cores</p>
+
+                    <select class="text-box">
+
+                        <option>Azul</option>
+                        <option>Vermelho</option>
+                        <option>Roxo</option>
+                        <option>Verde</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <button class="button" type="submit">
+                Registrar
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <script src="js/popover-close.js"></script>
+    <script src="js/calculate-sum.js"></script>
+
+</body>
+
+</html>

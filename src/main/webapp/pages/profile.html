@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dom Diogo - Admin</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+
+    <link rel="stylesheet" href="css/sights/both.css">
+    <link rel="stylesheet" href="css/sights/profile.css">
+    <link rel="stylesheet" href="css/popup.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/font.css">
+</head>
+
+<body>
+
+<aside id="sidebar">
+    <ul>
+        <div>
+            <li id="menu-icon-container">
+                <label id="menu-icon" for="menu-checkbox">
+                    <img class="sidebar-icon" src="img/svg/sidebar/menu-burger.svg">
+                </label>
+                <input name="menu-checkbox" id="menu-checkbox" type="checkbox">
+            </li>
+            <p id="menu-text">Menu</p>
+
+            <li class="emphasis">
+                <a href="adminHome">
+                    <img class="sidebar-icon" src="img/svg/sidebar/home-emphasis.svg">
+                    <span>Tela Inicial</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <img class="sidebar-icon" src="img/svg/sidebar/dashboard.svg">
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <img class="sidebar-icon" src="img/svg/sidebar/address-book.svg">
+                    <span>Professores</span>
+                </a>
+            </li>
+        </div>
+
+        <li id="sign-out">
+            <button onclick="window.location.href='/index.html'">
+                <img class="sidebar-icon" src="img/svg/sidebar/sign-out.svg">
+                <span>Sair</span>
+            </button>
+        </li>
+    </ul>
+</aside>
+
+<div id="major-container">
+    <div id="wrap">
+        <header>
+            <div class="logo">
+                <img src="img/branding/icone.png">
+                <img src="img/branding/white.png">
+            </div>
+        </header>
+
+        <main>
+            <div id="profile">
+                <div id="profile-image" class="diver"></div>
+                <div class="info">
+                    <h1>Kesler</h1>
+                    <sub>1° Ano do Ensino Médio</sub>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+</body>
+</html>

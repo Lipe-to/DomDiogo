@@ -1,0 +1,156 @@
+@import url('../variables.css');
+
+#front-desk>:first-child {
+    width: 100%;
+    justify-content: center;
+    padding-bottom: 5%;
+}
+
+#front-desk h2, #front-desk a{
+    margin-left: 2%;
+}
+
+#front-desk>* {
+    min-height: 200px;
+}
+
+.notice-board>h2 span {
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.notice-board h3 span {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+#postit-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 95%;
+}
+
+#postit-container>:first-child {
+    margin-top: 0;
+}
+
+#postit-container>div {
+    display: flex;
+    gap: 3%;
+}
+
+#postit-container>div>* {
+    width: 100%;
+}
+
+.postit {
+    position: relative;
+    box-sizing: border-box;
+    
+    margin-top: 2.5%;
+    padding: 1% 2% 2%;
+    border-radius: 6px;
+    
+    background-color: yellow;
+}
+
+.postit>div div:first-of-type {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2%;
+}
+
+.postit p {
+    max-width: 85%;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.postit .button-container {
+    margin-top: 5%;
+    display: flex;
+    gap: 0.8rem;
+}
+
+.tape {
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    max-width: 24px;
+    
+    right: 1.8%;
+    top: -15%;
+    
+    rotate: -55deg;
+}
+
+#postit-container>div .postit:last-of-type .tape {
+    rotate: 290deg;
+    width: 200%;
+}
+
+.postit:only-child .tape {
+    max-width: 28px;
+    right: 1%;
+    top: -12%;
+
+    rotate: -62deg !important;
+}
+
+#filter-container {
+    background-color: var(--white);
+}
+
+.filters {
+    background-color: var(--table-background);
+    padding: 1% 1.25%;
+    margin-top: 0.6%;
+    border-radius: 6px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2%;
+}
+
+.filters form {
+    display: flex;
+    width: 100%;
+    gap: 1%;
+}
+
+.filters label,
+.filters input {
+    border-radius: 5px;
+    border-width: thin;
+    border-style: solid;
+    border-color: #4646462c;
+    background-color: rgba(246, 246, 246, 0.15);
+
+    padding: 0.4rem;
+    color: var(--black);
+    font-weight: 500;
+    box-shadow: var(--shadow-simple);
+}
+
+.filters input {
+    padding-left: 0.8rem;
+    width: 100%;
+}
+
+.filters button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background-color: transparent;
+}
+
+.filters img {
+    width: 16px;
+}

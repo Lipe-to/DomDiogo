@@ -26,7 +26,7 @@ public class ObservacaoRepository {
                         resultSet.getInt("matricula_aluno"),
                         resultSet.getInt("id_professor"),
                         resultSet.getString("observacao"),
-                        ColorPalette.valueOf(resultSet.getString("cor"))
+                        ColorPalette.fromString(resultSet.getString("cor"))
                 );
                 listaObservacoes.add(observacaoEntity);
             }
@@ -125,7 +125,7 @@ public class ObservacaoRepository {
                         resultSet.getInt("matricula_aluno"),
                         resultSet.getInt("id_professor"),
                         resultSet.getString("observacao"),
-                        ColorPalette.valueOf(resultSet.getString("cor"))
+                        ColorPalette.fromString(resultSet.getString("cor"))
                 );
             }
         } catch (SQLException e) {
@@ -152,7 +152,7 @@ public class ObservacaoRepository {
                         resultSet.getInt("matricula_aluno"),
                         resultSet.getInt("id_professor"),
                         resultSet.getString("observacao"),
-                        ColorPalette.valueOf(resultSet.getString("cor"))
+                        ColorPalette.fromString(resultSet.getString("cor"))
                 );
                 listaObservacoes.add(observacaoEntity);
             }
@@ -167,8 +167,10 @@ public class ObservacaoRepository {
     public List<ObservacaoEntity> findByProfessor(int idProfessor) {
         String query = "select * from observacao where id_professor = ?";
         List<ObservacaoEntity> listaObservacoes = new ArrayList<>();
+
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();
+
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, idProfessor);
@@ -180,7 +182,7 @@ public class ObservacaoRepository {
                         resultSet.getInt("matricula_aluno"),
                         resultSet.getInt("id_professor"),
                         resultSet.getString("observacao"),
-                        ColorPalette.valueOf(resultSet.getString("cor"))
+                        ColorPalette.fromString(resultSet.getString("cor").trim().toUpperCase())
                 );
                 listaObservacoes.add(observacaoEntity);
             }

@@ -38,4 +38,11 @@ build/
 .DS_Store
 
 ## env ##
+<<<<<<< HEAD
 src/main/resources/.env
+=======
+src/main/resources/.env
+
+## .github ##
+.github/agents/
+>>>>>>> 529619fcaa1ead1a98ce5eb247109c07ffbd5539

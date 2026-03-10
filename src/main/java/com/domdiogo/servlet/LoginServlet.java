@@ -2,11 +2,10 @@ package com.domdiogo.servlet;
 
 import java.io.IOException;
 
+import com.domdiogo.PasswordUtil;
 import com.domdiogo.ServletHelper;
-import com.domdiogo.model.AlunoEntity;
-import com.domdiogo.model.ProfessorEntity;
-import com.domdiogo.model.Status;
-import com.domdiogo.model.StatusColor;
+import com.domdiogo.model.*;
+import com.domdiogo.repository.AdministradorRepository;
 import com.domdiogo.repository.AlunoRepository;
 import com.domdiogo.repository.ProfessorRepository;
 
@@ -17,34 +16,43 @@ import jakarta.servlet.http.*;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
-    private String redirect = "";
     private final AlunoRepository alunoRepository = new AlunoRepository();
     private final ProfessorRepository professorRepository = new ProfessorRepository();
+    private final AdministradorRepository administradorRepository = new AdministradorRepository();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        HttpSession session = request.getSession();
         String action = request.getParameter("action");
         String usuario = request.getParameter("usuario");
         String senha = request.getParameter("senha");
+        String redirect;
 
         switch (action) {
             case "login":
                 if (usuario.contains("@")) {
-                    // LOGIN ALUNO
-                    AlunoEntity aluno = alunoRepository.login(usuario, senha);
+                    // LOGIN ALUNO — busca por usuario, verifica senha com BCrypt
+                    AlunoEntity aluno = alunoRepository.login(usuario);
 
-                    if (aluno != null) {
-                        HttpSession session = request.getSession();
+                    if (aluno != null && PasswordUtil.check(senha, aluno.getSenha())) {
+                        // Migração transparente: se a senha estava em plain-text, re-hash
+                        if (!PasswordUtil.isHashed(aluno.getSenha())) {
+                            aluno.setSenha(PasswordUtil.hash(senha));
+                            alunoRepository.update(aluno);
+                        }
+
+
                         session.setAttribute("nome", aluno.getNome());
                         session.setAttribute("matricula", aluno.getMatricula());
+                        session.setAttribute("turma", aluno.getTurma());
 
                         ServletHelper.configureStatus(request,
                                 "Login realizado com sucesso!",
                                 StatusColor.GREEN);
+                        alunoRepository.updateUltimoLogin(aluno.getMatricula());
 
-                        redirect = "/WEB-INF/view/sights/studentHome.jsp";
+                        redirect = "/studentHome";
                     } else {
                         ServletHelper.configureStatus(request,
                                 "Usuário ou senha inválidos.",
@@ -53,11 +61,16 @@ public class LoginServlet extends HttpServlet {
                         redirect = "/index.jsp";
                     }
                 } else {
-                    // LOGIN PROFESSOR
-                    ProfessorEntity professor = professorRepository.login(usuario, senha);
+                    // LOGIN PROFESSOR — busca por usuario, verifica senha com BCrypt
+                    ProfessorEntity professor = professorRepository.login(usuario);
 
-                    if (professor != null) {
-                        HttpSession session = request.getSession();
+                    if (professor != null && PasswordUtil.check(senha, professor.getSenha())) {
+                        // Migração transparente
+                        if (!PasswordUtil.isHashed(professor.getSenha())) {
+                            professor.setSenha(PasswordUtil.hash(senha));
+                            professorRepository.update(professor);
+                        }
+
                         session.setAttribute("usuario", professor.getUsuario());
                         session.setAttribute("nome", professor.getNome());
                         session.setAttribute("idProfessor", professor.getId());
@@ -65,8 +78,8 @@ public class LoginServlet extends HttpServlet {
                         ServletHelper.configureStatus(request,
                                 "Login realizado com sucesso!",
                                 StatusColor.GREEN);
-
-                        redirect = "/WEB-INF/view/sights/teacherHome.jsp";
+                        professorRepository.updateUltimoLogin(professor.getId());
+                        redirect = "/teacherHome";
                     } else {
                         ServletHelper.configureStatus(request,
                                 "Usuário ou senha inválidos.",
@@ -129,56 +142,92 @@ public class LoginServlet extends HttpServlet {
                     redirect = "/WEB-INF/view/login/reset-password.jsp";
                     request.setAttribute("userId", userIdStr);
                 } else {
-                        int userId = Integer.parseInt(userIdStr);
-                        if (usuarioReset.contains("@")) {
-                            AlunoEntity aluno = alunoRepository.findByMatricula(userId);
+                    // Hash da nova senha com BCrypt
+                    String senhaHash = PasswordUtil.hash(novaSenh);
+                    int userId = Integer.parseInt(userIdStr);
 
-                            if (aluno != null) {
-                                aluno.setSenha(novaSenh);
-                                // Atualizar palavra-chave apenas se foi fornecida
-                                if (novaPalavra != null && !novaPalavra.trim().isEmpty()) {
-                                    aluno.setPalavra(novaPalavra);
-                                }
-                                Status statusAluno = alunoRepository.update(aluno);
+                    if (usuarioReset.contains("@")) {
+                        AlunoEntity aluno = alunoRepository.findByMatricula(userId);
 
-                                if (statusAluno == Status.SUCCESS) {
-                                    ServletHelper.configureStatus(request, "Senha atualizada com sucesso!", StatusColor.GREEN);
-                                    redirect = "/index.jsp";
-                                } else {
-                                    ServletHelper.configureStatus(request, "Erro ao atualizar senha.", StatusColor.RED);
-                                    redirect = "/WEB-INF/view/login/reset-password.jsp";
-                                    request.setAttribute("userId", userIdStr);
-                                }
-                        }
-
-
-                        } else {
-                            // Tentar como professor
-                            ProfessorEntity professor = professorRepository.findById(userId);
-
-                            if (professor != null) {
-                                // É professor
-                                professor.setSenha(novaSenh);
-                                // Atualizar palavra-chave apenas se foi fornecida
-                                if (novaPalavra != null && !novaPalavra.trim().isEmpty()) {
-                                    professor.setPalavra(novaPalavra);
-                                }
-                                Status statusProfessor = professorRepository.update(professor);
-
-                                if (statusProfessor == Status.SUCCESS) {
-                                    ServletHelper.configureStatus(request, "Senha atualizada com sucesso!", StatusColor.GREEN);
-                                    redirect = "/index.jsp";
-                                } else {
-                                    ServletHelper.configureStatus(request, "Erro ao atualizar senha.", StatusColor.RED);
-                                    redirect = "/WEB-INF/view/login/reset-password.jsp";
-                                    request.setAttribute("userId", userIdStr);
-                                }
-                            } else {
-                                ServletHelper.configureStatus(request, "Usuário não encontrado.", StatusColor.RED);
-                                redirect = "/pages/login/index.jsp";
+                        if (aluno != null) {
+                            aluno.setSenha(senhaHash);
+                            if (novaPalavra != null && !novaPalavra.trim().isEmpty()) {
+                                aluno.setPalavra(novaPalavra);
                             }
+                            Status statusAluno = alunoRepository.update(aluno);
+
+                            if (statusAluno == Status.SUCCESS) {
+                                ServletHelper.configureStatus(request, "Senha atualizada com sucesso!", StatusColor.GREEN);
+                                redirect = "/index.jsp";
+                            } else {
+                                ServletHelper.configureStatus(request, "Erro ao atualizar senha.", StatusColor.RED);
+                                redirect = "/WEB-INF/view/login/reset-password.jsp";
+                                request.setAttribute("userId", userIdStr);
+                            }
+                        } else {
+                            ServletHelper.configureStatus(request, "Aluno não encontrado.", StatusColor.RED);
+                            redirect = "/pages/login/forgot-password.jsp";
                         }
+                    } else {
+                        ProfessorEntity professor = professorRepository.findById(userId);
+
+                        if (professor != null) {
+                            professor.setSenha(senhaHash);
+                            if (novaPalavra != null && !novaPalavra.trim().isEmpty()) {
+                                professor.setPalavra(novaPalavra);
+                            }
+                            Status statusProfessor = professorRepository.update(professor);
+
+                            if (statusProfessor == Status.SUCCESS) {
+                                ServletHelper.configureStatus(request, "Senha atualizada com sucesso!", StatusColor.GREEN);
+                                redirect = "/index.jsp";
+                            } else {
+                                ServletHelper.configureStatus(request, "Erro ao atualizar senha.", StatusColor.RED);
+                                redirect = "/WEB-INF/view/login/reset-password.jsp";
+                                request.setAttribute("userId", userIdStr);
+                            }
+                        } else {
+                            ServletHelper.configureStatus(request, "Usuário não encontrado.", StatusColor.RED);
+                            redirect = "/pages/login/index.jsp";
+                        }
+                    }
                 }
+                break;
+
+            case "loginAdmin":
+                // LOGIN ADMINISTRADOR — busca por usuario, verifica senha com BCrypt
+                AdministradorEntity admin = administradorRepository.findByUsuario(usuario);
+
+                if (admin != null && PasswordUtil.check(senha, admin.getSenha())) {
+                    // Migração transparente
+                    if (!PasswordUtil.isHashed(admin.getSenha())) {
+                        admin.setSenha(PasswordUtil.hash(senha));
+                        administradorRepository.update(admin);
+                    }
+
+                    session.setAttribute("usuario", usuario);
+                    session.setAttribute("role", "ADMIN");
+
+                    ServletHelper.configureStatus(request,
+                            "Login de administrador realizado com sucesso!",
+                            StatusColor.GREEN);
+
+                    redirect = "/adminHome";
+                } else {
+                    ServletHelper.configureStatus(request,
+                            "Usuário ou senha de administrador inválidos.",
+                            StatusColor.RED);
+
+                    redirect = "/pages/login/admin.jsp";
+                }
+                break;
+
+            case "logout":
+                if (session != null) {
+                    session.invalidate();
+                }
+                ServletHelper.configureStatus(request, "Logout realizado com sucesso!", StatusColor.GREEN);
+                redirect = "/index.jsp";
                 break;
 
             default:

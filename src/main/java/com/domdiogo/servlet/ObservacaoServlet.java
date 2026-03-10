@@ -14,22 +14,31 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet({"/observacao", "/observacao/*"})
 public class ObservacaoServlet extends HttpServlet {
-    private String redirect = "";
     private final ObservacaoRepository repository = new ObservacaoRepository();
+
+    private String getRedirectPath(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null && "ADMIN".equals(session.getAttribute("role"))) {
+            return "/adminObs";
+        }
+        return "/teacherObs";
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String action = request.getParameter("action");
+        String redirect;
 
         switch (action) {
             case "readAll":
                 List<ObservacaoEntity> listaObservacoes = repository.read();
                 request.setAttribute("observacoes", listaObservacoes);
                 ServletHelper.configureStatus(request, "Observações carregadas com sucesso!", StatusColor.GREEN);
-                redirect = "/WEB-INF/observacoes.jsp";
+                redirect = getRedirectPath(request);
                 break;
 
             case "findById":
@@ -41,7 +50,7 @@ public class ObservacaoServlet extends HttpServlet {
                 } else {
                     ServletHelper.configureStatus(request, "Observação não encontrada.", StatusColor.RED);
                 }
-                redirect = "/WEB-INF/observacaoDetalhe.jsp";
+                redirect = getRedirectPath(request);
                 break;
 
             case "findByMatriculaAluno":
@@ -49,7 +58,7 @@ public class ObservacaoServlet extends HttpServlet {
                 List<ObservacaoEntity> obsAluno = repository.findByMatriculaAluno(matriculaAluno);
                 request.setAttribute("observacoes", obsAluno);
                 ServletHelper.configureStatus(request, "Observações do aluno carregadas.", StatusColor.GREEN);
-                redirect = "/WEB-INF/observacoes.jsp";
+                redirect = getRedirectPath(request);
                 break;
 
             case "findByProfessor":
@@ -57,12 +66,12 @@ public class ObservacaoServlet extends HttpServlet {
                 List<ObservacaoEntity> obsProfessor = repository.findByProfessor(idProfessor);
                 request.setAttribute("observacoes", obsProfessor);
                 ServletHelper.configureStatus(request, "Observações do professor carregadas.", StatusColor.GREEN);
-                redirect = "/WEB-INF/observacoes.jsp";
+                redirect = getRedirectPath(request);
                 break;
 
             default:
                 ServletHelper.configureStatus(request, "Ação inexistente.", StatusColor.RED);
-                redirect = "/WEB-INF/home.jsp";
+                redirect = getRedirectPath(request);
                 break;
         }
 
@@ -72,6 +81,7 @@ public class ObservacaoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String action = request.getParameter("action");
+        String redirect;
 
         switch (action) {
             case "create":
@@ -80,7 +90,7 @@ public class ObservacaoServlet extends HttpServlet {
                         Integer.parseInt(request.getParameter("matriculaAluno")),
                         Integer.parseInt(request.getParameter("idProfessor")),
                         request.getParameter("observacao"),
-                        ColorPalette.valueOf(request.getParameter("cor"))
+                        ColorPalette.fromString(request.getParameter("cor"))
                 );
                 Status createStatus = repository.create(novaObservacao);
                 if (createStatus == Status.SUCCESS) {
@@ -88,7 +98,7 @@ public class ObservacaoServlet extends HttpServlet {
                 } else {
                     ServletHelper.configureStatus(request, "Erro ao criar observação.", StatusColor.RED);
                 }
-                redirect = "/observacao?action=readAll";
+                redirect = getRedirectPath(request);
                 break;
 
             case "update":
@@ -98,7 +108,7 @@ public class ObservacaoServlet extends HttpServlet {
                         Integer.parseInt(request.getParameter("matriculaAluno")),
                         Integer.parseInt(request.getParameter("idProfessor")),
                         request.getParameter("observacao"),
-                        ColorPalette.valueOf(request.getParameter("cor"))
+                        ColorPalette.fromString(request.getParameter("cor"))
                 );
                 Status updateStatus = repository.update(observacaoUpdate);
                 if (updateStatus == Status.SUCCESS) {
@@ -106,7 +116,7 @@ public class ObservacaoServlet extends HttpServlet {
                 } else {
                     ServletHelper.configureStatus(request, "Erro ao atualizar observação.", StatusColor.RED);
                 }
-                redirect = "/observacao?action=readAll";
+                redirect = getRedirectPath(request);
                 break;
 
             case "delete":
@@ -117,12 +127,12 @@ public class ObservacaoServlet extends HttpServlet {
                 } else {
                     ServletHelper.configureStatus(request, "Erro ao excluir observação.", StatusColor.RED);
                 }
-                redirect = "/observacao?action=readAll";
+                redirect = getRedirectPath(request);
                 break;
 
             default:
                 ServletHelper.configureStatus(request, "Ação inválida.", StatusColor.RED);
-                redirect = "/WEB-INF/home.jsp";
+                redirect = getRedirectPath(request);
                 break;
         }
 

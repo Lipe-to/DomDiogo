@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url(variables.css);
 
 * {
@@ -17,6 +18,7 @@ body {
 
 img,
 button>*,
+button *,
 select,
 a {
     user-select: none;
@@ -42,13 +44,17 @@ a {
     cursor: pointer;
 }
 
+.button.fat {
+    width: 100%;
+}
+
 .text-box {
     width: 100%;
     background-color: rgba(246, 246, 246, 0.15);
     border-color: #4646462c;
     border-radius: 3px;
 
-    transition: box-shadow 0.3s ease-in-out;
+    transition: box-shadow 0.3s ease-in-out, border-color 0.8s ease-in-out;
 }
 
 .text-box {
@@ -68,7 +74,17 @@ a {
 }
 
 .logo {
-    max-width: 200px;
+    display: flex;
+    align-items: baseline;
+    justify-content: left;
+    gap: 0.6rem;
+    
+    cursor: pointer;
+}
+
+.logo.center {
+    align-items: center;
+    justify-content: center;
 }
 
 .select-box {
@@ -82,8 +98,7 @@ a {
 
     transition: box-shadow 0.3s ease-in-out;
 
-    min-width: 145px;
-    padding: 0.1% 2.5% 0.1% 1%;
+    min-width: 160px;
     background-image: url('../img/svg/caret-down.svg');
     background-size: 12%;
     background-repeat: no-repeat;
@@ -207,4 +222,9 @@ a {
 
 .orange {
     background-color: var(--orange);
+}
+
+textarea {
+    resize: vertical;
+    max-height: 150px;
 }
