@@ -159,7 +159,7 @@
 
                 <div class="notice-board">
 
-                    <h2>Quadro de avisos <span>Aluno</span></h2>
+                    <h2>Quadro de avisos</h2>
 
                     <br><br>
 
@@ -256,6 +256,61 @@
     </div>
 
 </div>
+
+<div id="popup-profile" class="popup profile" popover="auto">
+        <button class="popup-cross" popovertarget="popup-profile" popovertargetaction="hide" type="button">
+            <img src="${pageContext.request.contextPath}/img/svg/cross-small.svg">
+        </button>
+        <div class="personal-profile">
+            <div class="<%=fotoPerfil%>"></div>
+            <div>
+                <h1><%=nome%></h1>
+                <p>Aluno</p>
+            </div>
+        </div>
+        <div class="input-major">
+            <form style="display: flex;" action="${pageContext.request.contextPath}/login?action=alterarFoto" method="post">
+                <div class="input-container">
+                    <p>Foto de perfil</p>
+                    <div class="avatar">
+                        <div>
+                            <input class="text-box dino" type="radio" name="avatar"
+                                value="">
+                            <img class="check-circle" src="${pageContext.request.contextPath}/img/svg/check.svg">
+                         </div>
+                        <div>
+                            <input class="text-box diver" type="radio" name="avatar"
+                                value="">
+                            <img class="check-circle" src="${pageContext.request.contextPath}/img/svg/check.svg">
+                        </div>
+                        <div>
+                            <input class="text-box diver" type="radio" name="avatar"
+                                value="">
+                            <img class="check-circle" src="${pageContext.request.contextPath}/img/svg/check.svg">
+                        </div>
+                    </div>
+                </div>
+                <%-- <div class="input-container">
+                    <p>Tema</p>
+                    <select class="text-box" name="">
+                        <option value="">Azul</option>
+                        <option value="">Verde</option>
+                        <option value="">Vermelho</option>
+                    </select>
+                </div> --%>
+                <div>
+                    <button class="button fat" type="submit"><img class="icon-inner-button" src="${pageContext.request.contextPath}/img/svg/refresh.svg"><span>Atualizar informações</span></button>
+                </div>
+            </form>
+            
+            <form style="display:flex">
+                <button class="button" type="submit">
+                    <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/sign-out.svg">
+                    <span>Logout</span>
+                </button>
+            </form>
+        </div>
+    </div>
 
 </body>
 

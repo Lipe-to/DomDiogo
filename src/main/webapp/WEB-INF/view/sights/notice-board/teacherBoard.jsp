@@ -20,62 +20,90 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/font.css">
 </head>
 
+<%
+    String nome = (String) session.getAttribute("nome");
+    int idProfessor = (int) session.getAttribute("idProfessor");
+    String fotoPerfil = (String) session.getAttribute("fotoPerfil");
+
+    List<AlunoEntity> listAlunos = (List<AlunoEntity>) request.getAttribute("listAlunos");
+    List<AlunoNotaDTO> alunosNotas = (List<AlunoNotaDTO>) request.getAttribute("alunosNotas");
+    List<ObservacaoEntity> observacoes = (List<ObservacaoEntity>) request.getAttribute("observacoes");
+    
+    AlunoRepository alunoRepository = (AlunoRepository) request.getAttribute("alunoRepository");
+    ProfessorRepository professorRepository = (ProfessorRepository) request.getAttribute("professorRepository");
+
+    String disciplina = professorRepository.findDisciplinaByProfessorId(idProfessor);
+%>
+
 <body id="blue-theme" class="black">
 <li id="menu-icon-container">
-        <label id="menu-icon" for="menu-checkbox">
-            <img class="sidebar-icon expand white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/menu-burger.svg">
-            <img class="sidebar-icon reduce white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/reduce-menu.svg">
+    <label id="menu-icon" for="menu-checkbox">
+        <img class="sidebar-icon expand white"
+             src="${pageContext.request.contextPath}/img/svg/sidebar/white/menu-burger.svg">
+        <img class="sidebar-icon reduce white"
+             src="${pageContext.request.contextPath}/img/svg/sidebar/white/reduce-menu.svg">
 
-            <img class="sidebar-icon expand black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/menu-burger.svg">
-            <img class="sidebar-icon reduce black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/reduce-menu.svg">
-        </label>
-        <input name="menu-checkbox" id="menu-checkbox" type="checkbox" hidden>
-    </li>
-    <aside id="sidebar">
-        <div>
-            <div class="logo">
-                <img src="${pageContext.request.contextPath}/img/branding/icone.png" draggable="false">
-                <img class="white" src="${pageContext.request.contextPath}/img/branding/white.png" draggable="false">
-                <img style="opacity: 80%;" class="black" src="${pageContext.request.contextPath}/img/branding/black.png" draggable="false">
-            </div>
-            <ul>
-                <li class="emphasis">
-                    <a href="adminHome">
-                        <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/home.svg">
-                        <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/home.svg">
-                        <span>Tela Inicial</span>
-                    </a>
-                </li>
-                <li>
-                    <form style="display: flex" action="${pageContext.request.contextPath}/observacao?action=findByMatriculaAluno">
-                        <button type="submit">
-                            <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/address-book.svg">
-                            <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/address-book.svg">
-                            <span>Quadro de Avisos</span>
-                        </button>
-                    </form>
-                </li>
-                <li class="divide">
-                    <button popovertarget="popup-profile" type="button">
-                        <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/user.svg">
-                        <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/user.svg">
-                        <span>Meu perfil</span>
-                    </button>
-                </li>
-                <li id="sign-out">
-                    <form style="display: flex" action="${pageContext.request.contextPath}/login?action=logout" method="post">
-                        <button type="submit">
-                            <img class="sidebar-icon white"
-                                src="${pageContext.request.contextPath}/img/svg/sidebar/white/sign-out.svg">
-                            <img class="sidebar-icon black"
-                                src="${pageContext.request.contextPath}/img/svg/sidebar/black/sign-out.svg">
-                            <span>Sair</span>
-                        </button>
-                    </form>
-                </li>
-            </ul>
+        <img class="sidebar-icon expand black"
+             src="${pageContext.request.contextPath}/img/svg/sidebar/black/menu-burger.svg">
+        <img class="sidebar-icon reduce black"
+             src="${pageContext.request.contextPath}/img/svg/sidebar/black/reduce-menu.svg">
+    </label>
+    <input name="menu-checkbox" id="menu-checkbox" type="checkbox" hidden>
+</li>
+<aside id="sidebar">
+    <div>
+        <div class="logo">
+            <img src="${pageContext.request.contextPath}/img/branding/icone.png" draggable="false">
+            <img class="white" src="${pageContext.request.contextPath}/img/branding/white.png" draggable="false">
+            <img style="opacity: 80%;" class="black" src="${pageContext.request.contextPath}/img/branding/black.png"
+                 draggable="false">
         </div>
-    </aside>
+        <ul>
+            <li class="emphasis">
+                <a href="adminHome">
+                    <img class="sidebar-icon white"
+                         src="${pageContext.request.contextPath}/img/svg/sidebar/white/home.svg">
+                    <img class="sidebar-icon black"
+                         src="${pageContext.request.contextPath}/img/svg/sidebar/black/home.svg">
+                    <span>Tela Inicial</span>
+                </a>
+            </li>
+            <li>
+                <form style="display: flex"
+                      action="${pageContext.request.contextPath}/observacao?action=findByMatriculaAluno">
+                    <button type="submit">
+                        <img class="sidebar-icon white"
+                             src="${pageContext.request.contextPath}/img/svg/sidebar/white/address-book.svg">
+                        <img class="sidebar-icon black"
+                             src="${pageContext.request.contextPath}/img/svg/sidebar/black/address-book.svg">
+                        <span>Quadro de Avisos</span>
+                    </button>
+                </form>
+            </li>
+            <li class="divide">
+                <button popovertarget="popup-profile" type="button">
+                    <img class="sidebar-icon white"
+                         src="${pageContext.request.contextPath}/img/svg/sidebar/white/user.svg">
+                    <img class="sidebar-icon black"
+                         src="${pageContext.request.contextPath}/img/svg/sidebar/black/user.svg">
+                    <span>Meu perfil</span>
+                </button>
+            </li>
+            <li id="sign-out">
+                <form style="display: flex" action="${pageContext.request.contextPath}/login?action=logout"
+                      method="post">
+                    <button type="submit">
+                        <img class="sidebar-icon white"
+                             src="${pageContext.request.contextPath}/img/svg/sidebar/white/sign-out.svg">
+                        <img class="sidebar-icon black"
+                             src="${pageContext.request.contextPath}/img/svg/sidebar/black/sign-out.svg">
+                        <span>Sair</span>
+                    </button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</aside>
 <div id="major-container">
 
     <div id="wrap">
@@ -118,7 +146,7 @@
 
                 <div class="notice-board">
 
-                    <h2>Quadro de avisos <span>Professor</span></h2>
+                    <h2>Quadro de avisos</h2>
 
                     <br><br>
 
@@ -135,11 +163,11 @@
                             List<AvisoEntity> avisos =
                                     (List<AvisoEntity>) request.getAttribute("avisos");
 
-                            if(avisos != null && !avisos.isEmpty()){
+                            if (avisos != null && !avisos.isEmpty()) {
 
                                 ProfessorRepository professorRepository = new ProfessorRepository();
 
-                                for(AvisoEntity aviso : avisos){
+                                for (AvisoEntity aviso : avisos) {
 
                         %>
 
@@ -154,16 +182,14 @@
                                 <div>
 
                                     <sub>
-                                        <%="Por "+professorRepository.findById(aviso.getIdProfessor())+":"%>
+                                        <%="Por " + professorRepository.findById(aviso.getIdProfessor()) + ":"%>
                                     </sub>
 
                                     <h3>
 
                                         <%=aviso.getTitulo()%>
 
-                                        <span>
-<%=aviso.getPrazo()==null?"":"Prazo: "+aviso.getPrazo()%>
-</span>
+                                        <span><%=aviso.getPrazo() == null ? "" : "Prazo: " + aviso.getPrazo()%></span>
 
                                     </h3>
 
@@ -189,7 +215,7 @@
 
                             }
 
-                        }else{
+                        } else {
 
                         %>
 
@@ -212,6 +238,149 @@
         </main>
     </div>
 </div>
+
+<div id="popup-notice-board" class="popup" popover="auto">
+    <button class="popup-cross" popovertarget="popup-notice-board" popovertargetaction="hide" type="button">
+        <img src="${pageContext.request.contextPath}/img/svg/cross-small.svg">
+    </button>
+    <h1>Enviar aviso</h1>
+    <form action="${pageContext.request.contextPath}/nota?action=update" method="post">
+        <div class="input-major">
+            <div class="input-container">
+                <p class="required">Título</p>
+                <input class="text-box" name="titulo" type="text" required>
+            </div>
+
+            <div class="input-container">
+                <p class="required">Conteúdo</p>
+                <textarea class="text-box" name="aviso"></textarea>
+            </div>
+            
+            <div class="input-container">
+                <p class="required">Prazo</p>
+                <input class="text-box" name="date" type="date">
+            </div>
+
+            <select name="turmas" multiple>
+                <option value="9A">9A</option>
+                <option value="8B">8B</option>
+                <option value="7C">7C</option>
+            </select>
+
+            <div class="input-container">
+                <p class="required">Cores</p>
+                <div class="colors">
+                    <div>
+                        <input style="background-color: #3C71BA;" class="text-box" type="radio" name="cor" value="BLUE" checked>
+                        <img class="check-circle" src="img/svg/check.svg">
+                    </div>
+                    <div>
+                        <input style="background-color: #D13E3E;" class="text-box" type="radio" name="cor" value="RED">
+                        <img class="check-circle" src="img/svg/check.svg">
+                    </div>
+                    <div>
+                        <input style="background-color: #8D99D6;" class="text-box" type="radio" name="cor" value="TEA_BLUE">
+                        <img class="check-circle" src="img/svg/check.svg">
+                    </div>
+                    <div>
+                        <input style="background-color: #ca93c7;" class="text-box" type="radio" name="cor" value="PURPLE">
+                        <img class="check-circle" src="img/svg/check.svg">
+                    </div>
+                    <div>
+                        <input style="background-color: #86d1a8;" class="text-box" type="radio" name="cor" value="GREEN">
+                        <img class="check-circle" src="img/svg/check.svg">
+                    </div>
+                    <div>
+                        <input style="background-color: #b0cf89;" class="text-box" type="radio" name="cor" value="LIME_GREEN">
+                        <img class="check-circle" src="img/svg/check.svg">
+                    </div>
+                    <div>
+                        <input style="background-color: #e08383;" class="text-box" type="radio" name="cor" value="SMOOTH_RED">
+                        <img class="check-circle" src="img/svg/check.svg">
+                    </div>
+                    <div>
+                        <input style="background-color: #dfb381;" class="text-box" type="radio" name="cor" value="ORANGE">
+                        <img class="check-circle" src="img/svg/check.svg">
+                    </div>
+                    <div>
+                        <input style="background-color: #b5b5b5;" class="text-box" type="radio" name="cor" value="DEFAULT">
+                        <img class="check-circle" src="img/svg/check.svg">
+                    </div>
+                </div>
+            </div>
+
+            <input class="text-box" name="id" type="text" value="<%=idProfessor%>"
+                   hidden>
+            <input class="text-box" name="idNota" type="text" value="<%=item.getNotaId()%>"
+                   hidden>
+        </div>
+        <button class="button fat" type="submit">Atualizar notas</button>
+    </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div id="popup-profile" class="popup profile" popover="auto">
+        <button class="popup-cross" popovertarget="popup-profile" popovertargetaction="hide" type="button">
+            <img src="${pageContext.request.contextPath}/img/svg/cross-small.svg">
+        </button>
+        <div class="personal-profile">
+            <div class="<%=fotoPerfil%>"></div>
+            <div>
+                <h1><%=nome%></h1>
+                <p>Professor(a) de <%=disciplina%></p>
+            </div>
+        </div>
+        <div class="input-major">
+            <form style="display: flex;" action="${pageContext.request.contextPath}/login?action=alterarFoto" method="post">
+                <div class="input-container">
+                    <p>Foto de perfil</p>
+                    <div class="avatar">
+                        <div>
+                            <input class="text-box dino" type="radio" name="avatar"
+                                value="">
+                            <img class="check-circle" src="${pageContext.request.contextPath}/img/svg/check.svg">
+                         </div>
+                        <div>
+                            <input class="text-box diver" type="radio" name="avatar"
+                                value="">
+                            <img class="check-circle" src="${pageContext.request.contextPath}/img/svg/check.svg">
+                        </div>
+                        <div>
+                            <input class="text-box diver" type="radio" name="avatar"
+                                value="">
+                            <img class="check-circle" src="${pageContext.request.contextPath}/img/svg/check.svg">
+                        </div>
+                    </div>
+                </div>
+                <div class="input-container">
+                    <p>Tema</p>
+                    <select class="text-box" name="">
+                        <option value="">Azul</option>
+                        <option value="">Verde</option>
+                        <option value="">Vermelho</option>
+                    </select>
+                </div>
+                <div>
+                    <button class="button fat" type="submit"><img class="icon-inner-button" src="${pageContext.request.contextPath}/img/svg/refresh.svg"><span>Atualizar informações</span></button>
+                </div>
+            </form>
+            
+            <form style="display:flex">
+                <button class="button" type="submit">
+                    <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/sign-out.svg">
+                    <span>Logout</span>
+                </button>
+            </form>
+        </div>
+    </div>
 
 </body>
 </html>
