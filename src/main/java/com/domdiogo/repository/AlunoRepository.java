@@ -267,6 +267,49 @@ public class AlunoRepository {
         }
     }
 
+    public Status atualizarFotoPerfil(int matricula, String fotoPerfil) {
+        String query = "update aluno set foto_perfil = ? where matricula = ?";
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        Connection connection = connectionFactory.connect();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, fotoPerfil);
+            preparedStatement.setInt(2, matricula);
+
+            int rows = preparedStatement.executeUpdate();
+            if (rows > 0) {
+                return Status.SUCCESS;
+            } else {
+                return Status.NOT_FOUND;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return Status.INTERNAL_ERROR;
+        } finally {
+            connectionFactory.disconnect(connection);
+        }
+    }
+
+    public String getFotoPerfil(int matricula) {
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        Connection connection = connectionFactory.connect();
+        String query = "select foto_perfil from aluno where matricula = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, matricula);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                return resultSet.getString("foto_perfil");
+            }
+            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            connectionFactory.disconnect(connection);
+        }
+    }
+
     public boolean isApto(String usuario) {
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.connect();

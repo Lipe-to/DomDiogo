@@ -48,9 +48,6 @@ public class AvisoServlet extends HttpServlet {
 
         switch (action) {
 
-            // =========================
-            // ALUNO
-            // =========================
             case "aluno":
 
                 redirect = "/WEB-INF/view/sights/notice-board/studentBoard.jsp";
@@ -82,9 +79,6 @@ public class AvisoServlet extends HttpServlet {
 
                 break;
 
-            // =========================
-            // PROFESSOR
-            // =========================
             case "professor":
 
                 redirect = "/WEB-INF/view/sights/notice-board/teacherBoard.jsp";
@@ -104,9 +98,6 @@ public class AvisoServlet extends HttpServlet {
 
                 break;
 
-            // =========================
-            // ADMIN
-            // =========================
             case "admin":
 
                 redirect = "/WEB-INF/view/sights/notice-board/adminBoard.jsp";
@@ -160,7 +151,6 @@ public class AvisoServlet extends HttpServlet {
         request.setAttribute("professores", professorRepository.read());
         request.setAttribute("avisos", avisos);
 
-        // ensure UI variables used by JSPs are available in request
         String nomeAttr = "";
         String fotoPerfilAttr = "";
         String roleAttr = "";
@@ -198,9 +188,6 @@ public class AvisoServlet extends HttpServlet {
 
         switch (action) {
 
-            // =========================
-            // CRIAR AVISO
-            // =========================
             case "create":
 
                 String titulo = request.getParameter("titulo");
@@ -237,10 +224,6 @@ public class AvisoServlet extends HttpServlet {
 
                 break;
 
-
-            // =========================
-            // DELETAR AVISO
-            // =========================
             case "delete":
 
                 String idAvisoParam = request.getParameter("id");
@@ -251,7 +234,6 @@ public class AvisoServlet extends HttpServlet {
 
                     AvisoEntity avisoExistente = avisoRepository.findById(idAviso);
 
-                    // segurança: professor só apaga aviso dele
                     if (avisoExistente != null &&
                             avisoExistente.getIdProfessor() == idProfessorSession) {
 

@@ -24,6 +24,10 @@
     font-weight: 600;
 }
 
+.notice-board * {
+    color: var(--white);
+}
+
 #postit-container {
     display: flex;
     flex-direction: column;

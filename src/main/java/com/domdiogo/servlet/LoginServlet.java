@@ -32,11 +32,9 @@ public class LoginServlet extends HttpServlet {
         switch (action) {
             case "login":
                 if (usuario.contains("@")) {
-                    // LOGIN ALUNO — busca por usuario, verifica senha com BCrypt
                     AlunoEntity aluno = alunoRepository.login(usuario);
 
                     if (aluno != null && PasswordUtil.check(senha, aluno.getSenha())) {
-                        // Migração transparente: se a senha estava em plain-text, re-hash
                         if (!PasswordUtil.isHashed(aluno.getSenha())) {
                             aluno.setSenha(PasswordUtil.hash(senha));
                             alunoRepository.update(aluno);
@@ -51,6 +49,7 @@ public class LoginServlet extends HttpServlet {
                                 "Login realizado com sucesso!",
                                 StatusColor.GREEN);
                         alunoRepository.updateUltimoLogin(aluno.getMatricula());
+                        session.setAttribute("fotoPerfil", alunoRepository.getFotoPerfil(aluno.getMatricula()));
 
                         redirect = "/studentHome";
                     } else {
@@ -61,11 +60,9 @@ public class LoginServlet extends HttpServlet {
                         redirect = "/index.jsp";
                     }
                 } else {
-                    // LOGIN PROFESSOR — busca por usuario, verifica senha com BCrypt
                     ProfessorEntity professor = professorRepository.login(usuario);
 
                     if (professor != null && PasswordUtil.check(senha, professor.getSenha())) {
-                        // Migração transparente
                         if (!PasswordUtil.isHashed(professor.getSenha())) {
                             professor.setSenha(PasswordUtil.hash(senha));
                             professorRepository.update(professor);
@@ -79,6 +76,7 @@ public class LoginServlet extends HttpServlet {
                                 "Login realizado com sucesso!",
                                 StatusColor.GREEN);
                         professorRepository.updateUltimoLogin(professor.getId());
+                        session.setAttribute("fotoPerfil", professorRepository.getFotoPerfil(professor.getId()));
                         redirect = "/teacherHome";
                     } else {
                         ServletHelper.configureStatus(request,
@@ -96,7 +94,6 @@ public class LoginServlet extends HttpServlet {
                 request.setAttribute("usuario", usuarioValidacao);
 
                 if (usuarioValidacao.contains("@")) {
-                    // VALIDAR PALAVRA - ALUNO
                     Status validarStatusAluno = alunoRepository.validarPalavra(usuarioValidacao, palavraValidacao);
 
                     if (validarStatusAluno == Status.SUCCESS) {
@@ -112,7 +109,6 @@ public class LoginServlet extends HttpServlet {
                         redirect = "/pages/login/forgot-password.jsp";
                     }
                 } else {
-                    // VALIDAR PALAVRA - PROFESSOR
                     Status validarStatusProfessor = professorRepository.validarPalavra(usuarioValidacao, palavraValidacao);
 
                     if (validarStatusProfessor == Status.SUCCESS) {
@@ -142,7 +138,6 @@ public class LoginServlet extends HttpServlet {
                     redirect = "/WEB-INF/view/login/reset-password.jsp";
                     request.setAttribute("userId", userIdStr);
                 } else {
-                    // Hash da nova senha com BCrypt
                     String senhaHash = PasswordUtil.hash(novaSenh);
                     int userId = Integer.parseInt(userIdStr);
 
@@ -195,11 +190,9 @@ public class LoginServlet extends HttpServlet {
                 break;
 
             case "loginAdmin":
-                // LOGIN ADMINISTRADOR — busca por usuario, verifica senha com BCrypt
                 AdministradorEntity admin = administradorRepository.findByUsuario(usuario);
 
                 if (admin != null && PasswordUtil.check(senha, admin.getSenha())) {
-                    // Migração transparente
                     if (!PasswordUtil.isHashed(admin.getSenha())) {
                         admin.setSenha(PasswordUtil.hash(senha));
                         administradorRepository.update(admin);
@@ -229,6 +222,19 @@ public class LoginServlet extends HttpServlet {
                 ServletHelper.configureStatus(request, "Logout realizado com sucesso!", StatusColor.GREEN);
                 redirect = "/index.jsp";
                 break;
+
+            case "alterarFoto":
+
+                if (session.getAttribute("idProfessor") != null) {
+                    professorRepository.atualizarFotoPerfil((int)session.getAttribute("id_professor"), request.getParameter("avatar"));
+                    session.setAttribute("fotoPerfil", professorRepository.getFotoPerfil((int)session.getAttribute("id_professor")));
+                    redirect = "/teacherHome.jsp";
+                }else {
+                    alunoRepository.atualizarFotoPerfil((int)session.getAttribute("matricula"), request.getParameter("avatar"));
+                    session.setAttribute("fotoPerfil", alunoRepository.getFotoPerfil((int)session.getAttribute("matricula")));
+                    redirect = "/studentHome.jsp";
+
+                }
 
             default:
                 ServletHelper.configureStatus(request, "Ação inválida.", StatusColor.RED);

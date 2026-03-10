@@ -13,12 +13,10 @@ public class PasswordUtil {
             return false;
         }
 
-        // Se o valor armazenado é um hash BCrypt (começa com $2a$ ou $2b$)
         if (storedPassword.startsWith("$2a$") || storedPassword.startsWith("$2b$")) {
             return BCrypt.checkpw(plainPassword, storedPassword);
         }
 
-        // Fallback: senha legada em plain-text — comparação direta
         return plainPassword.equals(storedPassword);
     }
 

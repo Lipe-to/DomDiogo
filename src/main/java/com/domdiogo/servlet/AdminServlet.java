@@ -39,60 +39,32 @@ public class AdminServlet extends HttpServlet {
 
         String action = request.getParameter("action");
 
-        // ===== LISTA DE ALUNOS =====
         List<AlunoEntity> listAlunos = alunoRepository.read();
         if (listAlunos == null) {
             listAlunos = new ArrayList<>();
         }
         request.setAttribute("listAlunos", listAlunos);
 
-        // ===== LISTA DE APTOS =====
         List<AptoEntity> listAptos = aptoRepository.read();
         if (listAptos == null) {
             listAptos = new ArrayList<>();
         }
         request.setAttribute("listAptos", listAptos);
 
-        // ===== ALUNOS + NOTAS (AlunoNotaDTO) — consulta única =====
         List<AlunoNotaDTO> todosAlunosNotas = notaRepository.findAllAlunosNotas();
         if (todosAlunosNotas == null) {
             todosAlunosNotas = new ArrayList<>();
         }
 
-        // ===== ESTATÍSTICAS (calculadas ANTES dos filtros) =====
-        int totalAlunos = listAlunos.size();
-        Set<String> turmas = new HashSet<>();
-        for (AlunoEntity a : listAlunos) {
-            if (a.getTurma() != null) turmas.add(a.getTurma());
-        }
-
-        int aprovados = 0, reprovados = 0;
-        for (AlunoNotaDTO dto : todosAlunosNotas) {
-            if (dto.getMedia() != null) {
-                if (dto.getMedia() >= 7.0) {
-                    aprovados++;
-                } else {
-                    reprovados++;
-                }
-            }
-        }
+        int totalAlunos = alunoRepository.read().size();
+        int countTurmas = new TurmaRepository().read().size();
         int totalNotas = todosAlunosNotas.size();
-        String percApp = "0.0";
-        String percRep = "0.0";
-        if (totalNotas > 0) {
-            percApp = String.format("%.1f", ((double) aprovados / totalNotas) * 100);
-            percRep = String.format("%.1f", ((double) reprovados / totalNotas) * 100);
-        }
 
         request.setAttribute("totalAlunos", totalAlunos);
-        request.setAttribute("totalTurmas", turmas.size());
-        request.setAttribute("percAprovados", percApp);
-        request.setAttribute("percReprovados", percRep);
+        request.setAttribute("totalTurmas", countTurmas);
 
-        // ===== FILTROS (aplicados sobre cópia da lista) =====
         List<AlunoNotaDTO> alunosNotas = new ArrayList<>(todosAlunosNotas);
 
-        // Filtro por busca de aluno (matrícula)
         if ("buscarAluno".equals(action)) {
             String matriculaStr = request.getParameter("matriculaAluno");
             if (matriculaStr != null && !matriculaStr.trim().isEmpty()) {
@@ -111,30 +83,13 @@ public class AdminServlet extends HttpServlet {
             }
         }
 
-        // Filtro por disciplina
-        String buscaDisciplina = request.getParameter("disciplina");
-        if (buscaDisciplina != null && !buscaDisciplina.trim().isEmpty()) {
-            List<AlunoNotaDTO> filtrados = new ArrayList<>();
-            for (AlunoNotaDTO dto : alunosNotas) {
-                if (dto.getDisciplinaNome() != null &&
-                        dto.getDisciplinaNome().toLowerCase().contains(buscaDisciplina.toLowerCase())) {
-                    filtrados.add(dto);
-                }
-            }
-            alunosNotas = filtrados;
-        }
-
         request.setAttribute("alunosNotas", alunosNotas);
 
-        // ===== OBSERVAÇÕES (TODAS) =====
         List<ObservacaoEntity> observacoes = observacaoRepository.read();
         if (observacoes == null) {
             observacoes = new ArrayList<>();
         }
         request.setAttribute("observacoes", observacoes);
-
-
-        // ===== REPOSITORIES para uso no JSP =====
         request.setAttribute("alunoRepository", alunoRepository);
         request.setAttribute("professorRepository", professorRepository);
 

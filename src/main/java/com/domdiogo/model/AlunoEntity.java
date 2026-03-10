@@ -7,6 +7,7 @@ public class AlunoEntity {
     private String senha;
     private String palavra;
     private String turma;
+    private String fotoPerfil;
     private String ultimoLogin;
 
     public AlunoEntity(int matricula, String nome, String usuario, String senha, String palavra, String turma, String ultimoLogin) {
@@ -56,6 +57,10 @@ public class AlunoEntity {
 
     public String getTurma() {
         return turma;
+    }
+
+    public String getFotoPerfil() {
+        return fotoPerfil;
     }
 
     public void setSenha(String novaSenh) {

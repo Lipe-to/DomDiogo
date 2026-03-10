@@ -97,10 +97,10 @@
     height: 80px;
     aspect-ratio: 1 / 1;
     
-    background-image: url('../img/flat/diver.png');
+    background-image: url('../img/avatar/default.png');
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 200%;
+    background-size: 105%;
 
     cursor: grab;
     border-radius: 100%;
@@ -314,6 +314,6 @@
 }
 
 .avatar input {
-    background-size: 200%;
+    background-size: 105%;
     background-position: center;
 }

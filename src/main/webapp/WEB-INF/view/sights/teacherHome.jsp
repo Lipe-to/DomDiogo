@@ -126,16 +126,15 @@
 
         <main>
             <div id="front-desk">
-                <div class="castle" id="welcome">
+                <div class="apple" id="welcome">
                     <div>
                         <h2>Olá <%=nome%>!</h2>
                         <p>Bem vindo de volta!</p>
                     </div>
-                    <a class="button">Ver observações</a>
+                    <a href="#observations" class="button">Ver observações</a>
                 </div>
                 <div class="general-statistic">
                     <h2>Visão geral</h2>
-                    <%-- <a href="" class="h2">Visão geral<img class="redirect" src="${pageContext.request.contextPath}/img/svg/redirect-blue.svg"></a> --%>
                     <div>
                         <%
                             String apprClass = "";
@@ -511,31 +510,79 @@
             <form style="display: flex;" action="${pageContext.request.contextPath}/login?action=alterarFoto" method="post">
                 <div class="input-container">
                     <p>Foto de perfil</p>
+                    <input name="action" value="alterarFoto" hidden>
                     <div class="avatar">
                         <div>
-                            <input class="text-box dino" type="radio" name="avatar"
-                                value="">
-                            <img class="check-circle" src="${pageContext.request.contextPath}/img/svg/check.svg">
-                         </div>
-                        <div>
-                            <input class="text-box diver" type="radio" name="avatar"
-                                value="">
+                            <input class="text-box bird" type="radio" name="avatar"
+                                value="bird">
                             <img class="check-circle" src="${pageContext.request.contextPath}/img/svg/check.svg">
                         </div>
                         <div>
                             <input class="text-box diver" type="radio" name="avatar"
-                                value="">
+                                value="diver">
+                            <img class="check-circle" src="${pageContext.request.contextPath}/img/svg/check.svg">
+                        </div>
+                        <div>
+                            <input class="text-box dragon" type="radio" name="avatar"
+                                value="dragon">
+                            <img class="check-circle" src="${pageContext.request.contextPath}/img/svg/check.svg">
+                        </div>
+                        <div>
+                            <input class="text-box dino" type="radio" name="avatar"
+                                value="dino">
+                            <img class="check-circle" src="${pageContext.request.contextPath}/img/svg/check.svg">
+                        </div>
+                        <div>
+                            <input class="text-box monster" type="radio" name="avatar"
+                                value="monster">
+                            <img class="check-circle" src="${pageContext.request.contextPath}/img/svg/check.svg">
+                        </div>
+                        <div>
+                            <input class="text-box flag" type="radio" name="avatar"
+                                value="flag">
+                            <img class="check-circle" src="${pageContext.request.contextPath}/img/svg/check.svg">
+                        </div>
+                        <div>
+                            <input class="text-box castle" type="radio" name="avatar"
+                                value="castle">
+                            <img class="check-circle" src="${pageContext.request.contextPath}/img/svg/check.svg">
+                        </div>
+                        <div>
+                            <input class="text-box apple" type="radio" name="avatar"
+                                value="apple">
+                            <img class="check-circle" src="${pageContext.request.contextPath}/img/svg/check.svg">
+                        </div>
+                        <div>
+                            <input class="text-box basket" type="radio" name="avatar"
+                                value="basket">
+                            <img class="check-circle" src="${pageContext.request.contextPath}/img/svg/check.svg">
+                        </div>
+                        <div>
+                            <input class="text-box cd" type="radio" name="avatar"
+                                value="cd">
+                            <img class="check-circle" src="${pageContext.request.contextPath}/img/svg/check.svg">
+                        </div>
+                        <div>
+                            <input class="text-box onigiri" type="radio" name="avatar"
+                                value="onigiri">
+                            <img class="check-circle" src="${pageContext.request.contextPath}/img/svg/check.svg">
+                        </div>
+                        <div>
+                            <input class="text-box sword" type="radio" name="avatar"
+                                value="sword">
+                            <img class="check-circle" src="${pageContext.request.contextPath}/img/svg/check.svg">
+                        </div>
+                        <div>
+                            <input class="text-box music" type="radio" name="avatar"
+                                value="music">
+                            <img class="check-circle" src="${pageContext.request.contextPath}/img/svg/check.svg">
+                        </div>
+                        <div>
+                            <input class="text-box default" type="radio" name="avatar"
+                                value="default">
                             <img class="check-circle" src="${pageContext.request.contextPath}/img/svg/check.svg">
                         </div>
                     </div>
-                </div>
-                <div class="input-container">
-                    <p>Tema</p>
-                    <select class="text-box" name="">
-                        <option value="">Azul</option>
-                        <option value="">Verde</option>
-                        <option value="">Vermelho</option>
-                    </select>
                 </div>
                 <div>
                     <button class="button fat" type="submit"><img class="icon-inner-button" src="${pageContext.request.contextPath}/img/svg/refresh.svg"><span>Atualizar informações</span></button>

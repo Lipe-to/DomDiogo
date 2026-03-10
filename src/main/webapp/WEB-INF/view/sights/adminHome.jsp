@@ -35,9 +35,6 @@
     Integer totalAlunos = (Integer) request.getAttribute("totalAlunos");
     Integer totalTurmas = (Integer) request.getAttribute("totalTurmas");
 
-    String percApp = (String) request.getAttribute("percAprovados");
-    String percRep = (String) request.getAttribute("percReprovados");
-
     List<AlunoEntity> listAlunos = (List<AlunoEntity>) request.getAttribute("listAlunos");
     List<AptoEntity> listAptos = (List<AptoEntity>) request.getAttribute("listAptos");
     List<AlunoNotaDTO> alunosNotas = (List<AlunoNotaDTO>) request.getAttribute("alunosNotas");
@@ -77,6 +74,7 @@
                 </li>
                 <li>
                     <form style="display: flex" action="${pageContext.request.contextPath}/aviso?action=admin" method="get">
+                        <input type="hidden" name="action" value="admin">
                         <button type="submit">
                             <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/address-book.svg">
                             <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/address-book.svg">
@@ -116,7 +114,7 @@
 
         <main>
             <div id="front-desk">
-                <div class="castle" id="welcome">
+                <div class="admin" id="welcome">
                     <div>
                         <h2>Olá administrador!</h2>
                         <p>Bem vindo de volta!</p>
@@ -133,16 +131,6 @@
                         <div>
                             <h3><span><%= totalTurmas != null ? totalTurmas : 0 %></span></h3>
                             <span>Total de turmas</span>
-                        </div>
-
-                        <div>
-                            <h3><span class="appr"><%= percApp != null ? percApp : "0" %></span>%</h3>
-                            <span>Alunos aprovados</span>
-                        </div>
-
-                        <div>
-                            <h3><span class="repr"><%= percRep != null ? percRep : "0" %></span>%</h3>
-                            <span>Alunos reprovados</span>
                         </div>
 
                     </div>
@@ -388,9 +376,6 @@
                 </div>
             </div>
 
-
-            <!-- DADOS DOS ALUNOS -->
-
             <div id="students">
 
                 <h1>Dados dos Alunos</h1>
@@ -546,7 +531,7 @@
 
             <div id="fit-in">
 
-                <h1>Dados dos Alunos</h1>
+                <h1>Aptos à Registro</h1>
 
                 <div class="table-container">
 
@@ -693,11 +678,6 @@
                 <h1>Observações</h1>
 
                 <div class="actions-section-container">
-
-                    <button popovertarget="popup-obs">
-                        Adicionar Observação
-                    </button>
-
                 </div>
 
                 <div class="card-container">
