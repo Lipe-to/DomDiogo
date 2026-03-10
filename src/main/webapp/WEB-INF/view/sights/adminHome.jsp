@@ -35,9 +35,6 @@
     Integer totalAlunos = (Integer) request.getAttribute("totalAlunos");
     Integer totalTurmas = (Integer) request.getAttribute("totalTurmas");
 
-    String percApp = (String) request.getAttribute("percAprovados");
-    String percRep = (String) request.getAttribute("percReprovados");
-
     List<AlunoEntity> listAlunos = (List<AlunoEntity>) request.getAttribute("listAlunos");
     List<AptoEntity> listAptos = (List<AptoEntity>) request.getAttribute("listAptos");
     List<AlunoNotaDTO> alunosNotas = (List<AlunoNotaDTO>) request.getAttribute("alunosNotas");
@@ -77,6 +74,7 @@
                 </li>
                 <li>
                     <form style="display: flex" action="${pageContext.request.contextPath}/aviso?action=admin" method="get">
+                        <input type="hidden" name="action" value="admin">
                         <button type="submit">
                             <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/address-book.svg">
                             <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/address-book.svg">
@@ -133,16 +131,6 @@
                         <div>
                             <h3><span><%= totalTurmas != null ? totalTurmas : 0 %></span></h3>
                             <span>Total de turmas</span>
-                        </div>
-
-                        <div>
-                            <h3><span class="appr"><%= percApp != null ? percApp : "0" %></span>%</h3>
-                            <span>Alunos aprovados</span>
-                        </div>
-
-                        <div>
-                            <h3><span class="repr"><%= percRep != null ? percRep : "0" %></span>%</h3>
-                            <span>Alunos reprovados</span>
                         </div>
 
                     </div>

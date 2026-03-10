@@ -50,14 +50,6 @@ public class NotaEntity {
         return this.media;
     }
 
-    public String getMediaCalculada() {
-        if (n1 == null || n2 == null) {
-            return "-";
-        }
-        double media = (n1 + n2) / 2;
-        return String.format("%.2f", media);
-    }
-
     public int getIdDisciplina() {
         return this.idDisciplina;
     }
@@ -70,13 +62,6 @@ public class NotaEntity {
         return this.nomeDisciplina;
     }
 
-    public String getSituacao() {
-        if (media == null) return "Calma, ainda sem nota(s)!";
-        return media >= 7.0 ? "Aprovado" : "Reprovado";
-    }
 
-    public String getSituacaoCss() {
-        if (media == null) return "";
-        return media >= 7.0 ? "appr" : "repr";
-    }
+
 }

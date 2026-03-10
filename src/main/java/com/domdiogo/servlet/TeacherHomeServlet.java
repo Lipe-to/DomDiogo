@@ -37,7 +37,6 @@ public class TeacherHomeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
 
-        // Verificar se o professor está logado
         if (session.getAttribute("idProfessor") == null) {
             response.sendRedirect(request.getContextPath() + "/pages/login/login.jsp");
             return;
@@ -47,26 +46,22 @@ public class TeacherHomeServlet extends HttpServlet {
         String nome = (String) session.getAttribute("nome");
         String action = request.getParameter("action");
 
-        // Carregando todos os alunos
         List<AlunoEntity> listAlunos = alunoRepository.read();
         if (listAlunos == null) {
             listAlunos = new ArrayList<>();
         }
         request.setAttribute("listAlunos", listAlunos);
 
-        // Carregando alunos e notas para o professor
         List<AlunoNotaDTO> alunosNotas = notaRepository.findAlunosByProfessor(idProfessor);
         if (alunosNotas == null) {
             alunosNotas = new ArrayList<>();
         }
 
-        // Se foi enviado busca por aluno
         if ("buscarAluno".equals(action)) {
             String matriculaStr = request.getParameter("matriculaAluno");
             if (matriculaStr != null && !matriculaStr.trim().isEmpty()) {
                 try {
                     int matricula = Integer.parseInt(matriculaStr);
-                    // Filtrar apenas as notas do aluno buscado
                     List<AlunoNotaDTO> alunosNotasFiltrados = new ArrayList<>();
                     for (AlunoNotaDTO nota : alunosNotas) {
                         if (nota.getMatricula() == matricula) {
@@ -79,12 +74,10 @@ public class TeacherHomeServlet extends HttpServlet {
                 }
             }
         } else if ("listarTodos".equals(action)) {
-            // Listar todos (já carregados acima)
         }
 
         request.setAttribute("alunosNotas", alunosNotas);
 
-        // Carregando observações do professor
         List<ObservacaoEntity> observacoes = observacaoRepository.findByProfessor(idProfessor);
         if (observacoes == null) {
             observacoes = new ArrayList<>();
@@ -96,7 +89,6 @@ public class TeacherHomeServlet extends HttpServlet {
         request.setAttribute("countAlunosAprovado", alunoRepository.porcentagemAlunos(TipoCount.REPROVADO, idProfessor));
         request.setAttribute("countAlunosSemNota", alunoRepository.porcentagemAlunos(TipoCount.SEM_NOTA, idProfessor));
 
-        // Passando repositórios que serão usados no JSP
         request.setAttribute("alunoRepository", alunoRepository);
         request.setAttribute("professorRepository", professorRepository);
 

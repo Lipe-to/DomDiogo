@@ -5,8 +5,7 @@ public class AlunoNotaDTO {
     private int matricula;
     private String nomeAluno;
     private String turma;
-    private String ultimoLogin; // novo campo
-
+    private String ultimoLogin;
     private Integer notaId;
     private Double n1;
     private Double n2;
@@ -14,17 +13,7 @@ public class AlunoNotaDTO {
     private Integer idDisciplina;
     private String disciplinaNome;
 
-    public AlunoNotaDTO(int matricula,
-                        String nomeAluno,
-                        String turma,
-                        String ultimoLogin,
-                        Integer notaId,
-                        Double n1,
-                        Double n2,
-                        Double media,
-                        Integer idDisciplina,
-                        String disciplinaNome) {
-
+    public AlunoNotaDTO(int matricula, String nomeAluno, String turma, String ultimoLogin, Integer notaId, Double n1, Double n2, Double media, Integer idDisciplina, String disciplinaNome) {
         this.matricula = matricula;
         this.nomeAluno = nomeAluno;
         this.turma = turma;

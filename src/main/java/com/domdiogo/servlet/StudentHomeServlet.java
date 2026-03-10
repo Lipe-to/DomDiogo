@@ -28,7 +28,6 @@ public class StudentHomeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
 
-        // Verificar se o aluno está logado
         if (session.getAttribute("matricula") == null) {
             response.sendRedirect(request.getContextPath() + "/pages/login/login.jsp");
             return;
@@ -37,21 +36,18 @@ public class StudentHomeServlet extends HttpServlet {
         int matricula = (int) session.getAttribute("matricula");
         String nome = (String) session.getAttribute("nome");
 
-        // Carregando notas do aluno
         List<NotaEntity> notas = notaRepository.findByMatricula(matricula);
         if (notas == null) {
             notas = new ArrayList<>();
         }
         request.setAttribute("notas", notas);
 
-        // Carregando observações do aluno
         List<ObservacaoEntity> observacoes = observacaoRepository.findByMatriculaAluno(matricula);
         if (observacoes == null) {
             observacoes = new ArrayList<>();
         }
         request.setAttribute("observacoes", observacoes);
 
-        // Passando o repositório de professor para o JSP poder obter os nomes
         request.setAttribute("professorRepository", professorRepository);
 
         ServletHelper.redirect(request, response, "/WEB-INF/view/sights/studentHome.jsp");
