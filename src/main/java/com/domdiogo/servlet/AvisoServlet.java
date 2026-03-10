@@ -90,24 +90,14 @@ public class AvisoServlet extends HttpServlet {
 
                 if (idProfessorSession != null) {
 
-                    if (turma != null && !turma.isBlank()) {
+                    if (regex != null && !regex.isBlank()) {
 
-                        avisos = avisoRepository.findByProfessorAndTurma(idProfessorSession, turma);
+                        avisos = avisoRepository.findByAvisoRegexAndProfessor(regex, idProfessorSession);
 
                     } else {
 
                         avisos = avisoRepository.findByProfessor(idProfessorSession);
 
-                    }
-
-                    if (regex != null && !regex.isBlank()) {
-
-                        String r = regex.toLowerCase();
-
-                        avisos.removeIf(a ->
-                                a.getAviso() == null ||
-                                        !a.getAviso().toLowerCase().contains(r)
-                        );
                     }
                 }
 
