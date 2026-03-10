@@ -85,6 +85,21 @@ body {
     white-space: nowrap;
 }
 
+@media (max-width: 1100px) {
+    #front-desk {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #front-desk>* {
+        width: auto !important;
+    }
+
+    #welcome {
+        min-height: 240px;
+    }
+}
+
 #welcome {
     width: 40%;
 }
@@ -242,6 +257,10 @@ table {
     background-color: var(--table-grey);
 }
 
+table thead {
+    position: sticky;
+}
+
 table th {
     padding: 2% 0;
     color: var(--white);
@@ -387,7 +406,7 @@ body.white #sidebar {
 }
 
 body.white #sidebar li.emphasis,
-#menu-icon-container {
+body.white #menu-icon-container {
     background-color: rgb(80, 80, 80)
 }
 
@@ -412,7 +431,7 @@ body.black #sidebar {
 }
 
 body.black #sidebar li.emphasis,
-#menu-icon-container {
+body.black #menu-icon-container {
     background-color: rgb(231, 231, 231)
 }
 
@@ -495,6 +514,12 @@ body.black #sidebar * {
 #sidebar li>* {
     cursor: pointer;
 }
+
+#sidebar li>button, #sidebar li>form>button {
+    background: none;
+    border: 0;
+}
+
 
 #sidebar li a {
     opacity: 80%;
@@ -608,21 +633,30 @@ header {
     justify-content: end;
     align-items: center;
     overflow: hidden;
+}
+
+.personal-info h3, .personal-info p {
     color: var(--white);
+    opacity: 90%;
 }
 
 .profile-image {
-    width: 34px;
+    width: 40px;
     aspect-ratio: 1 / 1;
 
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
 
+    cursor: grab;
     border-width: 1px;
     border-style: solid;
     border-radius: 100%;
     border-color: var(--white);
+}
+
+.profile-image:active {
+    cursor: grabbing;
 }
 
 .foto-1 {
@@ -691,7 +725,7 @@ header {
     flex-direction: row-reverse;
 }
 
-.table-actions>:last-child {
+.table-actions .expand-button {
     width: 30%;
     min-width: 140px;
 }
@@ -733,6 +767,14 @@ header {
 
     overflow: auto;
     max-height: 400px;
+}
+
+.card-container:has(.no-obs) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1% 1.25% !important;
+    height: 90px;
 }
 
 .card {

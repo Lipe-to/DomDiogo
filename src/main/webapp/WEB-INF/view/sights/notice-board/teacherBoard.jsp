@@ -20,9 +20,64 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/font.css">
 </head>
 
-<body id="blue-theme">
+<body id="blue-theme" class="black">
+<li id="menu-icon-container">
+        <label id="menu-icon" for="menu-checkbox">
+            <img class="sidebar-icon expand white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/menu-burger.svg">
+            <img class="sidebar-icon reduce white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/reduce-menu.svg">
 
+            <img class="sidebar-icon expand black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/menu-burger.svg">
+            <img class="sidebar-icon reduce black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/reduce-menu.svg">
+        </label>
+        <input name="menu-checkbox" id="menu-checkbox" type="checkbox" hidden>
+    </li>
+    <aside id="sidebar">
+        <div>
+            <div class="logo">
+                <img src="${pageContext.request.contextPath}/img/branding/icone.png" draggable="false">
+                <img class="white" src="${pageContext.request.contextPath}/img/branding/white.png" draggable="false">
+                <img style="opacity: 80%;" class="black" src="${pageContext.request.contextPath}/img/branding/black.png" draggable="false">
+            </div>
+            <ul>
+                <li class="emphasis">
+                    <a href="adminHome">
+                        <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/home.svg">
+                        <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/home.svg">
+                        <span>Tela Inicial</span>
+                    </a>
+                </li>
+                <li>
+                    <form style="display: flex" action="${pageContext.request.contextPath}/observacao?action=findByMatriculaAluno">
+                        <button type="submit">
+                            <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/address-book.svg">
+                            <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/address-book.svg">
+                            <span>Quadro de Avisos</span>
+                        </button>
+                    </form>
+                </li>
+                <li class="divide">
+                    <button popovertarget="popup-profile" type="button">
+                        <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/user.svg">
+                        <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/user.svg">
+                        <span>Meu perfil</span>
+                    </button>
+                </li>
+                <li id="sign-out">
+                    <form style="display: flex" action="${pageContext.request.contextPath}/login?action=logout" method="post">
+                        <button type="submit">
+                            <img class="sidebar-icon white"
+                                src="${pageContext.request.contextPath}/img/svg/sidebar/white/sign-out.svg">
+                            <img class="sidebar-icon black"
+                                src="${pageContext.request.contextPath}/img/svg/sidebar/black/sign-out.svg">
+                            <span>Sair</span>
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </aside>
 <div id="major-container">
+
     <div id="wrap">
         <main>
 
@@ -41,55 +96,8 @@
 
                             <input class="search-box"
                                    type="text"
-                                   name="search"
+                                   name="regex"
                                    placeholder="Digite parte do aviso">
-
-                        </div>
-
-                        <br><br><br><br>
-
-                        <div>
-
-                            <p>Turmas:</p>
-
-                            <select name="turmas[]" class="search-box" multiple >
-
-                                <%
-
-                                    List<String> turmas =
-                                            (List<String>) request.getAttribute("turmas");
-
-                                    if(turmas != null){
-
-                                        for(String t : turmas){
-
-                                %>
-
-                                <option value="<%=t%>">
-
-                                    <%=t%>
-
-                                </option>
-
-                                <%
-
-                                        }
-
-                                    }
-
-                                %>
-
-                            </select>
-
-                        </div>
-
-                        <br><br>
-
-                        <div>
-
-                            <p>Prazo:</p>
-
-                            <input type="date" name="prazo" class="search-box">
 
                         </div>
 
