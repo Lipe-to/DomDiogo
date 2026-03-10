@@ -59,7 +59,7 @@
                     </a>
                 </li>
                 <li>
-                    <form style="display: flex" action="${pageContext.request.contextPath}/aviso?action=aluno" method="get">
+                    <form style="display: flex" action="${pageContext.request.contextPath}/observacao?action=findByMatriculaAluno">
                         <button type="submit">
                             <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/address-book.svg">
                             <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/address-book.svg">
