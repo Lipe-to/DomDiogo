@@ -10,6 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -160,5 +161,91 @@ public class AvisoServlet extends HttpServlet {
         request.setAttribute("avisos", avisos);
 
         ServletHelper.redirect(request, response, redirect);
+    }
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String action = request.getParameter("action");
+
+        HttpSession session = request.getSession(false);
+        Integer idProfessorSession = null;
+
+        if (session != null) {
+            idProfessorSession = (Integer) session.getAttribute("idProfessor");
+        }
+
+        if (idProfessorSession == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+
+        switch (action) {
+
+            // =========================
+            // CRIAR AVISO
+            // =========================
+            case "create":
+
+                String titulo = request.getParameter("titulo");
+                String avisoTexto = request.getParameter("aviso");
+                String prazoParam = request.getParameter("prazo");
+                String cor = request.getParameter("cor");
+
+                String[] turmasSelecionadas = request.getParameterValues("turmas");
+
+                LocalDate prazo = null;
+
+                if (prazoParam != null && !prazoParam.isBlank()) {
+                    prazo = LocalDate.parse(prazoParam);
+                }
+
+                List<String> turmas = new ArrayList<>();
+
+                if (turmasSelecionadas != null) {
+                    for (String t : turmasSelecionadas) {
+                        turmas.add(t);
+                    }
+                }
+
+                AvisoEntity aviso = new AvisoEntity(
+                        0,
+                        titulo,
+                        avisoTexto,
+                        prazo,
+                        idProfessorSession,
+                        cor
+                );
+
+                avisoRepository.create(aviso, turmas);
+
+                break;
+
+
+            // =========================
+            // DELETAR AVISO
+            // =========================
+            case "delete":
+
+                String idAvisoParam = request.getParameter("id");
+
+                if (idAvisoParam != null) {
+
+                    int idAviso = Integer.parseInt(idAvisoParam);
+
+                    AvisoEntity avisoExistente = avisoRepository.findById(idAviso);
+
+                    // segurança: professor só apaga aviso dele
+                    if (avisoExistente != null &&
+                            avisoExistente.getIdProfessor() == idProfessorSession) {
+
+                        avisoRepository.delete(idAviso);
+                    }
+                }
+
+                break;
+        }
+
+        response.sendRedirect("aviso?action=professor");
     }
 }
