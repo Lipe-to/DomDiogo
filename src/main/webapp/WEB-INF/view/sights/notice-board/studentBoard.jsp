@@ -78,80 +78,62 @@
     </aside>
 <div id="major-container">
 
+    <header>
+        <a href="#">
+            <div class="logo">
+                <img src="${pageContext.request.contextPath}/img/branding/icone.png" draggable="false">
+                <img src="${pageContext.request.contextPath}/img/branding/white.png" draggable="false">
+                </div>
+            </a>
+            <div class="personal-info">
+                <div class="profile-image <%=fotoPerfil%>"></div>
+                <div>
+                    <h3><%=nome%></h3>
+                    <p>Aluno</p>
+                </div>
+            </div>
+        </header>
     <div id="wrap">
 
         <main>
 
             <div id="filter-container">
-
                 <h1>Filtros</h1>
-
-                <div class="filters">
-
-                    <form action="<%=request.getContextPath()%>/aviso" method="get">
-
-                        <input type="hidden" name="action" value="aluno"/>
-
+                <form action="<%=request.getContextPath()%>/aviso" method="get" style="flex-direction: column;" class="filters">
+                    <div>
+                        <p style="margin-bottom: 1%;">Pesquisar por título ou conteúdo:</p>
                         <div>
-                            <p>Pesquisa por texto:</p>
-
-                            <input
-                                    class="search-box"
+                            <input type="hidden" name="action" value="aluno">
+                            <label style="cursor: pointer;" for="search-submit"><button type="submit"><img src="img/svg/search.svg"></button></label>
+                            <input class="search-box"
                                     type="text"
                                     name="regex"
-                                    placeholder="Digite parte do aviso"
-                            >
-
+                                    placeholder="Digite parte do aviso">
                         </div>
-
-                        <br><br><br><br>
-
+                    </div>
+                    <div>
+                        <p style="margin-bottom: 1%;">Selecione o professor:</p>
                         <div>
-
-                            <p>Professor:</p>
-
+                            <input type="hidden" name="action" value="aluno">
                             <select name="professor" class="search-box">
-
-                                <option value="">Selecione o professor</option>
-
+                                <option disabled selected>Selecione o professor</option>
                                 <%
-
                                     List<ProfessorEntity> professores =
                                             (List<ProfessorEntity>) request.getAttribute("professores");
-
                                     if (professores != null) {
-
                                         for (ProfessorEntity p : professores) {
-
                                 %>
-
                                 <option value="<%=p.getId()%>">
-
                                     <%=p.getNome()%>
-
                                 </option>
-
                                 <%
-
-                                        }
-
-                                    }
-
+                                    }}
                                 %>
-
                             </select>
-
                         </div>
-
-                        <button type="submit">
-
-                            <img src="<%=request.getContextPath()%>/img/svg/search.svg">
-
-                        </button>
-
-                    </form>
-
-                </div>
+                    </div>
+                </form>
+            </div>
 
             </div>
 

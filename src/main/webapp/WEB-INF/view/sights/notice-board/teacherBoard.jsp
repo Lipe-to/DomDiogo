@@ -100,42 +100,36 @@
     </div>
 </aside>
 <div id="major-container">
-
     <div id="wrap">
+        <header>
+            <a href="#">
+                <div class="logo">
+                    <img src="${pageContext.request.contextPath}/img/branding/icone.png" draggable="false">
+                    <img src="${pageContext.request.contextPath}/img/branding/white.png" draggable="false">
+                </div>
+            </a>
+            <div class="personal-info">
+                <div class="profile-image <%=fotoPerfil%>"></div>
+                <div>
+                    <h3><%=nome%></h3>
+                    <p>Professor(a) de <%=disciplina%></p>
+                </div>
+            </div>
+        </header>
         <main>
-
             <div id="filter-container">
-
                 <h1>Filtros</h1>
-
-                <div class="filters">
-
+                <div style="flex-direction: column;" class="filters">
+                    <p style="margin-bottom: 1%;">Pesquisar por título ou conteúdo:</p>
                     <form action="<%=request.getContextPath()%>/aviso" method="get">
-
-                        <input type="hidden" name="action" value="professor"/>
-
-                        <div>
-                            <p>Pesquisa por texto:</p>
-
-                            <input class="search-box"
+                        <input type="hidden" name="action" value="professor">
+                        <label style="cursor: pointer;" for="search-submit"><button type="submit"><img src="img/svg/search.svg"></button></label>
+                        <input class="search-box"
                                    type="text"
                                    name="regex"
                                    placeholder="Digite parte do aviso">
-
-                        </div>
-
-                        <button type="submit">
-
-                            <img src="<%=request.getContextPath()%>/img/svg/search.svg">
-
-                        </button>
-
                     </form>
-                    <button popovertarget="popup-notice-board" type="button">
-                        Enviar aviso
-                    </button>
                 </div>
-
             </div>
 
 
@@ -249,7 +243,7 @@
                 <p class="required">Conteúdo</p>
                 <textarea class="text-box" name="aviso" required></textarea>
             </div>
-            
+
             <div class="input-container">
                 <p class="required">Prazo (opcional)</p>
                 <input class="text-box" name="date" type="date">
@@ -260,7 +254,8 @@
                     TurmaRepository turmaRepository = new TurmaRepository();
                     for (String turma : turmaRepository.read()) {
                 %>
-                <option value="<%=turma%>"><%=turma%></option>
+                <option value="<%=turma%>"><%=turma%>
+                </option>
                 <%
                     }
                 %>
@@ -270,7 +265,8 @@
                 <p class="required">Cores</p>
                 <div class="colors">
                     <div>
-                        <input style="background-color: #3C71BA;" class="text-box" type="radio" name="cor" value="BLUE" checked>
+                        <input style="background-color: #3C71BA;" class="text-box" type="radio" name="cor" value="BLUE"
+                               checked>
                         <img class="check-circle" src="img/svg/check.svg">
                     </div>
                     <div>
@@ -278,31 +274,38 @@
                         <img class="check-circle" src="img/svg/check.svg">
                     </div>
                     <div>
-                        <input style="background-color: #8D99D6;" class="text-box" type="radio" name="cor" value="TEA_BLUE">
+                        <input style="background-color: #8D99D6;" class="text-box" type="radio" name="cor"
+                               value="TEA_BLUE">
                         <img class="check-circle" src="img/svg/check.svg">
                     </div>
                     <div>
-                        <input style="background-color: #ca93c7;" class="text-box" type="radio" name="cor" value="PURPLE">
+                        <input style="background-color: #ca93c7;" class="text-box" type="radio" name="cor"
+                               value="PURPLE">
                         <img class="check-circle" src="img/svg/check.svg">
                     </div>
                     <div>
-                        <input style="background-color: #86d1a8;" class="text-box" type="radio" name="cor" value="GREEN">
+                        <input style="background-color: #86d1a8;" class="text-box" type="radio" name="cor"
+                               value="GREEN">
                         <img class="check-circle" src="img/svg/check.svg">
                     </div>
                     <div>
-                        <input style="background-color: #b0cf89;" class="text-box" type="radio" name="cor" value="LIME_GREEN">
+                        <input style="background-color: #b0cf89;" class="text-box" type="radio" name="cor"
+                               value="LIME_GREEN">
                         <img class="check-circle" src="img/svg/check.svg">
                     </div>
                     <div>
-                        <input style="background-color: #e08383;" class="text-box" type="radio" name="cor" value="SMOOTH_RED">
+                        <input style="background-color: #e08383;" class="text-box" type="radio" name="cor"
+                               value="SMOOTH_RED">
                         <img class="check-circle" src="img/svg/check.svg">
                     </div>
                     <div>
-                        <input style="background-color: #dfb381;" class="text-box" type="radio" name="cor" value="ORANGE">
+                        <input style="background-color: #dfb381;" class="text-box" type="radio" name="cor"
+                               value="ORANGE">
                         <img class="check-circle" src="img/svg/check.svg">
                     </div>
                     <div>
-                        <input style="background-color: #b5b5b5;" class="text-box" type="radio" name="cor" value="DEFAULT">
+                        <input style="background-color: #b5b5b5;" class="text-box" type="radio" name="cor"
+                               value="DEFAULT">
                         <img class="check-circle" src="img/svg/check.svg">
                     </div>
                 </div>
@@ -316,68 +319,65 @@
 </div>
 
 
-
-
-
-
-
-
-
-
 <div id="popup-profile" class="popup profile" popover="auto">
-        <button class="popup-cross" popovertarget="popup-profile" popovertargetaction="hide" type="button">
-            <img src="${pageContext.request.contextPath}/img/svg/cross-small.svg">
-        </button>
-        <div class="personal-profile">
-            <div class="<%=fotoPerfil%>"></div>
-            <div>
-                <h1><%=nome%></h1>
-                <p>Professor(a) de <%=disciplina%></p>
-            </div>
-        </div>
-        <div class="input-major">
-            <form style="display: flex;" action="${pageContext.request.contextPath}/login?action=alterarFoto" method="post">
-                <div class="input-container">
-                    <p>Foto de perfil</p>
-                    <div class="avatar">
-                        <div>
-                            <input class="text-box dino" type="radio" name="avatar"
-                                value="">
-                            <img class="check-circle" src="${pageContext.request.contextPath}/img/svg/check.svg">
-                         </div>
-                        <div>
-                            <input class="text-box diver" type="radio" name="avatar"
-                                value="">
-                            <img class="check-circle" src="${pageContext.request.contextPath}/img/svg/check.svg">
-                        </div>
-                        <div>
-                            <input class="text-box diver" type="radio" name="avatar"
-                                value="">
-                            <img class="check-circle" src="${pageContext.request.contextPath}/img/svg/check.svg">
-                        </div>
-                    </div>
-                </div>
-                <div class="input-container">
-                    <p>Tema</p>
-                    <select class="text-box" name="">
-                        <option value="">Azul</option>
-                        <option value="">Verde</option>
-                        <option value="">Vermelho</option>
-                    </select>
-                </div>
-                <div>
-                    <button class="button fat" type="submit"><img class="icon-inner-button" src="${pageContext.request.contextPath}/img/svg/refresh.svg"><span>Atualizar informações</span></button>
-                </div>
-            </form>
-            
-            <form style="display:flex">
-                <button class="button" type="submit">
-                    <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/sign-out.svg">
-                    <span>Logout</span>
-                </button>
-            </form>
+    <button class="popup-cross" popovertarget="popup-profile" popovertargetaction="hide" type="button">
+        <img src="${pageContext.request.contextPath}/img/svg/cross-small.svg">
+    </button>
+    <div class="personal-profile">
+        <div class="<%=fotoPerfil%>"></div>
+        <div>
+            <h1><%=nome%>
+            </h1>
+            <p>Professor(a) de <%=disciplina%>
+            </p>
         </div>
     </div>
+    <div class="input-major">
+        <form style="display: flex;" action="${pageContext.request.contextPath}/login?action=alterarFoto" method="post">
+            <div class="input-container">
+                <p>Foto de perfil</p>
+                <div class="avatar">
+                    <div>
+                        <input class="text-box dino" type="radio" name="avatar"
+                               value="">
+                        <img class="check-circle" src="${pageContext.request.contextPath}/img/svg/check.svg">
+                    </div>
+                    <div>
+                        <input class="text-box diver" type="radio" name="avatar"
+                               value="">
+                        <img class="check-circle" src="${pageContext.request.contextPath}/img/svg/check.svg">
+                    </div>
+                    <div>
+                        <input class="text-box diver" type="radio" name="avatar"
+                               value="">
+                        <img class="check-circle" src="${pageContext.request.contextPath}/img/svg/check.svg">
+                    </div>
+                </div>
+            </div>
+            <div class="input-container">
+                <p>Tema</p>
+                <select class="text-box" name="">
+                    <option value="">Azul</option>
+                    <option value="">Verde</option>
+                    <option value="">Vermelho</option>
+                </select>
+            </div>
+            <div>
+                <button class="button fat" type="submit"><img class="icon-inner-button"
+                                                              src="${pageContext.request.contextPath}/img/svg/refresh.svg"><span>Atualizar informações</span>
+                </button>
+            </div>
+        </form>
+
+        <form style="display:flex">
+            <button class="button" type="submit">
+                <img class="sidebar-icon black"
+                     src="${pageContext.request.contextPath}/img/svg/sidebar/black/sign-out.svg">
+                <span>Logout</span>
+            </button>
+        </form>
+    </div>
+</div>
 
 </body>
 </html>
