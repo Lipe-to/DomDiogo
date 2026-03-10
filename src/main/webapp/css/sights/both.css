@@ -196,12 +196,14 @@ main>*,
 }
 
 #grades>:first-child,
-#students>:first-child {
+#students>:first-child,
+#fit-in>:first-child {
     margin-bottom: 1%;
 }
 
 #grades,
 #students,
+#fit-in,
 .grid-layout {
     background-color: var(--white);
 }
@@ -277,12 +279,14 @@ table td {
 }
 
 #report-card th,
-#students-info th {
+#students-info th,
+#fit-in-info th {
     padding: 1.45%;
 }
 
 #report-card td,
-#students-info td {
+#students-info td,
+#fit-in-info td {
     padding: 1.55%;
 }
 
@@ -511,7 +515,7 @@ body.black #sidebar * {
     transition: width 0.6s ease-in-out, background-color 0.2s ease, transform 0.3s ease-in-out;
 }
 
-#sidebar li>* {
+#sidebar li * {
     cursor: pointer;
 }
 

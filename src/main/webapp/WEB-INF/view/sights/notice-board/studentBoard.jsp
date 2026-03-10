@@ -20,6 +20,11 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/font.css">
 </head>
 
+<%
+    String nome = (String) session.getAttribute("nome");
+    String fotoPerfil = (String) session.getAttribute("fotoPerfil");
+%>
+
 <body id="blue-theme" class="black">
 <li id="menu-icon-container">
         <label id="menu-icon" for="menu-checkbox">
@@ -39,14 +44,14 @@
                 <img style="opacity: 80%;" class="black" src="${pageContext.request.contextPath}/img/branding/black.png" draggable="false">
             </div>
             <ul>
-                <li class="emphasis">
+                <li>
                     <a href="adminHome">
                         <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/home.svg">
                         <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/home.svg">
                         <span>Tela Inicial</span>
                     </a>
                 </li>
-                <li>
+                <li class="emphasis">
                     <form style="display: flex" action="${pageContext.request.contextPath}/observacao?action=findByMatriculaAluno">
                         <button type="submit">
                             <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/address-book.svg">
@@ -77,82 +82,59 @@
         </div>
     </aside>
 <div id="major-container">
-
     <div id="wrap">
+        <header>
+        <a href="#">
+            <div class="logo">
+                <img src="${pageContext.request.contextPath}/img/branding/icone.png" draggable="false">
+                <img src="${pageContext.request.contextPath}/img/branding/white.png" draggable="false">
+                </div>
+            </a>
+            <div class="personal-info">
+                <div class="profile-image <%=fotoPerfil%>"></div>
+                <div>
+                    <h3><%=nome%></h3>
+                    <p>Aluno</p>
+                </div>
+            </div>
+        </header>
 
         <main>
 
-            <div id="filter-container">
-
+            <div id="filter-container" class="student-board-filters">
                 <h1>Filtros</h1>
-
                 <div class="filters">
-
                     <form action="<%=request.getContextPath()%>/aviso" method="get">
+                        <input type="hidden" name="action" value="aluno">
+                            <label style="cursor:pointer;">
+                                <button type="submit">
+                                    <img src="${pageContext.request.contextPath}/img/svg/search.svg">
+                                </button>
+                            </label>
+                            <input class="search-box"
+                                type="text"
+                                name="regex"
+                                placeholder="Digite parte do aviso">
 
-                        <input type="hidden" name="action" value="aluno"/>
-
-                        <div>
-                            <p>Pesquisa por texto:</p>
-
-                            <input
-                                    class="search-box"
-                                    type="text"
-                                    name="regex"
-                                    placeholder="Digite parte do aviso"
-                            >
-
-                        </div>
-
-                        <br><br><br><br>
-
-                        <div>
-
-                            <p>Professor:</p>
-
-                            <select name="professor" class="search-box">
-
-                                <option value="">Selecione o professor</option>
-
+                            <select name="professor" class="search-box text-box">
+                                <option disabled selected>Selecione o professor</option>
                                 <%
-
                                     List<ProfessorEntity> professores =
                                             (List<ProfessorEntity>) request.getAttribute("professores");
 
                                     if (professores != null) {
-
                                         for (ProfessorEntity p : professores) {
-
                                 %>
-
                                 <option value="<%=p.getId()%>">
-
                                     <%=p.getNome()%>
-
                                 </option>
-
                                 <%
-
                                         }
-
                                     }
-
                                 %>
-
                             </select>
-
-                        </div>
-
-                        <button type="submit">
-
-                            <img src="<%=request.getContextPath()%>/img/svg/search.svg">
-
-                        </button>
-
                     </form>
-
                 </div>
-
             </div>
 
             <div id="front-desk">

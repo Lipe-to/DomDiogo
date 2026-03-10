@@ -52,7 +52,7 @@
             </div>
             <ul>
                 <li class="emphasis">
-                    <a href="adminHome">
+                    <a>
                         <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/home.svg">
                         <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/home.svg">
                         <span>Tela Inicial</span>

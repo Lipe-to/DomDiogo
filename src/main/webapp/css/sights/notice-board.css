@@ -81,10 +81,10 @@
     position: absolute;
     z-index: 0;
     width: 100%;
-    max-width: 24px;
+    max-width: 28px;
     
-    right: 1.8%;
-    top: -15%;
+    right: 0.8%;
+    top: -28%;
     
     rotate: -55deg;
 }
@@ -153,4 +153,21 @@
 
 .filters img {
     width: 16px;
+}
+
+.student-board-filters div form {
+    display: flex;
+    height: fit-content;
+    max-height: 30px;
+}
+
+.student-board-filters div form>* {
+    height: 100%;
+    padding: 0.35rem;
+}
+.student-board-filters input, .student-board-filters select {
+    box-sizing: border-box;
+    padding-left: 1% !important;
+    border-radius: 5px;
+    min-height: 30px;
 }

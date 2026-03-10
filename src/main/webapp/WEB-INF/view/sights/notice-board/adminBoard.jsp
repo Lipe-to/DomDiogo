@@ -9,7 +9,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Quadro de Avisos - Professor</title>
+    <title>Quadro de Avisos - Admin</title>
 
     <link rel="shortcut icon" href="<%=request.getContextPath()%>/img/branding/favicon.png">
 
@@ -22,15 +22,12 @@
 </head>
 
 <%
-    String nome = (String) session.getAttribute("nome");
-    int idProfessor = (int) session.getAttribute("idProfessor");
     String fotoPerfil = (String) session.getAttribute("fotoPerfil");
 
     ProfessorRepository professorRepository = new ProfessorRepository();
-    String disciplina = professorRepository.findDisciplinaByProfessorId(idProfessor);
 %>
 
-<body id="red-theme" class="black">
+<body id="blue-theme" class="black">
 <li id="menu-icon-container">
     <label id="menu-icon" for="menu-checkbox">
         <img class="sidebar-icon expand white"
@@ -108,13 +105,6 @@
                     <img src="${pageContext.request.contextPath}/img/branding/white.png" draggable="false">
                 </div>
             </a>
-            <div class="personal-info">
-                <div class="profile-image <%=fotoPerfil%>"></div>
-                <div>
-                    <h3><%=nome%></h3>
-                    <p>Professor(a) de <%=disciplina%></p>
-                </div>
-            </div>
         </header>
         <main>
             <div id="filter-container">
@@ -125,9 +115,9 @@
                         <input type="hidden" name="action" value="professor">
                         <label style="cursor: pointer;" for="search-submit"><button type="submit"><img src="img/svg/search.svg"></button></label>
                         <input class="search-box"
-                                   type="text"
-                                   name="regex"
-                                   placeholder="Digite parte do aviso">
+                               type="text"
+                               name="regex"
+                               placeholder="Digite parte do aviso">
                     </form>
                 </div>
             </div>
@@ -310,9 +300,6 @@
                     </div>
                 </div>
             </div>
-
-            <input class="text-box" name="id" type="text" value="<%=idProfessor%>"
-                   hidden>
         </div>
         <button class="button fat" type="submit">Atualizar notas</button>
     </form>
@@ -326,10 +313,8 @@
     <div class="personal-profile">
         <div class="<%=fotoPerfil%>"></div>
         <div>
-            <h1><%=nome%>
+            <h1>Admin
             </h1>
-            <p>Professor(a) de <%=disciplina%>
-            </p>
         </div>
     </div>
     <div class="input-major">

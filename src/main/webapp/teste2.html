@@ -1,409 +1,281 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-<meta charset="UTF-8">
-<title>Quadro de Avisos - Professor</title>
+    <meta charset="UTF-8">
+    <title>Quadro de Avisos - Aluno</title>
 
-<link rel="shortcut icon" href="img/branding/favicon.png">
+    <link rel="shortcut icon" href="img/branding/favicon.png">
 
-<link rel="stylesheet" href="css/sights/both.css">
-<link rel="stylesheet" href="css/sights/notice-board.css">
-<link rel="stylesheet" href="css/popup.css">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/variables.css">
-<link rel="stylesheet" href="css/font.css">
-
+    <link rel="stylesheet" href="css/sights/both.css">
+    <link rel="stylesheet" href="css/sights/notice-board.css">
+    <link rel="stylesheet" href="css/popup.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/font.css">
 </head>
 
 <body id="blue-theme" class="black">
 
-<li id="menu-icon-container">
-<label id="menu-icon" for="menu-checkbox">
+    <li id="menu-icon-container">
+        <label id="menu-icon" for="menu-checkbox">
+
+            <img class="sidebar-icon expand white" src="img/svg/sidebar/white/menu-burger.svg">
+            <img class="sidebar-icon reduce white" src="img/svg/sidebar/white/reduce-menu.svg">
+
+            <img class="sidebar-icon expand black" src="img/svg/sidebar/black/menu-burger.svg">
+            <img class="sidebar-icon reduce black" src="img/svg/sidebar/black/reduce-menu.svg">
+
+        </label>
+        <input name="menu-checkbox" id="menu-checkbox" type="checkbox" hidden>
+    </li>
+
+    <aside id="sidebar">
+        <div>
+
+            <div class="logo">
+                <img src="img/branding/icone.png" draggable="false">
+                <img class="white" src="img/branding/white.png" draggable="false">
+                <img style="opacity:80%;" class="black" src="img/branding/black.png" draggable="false">
+            </div>
+
+            <ul>
+
+                <li class="emphasis">
+                    <a href="#">
+                        <img class="sidebar-icon white" src="img/svg/sidebar/white/home.svg">
+                        <img class="sidebar-icon black" src="img/svg/sidebar/black/home.svg">
+                        <span>Tela Inicial</span>
+                    </a>
+                </li>
 
-<img class="sidebar-icon expand white"
-src="img/svg/sidebar/white/menu-burger.svg">
+                <li>
+                    <form style="display:flex">
+                        <button type="submit">
+                            <img class="sidebar-icon white" src="img/svg/sidebar/white/address-book.svg">
+                            <img class="sidebar-icon black" src="img/svg/sidebar/black/address-book.svg">
+                            <span>Quadro de Avisos</span>
+                        </button>
+                    </form>
+                </li>
 
-<img class="sidebar-icon reduce white"
-src="img/svg/sidebar/white/reduce-menu.svg">
+                <li class="divide">
+                    <button popovertarget="popup-profile" type="button">
+                        <img class="sidebar-icon white" src="img/svg/sidebar/white/user.svg">
+                        <img class="sidebar-icon black" src="img/svg/sidebar/black/user.svg">
+                        <span>Meu perfil</span>
+                    </button>
+                </li>
 
-<img class="sidebar-icon expand black"
-src="img/svg/sidebar/black/menu-burger.svg">
+                <li id="sign-out">
+                    <form style="display:flex">
+                        <button type="submit">
+                            <img class="sidebar-icon white" src="img/svg/sidebar/white/sign-out.svg">
+                            <img class="sidebar-icon black" src="img/svg/sidebar/black/sign-out.svg">
+                            <span>Sair</span>
+                        </button>
+                    </form>
+                </li>
 
-<img class="sidebar-icon reduce black"
-src="img/svg/sidebar/black/reduce-menu.svg">
+            </ul>
+        </div>
+    </aside>
 
-</label>
-<input name="menu-checkbox" id="menu-checkbox" type="checkbox" hidden>
-</li>
+    <div id="major-container">
+        <div id="wrap">
 
-<aside id="sidebar">
+            <header>
 
-<div>
+                <a href="#">
+                    <div class="logo">
+                        <img src="img/branding/icone.png" draggable="false">
+                        <img src="img/branding/white.png" draggable="false">
+                    </div>
+                </a>
 
-<div class="logo">
+                <div class="personal-info">
+                    <div class="profile-image dino"></div>
+                    <div>
+                        <h3>Nome do Aluno</h3>
+                        <p>Aluno</p>
+                    </div>
+                </div>
 
-<img src="img/branding/icone.png" draggable="false">
-<img class="white" src="img/branding/white.png" draggable="false">
-<img style="opacity:80%;" class="black" src="img/branding/black.png" draggable="false">
+            </header>
 
-</div>
+            <main>
 
-<ul>
+                <div id="filter-container" class="student-board-filters">
+                    <h1>Filtros</h1>
+                    <div class="filters">
 
-<li class="emphasis">
-<a href="adminHome">
+                        <form>
+                                <label>
+                                    <button type="submit">
+                                        <img src="img/svg/search.svg">
+                                    </button>
+                                </label>
 
-<img class="sidebar-icon white" src="img/svg/sidebar/white/home.svg">
-<img class="sidebar-icon black" src="img/svg/sidebar/black/home.svg">
+                                <input class="search-box" type="text" placeholder="Digite parte do aviso">
 
-<span>Tela Inicial</span>
+                                <select class="search-box text-box">
 
-</a>
-</li>
+                                    <option disabled selected>Selecione o professor</option>
+                                    <option>João Silva</option>
+                                    <option>Maria Souza</option>
+                                    <option>Carlos Oliveira</option>
 
-<li>
-<form style="display:flex" action="observacao?action=findByMatriculaAluno">
+                                </select>
+                        </form>
 
-<button type="submit">
+                    </div>
+                </div>
 
-<img class="sidebar-icon white" src="img/svg/sidebar/white/address-book.svg">
-<img class="sidebar-icon black" src="img/svg/sidebar/black/address-book.svg">
+                <div id="front-desk">
 
-<span>Quadro de Avisos</span>
+                    <div class="notice-board">
 
-</button>
+                        <h2>Quadro de avisos</h2>
 
-</form>
-</li>
+                        <br><br>
 
-<li class="divide">
+                        <img style="rotate:15deg;" class="screw right-top" src="img/flat/screw.png">
+                        <img style="rotate:84deg;" class="screw left-top" src="img/flat/screw.png">
 
-<button popovertarget="popup-profile" type="button">
+                        <div id="postit-container">
 
-<img class="sidebar-icon white" src="img/svg/sidebar/white/user.svg">
-<img class="sidebar-icon black" src="img/svg/sidebar/black/user.svg">
+                            <div class="postit" style="background-color:#3C71BA;">
 
-<span>Meu perfil</span>
+                                <div>
 
-</button>
+                                    <img class="tape" src="img/shape/tape.svg">
 
-</li>
+                                    <div>
 
-<li id="sign-out">
+                                        <sub>Por João Silva:</sub>
 
-<form style="display:flex" action="login?action=logout" method="post">
+                                        <h3>
 
-<button type="submit">
+                                            Prova de Matemática
 
-<img class="sidebar-icon white" src="img/svg/sidebar/white/sign-out.svg">
-<img class="sidebar-icon black" src="img/svg/sidebar/black/sign-out.svg">
+                                            <span>Prazo: 25/06</span>
 
-<span>Sair</span>
+                                        </h3>
 
-</button>
+                                        <sub>Aviso #1</sub>
 
-</form>
+                                    </div>
 
-</li>
+                                    <p>
+                                        A prova será aplicada na próxima semana. Estudem capítulos 3 e 4.
+                                    </p>
 
-</ul>
+                                </div>
+                            </div>
 
-</div>
 
-</aside>
+                            <div class="postit" style="background-color:#D13E3E;">
 
-<div id="major-container">
+                                <div>
 
-<div id="wrap">
+                                    <img class="tape" src="img/shape/tape.svg">
 
-<main>
+                                    <div>
 
-<div id="filter-container">
+                                        <sub>Por Maria Souza:</sub>
 
-<h1>Filtros</h1>
+                                        <h3>
 
-<div class="filters">
+                                            Entrega de Trabalho
 
-<form action="aviso" method="get">
+                                            <span>Prazo: 30/06</span>
 
-<input type="hidden" name="action" value="professor">
+                                        </h3>
 
-<div>
+                                        <sub>Aviso #2</sub>
 
-<p>Pesquisa por texto:</p>
+                                    </div>
 
-<input class="search-box"
-type="text"
-name="regex"
-placeholder="Digite parte do aviso">
+                                    <p>
+                                        Entrega do trabalho de história via plataforma até o prazo.
+                                    </p>
 
-</div>
+                                </div>
+                            </div>
 
-<button type="submit">
-<img src="img/svg/search.svg">
-</button>
+                        </div>
+                    </div>
+                </div>
 
-</form>
+            </main>
+        </div>
+    </div>
 
-</div>
 
-</div>
+    <div id="popup-profile" class="popup profile" popover="auto">
 
-<div id="front-desk">
+        <button class="popup-cross" popovertarget="popup-profile" popovertargetaction="hide" type="button">
+            <img src="img/svg/cross-small.svg">
+        </button>
 
-<div class="notice-board">
+        <div class="personal-profile">
 
-<h2>Quadro de avisos <span>Professor</span></h2>
+            <div class="dino"></div>
 
-<br><br>
+            <div>
+                <h1>Nome do Aluno</h1>
+                <p>Aluno</p>
+            </div>
 
-<img style="rotate:15deg;" class="screw right-top" src="img/flat/screw.png">
-<img style="rotate:84deg;" class="screw left-top" src="img/flat/screw.png">
+        </div>
 
-<div id="postit-container">
+        <div class="input-major">
 
-<!-- EXEMPLO DE AVISO -->
+            <form style="display:flex;">
 
-<div class="postit" style="background-color:#3C71BA;">
+                <div class="input-container">
 
-<div>
+                    <p>Foto de perfil</p>
 
-<img class="tape" src="img/shape/tape.svg">
+                    <div class="avatar">
 
-<div>
+                        <div>
+                            <input class="text-box dino" type="radio" name="avatar">
+                            <img class="check-circle" src="img/svg/check.svg">
+                        </div>
 
-<sub>Por Professor João:</sub>
+                        <div>
+                            <input class="text-box diver" type="radio" name="avatar">
+                            <img class="check-circle" src="img/svg/check.svg">
+                        </div>
 
-<h3>
+                        <div>
+                            <input class="text-box diver" type="radio" name="avatar">
+                            <img class="check-circle" src="img/svg/check.svg">
+                        </div>
 
-Trabalho de História
+                    </div>
+                </div>
 
-<span>Prazo: 20/04</span>
+                <div>
+                    <button class="button fat" type="submit">
+                        <img class="icon-inner-button" src="img/svg/refresh.svg">
+                        <span>Atualizar informações</span>
+                    </button>
+                </div>
 
-</h3>
+            </form>
 
-<sub>Aviso #1</sub>
+            <form style="display:flex">
+                <button class="button" type="submit">
+                    <img class="sidebar-icon black" src="img/svg/sidebar/black/sign-out.svg">
+                    <span>Logout</span>
+                </button>
+            </form>
 
-</div>
-
-<p>
-
-Entregar o trabalho sobre a Revolução Industrial em grupo de 3 alunos.
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</main>
-
-</div>
-
-</div>
-
-<div id="popup-notice-board" class="popup" popover="auto">
-
-<button class="popup-cross"
-popovertarget="popup-notice-board"
-popovertargetaction="hide"
-type="button">
-
-<img src="img/svg/cross-small.svg">
-
-</button>
-
-<h1>Enviar aviso</h1>
-
-<form action="nota?action=update" method="post">
-
-<div class="input-major">
-
-<div class="input-container">
-<p class="required">Título</p>
-<input class="text-box" name="titulo" type="text" required>
-</div>
-
-<div class="input-container">
-<p class="required">Conteúdo</p>
-<textarea class="text-box" name="aviso"></textarea>
-</div>
-
-<div class="input-container">
-<p class="required">Prazo</p>
-<input class="text-box" name="date" type="date">
-</div>
-
-<select name="turmas" multiple>
-<option value="9A">9A</option>
-<option value="8B">8B</option>
-<option value="7C">7C</option>
-</select>
-
-<div class="input-container">
-
-<p class="required">Cores</p>
-
-<div class="colors">
-
-<div>
-<input style="background-color:#3C71BA;" class="text-box" type="radio" name="cor" value="BLUE" checked>
-<img class="check-circle" src="img/svg/check.svg">
-</div>
-
-<div>
-<input style="background-color:#D13E3E;" class="text-box" type="radio" name="cor" value="RED">
-<img class="check-circle" src="img/svg/check.svg">
-</div>
-
-<div>
-<input style="background-color:#8D99D6;" class="text-box" type="radio" name="cor" value="TEA_BLUE">
-<img class="check-circle" src="img/svg/check.svg">
-</div>
-
-<div>
-<input style="background-color:#ca93c7;" class="text-box" type="radio" name="cor" value="PURPLE">
-<img class="check-circle" src="img/svg/check.svg">
-</div>
-
-<div>
-<input style="background-color:#86d1a8;" class="text-box" type="radio" name="cor" value="GREEN">
-<img class="check-circle" src="img/svg/check.svg">
-</div>
-
-<div>
-<input style="background-color:#b0cf89;" class="text-box" type="radio" name="cor" value="LIME_GREEN">
-<img class="check-circle" src="img/svg/check.svg">
-</div>
-
-<div>
-<input style="background-color:#e08383;" class="text-box" type="radio" name="cor" value="SMOOTH_RED">
-<img class="check-circle" src="img/svg/check.svg">
-</div>
-
-<div>
-<input style="background-color:#dfb381;" class="text-box" type="radio" name="cor" value="ORANGE">
-<img class="check-circle" src="img/svg/check.svg">
-</div>
-
-<div>
-<input style="background-color:#b5b5b5;" class="text-box" type="radio" name="cor" value="DEFAULT">
-<img class="check-circle" src="img/svg/check.svg">
-</div>
-
-</div>
-
-</div>
-
-<input class="text-box" name="id" type="hidden" value="1">
-<input class="text-box" name="idNota" type="hidden" value="1">
-
-</div>
-
-<button class="button fat" type="submit">Atualizar notas</button>
-
-</form>
-
-</div>
-
-<div id="popup-profile" class="popup profile" popover="auto">
-
-<button class="popup-cross"
-popovertarget="popup-profile"
-popovertargetaction="hide"
-type="button">
-
-<img src="img/svg/cross-small.svg">
-
-</button>
-
-<div class="personal-profile">
-
-<div class="avatar-default"></div>
-
-<div>
-
-<h1>Nome do Professor</h1>
-<p>Professor(a) de Matemática</p>
-
-</div>
-
-</div>
-
-<div class="input-major">
-
-<form style="display:flex;" action="login?action=alterarFoto" method="post">
-
-<div class="input-container">
-
-<p>Foto de perfil</p>
-
-<div class="avatar">
-
-<div>
-<input class="text-box dino" type="radio" name="avatar">
-<img class="check-circle" src="img/svg/check.svg">
-</div>
-
-<div>
-<input class="text-box diver" type="radio" name="avatar">
-<img class="check-circle" src="img/svg/check.svg">
-</div>
-
-<div>
-<input class="text-box diver" type="radio" name="avatar">
-<img class="check-circle" src="img/svg/check.svg">
-</div>
-
-</div>
-
-</div>
-
-<div class="input-container">
-
-<p>Tema</p>
-
-<select class="text-box">
-<option>Azul</option>
-<option>Verde</option>
-<option>Vermelho</option>
-</select>
-
-</div>
-
-<div>
-
-<button class="button fat" type="submit">
-
-<img class="icon-inner-button" src="img/svg/refresh.svg">
-<span>Atualizar informações</span>
-
-</button>
-
-</div>
-
-</form>
-
-<form style="display:flex">
-
-<button class="button" type="submit">
-
-<img class="sidebar-icon black" src="img/svg/sidebar/black/sign-out.svg">
-<span>Logout</span>
-
-</button>
-
-</form>
-
-</div>
-
-</div>
+        </div>
+    </div>
 
 </body>
+
 </html>

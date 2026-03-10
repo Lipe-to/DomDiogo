@@ -4,6 +4,7 @@
 <%@ page import="com.domdiogo.model.ObservacaoEntity" %>
 <%@ page import="com.domdiogo.repository.AlunoRepository" %>
 <%@ page import="com.domdiogo.repository.ProfessorRepository" %>
+<%@ page import="com.domdiogo.model.AptoEntity" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page pageEncoding="UTF-8" %>
 
@@ -38,6 +39,7 @@
     String percRep = (String) request.getAttribute("percReprovados");
 
     List<AlunoEntity> listAlunos = (List<AlunoEntity>) request.getAttribute("listAlunos");
+    List<AptoEntity> listAptos = (List<AptoEntity>) request.getAttribute("listAptos");
     List<AlunoNotaDTO> alunosNotas = (List<AlunoNotaDTO>) request.getAttribute("alunosNotas");
     List<ObservacaoEntity> observacoes = (List<ObservacaoEntity>) request.getAttribute("observacoes");
 
@@ -73,15 +75,16 @@
                         <span>Tela Inicial</span>
                     </a>
                 </li>
-
-                <%-- <li class="divide">
-                    <a href="#">
-                        <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/user.svg">
-                        <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/user.svg">
-                        <span>Meu perfil</span>
-                    </a>
-                </li> --%>
-                <li id="sign-out">
+                <li>
+                    <form style="display: flex" action="${pageContext.request.contextPath}/aviso?action=admin" method="get">
+                        <button type="submit">
+                            <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/address-book.svg">
+                            <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/address-book.svg">
+                            <span>Quadro de Avisos</span>
+                        </button>
+                    </form>
+                </li>
+                <li style="margin-top: auto;" id="sign-out">
                     <form style="display: flex" action="${pageContext.request.contextPath}/login?action=logout" method="post">
                         <button type="submit">
                             <img class="sidebar-icon white"
@@ -473,7 +476,7 @@
                                     <button class="button fat" popovertarget="popup-exclude-conf-<%=idPopoverAluno%>" popovertargetaction="hide" type="button">Cancelar</button>
                                     <form style="display: flex;" action="${pageContext.request.contextPath}/aluno?action=delete" method="post">
                                         <input type="hidden" name="matricula" value="<%=aluno.getMatricula()%>">
-                                        <button class="button fat confirm" type="submit">Excluir aluno</button>
+                                        <button class="button fat confirm" type="submit">Excluir</button>
                                     </form>
                                 </div>
                             </div>
@@ -524,6 +527,147 @@
 
                                     <input type="hidden" name="matricula" value="<%=aluno.getMatricula()%>">
 
+                                </div>
+
+                                <button class="button fat">Salvar</button>
+
+                            </form>
+
+                        </div>
+
+                        <%
+                                }
+                            }
+                        %>
+
+                    </div>
+                </div>
+            </div>
+
+            <div id="fit-in">
+
+                <h1>Dados dos Alunos</h1>
+
+                <div class="table-container">
+
+                    <div class="table-info">
+                        <div>
+                            <h3>Informações pessoais</h3>
+                            <sub>Área administrativa</sub>
+                        </div>
+                    </div>
+
+
+                    <div class="table-wrap">
+
+                        <table id="fit-in-info">
+
+                            <thead class="purple">
+
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Usuário</th>
+                                <th>É matriculado?</th>
+                                <th>Ações</th>
+                            </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                            <%
+
+                                int idPopoverApto = 0;
+                                if (listAptos != null) {
+                                    for (AptoEntity apto : listAptos) {
+                                        idPopoverApto++;
+                            %>
+
+                            <tr>
+
+                                <td><%=apto.getId()%>
+                                </td>
+
+                                <td><%=apto.getNome()%>
+                                </td>
+
+                                <td><%=apto.getUsuario()%>
+                                </td>
+
+                                <td><%=apto.isMatriculado() ? "Sim" : "Não"%>
+                                <td>
+
+                                    <div class="td-actions">
+
+                                        <button popovertarget="popup-apto-<%=idPopoverApto%>">
+                                            <img src="${pageContext.request.contextPath}/img/svg/crud/pencil-black.svg">
+                                        </button>
+
+                                        <div>
+                                            <button popovertarget="popup-exclude-apto-<%=idPopoverApto%>" class="delete">
+                                                <img src="${pageContext.request.contextPath}/img/svg/crud/trash.svg">
+                                            </button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <div id="popup-exclude-apto-<%=idPopoverApto%>" class="popup exclude" popover="auto">
+                                <button class="popup-cross" popovertarget="popup-exclude-apto-<%=idPopoverApto%>" popovertargetaction="hide" type="button">
+                                    <img src="${pageContext.request.contextPath}/img/svg/cross-small.svg">
+                                </button>
+                                <h1>Excluir Apto</h1>
+                                <p>Você tem certeza que deseja excluir <%=apto.getNome()%> do sistema? Essa ação não pode ser desfeita.</p>
+                                <div>
+                                    <button class="button fat" popovertarget="popup-exclude-apto-<%=idPopoverApto%>" popovertargetaction="hide" type="button">Cancelar</button>
+                                    <form style="display: flex;" action="${pageContext.request.contextPath}/apto?action=delete" method="post">
+                                        <input type="hidden" name="id" value="<%=apto.getId()%>">
+                                        <button class="button fat confirm" type="submit">Excluir</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <%
+                                    }
+                                }
+                            %>
+
+                            </tbody>
+                        </table>
+
+
+                        <%
+
+                            int idPopupApto = 0;
+
+                            if (listAptos != null) {
+
+                                for (AptoEntity apto : listAptos) {
+
+                                    idPopupApto++;
+
+                        %>
+
+                        <div id="popup-apto-<%=idPopupApto%>" class="popup" popover="auto">
+                            <button class="popup-cross" popovertarget="popup-apto-<%=idPopupApto%>" popovertargetaction="hide" type="button">
+                                <img src="${pageContext.request.contextPath}/img/svg/cross-small.svg">
+                            </button>
+                            <h1>Editar Apto</h1>
+                            <form action="${pageContext.request.contextPath}/apto?action=update" method="post">
+
+                                <div class="input-major">
+
+                                    <div class="input-container">
+                                        <p>Nome</p>
+                                        <input class="text-box" name="nome" value="<%=apto.getNome()%>">
+                                    </div>
+
+                                    <div class="input-container">
+                                        <p>Usuário</p>
+                                        <input class="text-box" name="usuario" value="<%=apto.getUsuario()%>">
+                                    </div>
+
+                                    <input type="hidden" name="id" value="<%=apto.getId()%>">
                                 </div>
 
                                 <button class="button fat">Salvar</button>
