@@ -29,6 +29,7 @@
 <%
     String nome = (String) session.getAttribute("nome");
     int idProfessor = (int) session.getAttribute("idProfessor");
+    String fotoPerfil = (String) session.getAttribute("fotoPerfil");
 
     @SuppressWarnings("unchecked")
     List<AlunoEntity> listAlunos = (List<AlunoEntity>) request.getAttribute("listAlunos");
