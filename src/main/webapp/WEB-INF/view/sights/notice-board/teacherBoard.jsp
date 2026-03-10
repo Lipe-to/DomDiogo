@@ -1,8 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.domdiogo.model.AvisoEntity" %>
-<%@ page import="com.domdiogo.model.ColorPalette" %>
 <%@ page import="com.domdiogo.repository.ProfessorRepository" %>
+<%@ page import="com.domdiogo.model.*" %>
+<%@ page import="com.domdiogo.repository.AlunoRepository" %>
+<%@ page import="com.domdiogo.repository.TurmaRepository" %>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -25,13 +26,7 @@
     int idProfessor = (int) session.getAttribute("idProfessor");
     String fotoPerfil = (String) session.getAttribute("fotoPerfil");
 
-    List<AlunoEntity> listAlunos = (List<AlunoEntity>) request.getAttribute("listAlunos");
-    List<AlunoNotaDTO> alunosNotas = (List<AlunoNotaDTO>) request.getAttribute("alunosNotas");
-    List<ObservacaoEntity> observacoes = (List<ObservacaoEntity>) request.getAttribute("observacoes");
-    
-    AlunoRepository alunoRepository = (AlunoRepository) request.getAttribute("alunoRepository");
-    ProfessorRepository professorRepository = (ProfessorRepository) request.getAttribute("professorRepository");
-
+    ProfessorRepository professorRepository = new ProfessorRepository();
     String disciplina = professorRepository.findDisciplinaByProfessorId(idProfessor);
 %>
 
@@ -136,7 +131,9 @@
                         </button>
 
                     </form>
-
+                    <button popovertarget="popup-notice-board" type="button">
+                        Enviar aviso
+                    </button>
                 </div>
 
             </div>
@@ -164,9 +161,6 @@
                                     (List<AvisoEntity>) request.getAttribute("avisos");
 
                             if (avisos != null && !avisos.isEmpty()) {
-
-                                ProfessorRepository professorRepository = new ProfessorRepository();
-
                                 for (AvisoEntity aviso : avisos) {
 
                         %>
@@ -182,7 +176,7 @@
                                 <div>
 
                                     <sub>
-                                        <%="Por " + professorRepository.findById(aviso.getIdProfessor()) + ":"%>
+                                        <%="Por " + professorRepository.findById(aviso.getIdProfessor()).getNome() + ":"%>
                                     </sub>
 
                                     <h3>
@@ -244,7 +238,7 @@
         <img src="${pageContext.request.contextPath}/img/svg/cross-small.svg">
     </button>
     <h1>Enviar aviso</h1>
-    <form action="${pageContext.request.contextPath}/nota?action=update" method="post">
+    <form action="${pageContext.request.contextPath}/aviso?action=create" method="post">
         <div class="input-major">
             <div class="input-container">
                 <p class="required">Título</p>
@@ -253,18 +247,23 @@
 
             <div class="input-container">
                 <p class="required">Conteúdo</p>
-                <textarea class="text-box" name="aviso"></textarea>
+                <textarea class="text-box" name="aviso" required></textarea>
             </div>
             
             <div class="input-container">
-                <p class="required">Prazo</p>
+                <p class="required">Prazo (opcional)</p>
                 <input class="text-box" name="date" type="date">
             </div>
 
-            <select name="turmas" multiple>
-                <option value="9A">9A</option>
-                <option value="8B">8B</option>
-                <option value="7C">7C</option>
+            <select name="turmas">
+                <%
+                    TurmaRepository turmaRepository = new TurmaRepository();
+                    for (String turma : turmaRepository.read()) {
+                %>
+                <option value="<%=turma%>"><%=turma%></option>
+                <%
+                    }
+                %>
             </select>
 
             <div class="input-container">
@@ -310,8 +309,6 @@
             </div>
 
             <input class="text-box" name="id" type="text" value="<%=idProfessor%>"
-                   hidden>
-            <input class="text-box" name="idNota" type="text" value="<%=item.getNotaId()%>"
                    hidden>
         </div>
         <button class="button fat" type="submit">Atualizar notas</button>
