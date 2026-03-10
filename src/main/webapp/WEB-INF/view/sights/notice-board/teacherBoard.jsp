@@ -96,16 +96,8 @@
 
                             <input class="search-box"
                                    type="text"
-                                   name="search"
+                                   name="regex"
                                    placeholder="Digite parte do aviso">
-
-                        </div>
-
-                        <div>
-
-                            <p>Prazo:</p>
-
-                            <input type="date" name="prazo" class="search-box">
 
                         </div>
 
