@@ -559,7 +559,7 @@
 
                         <table id="fit-in-info">
 
-                            <thead class="purple">
+                            <thead class="orange">
 
                             <tr>
                                 <th>ID</th>

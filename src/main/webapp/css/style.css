@@ -249,57 +249,57 @@ textarea {
 }
 
 .apple {
-    background-image: url('../img/avatar/apple.png');
+    background-image: url('../img/avatar/apple.png') !important;
 }
 
 .basket {
-    background-image: url('../img/avatar/basket.png');
+    background-image: url('../img/avatar/basket.png') !important;
 }
 
 .bird {
-    background-image: url('../img/avatar/bird.png');
+    background-image: url('../img/avatar/bird.png') !important;
 }
 
 .castle {
-    background-image: url('../img/avatar/castle.png');
+    background-image: url('../img/avatar/castle.png') !important;
 }
 
 .cd {
-    background-image: url('../img/avatar/cd.png');
+    background-image: url('../img/avatar/cd.png') !important;
 }
 
 .dino {
-    background-image: url('../img/avatar/dino.png');
+    background-image: url('../img/avatar/dino.png') !important;
 }
 
 .diver {
-    background-image: url('../img/avatar/diver.png');
+    background-image: url('../img/avatar/diver.png') !important;
 }
 
 .dragon {
-    background-image: url('../img/avatar/dragon.png');
+    background-image: url('../img/avatar/dragon.png') !important;
 }
 
 .flag {
-    background-image: url('../img/avatar/flag.png');
+    background-image: url('../img/avatar/flag.png') !important;
 }
 
 .monster {
-    background-image: url('../img/avatar/monster.png');
+    background-image: url('../img/avatar/monster.png') !important;
 }
 
 .music {
-    background-image: url('../img/avatar/music.png');
+    background-image: url('../img/avatar/music.png') !important;
 }
 
 .onigiri {
-    background-image: url('../img/avatar/onigiri.png');
+    background-image: url('../img/avatar/onigiri.png') !important;
 }
 
 .sword {
-    background-image: url('../img/avatar/sword.png');
+    background-image: url('../img/avatar/sword.png') !important;
 }
 
 .default {
-    background-image: url('../img/avatar/default.png');
+    background-image: url('../img/avatar/default.png') !important;
 }

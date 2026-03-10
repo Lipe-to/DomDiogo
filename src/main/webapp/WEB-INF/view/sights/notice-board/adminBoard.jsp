@@ -129,7 +129,7 @@
 
                     <h2>Quadro de avisos</h2>
 
-                    <br><br>
+                    <br>
 
                     <img style="rotate:15deg;" class="screw right-top"
                          src="<%=request.getContextPath()%>/img/flat/screw.png">
@@ -354,7 +354,7 @@
             </div>
         </form>
 
-        <form style="display:flex">
+        <form style="display:flex" action="${pageContext.request.contextPath}/login?action=logout" method="post">
             <button class="button" type="submit">
                 <img class="sidebar-icon black"
                      src="${pageContext.request.contextPath}/img/svg/sidebar/black/sign-out.svg">
