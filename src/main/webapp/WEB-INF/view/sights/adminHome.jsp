@@ -73,6 +73,15 @@
                         <span>Tela Inicial</span>
                     </a>
                 </li>
+                <li>
+                    <form style="display: flex" action="${pageContext.request.contextPath}/aviso?action=admin" method="get">
+                        <button type="submit">
+                            <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/address-book.svg">
+                            <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/address-book.svg">
+                            <span>Quadro de Avisos</span>
+                        </button>
+                    </form>
+                </li>
 
                 <%-- <li class="divide">
                     <a href="#">

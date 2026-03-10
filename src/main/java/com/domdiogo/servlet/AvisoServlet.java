@@ -160,6 +160,22 @@ public class AvisoServlet extends HttpServlet {
         request.setAttribute("professores", professorRepository.read());
         request.setAttribute("avisos", avisos);
 
+        // ensure UI variables used by JSPs are available in request
+        String nomeAttr = "";
+        String fotoPerfilAttr = "";
+        String roleAttr = "";
+        if (session != null) {
+            Object nomeObj = session.getAttribute("nome");
+            Object fotoObj = session.getAttribute("fotoPerfil");
+            Object roleObj = session.getAttribute("role");
+            nomeAttr = nomeObj == null ? "" : nomeObj.toString();
+            fotoPerfilAttr = fotoObj == null ? "" : fotoObj.toString();
+            roleAttr = roleObj == null ? "" : roleObj.toString();
+        }
+        request.setAttribute("nome", nomeAttr);
+        request.setAttribute("fotoPerfil", fotoPerfilAttr);
+        request.setAttribute("role", roleAttr);
+
         ServletHelper.redirect(request, response, redirect);
     }
     @Override
