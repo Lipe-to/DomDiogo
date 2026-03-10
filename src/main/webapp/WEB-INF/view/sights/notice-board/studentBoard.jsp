@@ -44,14 +44,14 @@
                 <img style="opacity: 80%;" class="black" src="${pageContext.request.contextPath}/img/branding/black.png" draggable="false">
             </div>
             <ul>
-                <li class="emphasis">
+                <li>
                     <a href="adminHome">
                         <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/home.svg">
                         <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/home.svg">
                         <span>Tela Inicial</span>
                     </a>
                 </li>
-                <li>
+                <li class="emphasis">
                     <form style="display: flex" action="${pageContext.request.contextPath}/observacao?action=findByMatriculaAluno">
                         <button type="submit">
                             <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/address-book.svg">

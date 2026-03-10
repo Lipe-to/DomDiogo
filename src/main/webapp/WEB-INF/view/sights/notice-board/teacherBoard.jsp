@@ -30,7 +30,7 @@
     String disciplina = professorRepository.findDisciplinaByProfessorId(idProfessor);
 %>
 
-<body id="blue-theme" class="black">
+<body id="red-theme" class="black">
 <li id="menu-icon-container">
     <label id="menu-icon" for="menu-checkbox">
         <img class="sidebar-icon expand white"
@@ -54,7 +54,7 @@
                  draggable="false">
         </div>
         <ul>
-            <li class="emphasis">
+            <li>
                 <a href="adminHome">
                     <img class="sidebar-icon white"
                          src="${pageContext.request.contextPath}/img/svg/sidebar/white/home.svg">
@@ -63,7 +63,7 @@
                     <span>Tela Inicial</span>
                 </a>
             </li>
-            <li>
+            <li class="emphasis">
                 <form style="display: flex"
                       action="${pageContext.request.contextPath}/observacao?action=findByMatriculaAluno">
                     <button type="submit">

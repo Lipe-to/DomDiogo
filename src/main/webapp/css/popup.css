@@ -191,6 +191,12 @@
     gap: 0.25rem;
 }
 
+.popup.obs>:last-child>:last-child button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .popup.obs>:last-child>:last-child>* {
     height: 100%;
     max-height: 32px;

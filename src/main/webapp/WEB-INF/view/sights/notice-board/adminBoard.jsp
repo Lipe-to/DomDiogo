@@ -51,7 +51,7 @@
                  draggable="false">
         </div>
         <ul>
-            <li class="emphasis">
+            <li>
                 <a href="adminHome">
                     <img class="sidebar-icon white"
                          src="${pageContext.request.contextPath}/img/svg/sidebar/white/home.svg">
@@ -60,7 +60,7 @@
                     <span>Tela Inicial</span>
                 </a>
             </li>
-            <li>
+            <li class="emphasis">
                 <form style="display: flex"
                       action="${pageContext.request.contextPath}/observacao?action=findByMatriculaAluno">
                     <button type="submit">
@@ -105,12 +105,6 @@
                     <img src="${pageContext.request.contextPath}/img/branding/white.png" draggable="false">
                 </div>
             </a>
-            <div class="personal-info">
-                <div class="profile-image <%=fotoPerfil%>"></div>
-                <div>
-                    <h3>Admin</h3>
-                </div>
-            </div>
         </header>
         <main>
             <div id="filter-container">

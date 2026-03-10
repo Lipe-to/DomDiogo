@@ -20,6 +20,7 @@ public class AdminServlet extends HttpServlet {
     private final NotaRepository notaRepository = new NotaRepository();
     private final ObservacaoRepository observacaoRepository = new ObservacaoRepository();
     private final ProfessorRepository professorRepository = new ProfessorRepository();
+    private final AptoRepository aptoRepository = new AptoRepository();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -44,6 +45,13 @@ public class AdminServlet extends HttpServlet {
             listAlunos = new ArrayList<>();
         }
         request.setAttribute("listAlunos", listAlunos);
+
+        // ===== LISTA DE APTOS =====
+        List<AptoEntity> listAptos = aptoRepository.read();
+        if (listAptos == null) {
+            listAptos = new ArrayList<>();
+        }
+        request.setAttribute("listAptos", listAptos);
 
         // ===== ALUNOS + NOTAS (AlunoNotaDTO) — consulta única =====
         List<AlunoNotaDTO> todosAlunosNotas = notaRepository.findAllAlunosNotas();
