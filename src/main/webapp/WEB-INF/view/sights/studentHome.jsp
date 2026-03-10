@@ -137,8 +137,8 @@
                                 <%-- <input checked style="display: none;" type="checkbox" id="search-submit">
                                 <label for="search-submit"><img src="${pageContext.request.contextPath}/img/svg/search.svg"></label>
                                 <input class="search-box" type="text" placeholder="Pesquisar por matéria">
-                                <button title="Filtrar"><img src="${pageContext.request.contextPath}/img/svg/filter.svg" alt="Filtrar"></button> --%>
-                                <button class="expand-button" onclick="gerarBoletim()" title="Gerenciar notas" popovertarget="popup-grades">
+                                <button title="Filtrar"><img src="${pageContext.request.contextPath}/img/svg/filter.svg" alt="Filtrar"></button>
+                                <button onclick="gerarBoletim()">
                                     <div><img src="${pageContext.request.contextPath}/img/svg/document.svg"><span>Extrair boletim</span></div>
                                 </button>
                             </div>
@@ -308,9 +308,13 @@
         </div>
     </div>
 </body>
-
+<div style="display: none;">
+    <img id="img-logo-pdf" src="${pageContext.request.contextPath}/img/branding/logo.png">
+    <img id="img-assinatura-dir" src="${pageContext.request.contextPath}/img/branding/directorSignature.png">
+    <img id="img-assinatura-sec" src="${pageContext.request.contextPath}/img/branding/secretarySignature.png">
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/generate-newsletter.js"></script>
+<script src="${pageContext.request.contextPath}/js/generate-bulletin.js"></script>
 
 </html>
