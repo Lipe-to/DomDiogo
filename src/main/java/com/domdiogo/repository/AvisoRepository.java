@@ -12,6 +12,7 @@ import java.util.List;
 public class AvisoRepository {
 
     public List<AvisoEntity> findAll() {
+
         String query = "SELECT * FROM aviso ORDER BY id_aviso DESC";
         List<AvisoEntity> lista = new ArrayList<>();
 
@@ -35,7 +36,9 @@ public class AvisoRepository {
     }
 
     public AvisoEntity findById(int id) {
+
         String query = "SELECT * FROM aviso WHERE id_aviso = ?";
+
         ConnectionFactory cf = new ConnectionFactory();
         Connection conn = cf.connect();
 
@@ -66,7 +69,7 @@ public class AvisoRepository {
                 SELECT DISTINCT a.*
                 FROM aviso a
                 JOIN aviso_turma at ON a.id_aviso = at.id_aviso
-                WHERE at.id_turma = ?
+                WHERE at.turma = ?
                 ORDER BY a.id_aviso DESC
                 """;
 
@@ -100,7 +103,7 @@ public class AvisoRepository {
                 SELECT DISTINCT a.*
                 FROM aviso a
                 JOIN aviso_turma at ON a.id_aviso = at.id_aviso
-                WHERE at.id_turma = ?
+                WHERE at.turma = ?
                 AND (
                     a.titulo ~* ?
                     OR a.aviso ~* ?
@@ -211,6 +214,49 @@ public class AvisoRepository {
         return lista;
     }
 
+    public List<AvisoEntity> findByAvisoRegexAndProfessor(String regex, int idProfessor) {
+
+        String query = """
+            SELECT *
+            FROM aviso
+            WHERE id_professor = ?
+            AND (
+                titulo ~* ?
+                OR aviso ~* ?
+                OR cor ~* ?
+                OR CAST(prazo AS TEXT) ~* ?
+            )
+            ORDER BY id_aviso DESC
+            """;
+
+        List<AvisoEntity> lista = new ArrayList<>();
+
+        ConnectionFactory cf = new ConnectionFactory();
+        Connection conn = cf.connect();
+
+        try (PreparedStatement ps = conn.prepareStatement(query)) {
+
+            ps.setInt(1, idProfessor);
+            ps.setString(2, regex);
+            ps.setString(3, regex);
+            ps.setString(4, regex);
+            ps.setString(5, regex);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    lista.add(mapResultSet(rs));
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            cf.disconnect(conn);
+        }
+
+        return lista;
+    }
+
     public List<AvisoEntity> findByProfessorAndTurma(int idProfessor, String turma) {
 
         String query = """
@@ -218,7 +264,7 @@ public class AvisoRepository {
                 FROM aviso a
                 JOIN aviso_turma at ON a.id_aviso = at.id_aviso
                 WHERE a.id_professor = ?
-                AND at.id_turma = ?
+                AND at.turma = ?
                 ORDER BY a.id_aviso DESC
                 """;
 
@@ -253,7 +299,7 @@ public class AvisoRepository {
                 "INSERT INTO aviso (titulo, aviso, prazo, id_professor, cor) VALUES (?, ?, ?, ?, ?)";
 
         String insertAvisoTurma =
-                "INSERT INTO aviso_turma (id_aviso, id_turma) VALUES (?, ?)";
+                "INSERT INTO aviso_turma (id_aviso, turma) VALUES (?, ?)";
 
         ConnectionFactory cf = new ConnectionFactory();
         Connection conn = cf.connect();
@@ -281,9 +327,13 @@ public class AvisoRepository {
 
                 ps.executeUpdate();
 
-                ResultSet keys = ps.getGeneratedKeys();
-                keys.next();
-                avisoId = keys.getInt(1);
+                try (ResultSet keys = ps.getGeneratedKeys()) {
+                    if (keys.next()) {
+                        avisoId = keys.getInt(1);
+                    } else {
+                        throw new SQLException("Falha ao obter id_aviso gerado.");
+                    }
+                }
             }
 
             if (turmas != null && !turmas.isEmpty()) {

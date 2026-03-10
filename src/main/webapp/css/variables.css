@@ -21,12 +21,12 @@
     --table-grey: #dcdcdc;
     --table-background: rgba(216, 216, 216, 0.397); /* #A4A4A4 */
     --table-row: rgba(29, 29, 29, 0.05); /* #000000 */
-    --card-white: #ffffffec;
     
     --notice-board: #CE8D65;
     --notice-board-color: #422f23;
     --notice-board-border: #E2E2E2;
-
+    --card-white: #F2F6FC;
+    
     --sidebar-icon: rgba(158, 158, 158, 0.150);
     --sidebar-icon-hover: rgba(158, 158, 158, 0.514);
     --sidebar-icon-active: rgba(158, 158, 158, 0.377);

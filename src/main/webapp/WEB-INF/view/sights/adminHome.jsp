@@ -87,13 +87,13 @@
                         <span>Professores</span>
                     </a>
                 </li>
-                <li class="divide">
+                <%-- <li class="divide">
                     <a href="#">
                         <img class="sidebar-icon white" src="${pageContext.request.contextPath}/img/svg/sidebar/white/user.svg">
                         <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/user.svg">
                         <span>Meu perfil</span>
                     </a>
-                </li>
+                </li> --%>
                 <li id="sign-out">
                     <form style="display: flex" action="${pageContext.request.contextPath}/login?action=logout" method="post">
                         <button type="submit">
@@ -125,24 +125,16 @@
         </header>
 
         <main>
-
-            <!-- FRONT DESK -->
-
             <div id="front-desk">
-
                 <div class="castle" id="welcome">
                     <div>
                         <h2>Olá administrador!</h2>
                         <p>Bem vindo de volta!</p>
                     </div>
                 </div>
-
                 <div class="general-statistic">
-
                     <h2>Visão geral</h2>
-
                     <div>
-
                         <div>
                             <h3><span><%= totalAlunos != null ? totalAlunos : 0 %></span></h3>
                             <span>Total de alunos</span>
@@ -154,22 +146,18 @@
                         </div>
 
                         <div>
-                            <h3><span class="appr"><%= percApp != null ? percApp : "0.0" %></span> %</h3>
+                            <h3><span class="appr"><%= percApp != null ? percApp : "0" %></span>%</h3>
                             <span>Alunos aprovados</span>
                         </div>
 
                         <div>
-                            <h3><span class="repr"><%= percRep != null ? percRep : "0.0" %></span> %</h3>
+                            <h3><span class="repr"><%= percRep != null ? percRep : "0" %></span>%</h3>
                             <span>Alunos reprovados</span>
                         </div>
 
                     </div>
                 </div>
             </div>
-
-
-            <!-- PAINEL ACADÊMICO -->
-
             <div id="grades">
                 <h1>Painel Acadêmico</h1>
                 <div class="table-container">
@@ -222,7 +210,6 @@
                                 <img src="${pageContext.request.contextPath}/img/svg/filter.svg" alt="Filtrar">
                             </button>
 
-                            <!-- Removendo o seletor de last-child das table actions -->
                             <button style="width: auto; min-width: 0;" title="Remover filtros" name="action" value="listarTodos" type="submit">
                                 <img src="${pageContext.request.contextPath}/img/svg/cross-small.svg"
                                      alt="Remover filtros">
@@ -359,7 +346,9 @@
                         %>
 
                         <div id="popup-grades-<%=idPopoverGradesPopup%>" class="popup" popover="auto">
-
+                            <button class="popup-cross" popovertarget="popup-grades-<%=idPopoverGradesPopup%>" popovertargetaction="hide" type="button">
+                                <img src="${pageContext.request.contextPath}/img/svg/cross-small.svg">
+                            </button>
                             <h1>Editar Nota</h1>
 
                             <form action="${pageContext.request.contextPath}/nota?action=update" method="post">
@@ -467,7 +456,7 @@
                                 <td><%=aluno.getUsuario()%>
                                 </td>
 
-                                <td><%=aluno.getTurma()%>
+                                <td><%=aluno.getTurma() == null ? "Não alocado" : aluno.getTurma()%>
                                 </td>
 
                                 <td>
@@ -478,23 +467,29 @@
                                             <img src="${pageContext.request.contextPath}/img/svg/crud/pencil-black.svg">
                                         </button>
 
-                                        <form action="${pageContext.request.contextPath}/aluno?action=delete"
-                                              method="post">
-
-                                            <input type="hidden" name="matricula" value="<%=aluno.getMatricula()%>">
-
-                                            <button class="delete">
+                                        <div>
+                                            <button popovertarget="popup-exclude-conf-<%=idPopoverAluno%>" class="delete">
                                                 <img src="${pageContext.request.contextPath}/img/svg/crud/trash.svg">
                                             </button>
-
-                                        </form>
-
+                                        </div>
                                     </div>
-
                                 </td>
-
                             </tr>
 
+                            <div id="popup-exclude-conf-<%=idPopoverAluno%>" class="popup exclude" popover="auto">
+                                <button class="popup-cross" popovertarget="popup-exclude-conf-<%=idPopoverAluno%>" popovertargetaction="hide" type="button">
+                                    <img src="${pageContext.request.contextPath}/img/svg/cross-small.svg">
+                                </button>
+                                <h1>Excluir Aluno</h1>
+                                <p>Você tem certeza que deseja excluir <%=aluno.getNome()%> do sistema? Essa ação não pode ser desfeita.</p>
+                                <div>
+                                    <button class="button fat" popovertarget="popup-exclude-conf-<%=idPopoverAluno%>" popovertargetaction="hide" type="button">Cancelar</button>
+                                    <form style="display: flex;" action="${pageContext.request.contextPath}/aluno?action=delete" method="post">
+                                        <input type="hidden" name="matricula" value="<%=aluno.getMatricula()%>">
+                                        <button class="button fat confirm" type="submit">Excluir aluno</button>
+                                    </form>
+                                </div>
+                            </div>
                             <%
                                     }
                                 }
@@ -517,9 +512,10 @@
                         %>
 
                         <div id="popup-aluno-<%=idPopupAluno%>" class="popup" popover="auto">
-
+                            <button class="popup-cross" popovertarget="popup-aluno-<%=idPopupAluno%>" popovertargetaction="hide" type="button">
+                                <img src="${pageContext.request.contextPath}/img/svg/cross-small.svg">
+                            </button>
                             <h1>Editar Aluno</h1>
-
                             <form action="${pageContext.request.contextPath}/aluno?action=update" method="post">
 
                                 <div class="input-major">
@@ -590,46 +586,44 @@
                                 String nomeAluno = alunoObs != null ? alunoObs.getNome() : "Aluno";
 
                                 String nomeProfessor = professorRepository.findById(obs.getIdProfessor()).getNome();
-
                     %>
 
                     <div style="background-color:<%=obs.getCor().getHex()%>" class="card">
-
                         <div>
-
-                            <h2><%=obs.getTitulo()%>
-                            </h2>
-
-                            <p>Para <%=nomeAluno%>
-                            </p>
-
+                            <h2><%=obs.getTitulo()%></h2>
+                            <p>Para <%=nomeAluno%></p>
                         </div>
 
-                        <button popovertarget="popover-obs-<%=idPopoverObs%>" class="button">
-                            Ver detalhes
-                        </button>
-
+                        <button popovertarget="popover-obs-<%=idPopoverObs%>" class="button">Ver detalhes</button>
                     </div>
 
-                    <div id="popover-obs-<%=idPopoverObs%>" class="popup obs" popover="auto">
+                    <div id="popover-obs-<%=idPopoverObs%>" style="--color-obs-card:<%=obs.getCor().getHex()%>;" class="popup obs" popover="auto">
                         <h1><%=obs.getTitulo()%>
                         </h1>
+                        <div>
+                            <div class="input-major">
+                                <div class="input-container">
+                                    <p>Professor</p>
+                                    <input class="text-box" type="text"
+                                           value="<%=nomeProfessor%>"
+                                           readonly>
+                                </div>
 
-                        <div class="input-major">
-
-                            <div class="input-container">
-                                <p>Professor</p>
-                                <input class="text-box" value="<%=nomeProfessor%>" readonly>
+                                <div class="input-container">
+                                    <p>Observação:</p>
+                                    <p class="content"><%=obs.getObservacao()%></p>
+                                </div>
                             </div>
-
-                            <div class="input-container">
-                                <p>Observação</p>
-                                <p class="content"><%=obs.getObservacao()%></p>
+                            <div>
+                                <button class="button fat" popovertarget="popover-obs-<%=idPopoverObs%>" popovertargetaction="hide" type="button">Fechar</button>
+                                <form style="display: flex;" action="${pageContext.request.contextPath}/observacao?action=delete" method="post">
+                                    <input type="hidden" name="id" value="<%=obs.getId()%>">
+                                    <button class="button" type="submit">
+                                        <img src="${pageContext.request.contextPath}/img/svg/trash.svg">
+                                    </button>
+                                </form>
                             </div>
-
                         </div>
-
-                        <button class="button fat close-popover">Fechar</button>
                     </div>
 
                     <%

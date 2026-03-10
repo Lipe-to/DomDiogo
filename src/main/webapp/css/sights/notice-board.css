@@ -79,7 +79,7 @@
 
 .tape {
     position: absolute;
-    z-index: 2;
+    z-index: 0;
     width: 100%;
     max-width: 24px;
     
