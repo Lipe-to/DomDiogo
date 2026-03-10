@@ -166,4 +166,30 @@ public class ProfessorRepository {
             connectionFactory.disconnect(connection);
         }
     }
+
+    public String findDisciplinaByProfessorId(int idProfessor) {
+        String query = "SELECT nome FROM disciplina WHERE id_professor = ?";
+        String disciplina = null;
+
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        Connection connection = connectionFactory.connect();
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, idProfessor);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                disciplina = rs.getString("nome");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            connectionFactory.disconnect(connection);
+        }
+
+        return disciplina;
+    }
 }

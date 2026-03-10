@@ -257,6 +257,10 @@ table {
     background-color: var(--table-grey);
 }
 
+table thead {
+    position: sticky;
+}
+
 table th {
     padding: 2% 0;
     color: var(--white);
@@ -511,6 +515,12 @@ body.black #sidebar * {
     cursor: pointer;
 }
 
+#sidebar li>button, #sidebar li>form>button {
+    background: none;
+    border: 0;
+}
+
+
 #sidebar li a {
     opacity: 80%;
 }
@@ -715,7 +725,7 @@ header {
     flex-direction: row-reverse;
 }
 
-.table-actions>:last-child {
+.table-actions .expand-button {
     width: 30%;
     min-width: 140px;
 }
@@ -757,6 +767,14 @@ header {
 
     overflow: auto;
     max-height: 400px;
+}
+
+.card-container:has(.no-obs) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1% 1.25% !important;
+    height: 90px;
 }
 
 .card {

@@ -6,6 +6,8 @@
     height: fit-content;
     margin: auto;
     padding: 3% 3%;
+
+    position: relative;
     inset: 0;
 
     position: fixed;
@@ -24,6 +26,30 @@
 
 .popup::backdrop {
     background: rgba(0, 0, 0, .4);
+}
+
+.popup-cross {
+    display: flex;
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    
+    border: 0;
+    border-radius: 4px;
+    background-color: transparent;
+    
+    opacity: 30%;
+    transition: opacity 0.4s ease, background-color 0.4s ease;
+}
+
+.popup-cross:hover {
+    background-color: rgba(39, 39, 39, 0.185);
+    opacity: 60%;
+}
+
+.popup-cross *, .popup-cross {
+    cursor: pointer;
+    margin: 0 auto;
 }
 
 .popup form {
@@ -48,9 +74,81 @@
     min-height: 32px;
 }
 
-.popup>:first-child {
+.popup h1 {
     text-align: center;
     margin-bottom: 10%;
+}
+
+.popup .personal-profile {
+    display: flex;
+    box-sizing: border-box;
+    gap: 5%;
+}
+
+.popup .personal-profile * {
+    margin-bottom: 0;
+    text-align: left;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.popup .personal-profile>:first-child {
+    height: 80px;
+    aspect-ratio: 1 / 1;
+    
+    background-image: url('../img/flat/diver.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 200%;
+
+    cursor: grab;
+    border-radius: 100%;
+    border-color: var(--white);
+}
+
+.popup .input-major {
+    margin-top: 5%;
+}
+
+.popup .input-major form {
+    margin-bottom: 0;
+}
+
+.popup.profile .input-major>:last-child button {
+    min-height: 32px;
+    margin-top: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+
+    background: none;
+    background-color: rgba(246, 246, 246, 0.15);
+    border-color: #4646462c;
+    border-radius: 3px;
+    outline: 6px transparent solid;
+
+    opacity: 50%;
+    transition: opacity 0.3s ease, outline 0.2s ease;
+}
+
+.popup.profile .input-major>:first-child>:first-child {
+    margin-bottom: 5%;
+}
+
+.popup.profile .input-major button span {
+    color: var(--black);
+    font-weight: 600;
+}
+
+.popup.profile .input-major>:last-child button:hover {
+    opacity: 90%;
+}
+
+.popup.profile .input-major>:first-child>:last-child button {
+    border-radius: 6px;
+    margin-top: 30%;
 }
 
 .popup.obs p.content {
@@ -85,6 +183,39 @@
     z-index: -1;
 }
 
+.popup.obs>:last-child>:last-child {
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+}
+
+.popup.obs>:last-child>:last-child>* {
+    height: 100%;
+    max-height: 32px;
+}
+
+.popup.obs>:last-child>:last-child form {
+    width: 45%;
+}
+
+.popup.obs>:last-child>:last-child form button {
+    background: none;
+    background-color: var(--red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup.obs>:last-child>:last-child button {
+    margin-top: 0;
+}
+
+.popup.obs>:last-child>:last-child img {
+    width: 16px;
+}
+
 .popup.popup.exclude p {
     text-align: center;
     font-size: 0.95rem;
@@ -112,7 +243,7 @@
     margin-top: 0;
 }
 
-.colors {
+.colors, .avatar {
     display: flex;
     overflow-x: auto;
     overflow-y: hidden;
@@ -121,11 +252,11 @@
     gap: 0.9rem;
 }
 
-.colors>* {
+.colors>*, .avatar>* {
     position: relative;
 }
 
-.colors * {
+.colors *, .avatar * {
     cursor: pointer;
 }
 
@@ -144,30 +275,39 @@
     transition: opacity 0.1s ease !important;
 }
 
-.colors input:not(:checked) + .check-circle {
+.colors input:not(:checked) + .check-circle, .avatar input:not(:checked) + .check-circle {
     opacity: 0;
     pointer-events: none;
 }
 
-.colors input:checked + .check-circle {
+.colors input:checked + .check-circle, .avatar input:checked + .check-circle {
     opacity: 1;
     pointer-events: all;
 }
 
-.colors::-webkit-scrollbar {
+.colors::-webkit-scrollbar, .avatar::-webkit-scrollbar {
     display: none;
 }
 
-.colors input, .colors {
+.colors input, .colors, .avatar input, .avatar {
     box-shadow: none !important;
     transition: none !important;
     /* Por algum motivo, o CSS do input=radio briga comigo */
 }
 
-.colors input {
+.colors input, .avatar input {
     appearance: none;
     width: 32px;
     aspect-ratio: 1 / 1;
     border-radius: 50%;
     border: 0;
+}
+
+.avatar input {
+    width: 50px;
+}
+
+.avatar input {
+    background-size: 200%;
+    background-position: center;
 }

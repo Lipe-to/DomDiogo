@@ -229,3 +229,29 @@ textarea {
     min-height: 32px;
     max-height: 200px;
 }
+
+.button:has(.icon-inner-button) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5%;
+}
+
+.button:has(.icon-inner-button) span {
+    color: var(--white) !important;
+    font-weight: 500 !important;
+}
+
+.icon-inner-button {
+    width: 12px;
+    aspect-ratio: 1 / 1;
+    opacity: 80%;
+}
+
+.diver {
+    background-image: url('../img/flat/diver.png');
+}
+
+.dino {
+    background-image: url('../img/flat/dino.png');
+}

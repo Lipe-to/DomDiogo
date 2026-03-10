@@ -29,6 +29,7 @@
 <%
     String nome = (String) session.getAttribute("nome");
     int idProfessor = (int) session.getAttribute("idProfessor");
+
     @SuppressWarnings("unchecked")
     List<AlunoEntity> listAlunos = (List<AlunoEntity>) request.getAttribute("listAlunos");
     @SuppressWarnings("unchecked")
@@ -37,6 +38,8 @@
     List<ObservacaoEntity> observacoes = (List<ObservacaoEntity>) request.getAttribute("observacoes");
     AlunoRepository alunoRepository = (AlunoRepository) request.getAttribute("alunoRepository");
     ProfessorRepository professorRepository = (ProfessorRepository) request.getAttribute("professorRepository");
+
+    String disciplina = professorRepository.findDisciplinaByProfessorId(idProfessor);
 %>
 
 <body id="red-theme" class="black">
@@ -77,26 +80,17 @@
                          src="${pageContext.request.contextPath}/img/svg/sidebar/white/dashboard.svg">
                     <img class="sidebar-icon black"
                          src="${pageContext.request.contextPath}/img/svg/sidebar/black/dashboard.svg">
-                    <span>Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img class="sidebar-icon white"
-                         src="${pageContext.request.contextPath}/img/svg/sidebar/white/address-book.svg">
-                    <img class="sidebar-icon black"
-                         src="${pageContext.request.contextPath}/img/svg/sidebar/black/address-book.svg">
-                    <span>Professores</span>
+                    <span>Quadro de Avisos</span>
                 </a>
             </li>
             <li class="divide">
-                <a href="#">
+                <button popovertarget="popup-profile" type="button">
                     <img class="sidebar-icon white"
                          src="${pageContext.request.contextPath}/img/svg/sidebar/white/user.svg">
                     <img class="sidebar-icon black"
                          src="${pageContext.request.contextPath}/img/svg/sidebar/black/user.svg">
                     <span>Meu perfil</span>
-                </a>
+                </button>
             </li>
             <li id="sign-out">
                 <form style="display: flex" action="${pageContext.request.contextPath}/login?action=logout" method="post">
@@ -123,11 +117,10 @@
                 </div>
             </a>
             <div class="personal-info">
-                <div class="profile-image"></div>
+                <div class="profile-image <%=fotoPerfil%>"></div>
                 <div>
-                    <h3><%=nome%>
-                    </h3>
-                    <p>Professor</p>
+                    <h3><%=nome%></h3>
+                    <p>Professor(a) de <%=disciplina%></p>
                 </div>
             </div>
         </header>
@@ -182,9 +175,7 @@
             </div>
 
             <div id="grades">
-                <h1>Matemática</h1>
-                <%-- <div class="actions-section-container">
-                </div> --%>
+                <h1><%=disciplina%></h1>
 
                 <div class="table-container">
                     <div class="table-info">
@@ -219,10 +210,10 @@
                             <button title="Filtrar" name="action" value="listarTodos" type="submit"><img
                                     src="${pageContext.request.contextPath}/img/svg/cross-small.svg"
                                     alt="Remover filtros"></button>
-                            <button title="Atualizar notas" popovertarget="popup-grades">
+                            <%-- <button title="Atualizar notas" popovertarget="popup-grades">
                                 <div><img src="${pageContext.request.contextPath}/img/svg/document.svg"><span>Atualizar notas</span>
                                 </div>
-                            </button>
+                            </button> --%>
                         </form>
                     </div>
                     <div class="table-wrap">
@@ -312,6 +303,9 @@
                                 idPopoverGradesId++;
                         %>
                         <div id="popup-grades-<%=idPopoverGradesId%>" class="popup" popover="auto">
+                            <button class="popup-cross" popovertarget="popup-grades-<%=idPopoverGradesId%>" popovertargetaction="hide" type="button">
+                                <img src="${pageContext.request.contextPath}/img/svg/cross-small.svg">
+                            </button>
                             <h1>Gerenciar notas</h1>
                             <form action="${pageContext.request.contextPath}/nota?action=update" method="post">
                                 <div class="input-major">
@@ -389,11 +383,19 @@
                                 </div>
 
                                 <div class="input-container">
-                                    <p>Observação</p>
+                                    <p>Observação:</p>
                                     <p class="content"><%=obs.getObservacao()%></p>
                                 </div>
                             </div>
-                            <button class="button fat close-popover" type="button">Fechar</button>
+                            <div>
+                                <button class="button fat" popovertarget="<%="popover-id-"+idPopoverObs%>" popovertargetaction="hide" type="button">Fechar</button>
+                                <form style="display: flex;" action="${pageContext.request.contextPath}/observacao?action=delete" method="post">
+                                    <input type="hidden" name="id" value="<%=obs.getId()%>">
+                                    <button class="button" type="submit">
+                                        <img src="${pageContext.request.contextPath}/img/svg/trash.svg">
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                     <%
@@ -402,7 +404,7 @@
                     <%
                         if (idPopoverObs == 0) {
                     %>
-                        <div class="any-card">
+                        <div class="no-obs" class="any-card">
                             <h3 style="opacity: 60%; width: 100%;">Nenhuma observação atribuída</h3>
                         </div>
                     <%
@@ -415,6 +417,9 @@
 </div>
 
 <div id="popup-obs" class="popup" popover="auto">
+    <button class="popup-cross" popovertarget="popup-obs" popovertargetaction="hide" type="button">
+        <img src="${pageContext.request.contextPath}/img/svg/cross-small.svg">
+    </button>
     <h1>Adicionar Observação</h1>
     <form action="${pageContext.request.contextPath}/observacao?action=create" method="post">
         <div class="input-major">
@@ -491,6 +496,62 @@
         <button class="button" type="submit">Registrar</button>
     </form>
 </div>
+
+    <div id="popup-profile" class="popup profile" popover="auto">
+        <button class="popup-cross" popovertarget="popup-profile" popovertargetaction="hide" type="button">
+            <img src="${pageContext.request.contextPath}/img/svg/cross-small.svg">
+        </button>
+        <div class="personal-profile">
+            <div class="<%=fotoPerfil%>"></div>
+            <div>
+                <h1><%=nome%></h1>
+                <p>Professor(a) de <%=disciplina%></p>
+            </div>
+        </div>
+        <div class="input-major">
+            <form style="display: flex;" action="${pageContext.request.contextPath}/login?action=alterarFoto" method="post">
+                <div class="input-container">
+                    <p>Foto de perfil</p>
+                    <div class="avatar">
+                        <div>
+                            <input class="text-box dino" type="radio" name="avatar"
+                                value="">
+                            <img class="check-circle" src="${pageContext.request.contextPath}/img/svg/check.svg">
+                         </div>
+                        <div>
+                            <input class="text-box diver" type="radio" name="avatar"
+                                value="">
+                            <img class="check-circle" src="${pageContext.request.contextPath}/img/svg/check.svg">
+                        </div>
+                        <div>
+                            <input class="text-box diver" type="radio" name="avatar"
+                                value="">
+                            <img class="check-circle" src="${pageContext.request.contextPath}/img/svg/check.svg">
+                        </div>
+                    </div>
+                </div>
+                <div class="input-container">
+                    <p>Tema</p>
+                    <select class="text-box" name="">
+                        <option value="">Azul</option>
+                        <option value="">Verde</option>
+                        <option value="">Vermelho</option>
+                    </select>
+                </div>
+                <div>
+                    <button class="button fat" type="submit"><img class="icon-inner-button" src="${pageContext.request.contextPath}/img/svg/refresh.svg"><span>Atualizar informações</span></button>
+                </div>
+            </form>
+            
+            <form style="display:flex">
+                <button class="button" type="submit">
+                    <img class="sidebar-icon black" src="${pageContext.request.contextPath}/img/svg/sidebar/black/sign-out.svg">
+                    <span>Logout</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
 </body>
 
 <script src="${pageContext.request.contextPath}/js/popover-close.js"></script>

@@ -183,9 +183,9 @@
 
                         %>
 
-                        <p style="margin:20px; font-size:18px;">
-                            Nenhum aviso encontrado.
-                        </p>
+                        <div class="no-obs" class="any-card">
+                            <h3 style="opacity: 60%; width: 100%;">Nenhum aviso disponível</h3>
+                        </div>
 
                         <%
 
