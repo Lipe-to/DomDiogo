@@ -152,20 +152,19 @@
                             <span>Total de alunos</span>
                         </div>
                         <div>
-                            <h3><span><%=alunoRepository.porcentagemAlunos(TipoCount.SEM_NOTA, idProfessor)%></span> %
+                            <h3><span><%=alunoRepository.porcentagemAlunos(TipoCount.SEM_NOTA, idProfessor)%>%</span>
                             </h3>
                             <span>Alunos sem notas</span>
                         </div>
                         <div>
                             <h3><span
-                                    class="<%=apprClass%>"><%=alunoRepository.porcentagemAlunos(TipoCount.APROVADO, idProfessor)%></span>
-                                %</h3>
+                                    class="<%=apprClass%>"><%=alunoRepository.porcentagemAlunos(TipoCount.APROVADO, idProfessor)%>%</span>
+                            </h3>
                             <span>Alunos aprovados</span>
                         </div>
                         <div>
                             <h3><span
-                                    class="<%=reprClass%>"><%=alunoRepository.porcentagemAlunos(TipoCount.REPROVADO, idProfessor)%></span>
-                                %</h3>
+                                    class="<%=reprClass%>"><%=alunoRepository.porcentagemAlunos(TipoCount.REPROVADO, idProfessor)%>%</span></h3>
                             <span>Alunos reprovados</span>
                         </div>
                     </div>
